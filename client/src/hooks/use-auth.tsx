@@ -16,6 +16,10 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Test credentials
+const TEST_EMAIL = "admin@bdma.com";
+const TEST_PASSWORD = "bdma2024";
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,16 +39,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
+    // Validate against test credentials
+    if (email !== TEST_EMAIL || password !== TEST_PASSWORD) {
+      throw new Error("Invalid credentials");
+    }
+
     try {
-      // This would typically make an API call to your backend
-      // For now, we'll simulate a successful login
-      const mockUser = { email, name: email.split('@')[0] };
+      const mockUser = { email, name: "Admin User" };
       setUser(mockUser);
       Cookies.set("user", JSON.stringify(mockUser), { expires: 7 });
       setLocation("/dashboard");
     } catch (error) {
       console.error("Login failed:", error);
-      throw new Error("Invalid credentials");
+      throw error;
     }
   };
 

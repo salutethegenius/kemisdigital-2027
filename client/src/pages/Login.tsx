@@ -4,8 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Info } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -28,10 +30,14 @@ export default function Login() {
   const onSubmit = async (data: LoginForm) => {
     try {
       await login(data.email, data.password);
+      toast({
+        title: "Login successful",
+        description: "Welcome to your dashboard!",
+      });
     } catch (error) {
       toast({
         title: "Login failed",
-        description: "Please check your credentials and try again",
+        description: "Invalid email or password",
         variant: "destructive",
       });
     }
@@ -42,8 +48,20 @@ export default function Login() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
+          <CardDescription className="text-center">
+            Sign in to access your BDMA dashboard
+          </CardDescription>
         </CardHeader>
         <CardContent>
+          <Alert className="mb-6 bg-muted">
+            <Info className="h-4 w-4" />
+            <AlertDescription>
+              Test Credentials:<br />
+              Email: admin@bdma.com<br />
+              Password: bdma2024
+            </AlertDescription>
+          </Alert>
+          
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Input
@@ -73,7 +91,7 @@ export default function Login() {
               className="w-full bg-cyan-600 hover:bg-cyan-700"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Logging in..." : "Login"}
+              {isSubmitting ? "Signing in..." : "Sign In"}
             </Button>
           </form>
         </CardContent>
