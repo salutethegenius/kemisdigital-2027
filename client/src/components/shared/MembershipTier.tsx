@@ -24,12 +24,12 @@ export default function MembershipTier({
     >
       <Card
         className={`h-full relative ${
-          recommended ? "border-cyan-500 border-2" : ""
+          recommended ? "border-gold-dark dark:border-gold border-2" : ""
         }`}
       >
         {recommended && (
           <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-            <span className="bg-cyan-500 text-white px-4 py-1 rounded-full text-sm">
+            <span className="bg-gold-dark dark:bg-gold text-white px-4 py-1 rounded-full text-sm">
               Recommended
             </span>
           </div>
@@ -37,12 +37,12 @@ export default function MembershipTier({
         <CardHeader>
           <h3 className="text-2xl font-bold text-center">{title}</h3>
           <div className="text-center">
-            <span className="text-3xl font-bold">{price}</span>
-            {price !== "Contact Us" && <span className="text-gray-600">/year</span>}
+            <span className="text-3xl font-bold text-gold-dark dark:text-gold">{price}</span>
+            {price !== "Contact Us" && <span className="text-gray-600 dark:text-gray-400">/year</span>}
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-600 mb-4 text-center">{description}</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">{description}</p>
           <ul className="space-y-3">
             {features.map((feature, index) => (
               <li key={index} className="flex items-start space-x-3">
@@ -59,14 +59,18 @@ export default function MembershipTier({
                     d="M5 13l4 4L19 7"
                   />
                 </svg>
-                <span>{feature}</span>
+                <span className="text-gray-700 dark:text-gray-300">{feature}</span>
               </li>
             ))}
           </ul>
         </CardContent>
         <CardFooter>
           <Button
-            className={`w-full ${recommended ? "bg-cyan-500 hover:bg-cyan-600" : ""}`}
+            className={`w-full ${
+              recommended 
+                ? "bg-gold-dark hover:bg-gold dark:bg-gold dark:hover:bg-gold-dark text-white" 
+                : ""
+            }`}
           >
             Get Started
           </Button>

@@ -20,15 +20,15 @@ export default function FeatureCard({
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <Card className="h-full">
+      <Card className="h-full hover:border-gold dark:hover:border-gold-dark transition-colors">
         <CardHeader>
           <div className="flex items-center space-x-3">
-            <Icon className="w-6 h-6 text-cyan-500" />
+            <Icon className="w-6 h-6 text-cyan-500 group-hover:text-gold dark:group-hover:text-gold-dark" />
             <h3 className="text-xl font-semibold">{title}</h3>
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-600 mb-4">{description}</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>
           {items && (
             <ul className="space-y-2">
               {items.map((item, index) => (
@@ -46,7 +46,7 @@ export default function FeatureCard({
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span>{item}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{item}</span>
                 </li>
               ))}
             </ul>
