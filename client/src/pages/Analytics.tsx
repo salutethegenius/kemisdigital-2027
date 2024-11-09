@@ -13,51 +13,61 @@ export default function Analytics() {
     font: {
       color: isDark ? '#ffffff' : '#000000'
     },
-    margin: { t: 30, r: 30, l: 60, b: 40 },
+    margin: { t: 50, r: 30, l: 60, b: 40 },
     showlegend: true,
-    legend: { bgcolor: 'transparent' }
+    legend: { bgcolor: 'transparent' },
+    annotations: [{
+      text: 'Bahamas Market Data',
+      showarrow: false,
+      x: 0.5,
+      y: 1.1,
+      xref: 'paper',
+      yref: 'paper',
+      font: {
+        size: 14,
+        color: isDark ? '#ffffff' : '#000000'
+      }
+    }]
   };
 
-  // Website Performance Data
+  // Website Performance Data (Adjusted for Bahamas market)
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
   const websitePerformanceData = {
-    users: [15000, 17500, 20000, 22500, 25000, 27500],
-    pageViews: [45000, 52500, 60000, 67500, 75000, 82500],
-    bounceRate: [65, 60, 55, 50, 48, 45],
-    benchmarkUsers: [14000, 16000, 18000, 20000, 22000, 24000],
-    benchmarkBounce: [70, 68, 65, 63, 60, 58]
+    users: [5000, 7000, 9000, 11000, 13000, 15000],
+    benchmarkUsers: [4500, 6000, 8000, 9500, 11000, 13000],
+    bounceRate: [55, 52, 48, 45, 43, 40],
+    benchmarkBounce: [58, 56, 54, 52, 50, 48]
   };
 
-  // Social Media Data
+  // Social Media Data (Bahamas market engagement rates)
   const platforms = ['Facebook', 'Instagram', 'LinkedIn', 'Twitter'];
   const socialMediaData = {
-    engagement: [4.5, 6.2, 3.8, 2.9],
-    benchmarkEngagement: [3.2, 4.8, 2.9, 2.1],
-    followerGrowth: [2500, 3800, 1500, 1200],
-    postReach: [15000, 22000, 8500, 7000],
-    industryReach: [12000, 18000, 7000, 6000]
+    engagement: [6.5, 8.0, 4.2, 3.5],
+    benchmarkEngagement: [5.0, 6.5, 3.5, 2.8],
+    followerGrowth: [1200, 2000, 800, 600],
+    postReach: [8000, 12000, 4000, 3000]
   };
 
-  // Email Marketing Data
+  // Email Marketing Data (Bahamas industry averages)
   const emailData = {
     metrics: ['Open Rate', 'Click Rate', 'Conversion'],
-    values: [25, 12, 8],
-    benchmarks: [22, 10, 6]
+    values: [28, 15, 6],
+    benchmarks: [22, 12, 4]
   };
 
-  // SEO Performance Data
+  // SEO Performance Data (Bahamas-specific traffic)
   const seoData = {
     dates: months,
-    organicTraffic: [8000, 10000, 12500, 15000, 18000, 22000],
-    domainAuthority: [35, 38, 40, 42, 45, 48],
-    topKeywords: [15, 22, 28, 35, 42, 50]
+    organicTraffic: [2000, 3000, 4500, 6000, 7000, 8000],
+    domainAuthority: [25, 28, 30, 32, 34, 35],
+    keywords: [20, 25, 30, 35, 40, 45]
   };
 
   return (
     <div>
       <Hero
         title="Digital Marketing Analytics"
-        description="Comprehensive insights into digital marketing performance metrics and industry benchmarks"
+        description="Comprehensive insights into Bahamas digital marketing performance metrics and Caribbean region benchmarks"
         showCTA={false}
       />
       
@@ -81,7 +91,7 @@ export default function Analytics() {
                   x: months,
                   y: websitePerformanceData.benchmarkUsers,
                   type: 'scatter',
-                  name: 'Industry Avg Users',
+                  name: 'Caribbean Avg Users',
                   line: { dash: 'dot', color: '#0088FE' },
                   opacity: 0.5
                 },
@@ -128,7 +138,7 @@ export default function Analytics() {
                   x: platforms,
                   y: socialMediaData.benchmarkEngagement,
                   type: 'bar',
-                  name: 'Industry Avg Engagement %',
+                  name: 'Caribbean Avg Engagement %',
                   marker: { color: '#00C49F', opacity: 0.5 }
                 }
               ]}
@@ -162,7 +172,7 @@ export default function Analytics() {
                   x: emailData.metrics,
                   y: emailData.benchmarks,
                   type: 'bar',
-                  name: 'Industry Benchmark',
+                  name: 'Caribbean Benchmark',
                   marker: { color: '#8884D8', opacity: 0.5 }
                 }
               ]}
@@ -203,7 +213,7 @@ export default function Analytics() {
               ]}
               layout={{
                 ...plotLayout,
-                yaxis: { title: 'Organic Traffic' },
+                yaxis: { title: 'Monthly Visitors' },
                 yaxis2: {
                   title: 'Domain Authority',
                   overlaying: 'y',
