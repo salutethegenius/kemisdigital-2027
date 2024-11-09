@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Analytics", href: "/dashboard/analytics", icon: BarChart },
     { name: "Events", href: "/dashboard/events", icon: Calendar },
     { name: "Network", href: "/dashboard/network", icon: Users },
     { name: "Resources", href: "/dashboard/resources", icon: FileText },

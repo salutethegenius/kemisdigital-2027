@@ -19,6 +19,7 @@ import Membership from "./pages/Membership";
 import Advocacy from "./pages/Advocacy";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
 import Layout from "./components/layout/Layout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 
@@ -35,6 +36,7 @@ createRoot(document.getElementById("root")!).render(
                   <DashboardLayout>
                     <Switch>
                       <Route path="/" component={Dashboard} />
+                      <Route path="/analytics" component={Analytics} />
                       <Route>404 Page Not Found</Route>
                     </Switch>
                   </DashboardLayout>
