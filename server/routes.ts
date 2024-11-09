@@ -1,6 +1,7 @@
 import type { Express } from "express";
+import blogRouter from './routes/blog';
 
 export function registerRoutes(app: Express) {
-  // put application routes here
-  // prefix all routes with /api
+  // Blog routes
+  app.use('/api/blog', blogRouter);
 }

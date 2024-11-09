@@ -20,6 +20,8 @@ import Advocacy from "./pages/Advocacy";
 import Analytics from "./pages/Analytics";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Blog from "./pages/Blog";
+import BlogEditor from "@/components/blog/BlogEditor";
 import Layout from "./components/layout/Layout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 
@@ -37,6 +39,17 @@ createRoot(document.getElementById("root")!).render(
                     <Switch>
                       <Route path="/" component={Dashboard} />
                       <Route path="/analytics" component={Analytics} />
+                      <Route path="/blog/new">
+                        {() => <BlogEditor onSuccess={() => window.location.href = "/blog"} />}
+                      </Route>
+                      <Route path="/blog/edit/:id">
+                        {(params) => (
+                          <BlogEditor
+                            postId={parseInt(params.id)}
+                            onSuccess={() => window.location.href = "/blog"}
+                          />
+                        )}
+                      </Route>
                       <Route>404 Page Not Found</Route>
                     </Switch>
                   </DashboardLayout>
@@ -55,6 +68,7 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/membership" component={Membership} />
                     <Route path="/analytics" component={Analytics} />
                     <Route path="/advocacy" component={Advocacy} />
+                    <Route path="/blog" component={Blog} />
                     <Route>404 Page Not Found</Route>
                   </Switch>
                 </Layout>
