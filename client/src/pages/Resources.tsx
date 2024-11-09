@@ -2,7 +2,7 @@ import Hero from "@/components/shared/Hero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { Book, Video, FileText, Tool } from "lucide-react";
+import { Book, Video, FileText, Wrench } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
 export default function Resources() {
@@ -60,7 +60,7 @@ export default function Resources() {
               <Card key={category.category}>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
-                    <Tool className="w-5 h-5 mr-2 text-cyan-500" />
+                    <Wrench className="w-5 h-5 mr-2 text-cyan-500" />
                     {category.category}
                   </h3>
                   <ul className="space-y-4">

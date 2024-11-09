@@ -2,7 +2,7 @@ import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
 import MembershipTier from "@/components/shared/MembershipTier";
 import { motion } from "framer-motion";
-import { Graduation, Users, FileText } from "lucide-react";
+import { GraduationCap, Users, FileText } from "lucide-react";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
         <FeatureCard
           title="Education & Standards"
           description="Enhance your skills with our comprehensive educational programs"
-          icon={Graduation}
+          icon={GraduationCap}
           items={[
             "Certified Digital Marketer Program",
             "Webinars and Workshops",
