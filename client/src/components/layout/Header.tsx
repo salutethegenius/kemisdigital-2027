@@ -7,6 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -23,7 +24,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm">
+    <header className="bg-background border-b">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 font-bold text-2xl">
           <svg
@@ -42,12 +43,13 @@ export default function Header() {
               key={item.name}
               href={item.href}
               className={`text-sm font-medium transition-colors hover:text-cyan-500 ${
-                location === item.href ? "text-cyan-500" : "text-gray-600"
+                location === item.href ? "text-cyan-500" : "text-muted-foreground"
               }`}
             >
               {item.name}
             </Link>
           ))}
+          <ThemeToggle />
           <Button>Join Now</Button>
         </div>
 
@@ -64,13 +66,14 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className={`text-sm font-medium transition-colors hover:text-cyan-500 ${
-                    location === item.href ? "text-cyan-500" : "text-gray-600"
+                    location === item.href ? "text-cyan-500" : "text-muted-foreground"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
+              <ThemeToggle />
               <Button className="w-full">Join Now</Button>
             </div>
           </SheetContent>
