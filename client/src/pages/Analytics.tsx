@@ -1,6 +1,7 @@
 import { useTheme } from "@/hooks/use-theme";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Plot from 'react-plotly.js';
+import Hero from "@/components/shared/Hero";
 
 export default function Analytics() {
   const { theme } = useTheme();
@@ -53,162 +54,168 @@ export default function Analytics() {
   };
 
   return (
-    <div className="space-y-6 p-6">
-      <h1 className="text-3xl font-bold mb-8">Analytics Dashboard</h1>
+    <div>
+      <Hero
+        title="Digital Marketing Analytics"
+        description="Comprehensive insights into digital marketing performance metrics and industry benchmarks"
+        showCTA={false}
+      />
       
-      {/* Website Performance */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Website Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Plot
-            data={[
-              {
-                x: months,
-                y: websitePerformanceData.users,
-                type: 'scatter',
-                name: 'Users',
-                line: { color: '#0088FE' }
-              },
-              {
-                x: months,
-                y: websitePerformanceData.benchmarkUsers,
-                type: 'scatter',
-                name: 'Industry Avg Users',
-                line: { dash: 'dot', color: '#0088FE' },
-                opacity: 0.5
-              },
-              {
-                x: months,
-                y: websitePerformanceData.bounceRate,
-                type: 'scatter',
-                name: 'Bounce Rate %',
-                yaxis: 'y2',
-                line: { color: '#FF8042' }
-              }
-            ]}
-            layout={{
-              ...plotLayout,
-              yaxis: { title: 'Users' },
-              yaxis2: {
-                title: 'Bounce Rate %',
-                overlaying: 'y',
-                side: 'right'
-              }
-            }}
-            useResizeHandler
-            className="w-full h-[400px]"
-          />
-        </CardContent>
-      </Card>
+      <div className="container mx-auto space-y-6 py-8">
+        {/* Website Performance */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Website Traffic & Conversion Rates</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Plot
+              data={[
+                {
+                  x: months,
+                  y: websitePerformanceData.users,
+                  type: 'scatter',
+                  name: 'Users',
+                  line: { color: '#0088FE' }
+                },
+                {
+                  x: months,
+                  y: websitePerformanceData.benchmarkUsers,
+                  type: 'scatter',
+                  name: 'Industry Avg Users',
+                  line: { dash: 'dot', color: '#0088FE' },
+                  opacity: 0.5
+                },
+                {
+                  x: months,
+                  y: websitePerformanceData.bounceRate,
+                  type: 'scatter',
+                  name: 'Bounce Rate %',
+                  yaxis: 'y2',
+                  line: { color: '#FF8042' }
+                }
+              ]}
+              layout={{
+                ...plotLayout,
+                yaxis: { title: 'Users' },
+                yaxis2: {
+                  title: 'Bounce Rate %',
+                  overlaying: 'y',
+                  side: 'right'
+                }
+              }}
+              useResizeHandler
+              className="w-full h-[400px]"
+            />
+          </CardContent>
+        </Card>
 
-      {/* Social Media Dashboard */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Social Media Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Plot
-            data={[
-              {
-                x: platforms,
-                y: socialMediaData.engagement,
-                type: 'bar',
-                name: 'Engagement Rate %',
-                marker: { color: '#00C49F' }
-              },
-              {
-                x: platforms,
-                y: socialMediaData.benchmarkEngagement,
-                type: 'bar',
-                name: 'Industry Avg Engagement %',
-                marker: { color: '#00C49F', opacity: 0.5 }
-              }
-            ]}
-            layout={{
-              ...plotLayout,
-              barmode: 'group',
-              yaxis: { title: 'Engagement Rate %' }
-            }}
-            useResizeHandler
-            className="w-full h-[400px]"
-          />
-        </CardContent>
-      </Card>
+        {/* Social Media Dashboard */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Social Media Engagement Metrics</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Plot
+              data={[
+                {
+                  x: platforms,
+                  y: socialMediaData.engagement,
+                  type: 'bar',
+                  name: 'Engagement Rate %',
+                  marker: { color: '#00C49F' }
+                },
+                {
+                  x: platforms,
+                  y: socialMediaData.benchmarkEngagement,
+                  type: 'bar',
+                  name: 'Industry Avg Engagement %',
+                  marker: { color: '#00C49F', opacity: 0.5 }
+                }
+              ]}
+              layout={{
+                ...plotLayout,
+                barmode: 'group',
+                yaxis: { title: 'Engagement Rate %' }
+              }}
+              useResizeHandler
+              className="w-full h-[400px]"
+            />
+          </CardContent>
+        </Card>
 
-      {/* Email Marketing Metrics */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Email Marketing Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Plot
-            data={[
-              {
-                x: emailData.metrics,
-                y: emailData.values,
-                type: 'bar',
-                name: 'Current',
-                marker: { color: '#8884D8' }
-              },
-              {
-                x: emailData.metrics,
-                y: emailData.benchmarks,
-                type: 'bar',
-                name: 'Industry Benchmark',
-                marker: { color: '#8884D8', opacity: 0.5 }
-              }
-            ]}
-            layout={{
-              ...plotLayout,
-              barmode: 'group',
-              yaxis: { title: 'Percentage (%)' }
-            }}
-            useResizeHandler
-            className="w-full h-[400px]"
-          />
-        </CardContent>
-      </Card>
+        {/* Email Marketing Metrics */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Email Marketing Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Plot
+              data={[
+                {
+                  x: emailData.metrics,
+                  y: emailData.values,
+                  type: 'bar',
+                  name: 'Current',
+                  marker: { color: '#8884D8' }
+                },
+                {
+                  x: emailData.metrics,
+                  y: emailData.benchmarks,
+                  type: 'bar',
+                  name: 'Industry Benchmark',
+                  marker: { color: '#8884D8', opacity: 0.5 }
+                }
+              ]}
+              layout={{
+                ...plotLayout,
+                barmode: 'group',
+                yaxis: { title: 'Percentage (%)' }
+              }}
+              useResizeHandler
+              className="w-full h-[400px]"
+            />
+          </CardContent>
+        </Card>
 
-      {/* SEO Performance */}
-      <Card>
-        <CardHeader>
-          <CardTitle>SEO Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Plot
-            data={[
-              {
-                x: seoData.dates,
-                y: seoData.organicTraffic,
-                type: 'scatter',
-                name: 'Organic Traffic',
-                line: { color: '#82CA9D' }
-              },
-              {
-                x: seoData.dates,
-                y: seoData.domainAuthority,
-                type: 'scatter',
-                name: 'Domain Authority',
-                yaxis: 'y2',
-                line: { color: '#FFC658' }
-              }
-            ]}
-            layout={{
-              ...plotLayout,
-              yaxis: { title: 'Organic Traffic' },
-              yaxis2: {
-                title: 'Domain Authority',
-                overlaying: 'y',
-                side: 'right'
-              }
-            }}
-            useResizeHandler
-            className="w-full h-[400px]"
-          />
-        </CardContent>
-      </Card>
+        {/* SEO Performance */}
+        <Card>
+          <CardHeader>
+            <CardTitle>SEO Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Plot
+              data={[
+                {
+                  x: seoData.dates,
+                  y: seoData.organicTraffic,
+                  type: 'scatter',
+                  name: 'Organic Traffic',
+                  line: { color: '#82CA9D' }
+                },
+                {
+                  x: seoData.dates,
+                  y: seoData.domainAuthority,
+                  type: 'scatter',
+                  name: 'Domain Authority',
+                  yaxis: 'y2',
+                  line: { color: '#FFC658' }
+                }
+              ]}
+              layout={{
+                ...plotLayout,
+                yaxis: { title: 'Organic Traffic' },
+                yaxis2: {
+                  title: 'Domain Authority',
+                  overlaying: 'y',
+                  side: 'right'
+                }
+              }}
+              useResizeHandler
+              className="w-full h-[400px]"
+            />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

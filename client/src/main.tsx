@@ -17,9 +17,9 @@ import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Membership from "./pages/Membership";
 import Advocacy from "./pages/Advocacy";
+import Analytics from "./pages/Analytics";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Analytics from "./pages/Analytics";
 import Layout from "./components/layout/Layout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 
@@ -53,6 +53,7 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/events" component={Events} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/membership" component={Membership} />
+                    <Route path="/analytics" component={Analytics} />
                     <Route path="/advocacy" component={Advocacy} />
                     <Route>404 Page Not Found</Route>
                   </Switch>
