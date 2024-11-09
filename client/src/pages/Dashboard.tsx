@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import { Calendar, Users, FileText, Bell } from "lucide-react";
+import DashboardCharts from "@/components/dashboard/DashboardCharts";
 
 export default function Dashboard() {
   return (
@@ -52,6 +53,8 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </motion.div>
+
+      <DashboardCharts />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
