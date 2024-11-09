@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
+import { useAuth } from "@/hooks/use-auth";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -22,6 +23,7 @@ const navigation = [
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <header className="bg-background border-b">
@@ -50,7 +52,18 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          <Button>Join Now</Button>
+          {user ? (
+            <Button variant="ghost" asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
+          ) : (
+            <Button variant="ghost" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
+          <Button asChild>
+            <Link href="/membership">Join Now</Link>
+          </Button>
         </div>
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -74,7 +87,18 @@ export default function Header() {
                 </Link>
               ))}
               <ThemeToggle />
-              <Button className="w-full">Join Now</Button>
+              {user ? (
+                <Button variant="ghost" asChild className="w-full" onClick={() => setIsOpen(false)}>
+                  <Link href="/dashboard">Dashboard</Link>
+                </Button>
+              ) : (
+                <Button variant="ghost" asChild className="w-full" onClick={() => setIsOpen(false)}>
+                  <Link href="/login">Login</Link>
+                </Button>
+              )}
+              <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
+                <Link href="/membership">Join Now</Link>
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
