@@ -1,20 +1,23 @@
 import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
 import { motion } from "framer-motion";
-import { 
-  Mail, 
-  MessageSquare, 
-  Globe, 
-  Gift, 
-  Share2, 
-  Brain, 
-  Target, 
+import {
+  Mail,
+  MessageSquare,
+  Globe,
+  Gift,
+  Share2,
+  Brain,
+  Target,
   Sparkles,
   Cpu,
   BarChart,
   Rocket,
   Users,
-  Zap
+  Zap,
+  CheckCircle2,
+  ArrowUpRight,
+  Infinity,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -26,53 +29,94 @@ export default function Home() {
     {
       icon: Cpu,
       title: "AI-Powered Content Generation",
-      description: "Create engaging, personalized content at scale",
+      description: "Create engaging, personalized content at scale with our advanced AI algorithms",
       benefits: [
-        "SEO-optimized content",
-        "Multi-language support",
-        "Brand voice consistency"
-      ]
+        "40% faster content creation",
+        "Multi-language support for global reach",
+        "Brand voice consistency across channels",
+        "Automated SEO optimization",
+        "Dynamic content personalization",
+      ],
+      caseStudy: "E-commerce client achieved 3x engagement with AI-generated product descriptions",
+      integration: "Seamlessly connects with WordPress, Shopify, and major CMS platforms",
     },
     {
       icon: BarChart,
       title: "Predictive Analytics",
-      description: "Make data-driven decisions with AI insights",
+      description: "Transform data into actionable insights with our AI-driven analytics platform",
       benefits: [
-        "Customer behavior analysis",
-        "Market trend forecasting",
-        "ROI optimization"
-      ]
+        "95% accuracy in trend forecasting",
+        "Real-time market analysis",
+        "Customer behavior prediction",
+        "Competitive intelligence",
+        "Revenue forecasting",
+      ],
+      caseStudy: "Financial services firm increased ROI by 45% using predictive insights",
+      integration: "Integrates with Google Analytics, Adobe Analytics, and custom data sources",
     },
     {
       icon: Rocket,
       title: "Automated Campaign Management",
-      description: "Streamline your marketing operations",
+      description: "Streamline your marketing operations with intelligent automation",
       benefits: [
-        "Smart scheduling",
+        "85% reduction in campaign setup time",
+        "Smart budget allocation",
+        "Cross-channel coordination",
         "Performance monitoring",
-        "Budget optimization"
-      ]
+        "Automated A/B testing",
+      ],
+      caseStudy: "Retail chain automated 90% of campaign workflows, saving 20 hours weekly",
+      integration: "Works with Facebook Ads, Google Ads, and email marketing platforms",
     },
     {
       icon: Users,
       title: "Personalized Marketing",
-      description: "Deliver tailored experiences to every customer",
+      description: "Deliver tailored experiences that resonate with each customer segment",
       benefits: [
-        "Dynamic content",
+        "2x increase in conversion rates",
+        "Dynamic content adaptation",
+        "Individual journey mapping",
         "Behavioral targeting",
-        "Customer journey mapping"
-      ]
+        "Custom recommendation engine",
+      ],
+      caseStudy: "Travel company achieved 65% higher engagement with personalized campaigns",
+      integration: "Compatible with major CRM systems and marketing automation tools",
     },
     {
       icon: Zap,
       title: "Real-time Optimization",
-      description: "Continuously improve campaign performance",
+      description: "Continuously improve performance with AI-driven optimization",
       benefits: [
-        "A/B testing",
-        "Performance analytics",
-        "Automated adjustments"
-      ]
-    }
+        "30% improvement in campaign ROI",
+        "Instant performance insights",
+        "Automated bid management",
+        "Creative optimization",
+        "Landing page testing",
+      ],
+      caseStudy: "SaaS company reduced CAC by 35% through real-time optimization",
+      integration: "Integrates with major ad platforms and analytics tools",
+    },
+  ];
+
+  const successMetrics = [
+    {
+      icon: CheckCircle2,
+      metric: "95%",
+      label: "Client Success Rate",
+      description: "Clients achieving their marketing goals",
+    },
+    {
+      icon: ArrowUpRight,
+      metric: "250%",
+      label: "Average ROI",
+      description: "Return on marketing investment",
+    },
+    {
+      icon: Infinity,
+      metric: "85%",
+      label: "Client Retention",
+      description: "Long-term partnership success",
+    },
   ];
 
   return (
@@ -100,7 +144,7 @@ export default function Home() {
               Leverage the power of artificial intelligence to transform your marketing strategy and drive exceptional results.
             </p>
           </div>
-          
+
           <motion.div
             variants={staggerChildren}
             initial="initial"
@@ -108,7 +152,10 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {aiServices.map((service) => (
-              <Card key={service.title} className="border-2 border-purple-100 dark:border-purple-800">
+              <Card
+                key={service.title}
+                className="border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600"
+              >
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
@@ -119,21 +166,49 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <ul className="space-y-2 mb-6">
-                    {service.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-purple-500" />
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                  <div className="mb-6">
+                    <h4 className="font-semibold mb-2">Key Benefits:</h4>
+                    <ul className="space-y-2">
+                      {service.benefits.map((benefit) => (
+                        <li key={benefit} className="flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-purple-500 flex-shrink-0" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mb-4">
+                    <h4 className="font-semibold mb-2">Success Story:</h4>
+                    <p className="text-sm text-muted-foreground">{service.caseStudy}</p>
+                  </div>
+                  <div className="mb-6">
+                    <h4 className="font-semibold mb-2">Integration:</h4>
+                    <p className="text-sm text-muted-foreground">{service.integration}</p>
+                  </div>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                     Learn More
                   </Button>
                 </CardContent>
               </Card>
             ))}
           </motion.div>
+
+          {/* Success Metrics Section */}
+          <div className="mt-20">
+            <h3 className="text-2xl font-bold text-center mb-12">Our Impact</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {successMetrics.map((metric) => (
+                <Card key={metric.label} className="text-center transition-all duration-300 hover:shadow-lg">
+                  <CardContent className="pt-6">
+                    <metric.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                    <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
+                    <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
+                    <p className="text-muted-foreground">{metric.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -150,7 +225,7 @@ export default function Home() {
           items={[
             "Smart Segmentation",
             "A/B Testing",
-            "Automated Workflows"
+            "Automated Workflows",
           ]}
         />
         <FeatureCard
@@ -160,7 +235,7 @@ export default function Home() {
           items={[
             "Personalized Messages",
             "Campaign Scheduling",
-            "Response Analytics"
+            "Response Analytics",
           ]}
         />
         <FeatureCard
@@ -170,7 +245,7 @@ export default function Home() {
           items={[
             "Responsive Design",
             "SEO Optimization",
-            "Performance Metrics"
+            "Performance Metrics",
           ]}
         />
       </motion.div>
@@ -188,7 +263,7 @@ export default function Home() {
           items={[
             "Points System",
             "Custom Rewards",
-            "Engagement Tracking"
+            "Engagement Tracking",
           ]}
         />
         <FeatureCard
@@ -198,7 +273,7 @@ export default function Home() {
           items={[
             "Content Calendar",
             "Analytics Dashboard",
-            "Engagement Optimization"
+            "Engagement Optimization",
           ]}
         />
         <FeatureCard
@@ -208,7 +283,7 @@ export default function Home() {
           items={[
             "Market Analysis",
             "Strategy Development",
-            "Implementation Support"
+            "Implementation Support",
           ]}
         />
       </motion.div>
