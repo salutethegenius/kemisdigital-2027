@@ -1,11 +1,22 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Preloader() {
+  const [shouldExit, setShouldExit] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldExit(true);
+    }, 3500); // Show for exactly 3.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      animate={{ opacity: shouldExit ? 0 : 1 }}
+      transition={{ duration: 3.5, ease: "easeInOut" }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-background"
     >
       <div className="relative">
