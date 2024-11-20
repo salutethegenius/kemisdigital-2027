@@ -37,7 +37,7 @@ const placeholderPosts: BlogPost[] = [
     title: "The Future of AI in Content Marketing",
     slug: "future-ai-content-marketing",
     excerpt: "Discover how AI is revolutionizing content creation and distribution strategies for modern businesses.",
-    featured_image: "/images/blog/ai-content.jpg",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Content+Marketing",
     published_at: new Date().toISOString(),
     category_name: "AI Marketing Insights",
     tags: ["AI", "Content Marketing", "Future Trends"],
@@ -48,7 +48,7 @@ const placeholderPosts: BlogPost[] = [
     title: "Digital Transformation Success Story: E-commerce Revolution",
     slug: "digital-transformation-ecommerce",
     excerpt: "Learn how an e-commerce brand achieved 300% growth through AI-powered personalization.",
-    featured_image: "/images/blog/ecommerce.jpg",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=E-commerce+Success",
     published_at: new Date().toISOString(),
     category_name: "Case Studies",
     tags: ["E-commerce", "Success Story", "AI Implementation"]
@@ -58,7 +58,7 @@ const placeholderPosts: BlogPost[] = [
     title: "AI Marketing Tools: A Comprehensive Guide",
     slug: "ai-marketing-tools-guide",
     excerpt: "An in-depth look at the most effective AI tools reshaping the marketing landscape.",
-    featured_image: "/images/blog/tools.jpg",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Marketing+Tools",
     published_at: new Date().toISOString(),
     category_name: "Educational Content",
     tags: ["Tools", "Guides", "Best Practices"]
@@ -68,7 +68,7 @@ const placeholderPosts: BlogPost[] = [
     title: "Transforming Customer Experience with AI",
     slug: "transforming-customer-experience",
     excerpt: "How AI is enabling businesses to deliver personalized, seamless customer experiences.",
-    featured_image: "/images/blog/customer-exp.jpg",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Customer+Experience",
     published_at: new Date().toISOString(),
     category_name: "Digital Transformation",
     tags: ["Customer Experience", "AI", "Digital Strategy"]
