@@ -69,7 +69,6 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/events" component={Events} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/membership" component={Membership} />
-                    <Route path="/analytics" component={Analytics} />
                     <Route path="/advocacy" component={Advocacy} />
                     <Route path="/ailabs" component={AILabs} />
                     <Route path="/blog" component={Blog} />
