@@ -1,6 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode, lazy, Suspense } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+
+const Chatbot = lazy(() => import("@/components/chat/Chatbot"));
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +16,9 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
     </div>
   );
 }
