@@ -1,13 +1,80 @@
 import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Globe, Gift, Share2, Brain, Target, Sparkles } from "lucide-react";
+import { 
+  Mail, 
+  MessageSquare, 
+  Globe, 
+  Gift, 
+  Share2, 
+  Brain, 
+  Target, 
+  Sparkles,
+  Cpu,
+  BarChart,
+  Rocket,
+  Users,
+  Zap
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { staggerChildren } from "@/lib/animations";
 
 export default function Home() {
+  const aiServices = [
+    {
+      icon: Cpu,
+      title: "AI-Powered Content Generation",
+      description: "Create engaging, personalized content at scale",
+      benefits: [
+        "SEO-optimized content",
+        "Multi-language support",
+        "Brand voice consistency"
+      ]
+    },
+    {
+      icon: BarChart,
+      title: "Predictive Analytics",
+      description: "Make data-driven decisions with AI insights",
+      benefits: [
+        "Customer behavior analysis",
+        "Market trend forecasting",
+        "ROI optimization"
+      ]
+    },
+    {
+      icon: Rocket,
+      title: "Automated Campaign Management",
+      description: "Streamline your marketing operations",
+      benefits: [
+        "Smart scheduling",
+        "Performance monitoring",
+        "Budget optimization"
+      ]
+    },
+    {
+      icon: Users,
+      title: "Personalized Marketing",
+      description: "Deliver tailored experiences to every customer",
+      benefits: [
+        "Dynamic content",
+        "Behavioral targeting",
+        "Customer journey mapping"
+      ]
+    },
+    {
+      icon: Zap,
+      title: "Real-time Optimization",
+      description: "Continuously improve campaign performance",
+      benefits: [
+        "A/B testing",
+        "Performance analytics",
+        "Automated adjustments"
+      ]
+    }
+  ];
+
   return (
     <div>
       <Hero
@@ -21,6 +88,52 @@ export default function Home() {
           <p className="text-muted-foreground">
             To empower businesses with innovative AI-driven marketing solutions that create meaningful connections, drive sustainable growth, and deliver measurable results in the digital age.
           </p>
+        </div>
+      </section>
+
+      {/* AI Service Showcase Section */}
+      <section className="py-16 bg-purple-50 dark:bg-purple-900/10">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">AI Marketing Services</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Leverage the power of artificial intelligence to transform your marketing strategy and drive exceptional results.
+            </p>
+          </div>
+          
+          <motion.div
+            variants={staggerChildren}
+            initial="initial"
+            animate="animate"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {aiServices.map((service) => (
+              <Card key={service.title} className="border-2 border-purple-100 dark:border-purple-800">
+                <CardHeader>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                      <service.icon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <ul className="space-y-2 mb-6">
+                    {service.benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-purple-500" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Learn More
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </motion.div>
         </div>
       </section>
 
