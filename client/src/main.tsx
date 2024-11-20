@@ -24,6 +24,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Blog from "./pages/Blog";
 import BlogEditor from "@/components/blog/BlogEditor";
+import CaseStudies from "./pages/CaseStudies";
 import Layout from "./components/layout/Layout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 
@@ -71,6 +72,7 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/membership" component={Membership} />
                     <Route path="/advocacy" component={Advocacy} />
                     <Route path="/ailabs" component={AILabs} />
+                    <Route path="/case-studies" component={CaseStudies} />
                     <Route path="/blog" component={Blog} />
                     <Route>404 Page Not Found</Route>
                   </Switch>
