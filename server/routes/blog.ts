@@ -13,7 +13,7 @@ router.get('/posts', async (req, res) => {
       SELECT 
         p.*,
         c.name as category_name,
-        array_agg(DISTINCT t.name) as tags
+        COALESCE(array_agg(t.name) FILTER (WHERE t.name IS NOT NULL), ARRAY[]::text[]) as tags
       FROM blog_posts p
       LEFT JOIN blog_categories c ON p.category_id = c.id
       LEFT JOIN blog_posts_tags pt ON p.id = pt.post_id
@@ -34,6 +34,7 @@ router.get('/posts', async (req, res) => {
     const posts = await db.query(query);
     res.json(posts.rows);
   } catch (error) {
+    console.error('Error fetching blog posts:', error);
     res.status(500).json({ error: 'Failed to fetch blog posts' });
   }
 });
@@ -46,7 +47,7 @@ router.get('/posts/:slug', async (req, res) => {
       SELECT 
         p.*,
         c.name as category_name,
-        array_agg(DISTINCT t.name) as tags
+        COALESCE(array_agg(t.name) FILTER (WHERE t.name IS NOT NULL), ARRAY[]::text[]) as tags
       FROM blog_posts p
       LEFT JOIN blog_categories c ON p.category_id = c.id
       LEFT JOIN blog_posts_tags pt ON p.id = pt.post_id
@@ -61,6 +62,7 @@ router.get('/posts/:slug', async (req, res) => {
 
     res.json(post.rows[0]);
   } catch (error) {
+    console.error('Error fetching blog post:', error);
     res.status(500).json({ error: 'Failed to fetch blog post' });
   }
 });
@@ -103,6 +105,7 @@ router.post('/posts', async (req, res) => {
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error('Error creating blog post:', error);
     res.status(500).json({ error: 'Failed to create blog post' });
   }
 });
@@ -163,6 +166,7 @@ router.put('/posts/:id', async (req, res) => {
 
     res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error updating blog post:', error);
     res.status(500).json({ error: 'Failed to update blog post' });
   }
 });
@@ -174,6 +178,7 @@ router.delete('/posts/:id', async (req, res) => {
     await db.query('DELETE FROM blog_posts WHERE id = $1', [id]);
     res.status(204).send();
   } catch (error) {
+    console.error('Error deleting blog post:', error);
     res.status(500).json({ error: 'Failed to delete blog post' });
   }
 });
@@ -184,6 +189,7 @@ router.get('/categories', async (req, res) => {
     const categories = await db.query('SELECT * FROM blog_categories ORDER BY name');
     res.json(categories.rows);
   } catch (error) {
+    console.error('Error fetching categories:', error);
     res.status(500).json({ error: 'Failed to fetch categories' });
   }
 });
@@ -198,6 +204,7 @@ router.post('/categories', async (req, res) => {
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error('Error creating category:', error);
     res.status(500).json({ error: 'Failed to create category' });
   }
 });
@@ -208,6 +215,7 @@ router.get('/tags', async (req, res) => {
     const tags = await db.query('SELECT * FROM blog_tags ORDER BY name');
     res.json(tags.rows);
   } catch (error) {
+    console.error('Error fetching tags:', error);
     res.status(500).json({ error: 'Failed to fetch tags' });
   }
 });
@@ -222,6 +230,7 @@ router.post('/tags', async (req, res) => {
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error('Error creating tag:', error);
     res.status(500).json({ error: 'Failed to create tag' });
   }
 });
