@@ -60,18 +60,26 @@ export default function ContentRecommendations() {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const prompt = `Based on a marketing professional interested in ${user?.interests?.join(", ") || "AI marketing"}, 
-          generate 3 content recommendations. Your response must be a valid JSON array containing exactly 3 recommendations.
-          Each recommendation must strictly follow this format:
-          [
-            {
-              "title": string (max 100 chars),
-              "description": string (max 200 chars),
-              "type": one of ["article", "video", "webinar", "tool"],
-              "relevanceScore": number between 0.0 and 1.0
-            }
-          ]
-          Ensure the response is a syntactically valid JSON array with no wrapper object.`;
+        const prompt = `Generate exactly 3 AI marketing content recommendations as a JSON array for a user interested in ${user?.interests?.join(", ") || "AI marketing"}.
+Return ONLY a JSON array with no explanation text.
+Format:
+[
+  {
+    "title": "string (max 100 chars)",
+    "description": "string (max 200 chars)",
+    "type": "article" | "video" | "webinar" | "tool",
+    "relevanceScore": number between 0 and 1
+  }
+]
+
+Requirements:
+- Must return exactly 3 recommendations
+- Must be a valid JSON array (no wrapper object)
+- No additional text or explanations
+- Each title must be under 100 characters
+- Each description must be under 200 characters
+- Type must be one of: "article", "video", "webinar", "tool"
+- RelevanceScore must be between 0 and 1`;
 
         const response = await getChatbotResponse(prompt);
         
@@ -81,49 +89,60 @@ export default function ContentRecommendations() {
         let parsedResponse: unknown;
         
         try {
-          // First try to parse the JSON
-          parsedResponse = JSON.parse(response);
-          
-          // Additional validation checks
+          // Remove any potential text before or after the JSON array
+          const jsonMatch = response.match(/\[.*\]/s);
+          if (!jsonMatch) {
+            throw new Error("No valid JSON array found in response");
+          }
+
+          // Parse the JSON with additional validation
+          parsedResponse = JSON.parse(jsonMatch[0]);
+
+          // Validate array structure
           if (!Array.isArray(parsedResponse)) {
-            throw new Error("Response is not an array");
+            throw new Error("Response is not a valid JSON array");
           }
-          
+
           if (parsedResponse.length !== 3) {
-            throw new Error("Response does not contain exactly 3 recommendations");
+            throw new Error(`Expected exactly 3 recommendations, got ${parsedResponse.length}`);
           }
 
-          // Validate each recommendation's structure and data types
+          // Type guard validation
           if (!isValidRecommendationsArray(parsedResponse)) {
-            throw new Error("Invalid recommendation format in response");
+            const invalidRecs = parsedResponse.map((rec, index) => ({
+              index,
+              issues: [
+                !rec?.title && "missing title",
+                !rec?.description && "missing description",
+                !rec?.type && "missing type",
+                !["article", "video", "webinar", "tool"].includes(rec?.type) && "invalid type",
+                (typeof rec?.relevanceScore !== "number" || 
+                 rec.relevanceScore < 0 || 
+                 rec.relevanceScore > 1) && "invalid relevanceScore"
+              ].filter(Boolean)
+            })).filter(rec => rec.issues.length > 0);
+
+            throw new Error(`Invalid recommendation format: ${JSON.stringify(invalidRecs)}`);
           }
 
-          // Additional data sanitation
+          // Sanitize and validate data
           const sanitizedRecommendations = parsedResponse.map(rec => ({
             ...rec,
-            title: rec.title.slice(0, 100), // Limit title length
-            description: rec.description.slice(0, 200), // Limit description length
-            relevanceScore: Math.max(0, Math.min(1, rec.relevanceScore)) // Ensure score is between 0 and 1
+            title: rec.title.slice(0, 100),
+            description: rec.description.slice(0, 200),
+            relevanceScore: Math.max(0, Math.min(1, rec.relevanceScore))
           }));
 
           setRecommendations(sanitizedRecommendations);
           setError(null);
-          return;
+        } catch (error) {
+          console.error("Failed to process recommendations:", error);
+          setRecommendations(fallbackRecommendations);
+          setError(`Error processing recommendations: ${error.message}`);
           
-        } catch (parseError) {
-          console.error("Failed to parse/validate response:", parseError);
-          setRecommendations(fallbackRecommendations);
-          setError(`Unable to process recommendations: ${parseError.message}`);
-          return;
-        }
-
-        if (isValidRecommendationsArray(parsedResponse)) {
-          setRecommendations(parsedResponse);
-          setError(null);
-        } else {
-          console.error("Invalid recommendations format:", parsedResponse);
-          setRecommendations(fallbackRecommendations);
-          setError("Received invalid recommendations format");
+          // Log detailed error information for debugging
+          console.debug("Original response:", response);
+          console.debug("Parsed data:", parsedResponse);
         }
       } catch (error) {
         console.error("Error fetching recommendations:", error);
