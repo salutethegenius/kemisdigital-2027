@@ -8,7 +8,10 @@ export const db = new Pool({
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   port: parseInt(process.env.PGPORT || '5432'),
-  ssl: process.env.NODE_ENV === 'production'
+  ssl: {
+    rejectUnauthorized: false,
+    sslmode: 'require'
+  }
 });
 
 db.on('error', (err: Error) => {
