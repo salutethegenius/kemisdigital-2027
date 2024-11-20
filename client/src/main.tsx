@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import Membership from "./pages/Membership";
 import Advocacy from "./pages/Advocacy";
 import Analytics from "./pages/Analytics";
+import AILabs from "./pages/AILabs";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Blog from "./pages/Blog";
@@ -70,6 +71,7 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/membership" component={Membership} />
                     <Route path="/analytics" component={Analytics} />
                     <Route path="/advocacy" component={Advocacy} />
+                    <Route path="/ailabs" component={AILabs} />
                     <Route path="/blog" component={Blog} />
                     <Route>404 Page Not Found</Route>
                   </Switch>
