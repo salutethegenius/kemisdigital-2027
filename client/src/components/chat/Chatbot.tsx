@@ -78,19 +78,26 @@ export default function Chatbot() {
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[425px] h-[600px] flex flex-col">
-          <DialogHeader>
-            <DialogTitle className="flex justify-between items-center">
-              <span>KemisDigital Support</span>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsOpen(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </DialogTitle>
-          </DialogHeader>
+        <DialogContent 
+            className="sm:max-w-[425px] h-[600px] flex flex-col"
+            aria-describedby="chat-description"
+          >
+            <DialogHeader>
+              <DialogTitle className="flex justify-between items-center">
+                <span>KemisDigital Support</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close chat"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </DialogTitle>
+              <p id="chat-description" className="text-sm text-muted-foreground">
+                Chat with our AI assistant for help with our services and solutions.
+              </p>
+            </DialogHeader>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 ? (

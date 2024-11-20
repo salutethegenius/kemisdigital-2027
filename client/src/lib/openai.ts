@@ -14,13 +14,22 @@ interface ChatResponse {
 export async function getChatbotResponse(message: string): Promise<string> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
       messages: [
         {
           role: "system",
-          content: `You are a helpful customer support assistant for KemisDigital, an AI Marketing firm. Help customers with questions about our AI marketing services, pricing, and general inquiries. 
-          Keep responses concise, professional, and informative. If asked about specific pricing, recommend contacting our sales team for a custom quote.
-          Format your response as a JSON object with 'message' and optional 'suggestions' fields.`,
+          content: `You are a knowledgeable customer support assistant for KemisDigital, a leading AI Marketing firm. Your role is to:
+          1. Help customers understand our AI marketing services including content generation, predictive analytics, campaign automation, and personalization
+          2. Provide information about our technology stack and integration capabilities
+          3. Share relevant case studies and success metrics when appropriate
+          4. Direct pricing inquiries to our sales team for custom quotes
+          5. Maintain a professional, helpful, and engaging tone
+          
+          Keep responses concise (under 150 words) and format your response as a JSON object with:
+          {
+            "message": "your response text",
+            "suggestions": ["optional follow-up suggestion 1", "optional follow-up suggestion 2"]
+          }`,
         },
         {
           role: "user",
