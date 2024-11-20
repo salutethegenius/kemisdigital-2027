@@ -60,26 +60,60 @@ export default function ContentRecommendations() {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const prompt = `Generate personalized content recommendations for a marketing professional interested in ${user?.interests?.join(", ") || "AI marketing"}. 
-          Return an array of exactly 3 recommendations in this format:
+        const prompt = `Based on a marketing professional interested in ${user?.interests?.join(", ") || "AI marketing"}, 
+          generate 3 content recommendations. Your response must be a valid JSON array containing exactly 3 recommendations.
+          Each recommendation must strictly follow this format:
           [
             {
-              "title": "string",
-              "description": "string",
-              "type": "article" | "video" | "webinar" | "tool",
-              "relevanceScore": number between 0 and 1
+              "title": string (max 100 chars),
+              "description": string (max 200 chars),
+              "type": one of ["article", "video", "webinar", "tool"],
+              "relevanceScore": number between 0.0 and 1.0
             }
-          ]`;
+          ]
+          Ensure the response is a syntactically valid JSON array with no wrapper object.`;
 
         const response = await getChatbotResponse(prompt);
+        
+        if (!response) {
+          throw new Error("Empty response received from AI service");
+        }
         let parsedResponse: unknown;
         
         try {
+          // First try to parse the JSON
           parsedResponse = JSON.parse(response);
+          
+          // Additional validation checks
+          if (!Array.isArray(parsedResponse)) {
+            throw new Error("Response is not an array");
+          }
+          
+          if (parsedResponse.length !== 3) {
+            throw new Error("Response does not contain exactly 3 recommendations");
+          }
+
+          // Validate each recommendation's structure and data types
+          if (!isValidRecommendationsArray(parsedResponse)) {
+            throw new Error("Invalid recommendation format in response");
+          }
+
+          // Additional data sanitation
+          const sanitizedRecommendations = parsedResponse.map(rec => ({
+            ...rec,
+            title: rec.title.slice(0, 100), // Limit title length
+            description: rec.description.slice(0, 200), // Limit description length
+            relevanceScore: Math.max(0, Math.min(1, rec.relevanceScore)) // Ensure score is between 0 and 1
+          }));
+
+          setRecommendations(sanitizedRecommendations);
+          setError(null);
+          return;
+          
         } catch (parseError) {
-          console.error("Failed to parse response:", parseError);
+          console.error("Failed to parse/validate response:", parseError);
           setRecommendations(fallbackRecommendations);
-          setError("Unable to parse recommendations");
+          setError(`Unable to process recommendations: ${parseError.message}`);
           return;
         }
 

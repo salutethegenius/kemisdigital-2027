@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "AI Labs", href: "/ailabs", icon: Brain },
     { name: "AI Services", href: "/dashboard/services", icon: Calendar },
     { name: "Clients", href: "/dashboard/clients", icon: Users },
-    { name: "Resources", href: "/dashboard/resources", icon: FileText },
+    { name: "Resources", href: "/resources", icon: FileText },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
