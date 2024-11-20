@@ -2,33 +2,33 @@ import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Award, Users, Target, Briefcase } from "lucide-react";
+import { Brain, Target, Sparkles, Code, MessageSquare, LineChart } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
 export default function About() {
   const leadershipTeam = [
     {
-      name: "Kenneth C. Moncur, CIPM",
-      role: "President",
-      description: "Expert in digital marketing with over 15 years of experience."
+      name: "Emily Chen",
+      role: "CEO & AI Strategy Lead",
+      description: "Pioneer in AI-driven marketing with 12+ years of experience in digital transformation."
     },
     {
-      name: "Sarah Johnson",
-      role: "Vice President",
-      description: "Specializes in social media strategy and content marketing."
+      name: "Marcus Rodriguez",
+      role: "CTO & Innovation Director",
+      description: "Expert in AI implementation and marketing technology infrastructure."
     },
     {
-      name: "Michael Thompson",
-      role: "Director of Education",
-      description: "Leads professional development and certification programs."
+      name: "Sarah Williams",
+      role: "Head of Client Success",
+      description: "Specialized in AI-powered campaign optimization and client strategy."
     }
   ];
 
   return (
     <div>
       <Hero
-        title="About Us"
-        description="Welcome to the Bahamas Digital Marketing Association (BDMA) – your partner in advancing digital marketing excellence across the Bahamas."
+        title="About KemisDigital"
+        description="Pioneering the future of marketing with artificial intelligence and data-driven strategies that deliver exceptional results."
         showCTA={false}
       />
 
@@ -38,27 +38,27 @@ export default function About() {
         animate="animate"
         className="mb-16"
       >
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Mission</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Our Vision</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard
-            title="Foster Community"
-            description="Build a vibrant community of digital marketing professionals"
-            icon={Users}
+            title="Innovation First"
+            description="Leading the AI marketing revolution with cutting-edge solutions"
+            icon={Brain}
           />
           <FeatureCard
-            title="Provide Training"
-            description="Offer access to certifications and educational resources"
-            icon={Award}
-          />
-          <FeatureCard
-            title="Set Standards"
-            description="Promote and maintain ethical marketing practices"
+            title="Client Success"
+            description="Delivering measurable results through AI-powered strategies"
             icon={Target}
           />
           <FeatureCard
-            title="Industry Advocacy"
-            description="Represent members in policy and best practices"
-            icon={Briefcase}
+            title="Technology Excellence"
+            description="Leveraging advanced AI tools for marketing automation"
+            icon={Sparkles}
+          />
+          <FeatureCard
+            title="Data-Driven Approach"
+            description="Making informed decisions with AI analytics"
+            icon={LineChart}
           />
         </div>
       </motion.section>
@@ -76,7 +76,7 @@ export default function About() {
               <Card>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                  <p className="text-cyan-600 mb-2">{member.role}</p>
+                  <p className="text-purple-600 mb-2">{member.role}</p>
                   <p className="text-gray-600">{member.description}</p>
                 </CardContent>
               </Card>
@@ -86,7 +86,7 @@ export default function About() {
       </section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">What We Offer</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Our Expertise</h2>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
           variants={staggerChildren}
@@ -95,38 +95,38 @@ export default function About() {
         >
           <Card>
             <CardContent className="pt-6">
-              <h3 className="text-xl font-bold mb-4">Educational Excellence</h3>
+              <h3 className="text-xl font-bold mb-4">AI Marketing Solutions</h3>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Industry-leading training programs</span>
+                  <span className="text-purple-500">•</span>
+                  <span>Predictive Analytics & Targeting</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Professional certifications</span>
+                  <span className="text-purple-500">•</span>
+                  <span>Automated Campaign Optimization</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Workshops and seminars</span>
+                  <span className="text-purple-500">•</span>
+                  <span>AI-Powered Content Generation</span>
                 </li>
               </ul>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-6">
-              <h3 className="text-xl font-bold mb-4">Industry Support</h3>
+              <h3 className="text-xl font-bold mb-4">Client Benefits</h3>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Networking opportunities</span>
+                  <span className="text-purple-500">•</span>
+                  <span>Enhanced ROI Through AI Optimization</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Resource library access</span>
+                  <span className="text-purple-500">•</span>
+                  <span>Real-time Performance Analytics</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-cyan-500">•</span>
-                  <span>Career development support</span>
+                  <span className="text-purple-500">•</span>
+                  <span>Personalized Marketing Strategies</span>
                 </li>
               </ul>
             </CardContent>
