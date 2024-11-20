@@ -1,5 +1,6 @@
 import Hero from "@/components/shared/Hero";
 import { Card, CardContent } from "@/components/ui/card";
+import ContentRecommendations from "@/components/recommendations/ContentRecommendations";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { Book, Video, FileText, Wrench } from "lucide-react";
@@ -40,6 +41,10 @@ export default function Resources() {
         description="Access our comprehensive collection of digital marketing tools, guides, and educational materials."
         showCTA={false}
       />
+      
+      <div className="mb-8">
+        <ContentRecommendations />
+      </div>
 
       <Tabs defaultValue="tools" className="mb-16">
         <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 mb-8">
