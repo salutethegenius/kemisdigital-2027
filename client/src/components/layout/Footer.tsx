@@ -2,35 +2,35 @@ import { Link } from "wouter";
 
 const footerSections = [
   {
-    title: "About BDMA",
+    title: "Company",
     links: [
-      { name: "Our Mission", href: "/about#mission" },
-      { name: "Leadership", href: "/about#leadership" },
-      { name: "Partners", href: "/about#partners" },
+      { name: "About Us", href: "/about" },
+      { name: "Case Studies", href: "/case-studies" },
+      { name: "Blog", href: "/blog" },
     ],
   },
   {
-    title: "Membership",
+    title: "Services",
     links: [
-      { name: "Join BDMA", href: "/membership" },
-      { name: "Member Directory", href: "/membership#directory" },
-      { name: "Member Benefits", href: "/membership#benefits" },
+      { name: "AI Marketing", href: "/services#ai-marketing" },
+      { name: "Content Creation", href: "/services#content" },
+      { name: "Analytics", href: "/services#analytics" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { name: "Blog", href: "/resources#blog" },
-      { name: "Webinars", href: "/resources#webinars" },
-      { name: "Certifications", href: "/resources#certifications" },
+      { name: "AI Lab", href: "/ai-lab" },
+      { name: "Documentation", href: "/docs" },
+      { name: "API Access", href: "/api" },
     ],
   },
   {
     title: "Contact",
     links: [
       { name: "Get in Touch", href: "/contact" },
-      { name: "Sponsorship", href: "/contact#sponsorship" },
-      { name: "Support", href: "/contact#support" },
+      { name: "Support", href: "/support" },
+      { name: "Schedule Demo", href: "/demo" },
     ],
   },
 ];
@@ -48,7 +48,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-cyan-500 transition-colors"
+                      className="text-gray-400 hover:text-purple-500 transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -59,7 +59,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024-25 Bahamas Digital Marketing Association. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} KemisDigital AI Marketing. All rights reserved.</p>
         </div>
       </div>
     </footer>

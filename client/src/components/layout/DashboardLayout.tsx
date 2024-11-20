@@ -16,8 +16,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
     { name: "Analytics", href: "/dashboard/analytics", icon: BarChart },
-    { name: "Events", href: "/dashboard/events", icon: Calendar },
-    { name: "Network", href: "/dashboard/network", icon: Users },
+    { name: "AI Services", href: "/dashboard/services", icon: Calendar },
+    { name: "Clients", href: "/dashboard/clients", icon: Users },
     { name: "Resources", href: "/dashboard/resources", icon: FileText },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="flex-1 flex flex-col min-h-0 border-r bg-card">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
-                <span className="text-2xl font-bold">BDMA</span>
+                <span className="text-2xl font-bold">KemisDigital</span>
               </div>
               <div className="px-4 mt-4">
                 <p className="text-sm font-medium text-muted-foreground">

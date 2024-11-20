@@ -18,30 +18,30 @@ interface Event {
 export default function Events() {
   const upcomingEvents: Event[] = [
     {
-      title: "Advanced Digital Marketing Workshop",
+      title: "AI Marketing Masterclass",
       date: "March 15, 2024",
-      location: "Bahamas Baptist University College",
+      location: "Virtual Event",
       time: "9:00 AM - 4:00 PM",
-      description: "Intensive workshop covering advanced digital marketing strategies, analytics, and campaign management.",
-      capacity: "30 participants",
+      description: "Learn how to leverage AI tools for marketing automation, content generation, and customer insights.",
+      capacity: "100 participants",
       type: "workshop"
     },
     {
-      title: "Annual Digital Marketing Summit 2024",
+      title: "Future of Digital Marketing Summit 2024",
       date: "April 20-21, 2024",
-      location: "Atlantis Paradise Island",
+      location: "Nassau Tech Hub",
       time: "9:00 AM - 5:00 PM",
-      description: "Two-day conference featuring industry leaders, networking sessions, and the latest digital marketing trends.",
-      capacity: "200 participants",
+      description: "Join industry leaders to explore the intersection of AI and digital marketing strategies.",
+      capacity: "250 participants",
       type: "conference"
     },
     {
-      title: "Social Media Strategy Masterclass",
+      title: "ChatGPT for Marketing Teams",
       date: "May 5, 2024",
       location: "Virtual Event",
       time: "2:00 PM - 4:00 PM",
-      description: "Learn effective social media strategies and best practices from industry experts.",
-      capacity: "100 participants",
+      description: "Practical workshop on using ChatGPT for content creation, customer service, and marketing automation.",
+      capacity: "150 participants",
       type: "webinar"
     }
   ];
@@ -49,8 +49,8 @@ export default function Events() {
   return (
     <div>
       <Hero
-        title="Upcoming Events"
-        description="Join us for professional development opportunities, networking events, and industry conferences."
+        title="AI Marketing Events"
+        description="Join our cutting-edge events to master AI-powered marketing strategies and stay ahead of the competition."
         showCTA={false}
       />
 
@@ -74,24 +74,24 @@ export default function Events() {
                     <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
                     <div className="flex flex-wrap gap-4 text-gray-600">
                       <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-2" />
+                        <Calendar className="w-4 h-4 mr-2 text-purple-500" />
                         {event.date}
                       </div>
                       <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-2" />
+                        <MapPin className="w-4 h-4 mr-2 text-purple-500" />
                         {event.location}
                       </div>
                       <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-2" />
+                        <Clock className="w-4 h-4 mr-2 text-purple-500" />
                         {event.time}
                       </div>
                       <div className="flex items-center">
-                        <Users className="w-4 h-4 mr-2" />
+                        <Users className="w-4 h-4 mr-2 text-purple-500" />
                         {event.capacity}
                       </div>
                     </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-cyan-100 text-cyan-800">
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
                     {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
                   </span>
                 </div>
@@ -101,7 +101,7 @@ export default function Events() {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
                 <Button variant="outline">Learn More</Button>
-                <Button>Register Now</Button>
+                <Button className="bg-purple-600 hover:bg-purple-700">Register Now</Button>
               </CardFooter>
             </Card>
           </motion.div>
@@ -113,15 +113,15 @@ export default function Events() {
           <CardContent className="pt-6">
             <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
             <p className="text-gray-600 mb-4">
-              Subscribe to our newsletter to receive updates about upcoming events and professional development opportunities.
+              Subscribe to our newsletter to receive updates about upcoming AI marketing events and exclusive insights.
             </p>
             <div className="flex gap-4">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-              <Button>Subscribe</Button>
+              <Button className="bg-purple-600 hover:bg-purple-700">Subscribe</Button>
             </div>
           </CardContent>
         </Card>

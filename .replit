@@ -11,6 +11,10 @@ build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
 [[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
@@ -39,6 +43,10 @@ author = "agent"
 task = "workflow.run"
 args = "fullstack"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "client"
+
 [[workflows.workflow]]
 name = "fullstack"
 author = "agent"
@@ -53,3 +61,18 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "client"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd client && npx vite --port 3000 --host 0.0.0.0"
+waitForPort = 3000

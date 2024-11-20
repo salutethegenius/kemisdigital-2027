@@ -13,11 +13,10 @@ import { useAuth } from "@/hooks/use-auth";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Membership", href: "/membership" },
-  { name: "Events", href: "/events" },
-  { name: "Resources", href: "/resources" },
-  { name: "Analytics", href: "/analytics" },
-  { name: "Advocacy", href: "/advocacy" },
+  { name: "AI Services", href: "/services" },
+  { name: "Case Studies", href: "/case-studies" },
+  { name: "AI Lab", href: "/ai-lab" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -27,17 +26,11 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="bg-background border-b">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 font-bold text-2xl">
-          <svg
-            viewBox="0 0 24 24"
-            className="w-8 h-8 text-cyan-500"
-            fill="currentColor"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
-          <span>BDMA</span>
+          <span className="text-primary">Kemis</span>
+          <span>Digital</span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-6">
@@ -45,8 +38,8 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-cyan-500 ${
-                location === item.href ? "text-cyan-500" : "text-muted-foreground"
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                location === item.href ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {item.name}
@@ -62,8 +55,8 @@ export default function Header() {
               <Link href="/login">Login</Link>
             </Button>
           )}
-          <Button asChild>
-            <Link href="/membership">Join Now</Link>
+          <Button asChild className="bg-primary hover:bg-primary/90 text-white">
+            <Link href="/contact">Get Started</Link>
           </Button>
         </div>
 
@@ -79,8 +72,8 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-cyan-500 ${
-                    location === item.href ? "text-cyan-500" : "text-muted-foreground"
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    location === item.href ? "text-primary" : "text-muted-foreground"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -97,8 +90,8 @@ export default function Header() {
                   <Link href="/login">Login</Link>
                 </Button>
               )}
-              <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
-                <Link href="/membership">Join Now</Link>
+              <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild onClick={() => setIsOpen(false)}>
+                <Link href="/contact">Get Started</Link>
               </Button>
             </div>
           </SheetContent>

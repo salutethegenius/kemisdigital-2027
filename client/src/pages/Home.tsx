@@ -1,8 +1,7 @@
 import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
-import MembershipTier from "@/components/shared/MembershipTier";
 import { motion } from "framer-motion";
-import { GraduationCap, Users, Scale } from "lucide-react";
+import { Brain, TrendingUp, Target, Sparkles, Users, Bot } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -12,8 +11,8 @@ export default function Home() {
   return (
     <div>
       <Hero
-        title="Welcome to the Bahamas Digital Marketing Association"
-        description="Elevating digital marketing standards, providing education, and setting ethical guidelines for professionals in the Bahamas."
+        title="Transform Your Business with AI-Powered Marketing"
+        description="KemisDigital combines cutting-edge artificial intelligence with expert marketing strategies to deliver exceptional results for your business."
       />
 
       <motion.div
@@ -23,114 +22,76 @@ export default function Home() {
         animate="animate"
       >
         <FeatureCard
-          title="Education & Standards"
-          description="Enhance your skills with our comprehensive educational programs"
-          icon={GraduationCap}
+          title="AI-Driven Insights"
+          description="Leverage advanced analytics and machine learning for data-driven decisions"
+          icon={Brain}
           items={[
-            "Certified Digital Marketer Program",
-            "Webinars and Workshops",
-            "Ethical Guidelines for Digital Marketing"
+            "Predictive Analytics",
+            "Customer Behavior Analysis",
+            "Market Trend Forecasting"
           ]}
         />
         <FeatureCard
-          title="Networking & Collaboration"
-          description="Connect with industry professionals and grow your network"
-          icon={Users}
+          title="Performance Marketing"
+          description="Optimize your campaigns with AI-powered targeting and automation"
+          icon={TrendingUp}
           items={[
-            "Annual Digital Marketing Summit",
-            "Monthly Meetups and Webinars",
-            "Mentorship Programs"
+            "Automated Campaign Optimization",
+            "Real-time Performance Tracking",
+            "ROI Maximization"
           ]}
         />
         <FeatureCard
-          title="Advocacy & Representation"
-          description="Supporting the growth and regulation of digital marketing"
-          icon={Scale}
+          title="Smart Content Creation"
+          description="Generate engaging content with AI assistance"
+          icon={Sparkles}
           items={[
-            "Policy Influence on Digital Transformation",
-            "Representation in Government Discussions",
-            "Promotion of Fair Digital Marketing Practices"
+            "AI Content Generation",
+            "SEO Optimization",
+            "Personalized Messaging"
           ]}
         />
       </motion.div>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-8">Membership Tiers</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <MembershipTier
-            title="Basic"
-            price="$100"
-            description="Perfect for individuals starting their digital marketing journey"
-            features={[
-              "Access to resource library",
-              "Monthly webinars",
-              "Community forum access",
-              "Basic certification"
-            ]}
-          />
-          <MembershipTier
-            title="Professional"
-            price="$250"
-            description="Ideal for practicing digital marketing professionals"
-            features={[
-              "All Basic features",
-              "Advanced certifications",
-              "Priority event access",
-              "1-on-1 mentoring",
-              "Professional listing"
-            ]}
-            recommended
-          />
-          <MembershipTier
-            title="Corporate"
-            price="Contact Us"
-            description="For agencies and marketing teams"
-            features={[
-              "All Professional features",
-              "Team training sessions",
-              "Custom workshops",
-              "Priority support",
-              "Brand visibility"
-            ]}
-          />
-        </div>
-      </section>
-
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-8">Upcoming Events</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">Our AI Solutions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Annual Digital Marketing Summit</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Bot className="w-6 h-6 text-purple-500" />
+                ChatGPT Integration
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Join us for our flagship event featuring keynote speakers, workshops, and networking opportunities.</p>
-              <p className="mb-4">Date: September 22-24, 2023</p>
-              <Button>Learn More & Register</Button>
+              <p className="mb-4">Enhance customer engagement with AI-powered chatbots and automated responses.</p>
+              <Button>Learn More</Button>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>Monthly Meetup: Social Media Strategies</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="w-6 h-6 text-purple-500" />
+                Predictive Analytics
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Discuss the latest social media trends and strategies for Bahamian businesses.</p>
-              <p className="mb-4">Date: June 15, 2023</p>
-              <Button>RSVP Now</Button>
+              <p className="mb-4">Make data-driven decisions with our advanced AI analytics platform.</p>
+              <Button>Explore Analytics</Button>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      <section className="mb-16 bg-cyan-600 text-white py-16 rounded-lg">
+      <section className="mb-16 bg-purple-600 text-white py-16 rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4">Industry Partnerships</h2>
-          <p className="max-w-2xl mx-auto">We collaborate with leading organizations to support the growth of digital marketing in the Bahamas.</p>
+          <h2 className="text-3xl font-bold mb-4">Trusted by Innovative Brands</h2>
+          <p className="max-w-2xl mx-auto">Join the growing list of businesses transforming their digital presence with KemisDigital.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {[1, 2, 3, 4].map((partner) => (
-            <div key={partner} className="bg-white rounded-full p-4 aspect-square flex items-center justify-center">
-              <p className="text-cyan-600 font-semibold">Partner {partner}</p>
+            <div key={partner} className="bg-white rounded-lg p-4 aspect-square flex items-center justify-center">
+              <p className="text-purple-600 font-semibold">Partner {partner}</p>
             </div>
           ))}
         </div>
@@ -139,11 +100,11 @@ export default function Home() {
       <section className="mb-16">
         <Card className="max-w-2xl mx-auto">
           <CardContent className="pt-6 text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
-            <p className="mb-6">Join our newsletter to stay updated on the latest digital marketing trends, events, and association news.</p>
+            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+            <p className="mb-6">Transform your marketing strategy with the power of AI. Get in touch with us today.</p>
             <div className="flex gap-4 max-w-md mx-auto">
               <Input type="email" placeholder="Enter your email" />
-              <Button>Subscribe</Button>
+              <Button className="bg-purple-600 hover:bg-purple-700">Contact Us</Button>
             </div>
           </CardContent>
         </Card>

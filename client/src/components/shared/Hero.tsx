@@ -13,7 +13,7 @@ export default function Hero({ title, description, showCTA = true }: HeroProps) 
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl md:text-5xl font-bold mb-6"
+        className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400"
       >
         {title}
       </motion.h1>
@@ -21,7 +21,7 @@ export default function Hero({ title, description, showCTA = true }: HeroProps) 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8"
+        className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
       >
         {description}
       </motion.p>
@@ -32,15 +32,18 @@ export default function Hero({ title, description, showCTA = true }: HeroProps) 
           transition={{ delay: 0.4 }}
           className="flex justify-center gap-4"
         >
-          <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600">
-            Join Us Today
+          <Button 
+            size="lg" 
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            Get Started
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="border-gold dark:border-gold-dark text-gold-dark dark:text-gold hover:bg-gold/10 dark:hover:bg-gold-dark/10"
+            className="border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/10"
           >
-            Explore Benefits
+            Schedule Demo
           </Button>
         </motion.div>
       )}
