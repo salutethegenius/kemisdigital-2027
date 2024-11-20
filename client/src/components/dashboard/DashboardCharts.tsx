@@ -1,8 +1,33 @@
 import { useTheme } from "@/hooks/use-theme";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Plot from 'react-plotly.js';
+import { useState, useEffect } from "react";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import Preloader from "@/components/shared/Preloader";
 
 export default function DashboardCharts() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (error) {
+    return (
+      <div className="p-4">
+        <ErrorBoundary />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <Preloader />;
+  }
   const { theme } = useTheme();
   const isDark = theme === "dark";
 

@@ -1,5 +1,7 @@
-import { ReactNode, Suspense } from "react";
+import { ReactNode, Suspense, lazy } from "react";
 import { Link, useLocation } from "wouter";
+
+const Analytics = lazy(() => import("@/pages/Analytics"));
 import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
