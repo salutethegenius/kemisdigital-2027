@@ -12,6 +12,7 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 // Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Services from "./pages/Services";
 import Resources from "./pages/Resources";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
@@ -62,6 +63,7 @@ createRoot(document.getElementById("root")!).render(
                   <Switch>
                     <Route path="/" component={Home} />
                     <Route path="/about" component={About} />
+                    <Route path="/services" component={Services} />
                     <Route path="/resources" component={Resources} />
                     <Route path="/events" component={Events} />
                     <Route path="/contact" component={Contact} />
