@@ -1,9 +1,10 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Link, useLocation } from "wouter";
 import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
+import Preloader from "@/components/shared/Preloader";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -79,7 +80,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <main className="flex-1">
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                {children}
+                <Suspense fallback={<Preloader />}>
+                  {children}
+                </Suspense>
               </div>
             </div>
           </main>

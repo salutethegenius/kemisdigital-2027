@@ -1,6 +1,7 @@
 import { ReactNode, lazy, Suspense } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Preloader from "@/components/shared/Preloader";
 
 const Chatbot = lazy(() => import("@/components/chat/Chatbot"));
 
@@ -13,10 +14,12 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        {children}
+        <Suspense fallback={<Preloader />}>
+          {children}
+        </Suspense>
       </main>
       <Footer />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Preloader />}>
         <Chatbot />
       </Suspense>
     </div>
