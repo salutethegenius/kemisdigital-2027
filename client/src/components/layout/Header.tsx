@@ -15,7 +15,6 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "AI Services", href: "/services" },
   { name: "Case Studies", href: "/case-studies" },
-  { name: "AI Lab", href: "/ai-lab" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
