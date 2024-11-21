@@ -60,26 +60,17 @@ export default function ContentRecommendations() {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const prompt = `Generate exactly 3 AI marketing content recommendations as a JSON array for a user interested in ${user?.interests?.join(", ") || "AI marketing"}.
-Return ONLY a JSON array with no explanation text.
-Format:
+        const prompt = `Return ONLY a raw JSON array of 3 AI marketing recommendations for a user interested in ${user?.interests?.join(", ") || "AI marketing"}.
+No text before or after. Format must be exactly:
 [
   {
-    "title": "string (max 100 chars)",
-    "description": "string (max 200 chars)",
+    "title": string (100 chars max),
+    "description": string (200 chars max),
     "type": "article" | "video" | "webinar" | "tool",
-    "relevanceScore": number between 0 and 1
+    "relevanceScore": number (between 0 and 1)
   }
 ]
-
-Requirements:
-- Must return exactly 3 recommendations
-- Must be a valid JSON array (no wrapper object)
-- No additional text or explanations
-- Each title must be under 100 characters
-- Each description must be under 200 characters
-- Type must be one of: "article", "video", "webinar", "tool"
-- RelevanceScore must be between 0 and 1`;
+Ensure response contains only a valid JSON array.`;
 
         const response = await getChatbotResponse(prompt);
         
@@ -90,7 +81,8 @@ Requirements:
         
         try {
           // Remove any potential text before or after the JSON array
-          const jsonMatch = response.match(/\[.*\]/s);
+          // Attempt to extract only the JSON array using stricter regex
+          const jsonMatch = response.match(/^\[[\s\S]*\]$/);
           if (!jsonMatch) {
             throw new Error("No valid JSON array found in response");
           }
@@ -138,7 +130,11 @@ Requirements:
         } catch (error) {
           console.error("Failed to process recommendations:", error);
           setRecommendations(fallbackRecommendations);
-          setError(`Error processing recommendations: ${error.message}`);
+          const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+          const userFriendlyError = errorMessage.includes('JSON')
+            ? 'Unable to process recommendations. The AI response was not in the correct format.'
+            : 'Unable to process recommendations. Please try again later.';
+          setError(userFriendlyError);
           
           // Log detailed error information for debugging
           console.debug("Original response:", response);

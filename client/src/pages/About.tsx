@@ -8,9 +8,9 @@ import { staggerChildren } from "@/lib/animations";
 export default function About() {
   const leadershipTeam = [
     {
-      name: "Emily Chen",
-      role: "CEO & AI Strategy Lead",
-      description: "Pioneer in AI-driven marketing with 12+ years of experience in digital transformation."
+      name: "Kenneth C. Moncur, CIPM",
+      role: "Founder, CEO & AI Strategy Lead",
+      description: "Pioneer in AI-driven marketing with 20+ years of experience in digital transformation."
     },
     {
       name: "Marcus Rodriguez",
