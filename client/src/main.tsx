@@ -42,7 +42,7 @@ createRoot(document.getElementById("root")!).render(
                     <Switch>
                       <Route path="/" component={Dashboard} />
                       <Route path="/analytics" component={Analytics} />
-                      <Route path="/ailab" component={AILabs} />
+                      <Route path="/ailabs" component={AILabs} />
                       <Route path="/blog/new">
                         {() => <BlogEditor onSuccess={() => window.location.href = "/blog"} />}
                       </Route>

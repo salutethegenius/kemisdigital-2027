@@ -19,7 +19,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
     { name: "Analytics", href: "/dashboard/analytics", icon: BarChart },
-    { name: "AI Lab", href: "/ailab", icon: Brain },
+    { name: "AI Labs", href: "/ailabs", icon: Brain },
     { name: "AI Services", href: "/dashboard/services", icon: Calendar },
     { name: "Clients", href: "/dashboard/clients", icon: Users },
     { name: "Resources", href: "/resources", icon: FileText },
