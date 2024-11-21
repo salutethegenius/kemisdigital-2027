@@ -19,7 +19,7 @@ import Contact from "./pages/Contact";
 import Membership from "./pages/Membership";
 import Advocacy from "./pages/Advocacy";
 import Analytics from "./pages/Analytics";
-import AILabs from "./pages/AILabs";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Blog from "./pages/Blog";
@@ -42,7 +42,6 @@ createRoot(document.getElementById("root")!).render(
                     <Switch>
                       <Route path="/" component={Dashboard} />
                       <Route path="/analytics" component={Analytics} />
-                      <Route path="/ailabs" component={AILabs} />
                       <Route path="/blog/new">
                         {() => <BlogEditor onSuccess={() => window.location.href = "/blog"} />}
                       </Route>
