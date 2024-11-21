@@ -20,9 +20,9 @@ const footerSections = [
   {
     title: "Resources",
     links: [
-      { name: "AI Lab", href: "/ai-lab" },
-      { name: "Documentation", href: "/docs" },
-      { name: "API Access", href: "/api" },
+      { name: "AI Tools", href: "/resources#ai-tools" },
+      { name: "Marketing Tools", href: "/resources#marketing-tools" },
+      { name: "Documentation", href: "/resources" },
     ],
   },
   {
