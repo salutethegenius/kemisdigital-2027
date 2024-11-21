@@ -72,7 +72,6 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/contact" component={Contact} />
                     <Route path="/membership" component={Membership} />
                     <Route path="/advocacy" component={Advocacy} />
-                    <Route path="/ailabs" component={AILabs} />
                     <Route path="/case-studies" component={CaseStudies} />
                     <Route path="/blog" component={Blog} />
                     <Route>404 Page Not Found</Route>
