@@ -44,6 +44,7 @@ createRoot(document.getElementById("root")!).render(
                       <Route path="/" component={Dashboard} />
                       <Route path="/analytics" component={Analytics} />
                       <Route path="/ailabs" component={AILabs} />
+                      <Route path="/services" component={Services} />
                       <Route path="/blog/new">
                         {() => <BlogEditor onSuccess={() => window.location.href = "/blog"} />}
                       </Route>

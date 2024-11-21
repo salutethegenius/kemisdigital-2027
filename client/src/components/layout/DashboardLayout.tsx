@@ -21,6 +21,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "Analytics", href: "/dashboard/analytics", icon: BarChart },
     { name: "AI Labs", href: "/dashboard/ailabs", icon: Brain },
     { name: "AI Services", href: "/dashboard/services", icon: Calendar },
+    { name: "Case Studies", href: "/dashboard/case-studies", icon: FileText },
     { name: "Clients", href: "/dashboard/clients", icon: Users },
     { name: "Resources", href: "/resources", icon: FileText },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
