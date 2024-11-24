@@ -60,7 +60,13 @@ useEffect(() => {
     setIsLoading(true);
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/email/send`, {
+      console.log('Sending email with data:', {
+        name: values.name,
+        email: values.email,
+        service: values.service
+      });
+
+      const response = await fetch('http://localhost:5000/api/email/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,9 +79,11 @@ useEffect(() => {
         }),
       });
 
+      const data = await response.json();
+      console.log('Server response:', data);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.details || 'Failed to send message');
+        throw new Error(data.details || data.error || 'Failed to send message');
       }
 
       toast({
@@ -85,12 +93,16 @@ useEffect(() => {
 
       form.reset();
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('Error sending message:', {
+        error,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+      
       toast({
         variant: "destructive",
         title: "Error",
         description: error instanceof Error 
-          ? error.message
+          ? error.message 
           : "Failed to send message. Please try again later.",
       });
     } finally {
