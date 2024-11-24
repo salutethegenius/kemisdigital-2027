@@ -75,14 +75,14 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      content: "info@kemisdigital.com",
-      link: "mailto:info@kemisdigital.com",
+      content: "frontdesk@kemisdigital.com",
+      link: "mailto:frontdesk@kemisdigital.com",
     },
     {
       icon: Phone,
       title: "Phone",
-      content: "+1 (242) 555-0123",
-      link: "tel:+12425550123",
+      content: "+1 (242) 605-1522",
+      link: "tel:+12426051522",
     },
     {
       icon: MapPin,

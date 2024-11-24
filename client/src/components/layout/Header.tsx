@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
-import { useAuth } from "@/hooks/use-auth";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -22,7 +21,6 @@ const navigation = [
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -45,15 +43,6 @@ export default function Header() {
             </Link>
           ))}
           <ThemeToggle />
-          {user ? (
-            <Button variant="ghost" asChild>
-              <Link href="/dashboard">Dashboard</Link>
-            </Button>
-          ) : (
-            <Button variant="ghost" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-          )}
           <Button asChild className="bg-primary hover:bg-primary/90 text-white">
             <Link href="/contact">Get Started</Link>
           </Button>
@@ -80,15 +69,6 @@ export default function Header() {
                 </Link>
               ))}
               <ThemeToggle />
-              {user ? (
-                <Button variant="ghost" asChild className="w-full" onClick={() => setIsOpen(false)}>
-                  <Link href="/dashboard">Dashboard</Link>
-                </Button>
-              ) : (
-                <Button variant="ghost" asChild className="w-full" onClick={() => setIsOpen(false)}>
-                  <Link href="/login">Login</Link>
-                </Button>
-              )}
               <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild onClick={() => setIsOpen(false)}>
                 <Link href="/contact">Get Started</Link>
               </Button>

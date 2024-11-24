@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/hooks/use-auth";
 import useSWR from "swr";
 import Hero from "@/components/shared/Hero";
 import { Link } from "wouter";
@@ -76,7 +75,6 @@ const placeholderPosts: BlogPost[] = [
 ];
 
 export default function Blog() {
-  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   
@@ -103,13 +101,7 @@ export default function Blog() {
       />
 
       <div className="container mx-auto py-8">
-        {user && (
-          <div className="mb-8">
-            <Button asChild className="bg-purple-600 hover:bg-purple-700">
-              <Link href="/dashboard/blog/new">Create New Post</Link>
-            </Button>
-          </div>
-        )}
+        
 
         {error && (
           <Alert variant="destructive" className="mb-8">
