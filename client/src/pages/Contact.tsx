@@ -56,36 +56,29 @@ useEffect(() => {
   });
 }, []);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     
     try {
-      console.log('Sending email with data:', {
-        name: values.name,
-        email: values.email,
-        service: values.service
-      });
-
-      const response = await fetch('http://localhost:5000/api/email/send', {
+      console.log('Attempting to send email to:', API_URL);
+      const response = await fetch(`${API_URL}/api/email/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: values.name,
-          email: values.email,
-          service: values.service,
-          message: values.message
-        }),
+        body: JSON.stringify(values),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.details || errorData.error || 'Server error');
+      }
 
       const data = await response.json();
       console.log('Server response:', data);
-
-      if (!response.ok) {
-        throw new Error(data.details || data.error || 'Failed to send message');
-      }
-
+      
       toast({
         title: "Success",
         description: "Thank you, we will be in touch soon!",
@@ -93,17 +86,22 @@ useEffect(() => {
 
       form.reset();
     } catch (error) {
-      console.error('Error sending message:', {
+      console.error('Error details:', {
         error,
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
+        type: error instanceof TypeError ? 'Network error' : 'Other error'
       });
       
+      const errorMessage = error instanceof TypeError 
+        ? 'Network error. Please check your connection and try again.'
+        : error instanceof Error 
+          ? error.message 
+          : 'Failed to send message. Please try again later.';
+
       toast({
         variant: "destructive",
         title: "Error",
-        description: error instanceof Error 
-          ? error.message 
-          : "Failed to send message. Please try again later.",
+        description: errorMessage,
       });
     } finally {
       setIsLoading(false);
