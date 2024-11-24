@@ -57,90 +57,45 @@ useEffect(() => {
 }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Validate EmailJS configuration
-    const requiredConfigs = {
-      serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    };
+    setIsLoading(true);
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/email/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          service: values.service,
+          message: values.message
+        }),
+      });
 
-    const missingConfigs = Object.entries(requiredConfigs)
-      .filter(([_, value]) => !value)
-      .map(([key]) => key);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.details || 'Failed to send message');
+      }
 
-    if (missingConfigs.length > 0) {
-      console.error('Missing EmailJS configuration:', missingConfigs);
+      toast({
+        title: "Success",
+        description: "Thank you, we will be in touch soon!",
+      });
+
+      form.reset();
+    } catch (error) {
+      console.error('Error sending message:', error);
       toast({
         variant: "destructive",
-        title: "Configuration Error",
-        description: "Email service is not properly configured. Please contact support.",
+        title: "Error",
+        description: error instanceof Error 
+          ? error.message
+          : "Failed to send message. Please try again later.",
       });
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(true);
-    let attempts = 0;
-    const maxAttempts = 3;
-    
-    const templateParams = {
-      from_name: values.name,
-      from_email: values.email,
-      service_requested: values.service,
-      message: values.message,
-      to_email: "frontdesk@kemisdigital.com"
-    };
-
-    while (attempts < maxAttempts) {
-      try {
-        console.log(`Attempt ${attempts + 1} of ${maxAttempts}`);
-        console.log('Template Parameters:', templateParams);
-
-        const response = await emailjs.send(
-          requiredConfigs.serviceId,
-          requiredConfigs.templateId,
-          templateParams,
-          requiredConfigs.publicKey
-        );
-
-        console.log('EmailJS Success Response:', response);
-
-        toast({
-          title: "Success",
-          description: "Thank you, we will be in touch soon!",
-        });
-
-        form.reset();
-        break;
-      } catch (error) {
-        attempts++;
-        console.error(`Attempt ${attempts} failed:`, {
-          error,
-          message: error instanceof Error ? error.message : 'Unknown error',
-          status: error.hasOwnProperty('status') ? error.status : 'No status code',
-          text: error.hasOwnProperty('text') ? error.text : 'No error text'
-        });
-
-        if (attempts === maxAttempts) {
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-          const isNetworkError = errorMessage.toLowerCase().includes('network') || 
-                                errorMessage.toLowerCase().includes('timeout') ||
-                                errorMessage.toLowerCase().includes('connection');
-
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: isNetworkError
-              ? "Network error occurred. Please check your connection and try again."
-              : "Failed to send message. Please try again later.",
-          });
-        } else {
-          // Wait before retrying
-          await new Promise(resolve => setTimeout(resolve, 1000 * attempts));
-        }
-      }
-    }
-    
-    setIsLoading(false);
   }
 
   const contactReasons = [
