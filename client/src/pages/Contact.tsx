@@ -57,8 +57,19 @@ useEffect(() => {
 }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!import.meta.env.VITE_EMAILJS_TEMPLATE_ID) {
-      console.error('EmailJS Template ID is missing');
+    // Validate EmailJS configuration
+    const requiredConfigs = {
+      serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    };
+
+    const missingConfigs = Object.entries(requiredConfigs)
+      .filter(([_, value]) => !value)
+      .map(([key]) => key);
+
+    if (missingConfigs.length > 0) {
+      console.error('Missing EmailJS configuration:', missingConfigs);
       toast({
         variant: "destructive",
         title: "Configuration Error",
@@ -68,53 +79,68 @@ useEffect(() => {
     }
 
     setIsLoading(true);
+    let attempts = 0;
+    const maxAttempts = 3;
     
-    try {
-      // Add additional logging before sending
-      const templateParams = {
-        from_name: values.name,
-        from_email: values.email,
-        service_requested: values.service,
-        message: values.message,
-        to_email: "frontdesk@kemisdigital.com"
-      };
-      
-      console.log('Template Parameters:', templateParams);
+    const templateParams = {
+      from_name: values.name,
+      from_email: values.email,
+      service_requested: values.service,
+      message: values.message,
+      to_email: "frontdesk@kemisdigital.com"
+    };
 
-      const response = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID!,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
-      );
+    while (attempts < maxAttempts) {
+      try {
+        console.log(`Attempt ${attempts + 1} of ${maxAttempts}`);
+        console.log('Template Parameters:', templateParams);
 
-      console.log('EmailJS Success Response:', response);
+        const response = await emailjs.send(
+          requiredConfigs.serviceId,
+          requiredConfigs.templateId,
+          templateParams,
+          requiredConfigs.publicKey
+        );
 
-      toast({
-        title: "Success",
-        description: "Thank you, we will be in touch soon!",
-      });
+        console.log('EmailJS Success Response:', response);
 
-      form.reset();
-    } catch (error) {
-      // Add more detailed error logging
-      console.error('EmailJS Error Details:', {
-        error,
-        message: error instanceof Error ? error.message : 'Unknown error',
-        status: error.hasOwnProperty('status') ? error.status : 'No status code',
-        text: error.hasOwnProperty('text') ? error.text : 'No error text'
-      });
-      
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error instanceof Error 
-          ? `Failed to send message: ${error.message}`
-          : "Failed to send message. Please try again later.",
-      });
-    } finally {
-      setIsLoading(false);
+        toast({
+          title: "Success",
+          description: "Thank you, we will be in touch soon!",
+        });
+
+        form.reset();
+        break;
+      } catch (error) {
+        attempts++;
+        console.error(`Attempt ${attempts} failed:`, {
+          error,
+          message: error instanceof Error ? error.message : 'Unknown error',
+          status: error.hasOwnProperty('status') ? error.status : 'No status code',
+          text: error.hasOwnProperty('text') ? error.text : 'No error text'
+        });
+
+        if (attempts === maxAttempts) {
+          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+          const isNetworkError = errorMessage.toLowerCase().includes('network') || 
+                                errorMessage.toLowerCase().includes('timeout') ||
+                                errorMessage.toLowerCase().includes('connection');
+
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: isNetworkError
+              ? "Network error occurred. Please check your connection and try again."
+              : "Failed to send message. Please try again later.",
+          });
+        } else {
+          // Wait before retrying
+          await new Promise(resolve => setTimeout(resolve, 1000 * attempts));
+        }
+      }
     }
+    
+    setIsLoading(false);
   }
 
   const contactReasons = [
