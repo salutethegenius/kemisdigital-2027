@@ -318,19 +318,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mb-16 bg-purple-600 text-white py-16 rounded-lg">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4">Trusted by Industry Leaders</h2>
-          <p className="max-w-2xl mx-auto">Join innovative businesses leveraging our AI marketing solutions.</p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          {[1, 2, 3, 4].map((partner) => (
-            <div key={partner} className="bg-white rounded-lg p-4 aspect-square flex items-center justify-center">
-              <p className="text-purple-600 font-semibold">Partner {partner}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="mb-16">
         <Card className="max-w-2xl mx-auto">
