@@ -4,7 +4,6 @@ import { Link, useLocation } from "wouter";
 const Analytics = lazy(() => import("@/pages/Analytics"));
 import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import Preloader from "@/components/shared/Preloader";
 
@@ -14,17 +13,13 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [location] = useLocation();
-  const { user, logout } = useAuth();
 
   const navigation = [
-    { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Analytics", href: "/dashboard/analytics", icon: BarChart },
-    { name: "AI Labs", href: "/dashboard/ailabs", icon: Brain },
-    { name: "AI Services", href: "/dashboard/services", icon: Calendar },
-    { name: "Case Studies", href: "/dashboard/case-studies", icon: FileText },
-    { name: "Clients", href: "/dashboard/clients", icon: Users },
+    { name: "Home", href: "/", icon: LayoutDashboard },
+    { name: "AI Services", href: "/services", icon: Brain },
+    { name: "Case Studies", href: "/case-studies", icon: FileText },
     { name: "Resources", href: "/resources", icon: FileText },
-    { name: "Settings", href: "/dashboard/settings", icon: Settings },
+    { name: "Contact", href: "/contact", icon: Users },
   ];
 
   return (
@@ -35,11 +30,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
                 <span className="text-2xl font-bold">KemisDigital</span>
-              </div>
-              <div className="px-4 mt-4">
-                <p className="text-sm font-medium text-muted-foreground">
-                  Welcome, {user?.name}
-                </p>
               </div>
               <nav className="mt-5 flex-1 px-2 space-y-1">
                 {navigation.map((item) => {
@@ -67,14 +57,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     </Link>
                   );
                 })}
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  onClick={logout}
-                >
-                  <LogOut className="mr-3 h-5 w-5" />
-                  Logout
-                </Button>
               </nav>
             </div>
           </div>

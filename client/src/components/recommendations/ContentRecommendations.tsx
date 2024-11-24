@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, Sparkles, AlertCircle } from "lucide-react";
 import { getChatbotResponse } from "@/lib/openai";
-import { useAuth } from "@/hooks/use-auth";
+
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -55,12 +55,12 @@ export default function ContentRecommendations() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useAuth();
+  const userInterests = ["AI marketing", "content generation", "automation"];
 
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const prompt = `Return ONLY a raw JSON array of 3 AI marketing recommendations for a user interested in ${user?.interests?.join(", ") || "AI marketing"}.
+        const prompt = `Return ONLY a raw JSON array of 3 AI marketing recommendations for a user interested in ${userInterests.join(", ")}.
 No text before or after. Format must be exactly:
 [
   {
