@@ -2,6 +2,7 @@ import Hero from "@/components/shared/Hero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
@@ -46,8 +47,10 @@ export default function Contact() {
   });
 
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     try {
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID!,
@@ -55,15 +58,16 @@ export default function Contact() {
         {
           from_name: values.name,
           from_email: values.email,
-          service_interest: values.service,
+          service_requested: values.service,
           message: values.message,
+          to_email: "frontdesk@kemisdigital.com"
         },
-        process.env.EMAILJS_PUBLIC_KEY!
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
       );
 
       toast({
         title: "Success",
-        description: "Your message has been sent successfully. We'll get back to you soon!",
+        description: "Thank you, we will be in touch soon!",
       });
 
       form.reset();
@@ -72,8 +76,12 @@ export default function Contact() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to send message. Please try again later.",
+        description: error instanceof Error 
+          ? error.message 
+          : "Failed to send message. Please try again later.",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -241,8 +249,12 @@ export default function Contact() {
                     )}
                   />
 
-                  <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-                    Send Message
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </Form>
