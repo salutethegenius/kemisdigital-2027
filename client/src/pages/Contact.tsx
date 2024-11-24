@@ -2,7 +2,7 @@ import Hero from "@/components/shared/Hero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
@@ -48,11 +48,26 @@ export default function Contact() {
 
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+useEffect(() => {
+  console.log('EmailJS Config:', {
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID ? 'Present' : 'Missing',
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID ? 'Present' : 'Missing',
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY ? 'Present' : 'Missing'
+  });
+}, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    console.log('Submitting form with values:', values);
+    
     try {
-      await emailjs.send(
+      console.log('EmailJS Parameters:', {
+        serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      });
+
+      const response = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID!,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
         {
@@ -65,6 +80,8 @@ export default function Contact() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
       );
 
+      console.log('EmailJS Response:', response);
+
       toast({
         title: "Success",
         description: "Thank you, we will be in touch soon!",
@@ -72,12 +89,17 @@ export default function Contact() {
 
       form.reset();
     } catch (error) {
-      console.error("Failed to send email:", error);
+      console.error('Failed to send email:', {
+        error,
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      });
+      
       toast({
         variant: "destructive",
         title: "Error",
         description: error instanceof Error 
-          ? error.message 
+          ? `Failed to send message: ${error.message}`
           : "Failed to send message. Please try again later.",
       });
     } finally {
