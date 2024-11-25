@@ -16,12 +16,16 @@ import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import CaseStudies from "./pages/CaseStudies";
+import ComingSoon from "./pages/ComingSoon";
 import Layout from "./components/layout/Layout";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <SWRConfig value={{ fetcher }}>
+        {/* Temporarily show ComingSoon page */}
+        <ComingSoon />
+        {/* Uncomment below and remove ComingSoon when ready to launch
         <Layout>
           <Switch>
             <Route path="/" component={Home} />
@@ -35,6 +39,7 @@ createRoot(document.getElementById("root")!).render(
             <Route>404 Page Not Found</Route>
           </Switch>
         </Layout>
+        */}
         <Toaster />
       </SWRConfig>
     </ThemeProvider>
