@@ -3,9 +3,8 @@ import { Loader2 } from "lucide-react";
 import CountdownTimer from "@/components/shared/CountdownTimer";
 
 export default function ComingSoon() {
-  // Set launch date to 30 days from now
-  const launchDate = new Date();
-  launchDate.setDate(launchDate.getDate() + 30);
+  // Set launch date to January 1st, 2025
+  const launchDate = new Date('2025-01-01T00:00:00');
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
@@ -29,7 +28,7 @@ export default function ComingSoon() {
           transition={{ delay: 0.2 }}
           className="text-4xl md:text-5xl font-bold mb-4"
         >
-          Something Amazing is Coming
+          KemisDigital AI Marketing Firm
         </motion.h1>
 
         <motion.p
@@ -48,25 +47,6 @@ export default function ComingSoon() {
           className="mb-12"
         >
           <CountdownTimer targetDate={launchDate} />
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-muted-foreground"
-        >
-          <p>Want to be notified when we launch?</p>
-          <div className="flex gap-4 max-w-md mx-auto mt-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <button className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-              Notify Me
-            </button>
-          </div>
         </motion.div>
       </motion.div>
     </div>
