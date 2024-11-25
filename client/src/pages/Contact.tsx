@@ -62,7 +62,7 @@ useEffect(() => {
     setIsLoading(true);
     
     try {
-      console.log('Attempting to send email to:', API_URL);
+      console.log('Sending email...');
       const response = await fetch(`${API_URL}/api/email/send`, {
         method: 'POST',
         headers: {
@@ -86,10 +86,11 @@ useEffect(() => {
 
       form.reset();
     } catch (error) {
-      console.error('Error details:', {
+      console.error('Error sending email:', {
         error,
         message: error instanceof Error ? error.message : 'Unknown error',
-        type: error instanceof TypeError ? 'Network error' : 'Other error'
+        type: error instanceof TypeError ? 'Network error' : 'Other error',
+        values // Log form values for debugging
       });
       
       const errorMessage = error instanceof TypeError 

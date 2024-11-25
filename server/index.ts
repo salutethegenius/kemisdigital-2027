@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://kemisdigital.com'],
+  origin: true,  // Allow all origins temporarily for testing
   methods: ['GET', 'POST'],
   credentials: true
 }));
