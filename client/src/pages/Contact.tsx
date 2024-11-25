@@ -3,8 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
-import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -48,36 +48,33 @@ export default function Contact() {
 
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-useEffect(() => {
-  console.log('EmailJS Config:', {
-    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID ? 'Present' : 'Missing',
-    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID ? 'Present' : 'Missing',
-    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY ? 'Present' : 'Missing'
-  });
-}, []);
-
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  
+  useEffect(() => {
+    // Initialize EmailJS with public key
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     
     try {
-      console.log('Sending email...');
-      const response = await fetch(`${API_URL}/api/email/send`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
+      console.log('Sending email via EmailJS...');
+      const response = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: values.name,
+          reply_to: values.email,
+          service_interest: values.service,
+          message: values.message,
+        }
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.details || errorData.error || 'Server error');
+      if (response.status !== 200) {
+        throw new Error('Failed to send email');
       }
 
-      const data = await response.json();
-      console.log('Server response:', data);
+      console.log('Email sent successfully:', response);
       
       toast({
         title: "Success",
