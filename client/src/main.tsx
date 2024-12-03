@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router } from "wouter";
 import "./index.css";
 import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
@@ -24,24 +24,14 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <SWRConfig value={{ fetcher }}>
-        {/* Temporarily show ComingSoon page */}
-        <ComingSoon />
-        {/* Uncomment below and remove ComingSoon when ready to launch
-        <Layout>
+        <Router>
           <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/services" component={Services} />
-            <Route path="/resources" component={Resources} />
-            <Route path="/events" component={Events} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/case-studies" component={CaseStudies} />
-            <Route path="/blog" component={Blog} />
             <Route path="/privacy" component={Privacy} />
-            <Route>404 Page Not Found</Route>
+            <Route path="/*">
+              <ComingSoon />
+            </Route>
           </Switch>
-        </Layout>
-        */}
+        </Router>
         <Toaster />
       </SWRConfig>
     </ThemeProvider>
