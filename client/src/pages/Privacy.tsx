@@ -101,7 +101,7 @@ export default function Privacy() {
             <div className="pl-6">
               <p>KemisDigital</p>
               <p>support@kemisdigital.com</p>
-              <p>+1 (242) 555-0123</p>
+              <p>+1 (242) 605-1522</p>
             </div>
           </CardContent>
         </Card>

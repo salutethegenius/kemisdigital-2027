@@ -6,6 +6,7 @@ import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { useLocation } from "wouter";
 
 // Pages
 import Home from "./pages/Home";

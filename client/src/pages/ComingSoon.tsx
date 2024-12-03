@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import CountdownTimer from "@/components/shared/CountdownTimer";
+import Preloader from "@/components/shared/Preloader";
 
 export default function ComingSoon() {
+  const [isLoading, setIsLoading] = useState(true);
   // Set launch date to January 1st, 2025
   const launchDate = new Date('2025-01-01T00:00:00');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3500); // Match preloader duration
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
@@ -14,19 +28,11 @@ export default function ComingSoon() {
         transition={{ duration: 0.5 }}
         className="text-center max-w-2xl mx-auto"
       >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="inline-block mb-8"
-        >
-          <Loader2 className="w-12 h-12 text-primary" />
-        </motion.div>
-
         <motion.h1
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-4xl md:text-5xl font-bold mb-4"
+          className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-violet-600"
         >
           KemisDigital AI Marketing Firm
         </motion.h1>
