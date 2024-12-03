@@ -13,7 +13,7 @@ export default function Privacy() {
         <h1 className="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
         <Card>
           <CardContent className="prose dark:prose-invert max-w-none p-6">
-            <p className="text-muted-foreground mb-6">Effective Date: January 1st, 2025</p>
+            <p className="text-muted-foreground mb-6">Effective Date: November 22nd, 2023</p>
             
             <p className="mb-6">
               At KemisDigital, your privacy is a top priority. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our website, services, and digital tools.

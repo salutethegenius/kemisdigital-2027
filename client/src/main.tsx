@@ -19,6 +19,7 @@ import Blog from "./pages/Blog";
 import CaseStudies from "./pages/CaseStudies";
 import ComingSoon from "./pages/ComingSoon";
 import Privacy from "./pages/Privacy";
+import DataDeletion from "./pages/DataDeletion";
 import Layout from "./components/layout/Layout";
 
 createRoot(document.getElementById("root")!).render(
@@ -28,6 +29,7 @@ createRoot(document.getElementById("root")!).render(
         <Router>
           <Switch>
             <Route path="/privacy" component={Privacy} />
+            <Route path="/data-deletion" component={DataDeletion} />
             <Route path="/*">
               <ComingSoon />
             </Route>
