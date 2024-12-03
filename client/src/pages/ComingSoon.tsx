@@ -48,6 +48,15 @@ export default function ComingSoon() {
         >
           <CountdownTimer targetDate={launchDate} />
         </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="absolute bottom-4 text-sm text-muted-foreground"
+        >
+          <a href="/privacy" className="hover:text-primary">Privacy Policy</a>
+        </motion.div>
       </motion.div>
     </div>
   );

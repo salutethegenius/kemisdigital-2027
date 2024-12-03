@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import CaseStudies from "./pages/CaseStudies";
 import ComingSoon from "./pages/ComingSoon";
+import Privacy from "./pages/Privacy";
 import Layout from "./components/layout/Layout";
 
 createRoot(document.getElementById("root")!).render(
@@ -36,6 +37,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/contact" component={Contact} />
             <Route path="/case-studies" component={CaseStudies} />
             <Route path="/blog" component={Blog} />
+            <Route path="/privacy" component={Privacy} />
             <Route>404 Page Not Found</Route>
           </Switch>
         </Layout>
