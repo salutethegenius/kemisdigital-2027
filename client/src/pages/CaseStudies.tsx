@@ -31,106 +31,106 @@ import Preloader from "@/components/shared/Preloader";
 
 const caseStudies: CaseStudy[] = [
   {
-    icon: TrendingUp,
-    title: "E-commerce Revenue Growth",
-    client: "Leading Online Retailer",
-    industry: "E-commerce",
-    challenge: "Struggling with low product description engagement and conversion rates",
-    solution: "Implemented AI-powered content generation for product descriptions and recommendations",
-    results: [
-      "3x increase in product engagement",
-      "40% boost in conversion rates",
-      "65% reduction in content creation time",
-      "28% increase in average order value"
-    ],
-    technologies: ["GPT-4", "Custom NLP", "Analytics Dashboard"],
-    timeframe: "3 months",
-    roi: "280% ROI within first quarter"
-  },
-  {
-    icon: BarChart,
-    title: "Financial Services Analytics Transformation",
-    client: "Regional Financial Institution",
+    icon: Shield,
+    title: "Digital Banking Transformation",
+    client: "Leading Caribbean Bank",
     industry: "Financial Services",
-    challenge: "Inefficient market analysis and customer targeting",
-    solution: "Deployed predictive analytics system for market trends and customer behavior",
+    challenge: "Legacy systems hindering digital transformation and compliance requirements",
+    solution: "Implemented comprehensive digital banking platform with AI-powered security and compliance features",
     results: [
-      "45% improvement in ROI",
-      "95% accuracy in trend forecasting",
-      "60% faster market analysis",
-      "32% increase in client acquisition"
+      "100% compliance with FATCA and AML requirements",
+      "85% reduction in manual compliance processes",
+      "60% increase in digital customer onboarding",
+      "40% reduction in operational costs"
     ],
-    technologies: ["Machine Learning", "Data Analytics", "BI Tools"],
-    timeframe: "6 months",
-    roi: "320% ROI within first year"
+    technologies: ["AI Security", "Compliance Automation", "Digital Banking Platform"],
+    timeframe: "8 months",
+    roi: "300% ROI within first year"
   },
   {
-    icon: Target,
-    title: "Retail Marketing Automation",
-    client: "National Retail Chain",
-    industry: "Retail",
-    challenge: "Time-consuming campaign management and inconsistent results",
-    solution: "Implemented automated campaign management system with AI optimization",
+    icon: Gift,
+    title: "NGO Digital Fundraising Success",
+    client: "Caribbean Environmental Foundation",
+    industry: "Non-Profit",
+    challenge: "Limited donor reach and inefficient donation processing",
+    solution: "Deployed integrated digital fundraising platform with AI-driven donor engagement",
     results: [
-      "90% reduction in campaign setup time",
-      "20 hours saved weekly",
-      "35% improvement in campaign ROI",
-      "50% increase in customer engagement"
+      "200% increase in online donations",
+      "45% improvement in donor retention",
+      "75% reduction in processing time",
+      "150% expansion in donor base"
     ],
-    technologies: ["Marketing Automation", "AI Optimization", "Cross-channel Integration"],
+    technologies: ["Payment Integration", "Donor CRM", "AI Analytics"],
     timeframe: "4 months",
     roi: "250% ROI within six months"
   },
   {
-    icon: Users,
-    title: "Travel Industry Personalization",
-    client: "International Travel Company",
-    industry: "Travel & Tourism",
-    challenge: "Generic marketing approaches leading to low engagement",
-    solution: "Implemented personalized marketing system with AI-driven customer segmentation",
+    icon: BarChart,
+    title: "Credit Union Digital Transformation",
+    client: "Regional Credit Union",
+    industry: "Financial Services",
+    challenge: "Manual member services and limited digital presence",
+    solution: "Implemented AI-powered member services platform with integrated analytics",
     results: [
-      "65% higher engagement rates",
-      "45% increase in booking conversions",
-      "30% improvement in customer satisfaction",
-      "25% reduction in marketing costs"
+      "90% reduction in service response time",
+      "70% increase in member satisfaction",
+      "50% cost reduction in operations",
+      "35% growth in new memberships"
     ],
-    technologies: ["AI Personalization", "CRM Integration", "Behavioral Analytics"],
+    technologies: ["AI Customer Service", "Data Analytics", "Process Automation"],
+    timeframe: "6 months",
+    roi: "280% ROI within first year"
+  },
+  {
+    icon: Target,
+    title: "Financial Advisory Marketing",
+    client: "Caribbean Investment Firm",
+    industry: "Financial Services",
+    challenge: "Traditional marketing approaches yielding low client acquisition",
+    solution: "Developed AI-driven marketing strategy with personalized content delivery",
+    results: [
+      "150% increase in qualified leads",
+      "45% higher conversion rate",
+      "60% improvement in client engagement",
+      "30% reduction in acquisition costs"
+    ],
+    technologies: ["AI Marketing", "Lead Generation", "Content Automation"],
     timeframe: "5 months",
+    roi: "220% ROI within first year"
+  },
+  {
+    icon: Brain,
+    title: "NGO Impact Measurement",
+    client: "Regional Healthcare NGO",
+    industry: "Non-Profit",
+    challenge: "Difficulty in measuring and communicating program impact",
+    solution: "Implemented AI-powered impact tracking and reporting system",
+    results: [
+      "95% accuracy in impact measurement",
+      "65% increase in grant success rate",
+      "40% improvement in donor reporting",
+      "80% reduction in reporting time"
+    ],
+    technologies: ["Impact Analytics", "AI Reporting", "Data Visualization"],
+    timeframe: "4 months",
     roi: "200% ROI within first year"
   },
   {
-    icon: LineChart,
-    title: "SaaS Growth Optimization",
-    client: "B2B Software Provider",
-    industry: "SaaS",
-    challenge: "High customer acquisition costs and inefficient targeting",
-    solution: "Implemented real-time optimization system for marketing campaigns",
-    results: [
-      "35% reduction in CAC",
-      "50% improvement in lead quality",
-      "40% increase in conversion rate",
-      "28% boost in customer lifetime value"
-    ],
-    technologies: ["Real-time Analytics", "AI Optimization", "Lead Scoring"],
-    timeframe: "4 months",
-    roi: "180% ROI within first six months"
-  },
-  {
     icon: Globe,
-    title: "Global Content Localization",
-    client: "International Consumer Brand",
-    industry: "Consumer Goods",
-    challenge: "Inconsistent global messaging and slow content adaptation",
-    solution: "Deployed AI-powered content localization and generation system",
+    title: "Caribbean Payment Integration",
+    client: "Regional Financial Network",
+    industry: "Financial Services",
+    challenge: "Complex payment systems and cross-border transaction issues",
+    solution: "Deployed integrated payment platform with AI fraud detection",
     results: [
-      "75% faster content localization",
-      "40% improvement in regional engagement",
-      "50% reduction in content costs",
-      "85% increase in global brand consistency"
+      "99.9% reduction in fraud incidents",
+      "75% faster transaction processing",
+      "50% reduction in transaction costs",
+      "200% increase in cross-border payments"
     ],
-    technologies: ["NLP", "Translation AI", "Content Management"],
+    technologies: ["Payment Processing", "AI Security", "Fraud Detection"],
     timeframe: "6 months",
-    roi: "220% ROI within first year"
+    roi: "320% ROI within first year"
   }
 ];
 
