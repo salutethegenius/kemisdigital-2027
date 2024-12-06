@@ -69,32 +69,32 @@ const caseStudies: CaseStudy[] = [
     title: "Credit Union Digital Transformation",
     client: "Regional Credit Union",
     industry: "Financial Services",
-    challenge: "Manual member services and limited digital presence",
-    solution: "Implemented AI-powered member services platform with integrated analytics",
+    challenge: "Manual member services and limited digital presence were hindering growth and member satisfaction in the Caribbean market",
+    solution: "Implemented comprehensive AI-powered member services platform with integrated analytics and digital onboarding",
     results: [
       "90% reduction in service response time",
       "70% increase in member satisfaction",
       "50% cost reduction in operations",
-      "35% growth in new memberships"
+      "35% growth in new memberships from digital channels"
     ],
-    technologies: ["AI Customer Service", "Data Analytics", "Process Automation"],
+    technologies: ["AI Customer Service", "Data Analytics", "Digital Onboarding"],
     timeframe: "6 months",
     roi: "280% ROI within first year"
   },
   {
     icon: Target,
     title: "Financial Advisory Marketing",
-    client: "Caribbean Investment Firm",
+    client: "Leading Bahamian Investment Firm",
     industry: "Financial Services",
-    challenge: "Traditional marketing approaches yielding low client acquisition",
-    solution: "Developed AI-driven marketing strategy with personalized content delivery",
+    challenge: "Traditional marketing approaches were ineffective in reaching and engaging high-net-worth clients in the Caribbean market",
+    solution: "Developed targeted AI-driven marketing strategy with personalized content delivery and automated lead nurturing",
     results: [
-      "150% increase in qualified leads",
-      "45% higher conversion rate",
-      "60% improvement in client engagement",
-      "30% reduction in acquisition costs"
+      "150% increase in qualified leads from Caribbean markets",
+      "45% higher conversion rate for investment services",
+      "60% improvement in client engagement metrics",
+      "30% reduction in client acquisition costs"
     ],
-    technologies: ["AI Marketing", "Lead Generation", "Content Automation"],
+    technologies: ["AI Marketing Analytics", "Lead Generation", "Content Personalization"],
     timeframe: "5 months",
     roi: "220% ROI within first year"
   },
