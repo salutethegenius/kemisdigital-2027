@@ -19,7 +19,7 @@ router.post('/send', async (req, res) => {
 
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: 'ken@kemisdigital.com',
+      to: 'frontdesk@kemisdigital.com',
       subject: `New Contact Form Submission - ${service}`,
       html: `
         <h2>New Contact Form Submission</h2>

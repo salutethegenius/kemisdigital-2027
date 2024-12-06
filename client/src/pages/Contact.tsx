@@ -1,14 +1,13 @@
-import Hero from "@/components/shared/Hero";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import emailjs from '@emailjs/browser';
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import emailjs from '@emailjs/browser';
+import Hero from "@/components/shared/Hero";
+import CalendarWidget from "@/components/shared/CalendarWidget";
+import { useToast } from "@/hooks/use-toast";
 import { staggerChildren } from "@/lib/animations";
 import {
   Form,
@@ -27,6 +26,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -87,7 +88,7 @@ export default function Contact() {
         error,
         message: error instanceof Error ? error.message : 'Unknown error',
         type: error instanceof TypeError ? 'Network error' : 'Other error',
-        values // Log form values for debugging
+        values
       });
       
       const errorMessage = error instanceof TypeError 
@@ -270,13 +271,19 @@ export default function Contact() {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-purple-600 hover:bg-purple-700"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Sending..." : "Send Message"}
-                  </Button>
+                  <div className="space-y-4">
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-purple-600 hover:bg-purple-700"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Sending..." : "Send Message"}
+                    </Button>
+                    <div className="text-center">
+                      <p className="text-sm text-muted-foreground mb-2">or</p>
+                      <CalendarWidget />
+                    </div>
+                  </div>
                 </form>
               </Form>
             </CardContent>
