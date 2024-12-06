@@ -131,6 +131,23 @@ const caseStudies: CaseStudy[] = [
     technologies: ["Cross-Border Payments", "AI Fraud Prevention", "Regulatory Compliance"],
     timeframe: "6 months",
     roi: "320% ROI within first year"
+  },
+  {
+    icon: Target,
+    title: "AI-Driven Tourism Marketing Platform",
+    client: "Caribbean Tourism Association",
+    industry: "Tourism",
+    challenge: "Needed to increase visitor engagement and bookings while optimizing marketing spend across multiple Caribbean destinations",
+    solution: "Implemented AI-powered tourism marketing platform with predictive analytics and personalized destination recommendations",
+    results: [
+      "180% increase in digital bookings",
+      "45% reduction in marketing spend",
+      "90% improvement in visitor engagement",
+      "150% increase in repeat visitors"
+    ],
+    technologies: ["AI Marketing Analytics", "Predictive Analytics", "Personalization Engine"],
+    timeframe: "4 months",
+    roi: "280% ROI within first year"
   }
 ];
 
