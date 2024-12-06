@@ -3,114 +3,141 @@ import FeatureCard from "@/components/shared/FeatureCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Globe, Gift, Share2, Brain, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, Globe, Gift, Share2, Brain, ArrowRight, Shield, Target, BarChart } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
 const services = [
   {
-    title: "Tourism-Focused Marketing",
-    description: "Destination-specific campaigns for hotels, resorts, and tour operators in the Caribbean",
-    icon: Globe,
+    title: "Digital Marketing Campaigns",
+    description: "Comprehensive digital marketing solutions for financial services and NGOs",
+    icon: Target,
     features: [
-      "Custom website design",
-      "Booking system integration",
-      "Local SEO optimization",
-      "Destination marketing"
+      "PPC ad management",
+      "LinkedIn campaigns",
+      "SEO optimization",
+      "Social media strategy",
+      "Community engagement"
     ],
     benefits: [
-      "Increased bookings",
-      "Better local visibility",
-      "Higher conversion rates"
+      "Increased qualified leads",
+      "Higher ROI",
+      "Broader reach"
     ],
     caseStudy: {
-      title: "Resort Success Story",
-      metric: "150% increase in direct bookings"
+      title: "Financial Services Success",
+      metric: "300% increase in qualified leads"
     },
-    pricing: "$2,000–$6,000 per project + $1,000/month support"
+    pricing: "$2,000–$6,000/month + 10-15% of ad spend"
   },
   {
-    title: "Loyalty & Rewards Programs",
-    description: "Custom retention programs for Caribbean retail and hospitality businesses",
+    title: "Online Payment Integration",
+    description: "Secure payment solutions for financial institutions and NGO donations",
     icon: Gift,
     features: [
-      "Points system design",
-      "Mobile app integration",
-      "Customer analytics",
-      "Reward automation"
+      "Credit card processing",
+      "PayPal integration",
+      "Mobile money solutions",
+      "Recurring donations",
+      "Secure transactions"
     ],
     benefits: [
-      "Increased customer retention",
-      "Higher repeat business",
-      "Enhanced customer data"
+      "Increased online payments",
+      "Better donor retention",
+      "Secure transactions"
     ],
     caseStudy: {
-      title: "Hotel Chain Success",
-      metric: "85% increase in repeat guests"
+      title: "NGO Success Story",
+      metric: "200% increase in online donations"
     },
-    pricing: "$3,000–$7,500 per program"
+    pricing: "$2,000–$5,000 per integration"
   },
   {
-    title: "Event Marketing Management",
-    description: "Digital promotions for Caribbean festivals, concerts, and community events",
-    icon: Share2,
+    title: "Training & Capacity Building",
+    description: "Comprehensive workshops for financial institutions and NGOs",
+    icon: Brain,
     features: [
-      "Geotargeted advertising",
-      "Social media campaigns",
-      "Ticket integration",
-      "Event analytics"
+      "Digital tools training",
+      "Cybersecurity practices",
+      "Social media management",
+      "Data analytics",
+      "Compliance training"
     ],
     benefits: [
-      "Increased attendance",
-      "Broader reach",
+      "Enhanced digital skills",
+      "Better security practices",
+      "Improved efficiency"
+    ],
+    caseStudy: {
+      title: "Staff Development",
+      metric: "90% improvement in digital competency"
+    },
+    pricing: "$500–$2,000 per session"
+  },
+  {
+    title: "Data Security & Compliance",
+    description: "Enterprise-grade security solutions meeting Bahamian standards",
+    icon: Shield,
+    features: [
+      "FATCA compliance",
+      "AML integration",
+      "Encrypted storage",
+      "Audit trails",
+      "Security monitoring"
+    ],
+    benefits: [
+      "Regulatory compliance",
+      "Enhanced security",
+      "Risk mitigation"
+    ],
+    caseStudy: {
+      title: "Bank Compliance",
+      metric: "100% compliance achievement"
+    },
+    pricing: "$4,000–$12,000 per project"
+  },
+  {
+    title: "NGO Digital Fundraising",
+    description: "Comprehensive digital fundraising solutions for NGOs",
+    icon: Share2,
+    features: [
+      "Campaign management",
+      "Email outreach",
+      "Social media ads",
+      "Crowdfunding",
+      "Impact storytelling"
+    ],
+    benefits: [
+      "Increased donations",
+      "Wider donor reach",
       "Better engagement"
     ],
     caseStudy: {
-      title: "Festival Marketing",
-      metric: "200% increase in ticket sales"
+      title: "Fundraising Success",
+      metric: "250% increase in donations"
     },
-    pricing: "$2,500–$10,000 per campaign"
+    pricing: "$3,000–$10,000 per campaign"
   },
   {
-    title: "Social Media Growth",
-    description: "Region-specific content creation for Instagram and TikTok",
-    icon: MessageSquare,
+    title: "Cloud CRM & Analytics",
+    description: "Comprehensive CRM and data management solutions",
+    icon: BarChart,
     features: [
-      "Local content strategy",
-      "Influencer partnerships",
-      "Trend optimization",
-      "Performance tracking"
+      "Lead management",
+      "Donor tracking",
+      "Performance analytics",
+      "Automated reporting",
+      "Integration support"
     ],
     benefits: [
-      "Increased local following",
-      "Higher engagement",
-      "Brand awareness"
+      "Better client management",
+      "Data-driven decisions",
+      "Improved efficiency"
     ],
     caseStudy: {
-      title: "Tourism Board Impact",
-      metric: "300% follower growth"
+      title: "CRM Implementation",
+      metric: "85% increase in client retention"
     },
-    pricing: "$1,500–$4,000/month"
-  },
-  {
-    title: "Small Business Digital Kit",
-    description: "Complete digital solutions for Caribbean small businesses",
-    icon: Brain,
-    features: [
-      "E-commerce setup",
-      "Google My Business",
-      "Social media setup",
-      "Local SEO"
-    ],
-    benefits: [
-      "Increased online presence",
-      "Better local rankings",
-      "More customers"
-    ],
-    caseStudy: {
-      title: "Local Business Growth",
-      metric: "125% increase in leads"
-    },
-    pricing: "$1,000–$3,000 per kit"
+    pricing: "$5,000–$15,000 per implementation"
   }
 ];
 
