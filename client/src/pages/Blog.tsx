@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import useSWR from "swr";
 import Hero from "@/components/shared/Hero";
 import { Link } from "wouter";
-import { Search, AlertCircle, Shield, Gift, Brain, Target, BarChart, Globe } from "lucide-react";
+import { Search, AlertCircle, Shield, Gift, Brain, Target, BarChart, Globe, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import { Alert, AlertDescription } from "@/components/ui/alert";
