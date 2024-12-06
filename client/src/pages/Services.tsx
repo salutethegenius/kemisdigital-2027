@@ -1,143 +1,244 @@
 import Hero from "@/components/shared/Hero";
-import FeatureCard from "@/components/shared/FeatureCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Globe, Gift, Share2, Brain, ArrowRight, Shield, Target, BarChart } from "lucide-react";
+import { 
+  Building2,
+  Palmtree,
+  Rocket,
+  HeartHandshake,
+  ArrowRight,
+  Shield,
+  Target,
+  BarChart,
+  Brain,
+  Gift,
+  Share2
+} from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
-const services = [
-  {
-    title: "Digital Marketing Campaigns",
-    description: "Comprehensive digital marketing solutions for financial services and NGOs",
-    icon: Target,
-    features: [
-      "PPC ad management",
-      "LinkedIn campaigns",
-      "SEO optimization",
-      "Social media strategy",
-      "Community engagement"
-    ],
-    benefits: [
-      "Increased qualified leads",
-      "Higher ROI",
-      "Broader reach"
-    ],
-    caseStudy: {
-      title: "Financial Services Success",
-      metric: "300% increase in qualified leads"
-    },
-    pricing: "$2,000–$6,000/month + 10-15% of ad spend"
+const services = {
+  financial: {
+    icon: Building2,
+    title: "Financial Services",
+    packages: [
+      {
+        title: "Basic Package",
+        description: "Website development + social media setup",
+        price: "$5,000",
+        features: [
+          "Professional website development",
+          "Social media platform setup",
+          "Basic SEO optimization",
+          "Mobile responsiveness",
+          "Content management system"
+        ]
+      },
+      {
+        title: "Pro Package",
+        description: "CRM implementation + compliance workflows",
+        price: "$12,000",
+        features: [
+          "Complete CRM implementation",
+          "Custom compliance workflows",
+          "Document management system",
+          "Client portal integration",
+          "Security features",
+          "Staff training program"
+        ]
+      },
+      {
+        title: "Premium Package",
+        description: "End-to-end digitization: Website, CRM, and automation",
+        price: "$20,000",
+        features: [
+          "End-to-end digital transformation",
+          "Custom website & CRM integration",
+          "Advanced automation workflows",
+          "Comprehensive analytics dashboard",
+          "Custom API integrations",
+          "24/7 premium support",
+          "Full team training & onboarding"
+        ]
+      }
+    ]
   },
-  {
-    title: "Online Payment Integration",
-    description: "Secure payment solutions for financial institutions and NGO donations",
-    icon: Gift,
-    features: [
-      "Credit card processing",
-      "PayPal integration",
-      "Mobile money solutions",
-      "Recurring donations",
-      "Secure transactions"
-    ],
-    benefits: [
-      "Increased online payments",
-      "Better donor retention",
-      "Secure transactions"
-    ],
-    caseStudy: {
-      title: "NGO Success Story",
-      metric: "200% increase in online donations"
-    },
-    pricing: "$2,000–$5,000 per integration"
+  tourism: {
+    icon: Palmtree,
+    title: "Tourism Sector",
+    packages: [
+      {
+        title: "Digital Presence",
+        description: "Essential online presence for tourism businesses",
+        price: "$4,500",
+        features: [
+          "Responsive website",
+          "Booking integration",
+          "Social media setup",
+          "Local SEO",
+          "Photo gallery"
+        ]
+      },
+      {
+        title: "Experience Package",
+        description: "Enhanced digital experience platform",
+        price: "$10,000",
+        features: [
+          "Virtual tours",
+          "Booking management system",
+          "Review integration",
+          "Content marketing",
+          "Social media management",
+          "Analytics tracking"
+        ]
+      },
+      {
+        title: "Resort Elite",
+        description: "Premium digital transformation for resorts",
+        price: "$18,000",
+        features: [
+          "Custom booking platform",
+          "Mobile app development",
+          "AI-powered recommendations",
+          "Multi-language support",
+          "Advanced analytics",
+          "Marketing automation",
+          "24/7 support"
+        ]
+      }
+    ]
   },
-  {
-    title: "Training & Capacity Building",
-    description: "Comprehensive workshops for financial institutions and NGOs",
-    icon: Brain,
-    features: [
-      "Digital tools training",
-      "Cybersecurity practices",
-      "Social media management",
-      "Data analytics",
-      "Compliance training"
-    ],
-    benefits: [
-      "Enhanced digital skills",
-      "Better security practices",
-      "Improved efficiency"
-    ],
-    caseStudy: {
-      title: "Staff Development",
-      metric: "90% improvement in digital competency"
-    },
-    pricing: "$500–$2,000 per session"
+  startup: {
+    icon: Rocket,
+    title: "Startups",
+    packages: [
+      {
+        title: "Launch Package",
+        description: "Essential digital toolkit for startups",
+        price: "$3,500",
+        features: [
+          "Landing page",
+          "Basic branding",
+          "Social media setup",
+          "Email marketing",
+          "Analytics setup"
+        ]
+      },
+      {
+        title: "Growth Package",
+        description: "Scaling solution for growing startups",
+        price: "$8,000",
+        features: [
+          "Full website development",
+          "CRM integration",
+          "Marketing automation",
+          "Payment gateway",
+          "Performance tracking",
+          "Technical support"
+        ]
+      },
+      {
+        title: "Scale Package",
+        description: "Complete digital infrastructure",
+        price: "$15,000",
+        features: [
+          "Custom platform development",
+          "Advanced automation",
+          "Integration APIs",
+          "Business intelligence",
+          "Marketing suite",
+          "Priority support",
+          "Team training"
+        ]
+      }
+    ]
   },
+  ngo: {
+    icon: HeartHandshake,
+    title: "NGOs",
+    packages: [
+      {
+        title: "Starter Package",
+        description: "Donation-focused website + online payment gateway",
+        price: "$4,000",
+        features: [
+          "Donation-optimized website",
+          "Secure payment gateway integration",
+          "Basic donor management",
+          "Social media platform setup",
+          "Content management system"
+        ]
+      },
+      {
+        title: "Growth Package",
+        description: "Website + social media campaigns + analytics",
+        price: "$7,500",
+        features: [
+          "Advanced website features",
+          "Comprehensive social media campaigns",
+          "Enhanced donor management",
+          "Email automation system",
+          "Analytics dashboard",
+          "Impact reporting tools"
+        ]
+      },
+      {
+        title: "Impact Package",
+        description: "Full digital transformation: Website, CRM, and dashboards",
+        price: "$15,000",
+        features: [
+          "Custom platform development",
+          "Advanced CRM implementation",
+          "Automated campaign management",
+          "Comprehensive impact dashboards",
+          "Grant management system",
+          "Full integration support",
+          "Complete staff training"
+        ]
+      }
+    ]
+  }
+};
+
+const additionalServices = [
   {
-    title: "Data Security & Compliance",
-    description: "Enterprise-grade security solutions meeting Bahamian standards",
-    icon: Shield,
-    features: [
-      "FATCA compliance",
-      "AML integration",
-      "Encrypted storage",
-      "Audit trails",
-      "Security monitoring"
-    ],
-    benefits: [
-      "Regulatory compliance",
-      "Enhanced security",
-      "Risk mitigation"
-    ],
-    caseStudy: {
-      title: "Bank Compliance",
-      metric: "100% compliance achievement"
-    },
-    pricing: "$4,000–$12,000 per project"
-  },
-  {
-    title: "NGO Digital Fundraising",
-    description: "Comprehensive digital fundraising solutions for NGOs",
-    icon: Share2,
-    features: [
-      "Campaign management",
-      "Email outreach",
-      "Social media ads",
-      "Crowdfunding",
-      "Impact storytelling"
-    ],
-    benefits: [
-      "Increased donations",
-      "Wider donor reach",
-      "Better engagement"
-    ],
-    caseStudy: {
-      title: "Fundraising Success",
-      metric: "250% increase in donations"
-    },
-    pricing: "$3,000–$10,000 per campaign"
-  },
-  {
-    title: "Cloud CRM & Analytics",
-    description: "Comprehensive CRM and data management solutions",
+    title: "Analytics & Reporting Dashboards",
+    description: "Custom analytics solutions for data-driven decisions",
     icon: BarChart,
+    price: "$3,000–$8,000",
     features: [
-      "Lead management",
-      "Donor tracking",
-      "Performance analytics",
+      "Custom KPI tracking",
+      "Real-time analytics",
       "Automated reporting",
-      "Integration support"
-    ],
-    benefits: [
-      "Better client management",
-      "Data-driven decisions",
-      "Improved efficiency"
-    ],
-    caseStudy: {
-      title: "CRM Implementation",
-      metric: "85% increase in client retention"
-    },
-    pricing: "$5,000–$15,000 per implementation"
+      "Data visualization",
+      "Performance insights"
+    ]
+  },
+  {
+    title: "Digital Marketing Services",
+    description: "Targeted marketing campaigns and strategy",
+    icon: Target,
+    price: "From $2,000/month",
+    features: [
+      "Social media management",
+      "Content marketing",
+      "PPC campaigns",
+      "SEO optimization",
+      "Performance tracking"
+    ]
+  },
+  {
+    title: "Training & Support",
+    description: "Comprehensive training and ongoing support",
+    icon: Brain,
+    price: "Custom pricing",
+    features: [
+      "Staff training",
+      "Technical support",
+      "Strategy consulting",
+      "Best practices",
+      "Regular updates"
+    ]
   }
 ];
 
@@ -145,105 +246,102 @@ export default function Services() {
   return (
     <div>
       <Hero
-        title="AI-Powered Marketing Services"
-        description="Transform your business with our comprehensive suite of AI-driven marketing solutions designed to drive growth and maximize ROI."
+        title="AI-Powered Solutions & Services"
+        description="Comprehensive digital transformation packages tailored for Caribbean businesses, financial institutions, NGOs, and tourism sector."
         showCTA={false}
       />
 
-      <motion.div
-        variants={staggerChildren}
-        initial="initial"
-        animate="animate"
-        className="grid grid-cols-1 gap-8 mb-16"
-      >
-        {services.map((service, index) => (
+      <div className="py-16 bg-purple-50 dark:bg-purple-900/10">
+        <div className="container mx-auto px-4">
           <motion.div
-            key={service.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            variants={staggerChildren}
+            initial="initial"
+            animate="animate"
+            className="space-y-16"
           >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <service.icon className="w-6 h-6 text-purple-500" />
-                  {service.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-lg mb-4 text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <div className="mb-4">
-                      <h3 className="font-semibold mb-2">Key Features</h3>
-                      <ul className="space-y-2">
+            {/* Sector Packages */}
+            {Object.values(services).map((sector) => (
+              <section key={sector.title} className="space-y-8">
+                <div className="flex items-center gap-3 mb-8">
+                  <sector.icon className="w-8 h-8 text-purple-600" />
+                  <h2 className="text-3xl font-bold">{sector.title}</h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {sector.packages.map((pkg) => (
+                    <Card key={pkg.title} className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600">
+                      <CardHeader>
+                        <CardTitle className="text-xl mb-2">{pkg.title}</CardTitle>
+                        <p className="text-muted-foreground">{pkg.description}</p>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-3xl font-bold text-purple-600 mb-6">{pkg.price}</p>
+                        <ul className="space-y-3">
+                          {pkg.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-2">
+                              <ArrowRight className="w-4 h-4 text-purple-600" />
+                              <span className="text-sm">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
+                          Get Started
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            {/* Additional Services */}
+            <section className="space-y-8">
+              <h2 className="text-3xl font-bold mb-8">Additional Services</h2>
+              <div className="grid md:grid-cols-3 gap-8">
+                {additionalServices.map((service) => (
+                  <Card key={service.title} className="border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-4">
+                        <service.icon className="w-6 h-6 text-purple-600" />
+                        <CardTitle className="text-xl">{service.title}</CardTitle>
+                      </div>
+                      <p className="text-muted-foreground">{service.description}</p>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-2xl font-bold text-purple-600 mb-6">{service.price}</p>
+                      <ul className="space-y-3">
                         {service.features.map((feature) => (
                           <li key={feature} className="flex items-center gap-2">
-                            <ArrowRight className="w-4 h-4 text-purple-500" />
-                            {feature}
+                            <ArrowRight className="w-4 h-4 text-purple-600" />
+                            <span className="text-sm">{feature}</span>
                           </li>
                         ))}
                       </ul>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Benefits</h3>
-                      <ul className="space-y-2">
-                        {service.benefits.map((benefit) => (
-                          <li key={benefit} className="flex items-center gap-2">
-                            <ArrowRight className="w-4 h-4 text-purple-500" />
-                            {benefit}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="bg-purple-50 dark:bg-purple-900/10 p-6 rounded-lg mb-4">
-                      <h3 className="font-semibold mb-2">Case Study</h3>
-                      <p className="text-lg font-semibold text-purple-600 mb-2">
-                        {service.caseStudy.title}
-                      </p>
-                      <p className="text-2xl font-bold">
-                        {service.caseStudy.metric}
-                      </p>
-                    </div>
-                    <div className="bg-purple-50 dark:bg-purple-900/10 p-6 rounded-lg mb-4">
-                      <h3 className="font-semibold mb-2">Investment</h3>
-                      <p className="text-xl font-bold text-purple-600">
-                        {service.pricing}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                      <Button className="bg-purple-600 hover:bg-purple-700">
-                        Get Started
-                      </Button>
-                      <Button variant="outline" className="border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/10">
+                      <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
                         Learn More
                       </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
           </motion.div>
-        ))}
-      </motion.div>
 
-      <Card className="mb-16">
-        <CardContent className="pt-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Ready to Transform Your Marketing?</h2>
-            <p className="text-muted-foreground mb-6">
-              Book a free consultation to discuss how our AI-powered services can help your business grow.
-            </p>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              Schedule Consultation
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          {/* CTA Section */}
+          <Card className="mt-16">
+            <CardContent className="pt-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold mb-4">Ready to Transform Your Business?</h2>
+                <p className="text-muted-foreground mb-6">
+                  Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
+                </p>
+                <Button className="bg-purple-600 hover:bg-purple-700">
+                  Schedule Consultation
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
