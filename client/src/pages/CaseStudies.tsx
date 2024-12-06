@@ -32,37 +32,37 @@ import Preloader from "@/components/shared/Preloader";
 const caseStudies: CaseStudy[] = [
   {
     icon: Shield,
-    title: "Digital Banking Digital Sales",
-    client: "Leading Caribbean Commercial Bank",
+    title: "AI-Powered Digital Banking Transformation",
+    client: "Major Bahamian Commercial Bank",
     industry: "Financial Services",
-    challenge: "Traditional sales processes limiting growth and customer acquisition in digital channels",
-    solution: "Implemented AI-powered digital sales platform with automated customer journey and personalized product recommendations",
+    challenge: "Manual onboarding processes and limited digital service offerings were causing customer attrition and operational inefficiencies",
+    solution: "Implemented comprehensive AI-driven digital banking platform with automated KYC, personalized product recommendations, and integrated compliance monitoring",
     results: [
-      "250% increase in digital product sales",
-      "85% improvement in lead conversion rate",
-      "60% reduction in customer acquisition cost",
-      "45% increase in cross-selling success"
+      "300% increase in digital account openings",
+      "90% reduction in KYC processing time",
+      "75% decrease in compliance-related queries",
+      "50% improvement in customer satisfaction scores"
     ],
-    technologies: ["AI Sales Analytics", "Customer Journey Automation", "Digital Onboarding Platform"],
-    timeframe: "8 months",
-    roi: "400% ROI within first year"
+    technologies: ["AI-Powered KYC", "Automated Compliance Monitoring", "Digital Onboarding Platform"],
+    timeframe: "6 months",
+    roi: "450% ROI within first year"
   },
   {
     icon: Gift,
-    title: "NGO Digital Fundraising Success",
-    client: "Caribbean Environmental Foundation",
+    title: "Digital Transformation for Environmental NGO",
+    client: "Bahamas National Trust",
     industry: "Non-Profit",
-    challenge: "Limited donor reach and inefficient donation processing",
-    solution: "Deployed integrated digital fundraising platform with AI-driven donor engagement",
+    challenge: "Needed to expand donor base and improve program impact tracking while streamlining grant management processes",
+    solution: "Implemented AI-powered donor management system with integrated impact tracking and automated grant reporting",
     results: [
-      "200% increase in online donations",
-      "45% improvement in donor retention",
-      "75% reduction in processing time",
-      "150% expansion in donor base"
+      "250% increase in international donations",
+      "85% improvement in grant application success rate",
+      "60% reduction in reporting time",
+      "200% growth in recurring donors"
     ],
-    technologies: ["Payment Integration", "Donor CRM", "AI Analytics"],
+    technologies: ["AI Donor Analytics", "Impact Tracking System", "Automated Grant Management"],
     timeframe: "4 months",
-    roi: "250% ROI within six months"
+    roi: "300% ROI within six months"
   },
   {
     icon: BarChart,
