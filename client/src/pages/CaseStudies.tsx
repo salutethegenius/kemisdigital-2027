@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { staggerChildren } from "@/lib/animations";
-import { TrendingUp, Users, Target, BarChart, LineChart, Globe, ArrowRight } from "lucide-react";
+import { Shield, Gift, Brain, Target, BarChart, Globe, ArrowRight } from "lucide-react";
 import Preloader from "@/components/shared/Preloader";
 
 const caseStudies: CaseStudy[] = [
