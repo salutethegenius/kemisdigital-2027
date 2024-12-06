@@ -158,14 +158,30 @@ export default function CaseStudies() {
     }
     
     if (selectedSolution !== "all") {
-      filtered = filtered.filter(study => study.technologies.includes(selectedSolution));
+      filtered = filtered.filter(study => study.technologies.some(tech => 
+        tech.toLowerCase().includes(selectedSolution.toLowerCase())
+      ));
     }
     
     if (selectedResult !== "all") {
       filtered = filtered.filter(study => 
-        study.results.some(result => 
-          result.toLowerCase().includes(selectedResult.toLowerCase())
-        )
+        study.results.some(result => {
+          const resultLower = result.toLowerCase();
+          switch(selectedResult) {
+            case "ROI":
+              return resultLower.includes("roi") || resultLower.includes("return");
+            case "Growth":
+              return resultLower.includes("increase") || resultLower.includes("growth");
+            case "Cost Reduction":
+              return resultLower.includes("reduction") || resultLower.includes("decrease") || resultLower.includes("cost");
+            case "Performance":
+              return resultLower.includes("improvement") || resultLower.includes("efficiency");
+            case "Time Efficiency":
+              return resultLower.includes("time") || resultLower.includes("faster");
+            default:
+              return false;
+          }
+        })
       );
     }
     
@@ -175,7 +191,17 @@ export default function CaseStudies() {
   // Get unique values for filters
   const industries = Array.from(new Set(caseStudies.map(study => study.industry)));
   const solutions = Array.from(new Set(caseStudies.flatMap(study => study.technologies)));
-  const resultTypes = ["ROI", "Engagement", "Conversion", "Time Savings", "Cost Reduction"];
+  // Extract result types from actual case studies
+const resultTypes = Array.from(new Set(caseStudies.flatMap(study => 
+  study.results.map(result => {
+    if (result.toLowerCase().includes("roi")) return "ROI";
+    if (result.toLowerCase().includes("increase")) return "Growth";
+    if (result.toLowerCase().includes("reduction") || result.toLowerCase().includes("decrease")) return "Cost Reduction";
+    if (result.toLowerCase().includes("improvement")) return "Performance";
+    if (result.toLowerCase().includes("time")) return "Time Efficiency";
+    return "Other";
+  })
+)));
 
   return (
     <div>
