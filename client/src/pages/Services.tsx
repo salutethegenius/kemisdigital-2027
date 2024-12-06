@@ -48,9 +48,9 @@ const services = {
         ]
       },
       {
-        title: "Premium Package",
+        title: "Impact Package",
         description: "End-to-end digitization: Website, CRM, and automation",
-        price: "$20,000",
+        price: "Request Call",
         features: [
           "End-to-end digital transformation",
           "Custom website & CRM integration",
@@ -95,7 +95,7 @@ const services = {
       {
         title: "Resort Elite",
         description: "Premium digital transformation for resorts",
-        price: "$18,000",
+        price: "Request Call",
         features: [
           "Custom booking platform",
           "Mobile app development",
@@ -138,7 +138,7 @@ const services = {
         ]
       },
       {
-        title: "Scale Package",
+        title: "Impact Package",
         description: "Complete digital infrastructure",
         price: "$15,000",
         features: [
@@ -247,7 +247,7 @@ export default function Services() {
     <div>
       <Hero
         title="AI-Powered Solutions & Services"
-        description="Comprehensive digital transformation packages tailored for Caribbean businesses, financial institutions, NGOs, and tourism sector."
+        description="Comprehensive digital transformation packages tailored for Caribbean startups, financial institutions, NGOs, and tourism sector."
         showCTA={false}
       />
 
