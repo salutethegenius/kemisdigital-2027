@@ -32,20 +32,20 @@ import Preloader from "@/components/shared/Preloader";
 const caseStudies: CaseStudy[] = [
   {
     icon: Shield,
-    title: "Digital Banking Transformation",
-    client: "Leading Caribbean Bank",
+    title: "Digital Banking Digital Sales",
+    client: "Leading Caribbean Commercial Bank",
     industry: "Financial Services",
-    challenge: "Legacy systems hindering digital transformation and compliance requirements",
-    solution: "Implemented comprehensive digital banking platform with AI-powered security and compliance features",
+    challenge: "Traditional sales processes limiting growth and customer acquisition in digital channels",
+    solution: "Implemented AI-powered digital sales platform with automated customer journey and personalized product recommendations",
     results: [
-      "100% compliance with FATCA and AML requirements",
-      "85% reduction in manual compliance processes",
-      "60% increase in digital customer onboarding",
-      "40% reduction in operational costs"
+      "250% increase in digital product sales",
+      "85% improvement in lead conversion rate",
+      "60% reduction in customer acquisition cost",
+      "45% increase in cross-selling success"
     ],
-    technologies: ["AI Security", "Compliance Automation", "Digital Banking Platform"],
+    technologies: ["AI Sales Analytics", "Customer Journey Automation", "Digital Onboarding Platform"],
     timeframe: "8 months",
-    roi: "300% ROI within first year"
+    roi: "400% ROI within first year"
   },
   {
     icon: Gift,
