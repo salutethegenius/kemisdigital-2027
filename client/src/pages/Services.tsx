@@ -205,7 +205,7 @@ const additionalServices = [
     title: "Analytics & Reporting Dashboards",
     description: "Custom analytics solutions for data-driven decisions",
     icon: BarChart,
-    price: "$3,000–$8,000",
+    price: "Request Call",
     features: [
       "Custom KPI tracking",
       "Real-time analytics",
@@ -218,7 +218,7 @@ const additionalServices = [
     title: "Digital Marketing Services",
     description: "Targeted marketing campaigns and strategy",
     icon: Target,
-    price: "From $2,000/month",
+    price: "Request Call",
     features: [
       "Social media management",
       "Content marketing",
@@ -231,7 +231,7 @@ const additionalServices = [
     title: "Training & Support",
     description: "Comprehensive training and ongoing support",
     icon: Brain,
-    price: "Custom pricing",
+    price: "Request Call",
     features: [
       "Staff training",
       "Technical support",
