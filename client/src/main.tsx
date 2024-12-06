@@ -27,28 +27,20 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <SWRConfig value={{ fetcher }}>
         <Router>
-          <Switch>
-            <Route path="/privacy">
-              <Privacy />
-            </Route>
-            <Route path="/data-deletion">
-              <DataDeletion />
-            </Route>
-            <Route path="/:rest*">
-              <Layout>
-                <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/services" component={Services} />
-                  <Route path="/about" component={About} />
-                  <Route path="/resources" component={Resources} />
-                  <Route path="/events" component={Events} />
-                  <Route path="/contact" component={Contact} />
-                  <Route path="/blog" component={Blog} />
-                  <Route path="/case-studies" component={CaseStudies} />
-                </Switch>
-              </Layout>
-            </Route>
-          </Switch>
+          <Layout>
+            <Switch>
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/data-deletion" component={DataDeletion} />
+              <Route path="/services" component={Services} />
+              <Route path="/about" component={About} />
+              <Route path="/resources" component={Resources} />
+              <Route path="/events" component={Events} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/blog" component={Blog} />
+              <Route path="/case-studies" component={CaseStudies} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Layout>
         </Router>
         <Toaster />
       </SWRConfig>
