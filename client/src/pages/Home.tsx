@@ -1,6 +1,7 @@
 import Hero from "@/components/shared/Hero";
 import FeatureCard from "@/components/shared/FeatureCard";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import {
   Mail,
   MessageSquare,
@@ -18,6 +19,7 @@ import {
   CheckCircle2,
   ArrowUpRight,
   Infinity,
+  Shield,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,78 +30,93 @@ export default function Home() {
   const aiServices = [
     {
       icon: Globe,
-      title: "Tourism Marketing Suite",
-      description: "Complete digital marketing solutions for Caribbean tourism businesses",
+      title: "Custom Website Development",
+      description: "Secure, mobile-responsive websites with client portals for financial institutions and NGOs",
       benefits: [
-        "Custom website with booking integration",
-        "Local SEO optimization",
-        "Social media management",
-        "Content creation",
-        "Performance analytics"
+        "SSL security implementation",
+        "ADA compliance",
+        "Client portal integration",
+        "Payment gateway setup",
+        "Mobile responsiveness"
       ],
-      caseStudy: "Resort client achieved 150% increase in direct bookings",
-      integration: "Integrates with major booking platforms and payment systems",
-      pricing: "From $2,000 + monthly support"
-    },
-    {
-      icon: Gift,
-      title: "Caribbean Loyalty Solutions",
-      description: "Custom loyalty programs for hospitality and retail businesses",
-      benefits: [
-        "Mobile-first rewards program",
-        "Customer analytics dashboard",
-        "Automated rewards",
-        "Integration with POS systems",
-        "Customer engagement tools"
-      ],
-      caseStudy: "Hotel chain saw 85% increase in repeat guests",
-      integration: "Works with major POS and payment systems",
-      pricing: "Starting at $3,000"
-    },
-    {
-      icon: Share2,
-      title: "Local Event Marketing",
-      description: "Digital promotion solutions for Caribbean events and festivals",
-      benefits: [
-        "Geotargeted advertising",
-        "Social media campaigns",
-        "Ticket sales integration",
-        "Attendance tracking",
-        "ROI reporting"
-      ],
-      caseStudy: "Festival achieved 200% increase in ticket sales",
-      integration: "Compatible with major ticketing platforms",
-      pricing: "From $2,500 per campaign"
-    },
-    {
-      icon: MessageSquare,
-      title: "Caribbean Social Growth",
-      description: "Region-specific social media management and content creation",
-      benefits: [
-        "Local content strategy",
-        "Influencer partnerships",
-        "Community management",
-        "Performance tracking",
-        "Trend optimization"
-      ],
-      caseStudy: "Tourism board achieved 300% follower growth",
-      integration: "Manages all major social platforms",
-      pricing: "Starting at $1,500/month"
+      caseStudy: "Financial institution achieved 200% increase in digital client onboarding",
+      integration: "Integrates with major payment and banking systems",
+      pricing: "From $3,000 + yearly maintenance"
     },
     {
       icon: Brain,
-      title: "Small Business Digital Kit",
-      description: "Complete digital presence setup for Caribbean businesses",
+      title: "Cloud CRM Solutions",
+      description: "Comprehensive CRM systems for managing clients, donors, and compliance",
       benefits: [
-        "E-commerce website",
-        "Google My Business setup",
-        "Social media profiles",
-        "Local SEO",
-        "Basic analytics"
+        "Automated compliance workflows",
+        "Donor management system",
+        "Regulatory reporting",
+        "Client relationship tracking",
+        "Data analytics dashboard"
       ],
-      caseStudy: "Local business increased leads by 125%",
-      integration: "Works with popular e-commerce platforms",
-      pricing: "From $1,000"
+      caseStudy: "NGO improved donor retention by 85%",
+      integration: "Compatible with Salesforce and custom solutions",
+      pricing: "Starting at $5,000"
+    },
+    {
+      icon: Shield,
+      title: "Data Security & Compliance",
+      description: "Enterprise-grade security solutions meeting Bahamian and international standards",
+      benefits: [
+        "FATCA compliance setup",
+        "AML system integration",
+        "Encrypted communications",
+        "Secure document storage",
+        "Audit trail tracking"
+      ],
+      caseStudy: "Bank achieved 100% compliance score",
+      integration: "Works with major security frameworks",
+      pricing: "From $4,000"
+    },
+    {
+      icon: Cpu,
+      title: "Workflow Automation",
+      description: "Automated systems for client onboarding and document processing",
+      benefits: [
+        "Document verification",
+        "Loan processing automation",
+        "Grant application tracking",
+        "Report generation",
+        "Process optimization"
+      ],
+      caseStudy: "Financial firm reduced processing time by 75%",
+      integration: "Integrates with existing workflows",
+      pricing: "Starting at $2,500"
+    },
+    {
+      icon: BarChart,
+      title: "Analytics Dashboard",
+      description: "Custom analytics solutions for financial performance and impact measurement",
+      benefits: [
+        "Real-time KPI tracking",
+        "Portfolio analysis",
+        "Impact measurement",
+        "Donor analytics",
+        "Custom reporting"
+      ],
+      caseStudy: "NGO increased funding efficiency by 40%",
+      integration: "Works with major analytics platforms",
+      pricing: "From $3,000"
+    },
+    {
+      icon: Target,
+      title: "Digital Fundraising",
+      description: "Comprehensive digital fundraising solutions for NGOs",
+      benefits: [
+        "Campaign management",
+        "Donor engagement tools",
+        "Social media integration",
+        "Impact reporting",
+        "Payment processing"
+      ],
+      caseStudy: "NGO increased online donations by 300%",
+      integration: "Compatible with major payment platforms",
+      pricing: "From $3,000 per campaign"
     }
   ];
 
@@ -201,6 +218,15 @@ export default function Home() {
               </Card>
             ))}
           </motion.div>
+
+          <div className="flex justify-center mt-8">
+            <Link href="/services">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg flex items-center gap-2">
+                View More Services
+                <ArrowUpRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
 
           {/* Success Metrics Section */}
           <div className="mt-20">
