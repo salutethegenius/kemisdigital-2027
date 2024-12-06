@@ -1,14 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useSWR from "swr";
 import Hero from "@/components/shared/Hero";
 import { Link } from "wouter";
-import { Search, AlertCircle, Shield, Gift, Brain, Target, BarChart, Globe, LucideIcon } from "lucide-react";
+import { Search, Shield, Gift, Brain, Target, BarChart, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface BlogPost {
   id: number;
@@ -19,7 +18,7 @@ interface BlogPost {
   category_name: string;
   tags: string[];
   isFeatured?: boolean;
-  icon: LucideIcon;
+  icon: string;
 }
 
 const categories = [
@@ -29,6 +28,18 @@ const categories = [
   "Caribbean Market Insights"
 ];
 
+const getIcon = (iconName: string) => {
+  const icons: { [key: string]: React.ComponentType } = {
+    Shield,
+    Gift,
+    Brain,
+    Target,
+    BarChart,
+    Globe
+  };
+  return icons[iconName] || Shield;
+};
+
 // Placeholder blog posts with AI marketing content
 const placeholderPosts: BlogPost[] = [
   {
@@ -36,7 +47,7 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Driven Compliance: The Future of Caribbean Banking",
     slug: "ai-compliance-caribbean-banking",
     excerpt: "Explore how AI is revolutionizing compliance and risk management in Caribbean financial institutions while reducing operational costs.",
-    icon: Shield,
+    icon: "Shield",
     published_at: new Date().toISOString(),
     category_name: "Financial Services",
     tags: ["Banking", "Compliance", "AI Technology"],
@@ -47,7 +58,7 @@ const placeholderPosts: BlogPost[] = [
     title: "Digital Fundraising Success: Caribbean NGO Case Study",
     slug: "digital-fundraising-caribbean-ngo",
     excerpt: "Learn how a Caribbean environmental NGO achieved 200% growth in donations through AI-powered donor engagement strategies.",
-    icon: Gift,
+    icon: "Gift",
     published_at: new Date().toISOString(),
     category_name: "NGO Solutions",
     tags: ["NGO", "Fundraising", "Digital Strategy"]
@@ -57,7 +68,7 @@ const placeholderPosts: BlogPost[] = [
     title: "Implementing Digital Payment Solutions in the Caribbean",
     slug: "caribbean-digital-payments-guide",
     excerpt: "A comprehensive guide to integrating secure digital payment systems for Caribbean financial institutions and NGOs.",
-    icon: Globe,
+    icon: "Globe",
     published_at: new Date().toISOString(),
     category_name: "Digital Compliance",
     tags: ["Payments", "Security", "Integration"]
@@ -67,7 +78,7 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Enhanced Member Services for Credit Unions",
     slug: "credit-union-ai-services",
     excerpt: "How Caribbean credit unions are leveraging AI to transform member services and drive operational efficiency.",
-    icon: Brain,
+    icon: "Brain",
     published_at: new Date().toISOString(),
     category_name: "Caribbean Market Insights",
     tags: ["Credit Unions", "Member Services", "AI Implementation"]
@@ -101,10 +112,6 @@ export default function Blog() {
       />
 
       <div className="container mx-auto py-8">
-        
-
-        
-
         {/* Search and Filter Section */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -138,38 +145,41 @@ export default function Blog() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Featured Insights</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featuredPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 p-8 flex justify-center items-center">
-                    <post.icon className="w-16 h-16 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl">
-                      <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
-                        {post.title}
-                      </Link>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags?.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="text-sm text-muted-foreground">
-                        {new Date(post.published_at).toLocaleDateString()}
-                      </span>
+              {featuredPosts.map((post) => {
+                const Icon = getIcon(post.icon);
+                return (
+                  <Card key={post.id} className="overflow-hidden">
+                    <div className="bg-purple-100 dark:bg-purple-900/30 p-8 flex justify-center items-center">
+                      <Icon className="w-16 h-16 text-purple-600 dark:text-purple-400" />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardHeader>
+                      <CardTitle className="text-xl">
+                        <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
+                          {post.title}
+                        </Link>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                      <div className="flex justify-between items-center">
+                        <div className="flex flex-wrap gap-2">
+                          {post.tags?.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="text-sm text-muted-foreground">
+                          {new Date(post.published_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </section>
         )}
@@ -181,54 +191,57 @@ export default function Blog() {
           animate="animate"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {filteredPosts.map((post) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <Card className="h-full flex flex-col">
-                <div className="bg-purple-100 dark:bg-purple-900/30 p-6 flex justify-center items-center">
-                  <post.icon className="w-12 h-12 text-purple-600 dark:text-purple-400" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">
-                    <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
-                      {post.title}
-                    </Link>
-                  </CardTitle>
-                  {post.category_name && (
-                    <span className="text-sm text-purple-600">
-                      {post.category_name}
-                    </span>
-                  )}
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                  <div className="mt-auto">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags?.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        {new Date(post.published_at).toLocaleDateString()}
-                      </span>
-                      <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
-                        Read More
-                      </Button>
-                    </div>
+          {filteredPosts.map((post) => {
+            const Icon = getIcon(post.icon);
+            return (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <Card className="h-full flex flex-col">
+                  <div className="bg-purple-100 dark:bg-purple-900/30 p-6 flex justify-center items-center">
+                    <Icon className="w-12 h-12 text-purple-600 dark:text-purple-400" />
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  <CardHeader>
+                    <CardTitle className="text-xl">
+                      <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
+                        {post.title}
+                      </Link>
+                    </CardTitle>
+                    {post.category_name && (
+                      <span className="text-sm text-purple-600">
+                        {post.category_name}
+                      </span>
+                    )}
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                    <div className="mt-auto">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {post.tags?.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">
+                          {new Date(post.published_at).toLocaleDateString()}
+                        </span>
+                        <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
+                          Read More
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </div>
