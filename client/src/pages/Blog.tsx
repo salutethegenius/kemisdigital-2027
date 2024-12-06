@@ -23,54 +23,54 @@ interface BlogPost {
 }
 
 const categories = [
-  "AI Marketing Insights",
-  "Digital Transformation",
-  "Case Studies",
-  "Educational Content"
+  "Financial Services",
+  "NGO Solutions",
+  "Digital Compliance",
+  "Caribbean Market Insights"
 ];
 
 // Placeholder blog posts with AI marketing content
 const placeholderPosts: BlogPost[] = [
   {
     id: 1,
-    title: "The Future of AI in Content Marketing",
-    slug: "future-ai-content-marketing",
-    excerpt: "Discover how AI is revolutionizing content creation and distribution strategies for modern businesses.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Content+Marketing",
+    title: "AI-Driven Compliance: The Future of Caribbean Banking",
+    slug: "ai-compliance-caribbean-banking",
+    excerpt: "Explore how AI is revolutionizing compliance and risk management in Caribbean financial institutions while reducing operational costs.",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Banking+Compliance",
     published_at: new Date().toISOString(),
     category_name: "AI Marketing Insights",
-    tags: ["AI", "Content Marketing", "Future Trends"],
+    tags: ["Banking", "Compliance", "AI Technology"],
     isFeatured: true
   },
   {
     id: 2,
-    title: "Digital Transformation Success Story: E-commerce Revolution",
-    slug: "digital-transformation-ecommerce",
-    excerpt: "Learn how an e-commerce brand achieved 300% growth through AI-powered personalization.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=E-commerce+Success",
+    title: "Digital Fundraising Success: Caribbean NGO Case Study",
+    slug: "digital-fundraising-caribbean-ngo",
+    excerpt: "Learn how a Caribbean environmental NGO achieved 200% growth in donations through AI-powered donor engagement strategies.",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=NGO+Digital+Success",
     published_at: new Date().toISOString(),
     category_name: "Case Studies",
-    tags: ["E-commerce", "Success Story", "AI Implementation"]
+    tags: ["NGO", "Fundraising", "Digital Strategy"]
   },
   {
     id: 3,
-    title: "AI Marketing Tools: A Comprehensive Guide",
-    slug: "ai-marketing-tools-guide",
-    excerpt: "An in-depth look at the most effective AI tools reshaping the marketing landscape.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Marketing+Tools",
+    title: "Implementing Digital Payment Solutions in the Caribbean",
+    slug: "caribbean-digital-payments-guide",
+    excerpt: "A comprehensive guide to integrating secure digital payment systems for Caribbean financial institutions and NGOs.",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Payments",
     published_at: new Date().toISOString(),
     category_name: "Educational Content",
-    tags: ["Tools", "Guides", "Best Practices"]
+    tags: ["Payments", "Security", "Integration"]
   },
   {
     id: 4,
-    title: "Transforming Customer Experience with AI",
-    slug: "transforming-customer-experience",
-    excerpt: "How AI is enabling businesses to deliver personalized, seamless customer experiences.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Customer+Experience",
+    title: "AI-Enhanced Member Services for Credit Unions",
+    slug: "credit-union-ai-services",
+    excerpt: "How Caribbean credit unions are leveraging AI to transform member services and drive operational efficiency.",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Credit+Union+AI",
     published_at: new Date().toISOString(),
     category_name: "Digital Transformation",
-    tags: ["Customer Experience", "AI", "Digital Strategy"]
+    tags: ["Credit Unions", "Member Services", "AI Implementation"]
   }
 ];
 
