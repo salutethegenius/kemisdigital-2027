@@ -100,35 +100,35 @@ const caseStudies: CaseStudy[] = [
   },
   {
     icon: Brain,
-    title: "NGO Impact Measurement",
-    client: "Regional Healthcare NGO",
+    title: "NGO Impact Measurement & Analytics",
+    client: "Caribbean Healthcare Initiative",
     industry: "Non-Profit",
-    challenge: "Difficulty in measuring and communicating program impact",
-    solution: "Implemented AI-powered impact tracking and reporting system",
+    challenge: "Struggled with quantifying healthcare program effectiveness and communicating impact to international donors",
+    solution: "Implemented comprehensive AI-powered impact tracking system with real-time analytics and automated donor reporting",
     results: [
-      "95% accuracy in impact measurement",
-      "65% increase in grant success rate",
-      "40% improvement in donor reporting",
-      "80% reduction in reporting time"
+      "95% improvement in impact measurement accuracy",
+      "65% increase in international grant success rate",
+      "40% boost in donor engagement and reporting clarity",
+      "80% reduction in impact reporting preparation time"
     ],
-    technologies: ["Impact Analytics", "AI Reporting", "Data Visualization"],
+    technologies: ["Healthcare Analytics", "AI Impact Tracking", "Automated Grant Reporting"],
     timeframe: "4 months",
     roi: "200% ROI within first year"
   },
   {
     icon: Globe,
-    title: "Caribbean Payment Integration",
-    client: "Regional Financial Network",
+    title: "Caribbean Regional Payment Network",
+    client: "Pan-Caribbean Financial Consortium",
     industry: "Financial Services",
-    challenge: "Complex payment systems and cross-border transaction issues",
-    solution: "Deployed integrated payment platform with AI fraud detection",
+    challenge: "Fragmented payment infrastructure across Caribbean nations leading to high costs and delays in cross-border transactions",
+    solution: "Implemented unified AI-powered payment platform with integrated compliance and real-time fraud detection",
     results: [
-      "99.9% reduction in fraud incidents",
-      "75% faster transaction processing",
-      "50% reduction in transaction costs",
-      "200% increase in cross-border payments"
+      "99.9% reduction in fraudulent transactions",
+      "75% improvement in cross-border processing speed",
+      "50% decrease in transaction fees for member institutions",
+      "200% growth in regional payment volume"
     ],
-    technologies: ["Payment Processing", "AI Security", "Fraud Detection"],
+    technologies: ["Cross-Border Payments", "AI Fraud Prevention", "Regulatory Compliance"],
     timeframe: "6 months",
     roi: "320% ROI within first year"
   }
