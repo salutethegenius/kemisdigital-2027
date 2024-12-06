@@ -36,7 +36,7 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Driven Compliance: The Future of Caribbean Banking",
     slug: "ai-compliance-caribbean-banking",
     excerpt: "Explore how AI is revolutionizing compliance and risk management in Caribbean financial institutions while reducing operational costs.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=AI+Banking+Compliance",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Banking",
     published_at: new Date().toISOString(),
     category_name: "AI Marketing Insights",
     tags: ["Banking", "Compliance", "AI Technology"],
@@ -47,7 +47,7 @@ const placeholderPosts: BlogPost[] = [
     title: "Digital Fundraising Success: Caribbean NGO Case Study",
     slug: "digital-fundraising-caribbean-ngo",
     excerpt: "Learn how a Caribbean environmental NGO achieved 200% growth in donations through AI-powered donor engagement strategies.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=NGO+Digital+Success",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Fundraising",
     published_at: new Date().toISOString(),
     category_name: "Case Studies",
     tags: ["NGO", "Fundraising", "Digital Strategy"]
@@ -67,7 +67,7 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Enhanced Member Services for Credit Unions",
     slug: "credit-union-ai-services",
     excerpt: "How Caribbean credit unions are leveraging AI to transform member services and drive operational efficiency.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Credit+Union+AI",
+    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Services",
     published_at: new Date().toISOString(),
     category_name: "Digital Transformation",
     tags: ["Credit Unions", "Member Services", "AI Implementation"]
@@ -148,11 +148,12 @@ export default function Blog() {
               {featuredPosts.map((post) => (
                 <Card key={post.id} className="overflow-hidden">
                   {post.featured_image && (
-                    <div className="aspect-video overflow-hidden">
+                    <div className="aspect-video overflow-hidden bg-purple-600">
                       <img
                         src={post.featured_image}
                         alt={post.title}
-                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300"
+                        style={{ fontFamily: 'system-ui' }}
                       />
                     </div>
                   )}
