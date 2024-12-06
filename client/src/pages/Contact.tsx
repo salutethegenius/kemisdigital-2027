@@ -1,10 +1,15 @@
+// React and core imports
 import { useState, useEffect } from "react";
+
+// Third-party library imports
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import emailjs from '@emailjs/browser';
+
+// Local component and utility imports
 import Hero from "@/components/shared/Hero";
 import CalendarWidget from "@/components/shared/CalendarWidget";
 import { useToast } from "@/hooks/use-toast";
@@ -29,6 +34,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Form schema
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -36,8 +42,10 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
+type FormData = z.infer<typeof formSchema>;
+
 export default function Contact() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -51,15 +59,13 @@ export default function Contact() {
   const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
-    // Initialize EmailJS with public key
     emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
   }, []);
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormData) {
     setIsLoading(true);
     
     try {
-      console.log('Sending email via EmailJS...');
       const response = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -74,8 +80,6 @@ export default function Contact() {
       if (response.status !== 200) {
         throw new Error('Failed to send email');
       }
-
-      console.log('Email sent successfully:', response);
       
       toast({
         title: "Success",
