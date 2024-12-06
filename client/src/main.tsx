@@ -6,7 +6,6 @@ import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
-import { useLocation } from "wouter";
 
 // Pages
 import Home from "./pages/Home";
@@ -28,10 +27,49 @@ createRoot(document.getElementById("root")!).render(
       <SWRConfig value={{ fetcher }}>
         <Router>
           <Switch>
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/data-deletion" component={DataDeletion} />
-            <Route path="/*">
+            <Route path="/">
               <ComingSoon />
+            </Route>
+            <Route path="/services">
+              <Layout>
+                <Services />
+              </Layout>
+            </Route>
+            <Route path="/about">
+              <Layout>
+                <About />
+              </Layout>
+            </Route>
+            <Route path="/resources">
+              <Layout>
+                <Resources />
+              </Layout>
+            </Route>
+            <Route path="/events">
+              <Layout>
+                <Events />
+              </Layout>
+            </Route>
+            <Route path="/contact">
+              <Layout>
+                <Contact />
+              </Layout>
+            </Route>
+            <Route path="/blog">
+              <Layout>
+                <Blog />
+              </Layout>
+            </Route>
+            <Route path="/case-studies">
+              <Layout>
+                <CaseStudies />
+              </Layout>
+            </Route>
+            <Route path="/privacy">
+              <Privacy />
+            </Route>
+            <Route path="/data-deletion">
+              <DataDeletion />
             </Route>
           </Switch>
         </Router>
