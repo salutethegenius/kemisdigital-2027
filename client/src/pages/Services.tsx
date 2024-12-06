@@ -140,7 +140,7 @@ const services = {
       {
         title: "Impact Package",
         description: "Complete digital infrastructure",
-        price: "$15,000",
+        price: "Request Call",
         features: [
           "Custom platform development",
           "Advanced automation",
@@ -185,7 +185,7 @@ const services = {
       {
         title: "Impact Package",
         description: "Full digital transformation: Website, CRM, and dashboards",
-        price: "$15,000",
+        price: "Request Call",
         features: [
           "Custom platform development",
           "Advanced CRM implementation",
