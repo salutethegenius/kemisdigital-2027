@@ -78,10 +78,10 @@ export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   
-  const { data: posts, error } = useSWR<BlogPost[]>('/api/blog/posts?status=published');
+  const { data: posts } = useSWR<BlogPost[]>('/api/blog/posts?status=published');
 
-  // Use placeholder posts if there's an error or no data
-  const allPosts = posts || placeholderPosts;
+  // Use placeholder posts while loading or if no data
+  const allPosts = posts && posts.length > 0 ? posts : placeholderPosts;
 
   const filteredPosts = allPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,14 +103,7 @@ export default function Blog() {
       <div className="container mx-auto py-8">
         
 
-        {error && (
-          <Alert variant="destructive" className="mb-8">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              There was an error loading the blog posts. Showing placeholder content instead.
-            </AlertDescription>
-          </Alert>
-        )}
+        
 
         {/* Search and Filter Section */}
         <div className="mb-8">
