@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import useSWR from "swr";
 import Hero from "@/components/shared/Hero";
 import { Link } from "wouter";
-import { Search, AlertCircle } from "lucide-react";
+import { Search, AlertCircle, Shield, Gift, Brain, Target, BarChart, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -15,11 +15,11 @@ interface BlogPost {
   title: string;
   slug: string;
   excerpt: string;
-  featured_image?: string;
   published_at: string;
   category_name: string;
   tags: string[];
   isFeatured?: boolean;
+  icon: LucideIcon;
 }
 
 const categories = [
@@ -36,9 +36,9 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Driven Compliance: The Future of Caribbean Banking",
     slug: "ai-compliance-caribbean-banking",
     excerpt: "Explore how AI is revolutionizing compliance and risk management in Caribbean financial institutions while reducing operational costs.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Banking",
+    icon: Shield,
     published_at: new Date().toISOString(),
-    category_name: "AI Marketing Insights",
+    category_name: "Financial Services",
     tags: ["Banking", "Compliance", "AI Technology"],
     isFeatured: true
   },
@@ -47,9 +47,9 @@ const placeholderPosts: BlogPost[] = [
     title: "Digital Fundraising Success: Caribbean NGO Case Study",
     slug: "digital-fundraising-caribbean-ngo",
     excerpt: "Learn how a Caribbean environmental NGO achieved 200% growth in donations through AI-powered donor engagement strategies.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Fundraising",
+    icon: Gift,
     published_at: new Date().toISOString(),
-    category_name: "Case Studies",
+    category_name: "NGO Solutions",
     tags: ["NGO", "Fundraising", "Digital Strategy"]
   },
   {
@@ -57,9 +57,9 @@ const placeholderPosts: BlogPost[] = [
     title: "Implementing Digital Payment Solutions in the Caribbean",
     slug: "caribbean-digital-payments-guide",
     excerpt: "A comprehensive guide to integrating secure digital payment systems for Caribbean financial institutions and NGOs.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Payments",
+    icon: Globe,
     published_at: new Date().toISOString(),
-    category_name: "Educational Content",
+    category_name: "Digital Compliance",
     tags: ["Payments", "Security", "Integration"]
   },
   {
@@ -67,9 +67,9 @@ const placeholderPosts: BlogPost[] = [
     title: "AI-Enhanced Member Services for Credit Unions",
     slug: "credit-union-ai-services",
     excerpt: "How Caribbean credit unions are leveraging AI to transform member services and drive operational efficiency.",
-    featured_image: "https://via.placeholder.com/1280x720/6B46C1/FFFFFF?text=Digital+Services",
+    icon: Brain,
     published_at: new Date().toISOString(),
-    category_name: "Digital Transformation",
+    category_name: "Caribbean Market Insights",
     tags: ["Credit Unions", "Member Services", "AI Implementation"]
   }
 ];
@@ -147,16 +147,9 @@ export default function Blog() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {featuredPosts.map((post) => (
                 <Card key={post.id} className="overflow-hidden">
-                  {post.featured_image && (
-                    <div className="aspect-video overflow-hidden bg-purple-600">
-                      <img
-                        src={post.featured_image}
-                        alt={post.title}
-                        className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300"
-                        style={{ fontFamily: 'system-ui' }}
-                      />
-                    </div>
-                  )}
+                  <div className="bg-purple-100 dark:bg-purple-900/30 p-8 flex justify-center items-center">
+                    <post.icon className="w-16 h-16 text-purple-600 dark:text-purple-400" />
+                  </div>
                   <CardHeader>
                     <CardTitle className="text-xl">
                       <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
@@ -202,15 +195,9 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
             >
               <Card className="h-full flex flex-col">
-                {post.featured_image && (
-                  <div className="aspect-video overflow-hidden">
-                    <img
-                      src={post.featured_image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
+                <div className="bg-purple-100 dark:bg-purple-900/30 p-6 flex justify-center items-center">
+                  <post.icon className="w-12 h-12 text-purple-600 dark:text-purple-400" />
+                </div>
                 <CardHeader>
                   <CardTitle className="text-xl">
                     <Link href={`/blog/${post.slug}`} className="hover:text-purple-600">
