@@ -27,75 +27,80 @@ import { staggerChildren } from "@/lib/animations";
 export default function Home() {
   const aiServices = [
     {
-      icon: Cpu,
-      title: "AI-Powered Content Generation",
-      description: "Create engaging, personalized content at scale with our advanced AI algorithms",
+      icon: Globe,
+      title: "Tourism Marketing Suite",
+      description: "Complete digital marketing solutions for Caribbean tourism businesses",
       benefits: [
-        "40% faster content creation",
-        "Multi-language support for global reach",
-        "Brand voice consistency across channels",
-        "Automated SEO optimization",
-        "Dynamic content personalization",
+        "Custom website with booking integration",
+        "Local SEO optimization",
+        "Social media management",
+        "Content creation",
+        "Performance analytics"
       ],
-      caseStudy: "E-commerce client achieved 3x engagement with AI-generated product descriptions",
-      integration: "Seamlessly connects with WordPress, Shopify, and major CMS platforms",
+      caseStudy: "Resort client achieved 150% increase in direct bookings",
+      integration: "Integrates with major booking platforms and payment systems",
+      pricing: "From $2,000 + monthly support"
     },
     {
-      icon: BarChart,
-      title: "Predictive Analytics",
-      description: "Transform data into actionable insights with our AI-driven analytics platform",
+      icon: Gift,
+      title: "Caribbean Loyalty Solutions",
+      description: "Custom loyalty programs for hospitality and retail businesses",
       benefits: [
-        "95% accuracy in trend forecasting",
-        "Real-time market analysis",
-        "Customer behavior prediction",
-        "Competitive intelligence",
-        "Revenue forecasting",
+        "Mobile-first rewards program",
+        "Customer analytics dashboard",
+        "Automated rewards",
+        "Integration with POS systems",
+        "Customer engagement tools"
       ],
-      caseStudy: "Financial services firm increased ROI by 45% using predictive insights",
-      integration: "Integrates with Google Analytics, Adobe Analytics, and custom data sources",
+      caseStudy: "Hotel chain saw 85% increase in repeat guests",
+      integration: "Works with major POS and payment systems",
+      pricing: "Starting at $3,000"
     },
     {
-      icon: Rocket,
-      title: "Automated Campaign Management",
-      description: "Streamline your marketing operations with intelligent automation",
+      icon: Share2,
+      title: "Local Event Marketing",
+      description: "Digital promotion solutions for Caribbean events and festivals",
       benefits: [
-        "85% reduction in campaign setup time",
-        "Smart budget allocation",
-        "Cross-channel coordination",
-        "Performance monitoring",
-        "Automated A/B testing",
+        "Geotargeted advertising",
+        "Social media campaigns",
+        "Ticket sales integration",
+        "Attendance tracking",
+        "ROI reporting"
       ],
-      caseStudy: "Retail chain automated 90% of campaign workflows, saving 20 hours weekly",
-      integration: "Works with Facebook Ads, Google Ads, and email marketing platforms",
+      caseStudy: "Festival achieved 200% increase in ticket sales",
+      integration: "Compatible with major ticketing platforms",
+      pricing: "From $2,500 per campaign"
     },
     {
-      icon: Users,
-      title: "Personalized Marketing",
-      description: "Deliver tailored experiences that resonate with each customer segment",
+      icon: MessageSquare,
+      title: "Caribbean Social Growth",
+      description: "Region-specific social media management and content creation",
       benefits: [
-        "2x increase in conversion rates",
-        "Dynamic content adaptation",
-        "Individual journey mapping",
-        "Behavioral targeting",
-        "Custom recommendation engine",
+        "Local content strategy",
+        "Influencer partnerships",
+        "Community management",
+        "Performance tracking",
+        "Trend optimization"
       ],
-      caseStudy: "Travel company achieved 65% higher engagement with personalized campaigns",
-      integration: "Compatible with major CRM systems and marketing automation tools",
+      caseStudy: "Tourism board achieved 300% follower growth",
+      integration: "Manages all major social platforms",
+      pricing: "Starting at $1,500/month"
     },
     {
-      icon: Zap,
-      title: "Real-time Optimization",
-      description: "Continuously improve performance with AI-driven optimization",
+      icon: Brain,
+      title: "Small Business Digital Kit",
+      description: "Complete digital presence setup for Caribbean businesses",
       benefits: [
-        "30% improvement in campaign ROI",
-        "Instant performance insights",
-        "Automated bid management",
-        "Creative optimization",
-        "Landing page testing",
+        "E-commerce website",
+        "Google My Business setup",
+        "Social media profiles",
+        "Local SEO",
+        "Basic analytics"
       ],
-      caseStudy: "SaaS company reduced CAC by 35% through real-time optimization",
-      integration: "Integrates with major ad platforms and analytics tools",
-    },
+      caseStudy: "Local business increased leads by 125%",
+      integration: "Works with popular e-commerce platforms",
+      pricing: "From $1,000"
+    }
   ];
 
   const successMetrics = [
@@ -181,9 +186,13 @@ export default function Home() {
                     <h4 className="font-semibold mb-2">Success Story:</h4>
                     <p className="text-sm text-muted-foreground">{service.caseStudy}</p>
                   </div>
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h4 className="font-semibold mb-2">Integration:</h4>
                     <p className="text-sm text-muted-foreground">{service.integration}</p>
+                  </div>
+                  <div className="mb-6">
+                    <h4 className="font-semibold mb-2">Investment:</h4>
+                    <p className="text-lg font-semibold text-purple-600">{service.pricing}</p>
                   </div>
                   <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                     Learn More

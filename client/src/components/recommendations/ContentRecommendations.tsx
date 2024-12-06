@@ -150,7 +150,7 @@ Ensure response contains only a valid JSON array.`;
     };
 
     fetchRecommendations();
-  }, [user]);
+  }, []);
 
   const renderContent = () => {
     if (isLoading) {

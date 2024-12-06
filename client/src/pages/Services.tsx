@@ -8,124 +8,109 @@ import { staggerChildren } from "@/lib/animations";
 
 const services = [
   {
-    title: "Email Advertising Automation",
-    description: "AI-powered email campaigns that deliver personalized content at scale",
-    icon: Mail,
-    features: [
-      "Smart audience segmentation",
-      "Dynamic content personalization",
-      "A/B testing automation",
-      "Performance analytics"
-    ],
-    benefits: [
-      "Increase open rates by 35%",
-      "Boost click-through rates",
-      "Improve conversion rates"
-    ],
-    caseStudy: {
-      title: "E-commerce Success Story",
-      metric: "45% increase in email revenue"
-    }
-  },
-  {
-    title: "SMS Campaign Management",
-    description: "Strategic mobile messaging that drives engagement and conversions",
-    icon: MessageSquare,
-    features: [
-      "Automated scheduling",
-      "Personalized messaging",
-      "Two-way communication",
-      "Campaign tracking"
-    ],
-    benefits: [
-      "98% open rates",
-      "Fast customer response",
-      "Higher engagement"
-    ],
-    caseStudy: {
-      title: "Retail Brand Impact",
-      metric: "3x increase in store visits"
-    }
-  },
-  {
-    title: "Website Development",
-    description: "Custom websites optimized for conversion and user experience",
+    title: "Tourism-Focused Marketing",
+    description: "Destination-specific campaigns for hotels, resorts, and tour operators in the Caribbean",
     icon: Globe,
     features: [
-      "Responsive design",
-      "SEO optimization",
-      "Performance tuning",
-      "Analytics integration"
+      "Custom website design",
+      "Booking system integration",
+      "Local SEO optimization",
+      "Destination marketing"
     ],
     benefits: [
-      "Faster load times",
-      "Higher search rankings",
-      "Better user experience"
+      "Increased bookings",
+      "Better local visibility",
+      "Higher conversion rates"
     ],
     caseStudy: {
-      title: "B2B Website Redesign",
-      metric: "85% increase in leads"
-    }
+      title: "Resort Success Story",
+      metric: "150% increase in direct bookings"
+    },
+    pricing: "$2,000–$6,000 per project + $1,000/month support"
   },
   {
-    title: "Customer Reward Programs",
-    description: "Build loyalty through intelligent reward systems",
+    title: "Loyalty & Rewards Programs",
+    description: "Custom retention programs for Caribbean retail and hospitality businesses",
     icon: Gift,
     features: [
-      "Points management",
-      "Tiered rewards",
-      "Custom incentives",
-      "Analytics dashboard"
+      "Points system design",
+      "Mobile app integration",
+      "Customer analytics",
+      "Reward automation"
     ],
     benefits: [
-      "Increased retention",
-      "Higher customer value",
-      "Brand loyalty"
+      "Increased customer retention",
+      "Higher repeat business",
+      "Enhanced customer data"
     ],
     caseStudy: {
-      title: "Restaurant Chain Loyalty",
-      metric: "2.5x customer lifetime value"
-    }
+      title: "Hotel Chain Success",
+      metric: "85% increase in repeat guests"
+    },
+    pricing: "$3,000–$7,500 per program"
   },
   {
-    title: "Social Media Management",
-    description: "Strategic social presence with AI-powered insights",
+    title: "Event Marketing Management",
+    description: "Digital promotions for Caribbean festivals, concerts, and community events",
     icon: Share2,
     features: [
-      "Content calendar",
-      "Engagement analytics",
-      "Automated posting",
+      "Geotargeted advertising",
+      "Social media campaigns",
+      "Ticket integration",
+      "Event analytics"
+    ],
+    benefits: [
+      "Increased attendance",
+      "Broader reach",
+      "Better engagement"
+    ],
+    caseStudy: {
+      title: "Festival Marketing",
+      metric: "200% increase in ticket sales"
+    },
+    pricing: "$2,500–$10,000 per campaign"
+  },
+  {
+    title: "Social Media Growth",
+    description: "Region-specific content creation for Instagram and TikTok",
+    icon: MessageSquare,
+    features: [
+      "Local content strategy",
+      "Influencer partnerships",
+      "Trend optimization",
       "Performance tracking"
     ],
     benefits: [
-      "Consistent branding",
+      "Increased local following",
       "Higher engagement",
-      "Growing audience"
+      "Brand awareness"
     ],
     caseStudy: {
-      title: "Brand Awareness Campaign",
-      metric: "200% follower growth"
-    }
+      title: "Tourism Board Impact",
+      metric: "300% follower growth"
+    },
+    pricing: "$1,500–$4,000/month"
   },
   {
-    title: "AI Marketing Consulting",
-    description: "Expert guidance for digital transformation",
+    title: "Small Business Digital Kit",
+    description: "Complete digital solutions for Caribbean small businesses",
     icon: Brain,
     features: [
-      "Strategy development",
-      "Technology selection",
-      "Implementation support",
-      "Performance optimization"
+      "E-commerce setup",
+      "Google My Business",
+      "Social media setup",
+      "Local SEO"
     ],
     benefits: [
-      "Data-driven decisions",
-      "Competitive advantage",
-      "ROI optimization"
+      "Increased online presence",
+      "Better local rankings",
+      "More customers"
     ],
     caseStudy: {
-      title: "Digital Transformation",
-      metric: "150% marketing ROI"
-    }
+      title: "Local Business Growth",
+      metric: "125% increase in leads"
+    },
+    pricing: "$1,000–$3,000 per kit"
   }
 ];
 
@@ -195,6 +180,12 @@ export default function Services() {
                       </p>
                       <p className="text-2xl font-bold">
                         {service.caseStudy.metric}
+                      </p>
+                    </div>
+                    <div className="bg-purple-50 dark:bg-purple-900/10 p-6 rounded-lg mb-4">
+                      <h3 className="font-semibold mb-2">Investment</h3>
+                      <p className="text-xl font-bold text-purple-600">
+                        {service.pricing}
                       </p>
                     </div>
                     <div className="flex flex-col gap-4">

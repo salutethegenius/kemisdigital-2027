@@ -74,5 +74,4 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd client && npx vite --port 3000 --host 0.0.0.0"
-waitForPort = 3000
+args = "cd client && NODE_ENV=development npx vite --port 3000 --host 0.0.0.0"
