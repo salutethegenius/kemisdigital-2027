@@ -41,12 +41,12 @@ export default function Home() {
       ],
       caseStudy: "Financial institution achieved 200% increase in digital client onboarding",
       integration: "Integrates with major payment and banking systems",
-      pricing: "From $3,000 + yearly maintenance"
+      pricing: "$3,000–$10,000 per project"
     },
     {
       icon: Brain,
-      title: "Cloud CRM Solutions",
-      description: "Comprehensive CRM systems for managing clients, donors, and compliance",
+      title: "Cloud CRM & Data Management",
+      description: "Implement CRMs to manage leads, clients, compliance workflows, and donor tracking",
       benefits: [
         "Automated compliance workflows",
         "Donor management system",
@@ -55,8 +55,23 @@ export default function Home() {
         "Data analytics dashboard"
       ],
       caseStudy: "NGO improved donor retention by 85%",
-      integration: "Compatible with Salesforce and custom solutions",
-      pricing: "Starting at $5,000"
+      integration: "Compatible with Salesforce and Zoho",
+      pricing: "$5,000–$15,000 per implementation"
+    },
+    {
+      icon: Target,
+      title: "Digital Marketing Campaigns",
+      description: "Lead generation and social media campaigns for financial services and NGOs",
+      benefits: [
+        "PPC ad management",
+        "LinkedIn campaigns",
+        "SEO optimization",
+        "Social media strategy",
+        "Community engagement"
+      ],
+      caseStudy: "300% increase in qualified leads",
+      integration: "Works with major ad platforms",
+      pricing: "$2,000–$6,000/month"
     },
     {
       icon: Shield,
@@ -71,52 +86,37 @@ export default function Home() {
       ],
       caseStudy: "Bank achieved 100% compliance score",
       integration: "Works with major security frameworks",
-      pricing: "From $4,000"
+      pricing: "$4,000–$12,000 per project"
     },
     {
       icon: Cpu,
       title: "Workflow Automation",
-      description: "Automated systems for client onboarding and document processing",
+      description: "Streamline operations with automated client onboarding and document processing",
       benefits: [
+        "Client onboarding automation",
         "Document verification",
-        "Loan processing automation",
         "Grant application tracking",
         "Report generation",
         "Process optimization"
       ],
-      caseStudy: "Financial firm reduced processing time by 75%",
+      caseStudy: "75% reduction in processing time",
       integration: "Integrates with existing workflows",
-      pricing: "Starting at $2,500"
+      pricing: "$2,500–$7,500 per implementation"
     },
     {
       icon: BarChart,
-      title: "Analytics Dashboard",
-      description: "Custom analytics solutions for financial performance and impact measurement",
+      title: "Analytics & Reporting",
+      description: "Custom dashboards for KPIs, portfolio analysis, and impact measurement",
       benefits: [
         "Real-time KPI tracking",
         "Portfolio analysis",
         "Impact measurement",
-        "Donor analytics",
+        "Donation analytics",
         "Custom reporting"
       ],
-      caseStudy: "NGO increased funding efficiency by 40%",
-      integration: "Works with major analytics platforms",
-      pricing: "From $3,000"
-    },
-    {
-      icon: Target,
-      title: "Digital Fundraising",
-      description: "Comprehensive digital fundraising solutions for NGOs",
-      benefits: [
-        "Campaign management",
-        "Donor engagement tools",
-        "Social media integration",
-        "Impact reporting",
-        "Payment processing"
-      ],
-      caseStudy: "NGO increased online donations by 300%",
-      integration: "Compatible with major payment platforms",
-      pricing: "From $3,000 per campaign"
+      caseStudy: "40% increase in funding efficiency",
+      integration: "Compatible with major analytics tools",
+      pricing: "$3,000–$8,000 per project"
     }
   ];
 
