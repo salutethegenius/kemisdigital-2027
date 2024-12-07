@@ -322,7 +322,7 @@ export default function Services() {
                         service.title === "Digital Marketing Services" ? "/services/digital-marketing" :
                         service.title === "Training & Support" ? "/services/training-support" :
                         "/services/web-development"
-                      }>
+                      } className="w-full">
                         <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
                           Learn More
                         </Button>
