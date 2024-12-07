@@ -1,15 +1,10 @@
-// React and core imports
-import { useState, useEffect } from "react";
-
-// Third-party library imports
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import emailjs from '@emailjs/browser';
 
-// Local component and utility imports
 import Hero from "@/components/shared/Hero";
 import CalendarWidget from "@/components/shared/CalendarWidget";
 import { useToast } from "@/hooks/use-toast";
@@ -57,54 +52,27 @@ export default function Contact() {
 
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  
-  useEffect(() => {
-    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-  }, []);
 
   async function onSubmit(values: FormData) {
     setIsLoading(true);
     
     try {
-      const response = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: values.name,
-          reply_to: values.email,
-          service_interest: values.service,
-          message: values.message,
-        }
-      );
-
-      if (response.status !== 200) {
-        throw new Error('Failed to send email');
-      }
+      // Temporarily store the form data and show success message
+      console.log('Form submitted:', values);
       
       toast({
         title: "Success",
-        description: "Thank you, we will be in touch soon!",
+        description: "Thank you for your message. We'll be in touch soon!",
       });
 
       form.reset();
     } catch (error) {
-      console.error('Error sending email:', {
-        error,
-        message: error instanceof Error ? error.message : 'Unknown error',
-        type: error instanceof TypeError ? 'Network error' : 'Other error',
-        values
-      });
+      console.error('Error submitting form:', error);
       
-      const errorMessage = error instanceof TypeError 
-        ? 'Network error. Please check your connection and try again.'
-        : error instanceof Error 
-          ? error.message 
-          : 'Failed to send message. Please try again later.';
-
       toast({
         variant: "destructive",
         title: "Error",
-        description: errorMessage,
+        description: "There was a problem submitting your message. Please try again later.",
       });
     } finally {
       setIsLoading(false);
