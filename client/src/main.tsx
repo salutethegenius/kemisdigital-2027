@@ -19,6 +19,12 @@ import CaseStudies from "./pages/CaseStudies";
 import Privacy from "./pages/Privacy";
 import DataDeletion from "./pages/DataDeletion";
 
+// Service Pages
+import WebDevelopment from "./pages/services/WebDevelopment";
+import AnalyticsDashboards from "./pages/services/AnalyticsDashboards";
+import DigitalMarketing from "./pages/services/DigitalMarketing";
+import TrainingSupport from "./pages/services/TrainingSupport";
+
 // Layout
 import Layout from "./components/layout/Layout";
 
@@ -32,6 +38,10 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/privacy" component={Privacy} />
               <Route path="/data-deletion" component={DataDeletion} />
               <Route path="/services" component={Services} />
+              <Route path="/services/web-development" component={WebDevelopment} />
+              <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
+              <Route path="/services/digital-marketing" component={DigitalMarketing} />
+              <Route path="/services/training-support" component={TrainingSupport} />
               <Route path="/about" component={About} />
               <Route path="/resources" component={Resources} />
               <Route path="/events" component={Events} />
