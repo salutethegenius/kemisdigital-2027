@@ -211,9 +211,11 @@ export default function Home() {
                     <h4 className="font-semibold mb-2">Investment:</h4>
                     <p className="text-lg font-semibold text-purple-600">{service.pricing}</p>
                   </div>
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
-                    Learn More
-                  </Button>
+                  <Link href={`/services/${service.title.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
+                      Learn More
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
