@@ -20,10 +20,10 @@ import Privacy from "./pages/Privacy";
 import DataDeletion from "./pages/DataDeletion";
 
 // Service Pages
-import WebDevelopment from "./pages/services/WebDevelopment";
-import AnalyticsDashboards from "./pages/services/AnalyticsDashboards";
-import DigitalMarketing from "./pages/services/DigitalMarketing";
-import TrainingSupport from "./pages/services/TrainingSupport";
+import WebDevelopment from "@/pages/services/WebDevelopment";
+import AnalyticsDashboards from "@/pages/services/AnalyticsDashboards";
+import DigitalMarketing from "@/pages/services/DigitalMarketing";
+import TrainingSupport from "@/pages/services/TrainingSupport";
 
 // Layout
 import Layout from "./components/layout/Layout";

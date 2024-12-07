@@ -211,12 +211,13 @@ export default function Home() {
                     <h4 className="font-semibold mb-2">Investment:</h4>
                     <p className="text-lg font-semibold text-purple-600">{service.pricing}</p>
                   </div>
-                  <Link href={`/services/${service.title.toLowerCase()
-                    .replace(/custom website development/i, 'web-development')
-                    .replace(/analytics & reporting dashboards/i, 'analytics-dashboards')
-                    .replace(/digital marketing services/i, 'digital-marketing')
-                    .replace(/training & support/i, 'training-support')
-                    .replace(/ /g, '-')}`}>
+                  <Link href={
+                    service.title === "Custom Website Development" ? "/services/web-development" :
+                    service.title === "Analytics & Reporting Dashboards" ? "/services/analytics-dashboards" :
+                    service.title === "Digital Marketing Services" ? "/services/digital-marketing" :
+                    service.title === "Training & Support" ? "/services/training-support" :
+                    "/services/web-development"
+                  }>
                     <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                       Learn More
                     </Button>
