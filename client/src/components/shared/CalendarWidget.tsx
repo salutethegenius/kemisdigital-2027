@@ -1,32 +1,57 @@
-import { getCalApi } from "@calcom/embed-react";
-import { useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface CalendarWidgetProps {
   className?: string;
 }
 
 export default function CalendarWidget({ className }: CalendarWidgetProps) {
-  useEffect(() => {
-    (async function () {
-      const cal = await getCalApi();
-      cal.ns["frontdesk"]("ui", {
-        styles: { branding: { brandColor: "#7c3aed" } },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
-    })();
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleScheduleRequest = () => {
+    toast({
+      title: "Coming Soon",
+      description: "Online scheduling will be available soon. For now, please use the contact form above to request a consultation.",
+    });
+    setIsOpen(false);
+  };
 
   return (
     <div className={className}>
       <Button 
-        data-cal-namespace="frontdesk"
-        data-cal-link="kemisdigital/consultation"
+        onClick={() => setIsOpen(true)}
         className="bg-purple-600 hover:bg-purple-700 text-white"
       >
         Schedule Demo
       </Button>
+
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Schedule a Demo</DialogTitle>
+          </DialogHeader>
+          <div className="text-center py-6">
+            <p className="text-muted-foreground mb-4">
+              Online scheduling is coming soon! In the meantime, please fill out the contact form above
+              and we'll get back to you within 24 hours to schedule your demo.
+            </p>
+            <Button 
+              onClick={handleScheduleRequest}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              Request Demo
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
