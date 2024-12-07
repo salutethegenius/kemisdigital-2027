@@ -212,9 +212,10 @@ export default function Home() {
                     <p className="text-lg font-semibold text-purple-600">{service.pricing}</p>
                   </div>
                   <Link href={`/services/${service.title.toLowerCase()
-                    .replace(/custom /i, '')
-                    .replace(/website /i, 'web-')
-                    .replace(/ & /g, '-')
+                    .replace(/custom website development/i, 'web-development')
+                    .replace(/analytics & reporting dashboards/i, 'analytics-dashboards')
+                    .replace(/digital marketing services/i, 'digital-marketing')
+                    .replace(/training & support/i, 'training-support')
                     .replace(/ /g, '-')}`}>
                     <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                       Learn More
