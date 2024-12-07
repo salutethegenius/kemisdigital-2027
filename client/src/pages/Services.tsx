@@ -317,7 +317,12 @@ export default function Services() {
                           </li>
                         ))}
                       </ul>
-                      <Link href={`/services/${service.title.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}>
+                      <Link href={`/services/${service.title.toLowerCase()
+                        .replace(/analytics & reporting/i, 'analytics')
+                        .replace(/dashboards/i, '-dashboards')
+                        .replace(/digital marketing/i, 'digital-marketing')
+                        .replace(/training & support/i, 'training-support')
+                        .replace(/ /g, '-')}`}>
                         <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
                           Learn More
                         </Button>
