@@ -57,12 +57,22 @@ export default function Contact() {
     setIsLoading(true);
     
     try {
-      // Temporarily store the form data and show success message
-      console.log('Form submitted:', values);
+      const response = await fetch('/api/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details || 'Failed to send message');
+      }
       
       toast({
-        title: "Success",
-        description: "Thank you for your message. We'll be in touch soon!",
+        title: "Message Sent",
+        description: "Thank you for your message. Our team will be in touch soon!",
       });
 
       form.reset();
@@ -71,8 +81,8 @@ export default function Contact() {
       
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "There was a problem submitting your message. Please try again later.",
+        title: "Message Failed",
+        description: error instanceof Error ? error.message : "There was a problem sending your message. Please try again later.",
       });
     } finally {
       setIsLoading(false);
