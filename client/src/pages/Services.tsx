@@ -316,9 +316,17 @@ export default function Services() {
                           </li>
                         ))}
                       </ul>
-                      <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
-                        Learn More
-                      </Button>
+                      <Link href={`/services/${
+                        service.title === 'Analytics & Reporting Dashboards' 
+                          ? 'analytics-dashboards'
+                          : service.title === 'Digital Marketing Services'
+                          ? 'digital-marketing'
+                          : 'training-support'
+                      }`}>
+                        <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
+                          Learn More
+                        </Button>
+                      </Link>
                     </CardContent>
                   </Card>
                 ))}
