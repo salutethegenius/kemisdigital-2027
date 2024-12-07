@@ -1,4 +1,4 @@
-import ServiceLayout from "@/components/services/ServiceLayout";
+import ServiceLayout from "../../components/services/ServiceLayout";
 
 export default function TrainingSupport() {
   return (
