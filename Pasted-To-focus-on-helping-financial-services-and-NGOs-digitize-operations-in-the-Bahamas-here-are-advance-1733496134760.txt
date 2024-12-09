@@ -2,7 +2,7 @@ To focus on helping financial services and NGOs digitize operations in the Baham
 
 Advanced Services for Financial Services and NGOs
 
-1. Website Development and Optimization
+1. Custom Website Development and Optimization
 
 	•	For Financial Services:
 	•	Develop secure, mobile-responsive websites with client portals for account management, reporting, and transaction tracking.

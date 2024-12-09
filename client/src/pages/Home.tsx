@@ -3,12 +3,23 @@ import FeatureCard from "@/components/shared/FeatureCard";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
+  Mail,
+  MessageSquare,
   Globe,
+  Gift,
+  Share2,
+  Brain,
   Target,
   Sparkles,
+  
+  BarChart,
+  Rocket,
+  Users,
+  Zap,
   CheckCircle2,
   ArrowUpRight,
   Infinity,
+  Shield,
   Code2 as Code,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -20,7 +31,7 @@ export default function Home() {
   const aiServices = [
     {
       icon: Globe,
-      title: "Website Development",
+      title: "Custom Website Development",
       description: "Enterprise-grade, secure websites with integrated client portals tailored for financial institutions and NGOs. Our solutions prioritize compliance, user experience, and seamless integration capabilities.",
       benefits: [
         "Bank-grade SSL security with 256-bit encryption",
@@ -59,7 +70,7 @@ export default function Home() {
     
     {
       icon: Code,
-      title: "Software & App Development",
+      title: "Custom Software/App Development",
       description: "Tailored software solutions and mobile applications built with cutting-edge technology to address specific business challenges and enhance operational efficiency.",
       benefits: [
         "Custom enterprise software development",
@@ -225,7 +236,81 @@ export default function Home() {
         </div>
       </section>
 
-      
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+        variants={staggerChildren}
+        initial="initial"
+        animate="animate"
+      >
+        <FeatureCard
+          title="Email Marketing"
+          description="AI-powered email campaigns that deliver personalized content at scale"
+          icon={Mail}
+          items={[
+            "Smart Segmentation",
+            "A/B Testing",
+            "Automated Workflows",
+          ]}
+        />
+        <FeatureCard
+          title="SMS Campaigns"
+          description="Targeted mobile messaging that drives engagement"
+          icon={MessageSquare}
+          items={[
+            "Personalized Messages",
+            "Campaign Scheduling",
+            "Response Analytics",
+          ]}
+        />
+        <FeatureCard
+          title="Website Development"
+          description="Custom websites optimized for conversion and user experience"
+          icon={Globe}
+          items={[
+            "Responsive Design",
+            "SEO Optimization",
+            "Performance Metrics",
+          ]}
+        />
+      </motion.div>
+
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+        variants={staggerChildren}
+        initial="initial"
+        animate="animate"
+      >
+        <FeatureCard
+          title="Customer Rewards"
+          description="Build loyalty through smart reward programs"
+          icon={Gift}
+          items={[
+            "Points System",
+            "Custom Rewards",
+            "Engagement Tracking",
+          ]}
+        />
+        <FeatureCard
+          title="Social Media Management"
+          description="Strategic social media presence with AI insights"
+          icon={Share2}
+          items={[
+            "Content Calendar",
+            "Analytics Dashboard",
+            "Engagement Optimization",
+          ]}
+        />
+        <FeatureCard
+          title="AI Strategy Consulting"
+          description="Expert guidance for digital transformation"
+          icon={Brain}
+          items={[
+            "Market Analysis",
+            "Strategy Development",
+            "Implementation Support",
+          ]}
+        />
+      </motion.div>
 
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-center mb-8">Why Choose KemisDigital</h2>
