@@ -103,15 +103,15 @@ export default function Home() {
     <div>
       <Hero
         title="The Peoples' Choice!"
-        description="We focus on tailored marketing, sales, and technology solutions. We help startups, financial institutions, and NGOs transform their business with cutting-edge AI-powered solutions and services."
+        description="Our clients say we’ve earned this title because we’re in the game with you. Backed by 20 years of experience in the Bahamian marketplace, we craft A-Player strategies that don’t just bring your ideas to life—they stand the test of time!"
         videoBackground="/src/img/1470870_People_Business_3840x2160.mp4"
       />
-
+      <br></br>
       <section className="text-center mb-16">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
           <p className="text-muted-foreground">
-            To empower businesses with innovative AI-driven marketing solutions that create meaningful connections, drive sustainable growth, and deliver measurable results in the digital age.
+            We aim to shape the future of business in the Bahamas by driving digital transformation and empowering local startups, NGOs, and businesses in the tourism sector.
           </p>
         </div>
       </section>
