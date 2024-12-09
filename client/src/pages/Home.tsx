@@ -21,7 +21,7 @@ export default function Home() {
     {
       icon: Globe,
       title: "Custom Website Development",
-      description: "Enterprise-grade, secure websites with integrated client portals tailored for businesses and NGOs. Our solutions prioritize security, user experience, and seamless integration capabilities.",
+      description: "Enterprise-grade, secure websites with integrated client portals tailored for startups, NGOs and toursim-based businesses. Our solutions prioritize security, user experience, and seamless integration capabilities.",
       benefits: [
         "Bank-grade SSL security with 256-bit encryption",
         "WCAG 2.1 ADA compliance with screen reader support",
@@ -40,7 +40,7 @@ export default function Home() {
     {
       icon: Target,
       title: "Digital Marketing Campaigns",
-      description: "Data-driven marketing campaigns specifically designed for financial services and NGOs in the Caribbean region. We combine AI-powered targeting with deep local market expertise.",
+      description: "Data-driven marketing campaigns specifically designed for startups, NGOs, and toursim-based businesses in the Caribbean region. We combine AI-powered targeting with deep local market expertise.",
       benefits: [
         "AI-powered campaign optimization with real-time bidding",
         "Industry-specific LinkedIn targeting with Sales Navigator",
