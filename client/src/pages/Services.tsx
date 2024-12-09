@@ -14,7 +14,8 @@ import {
   BarChart,
   Brain,
   Gift,
-  Share2
+  Share2,
+  Mail
 } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
