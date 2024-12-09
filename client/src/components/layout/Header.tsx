@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu } from "lucide-react";
+import { Menu, Video, Mail } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -8,6 +8,14 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -15,7 +23,6 @@ const navigation = [
   { name: "AI Services", href: "/services" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -42,6 +49,31 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location === "/contact" || location === "/meet" ? "text-primary" : "text-muted-foreground"
+                }`}>Contact</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="grid gap-3 p-4 w-[200px]">
+                    <NavigationMenuLink asChild>
+                      <Link href="/contact" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md">
+                        <Mail className="w-4 h-4" />
+                        <span>Contact Us</span>
+                      </Link>
+                    </NavigationMenuLink>
+                    <NavigationMenuLink asChild>
+                      <Link href="/meet" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md">
+                        <Video className="w-4 h-4" />
+                        <span>Video Meeting</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           <ThemeToggle />
           <Button asChild className="bg-primary hover:bg-primary/90 text-white">
             <Link href="/contact">Get Started</Link>
@@ -68,6 +100,25 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
+              <div className="space-y-2 border-t pt-4">
+                <h3 className="text-sm font-medium text-muted-foreground">Contact</h3>
+                <Link
+                  href="/contact"
+                  className="flex items-center space-x-2 text-sm hover:text-primary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Contact Us</span>
+                </Link>
+                <Link
+                  href="/meet"
+                  className="flex items-center space-x-2 text-sm hover:text-primary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Video className="w-4 h-4" />
+                  <span>Video Meeting</span>
+                </Link>
+              </div>
               <ThemeToggle />
               <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild onClick={() => setIsOpen(false)}>
                 <Link href="/contact">Get Started</Link>
