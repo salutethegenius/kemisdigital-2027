@@ -20,6 +20,141 @@ import {
 import { staggerChildren } from "@/lib/animations";
 
 const services = {
+  startup: {
+    icon: Rocket,
+    title: "Startups",
+    packages: [
+      {
+        title: "Launch Package",
+        description: "Essential digital toolkit for startups",
+        price: "$3,500",
+        features: [
+          "Landing page",
+          "Basic branding",
+          "Social media setup",
+          "Email marketing",
+          "Analytics setup"
+        ]
+      },
+      {
+        title: "Growth Package",
+        description: "Scaling solution for growing startups",
+        price: "$8,000",
+        features: [
+          "Full website development",
+          "CRM integration",
+          "Marketing automation",
+          "Payment gateway",
+          "Performance tracking",
+          "Technical support"
+        ]
+      },
+      {
+        title: "Impact Package",
+        description: "Complete digital infrastructure",
+        price: "Request Call",
+        features: [
+          "Custom platform development",
+          "Advanced automation",
+          "Integration APIs",
+          "Business intelligence",
+          "Marketing suite",
+          "Priority support",
+          "Team training"
+        ]
+      }
+    ]
+  },
+  ngo: {
+    icon: HeartHandshake,
+    title: "NGOs",
+    packages: [
+      {
+        title: "Starter Package",
+        description: "Donation-focused website + online payment gateway",
+        price: "$4,000",
+        features: [
+          "Donation-optimized website",
+          "Secure payment gateway integration",
+          "Basic donor management",
+          "Social media platform setup",
+          "Content management system"
+        ]
+      },
+      {
+        title: "Growth Package",
+        description: "Website + social media campaigns + analytics",
+        price: "$7,500",
+        features: [
+          "Advanced website features",
+          "Comprehensive social media campaigns",
+          "Enhanced donor management",
+          "Email automation system",
+          "Analytics dashboard",
+          "Impact reporting tools"
+        ]
+      },
+      {
+        title: "Impact Package",
+        description: "Full digital transformation: Website, CRM, and dashboards",
+        price: "Request Call",
+        features: [
+          "Custom platform development",
+          "Advanced CRM implementation",
+          "Automated campaign management",
+          "Comprehensive impact dashboards",
+          "Grant management system",
+          "Full integration support",
+          "Complete staff training"
+        ]
+      }
+    ]
+  },
+  tourism: {
+    icon: Palmtree,
+    title: "Tourism Sector",
+    packages: [
+      {
+        title: "Digital Presence",
+        description: "Essential online presence for tourism businesses",
+        price: "$4,500",
+        features: [
+          "Responsive website",
+          "Booking integration",
+          "Social media setup",
+          "Local SEO",
+          "Photo gallery"
+        ]
+      },
+      {
+        title: "Experience Package",
+        description: "Enhanced digital experience platform",
+        price: "$10,000",
+        features: [
+          "Virtual tours",
+          "Booking management system",
+          "Review integration",
+          "Content marketing",
+          "Social media management",
+          "Analytics tracking"
+        ]
+      },
+      {
+        title: "Resort Elite",
+        description: "Premium digital transformation for resorts",
+        price: "Request Call",
+        features: [
+          "Custom booking platform",
+          "Mobile app development",
+          "AI-powered recommendations",
+          "Multi-language support",
+          "Advanced analytics",
+          "Marketing automation",
+          "24/7 support"
+        ]
+      }
+    ]
+  },
   financial: {
     icon: Building2,
     title: "Financial Services",
