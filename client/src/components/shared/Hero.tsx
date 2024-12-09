@@ -10,16 +10,16 @@ interface HeroProps {
 
 export default function Hero({ title, description, showCTA = true, videoBackground }: HeroProps) {
   return (
-    <section className="relative text-center min-h-[60vh] flex items-center justify-center">
+    <section className="relative text-center min-h-[85vh] flex items-center justify-center">
       {videoBackground && (
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div className="absolute inset-0 bg-black/50 z-10" /> {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/40 z-10" /> {/* Dark overlay */}
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
           >
             <source src={videoBackground} type="video/mp4" />
             Your browser does not support the video tag.
