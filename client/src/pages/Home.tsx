@@ -33,51 +33,57 @@ export default function Home() {
       title: "Custom Website Development",
       description: "Enterprise-grade, secure websites with integrated client portals tailored for financial institutions and NGOs. Our solutions prioritize compliance, user experience, and seamless integration capabilities.",
       benefits: [
-        "Bank-grade SSL security with advanced encryption",
-        "WCAG 2.1 ADA compliance and accessibility features",
-        "Customized client portals with role-based access",
-        "Multi-currency payment gateway integration",
-        "Progressive Web App (PWA) capabilities",
-        "Real-time data synchronization",
-        "Automated backup systems"
+        "Bank-grade SSL security with 256-bit encryption",
+        "WCAG 2.1 ADA compliance with screen reader support",
+        "Custom client portals with multi-factor authentication",
+        "Multi-currency payment processing with fraud detection",
+        "Progressive Web App with offline capabilities",
+        "Real-time data sync with 99.9% uptime guarantee",
+        "Automated backup with disaster recovery",
+        "Custom API development and integration",
+        "24/7 security monitoring and threat detection"
       ],
-      caseStudy: "Caribbean financial institution achieved 200% increase in digital client onboarding and 45% reduction in support tickets through our custom portal solution",
-      integration: "Seamless integration with major banking systems, payment processors, and CRM platforms including Stripe, PayPal, Salesforce, and core banking systems",
-      pricing: "Basic: $3,000 - Simple website with basic integrations\nPro: $6,000 - Full-featured portal and payment system\nEnterprise: $10,000+ - Custom solutions with advanced features"
+      caseStudy: "A leading Caribbean financial institution achieved 200% increase in digital client onboarding, 45% reduction in support tickets, and 60% improvement in customer satisfaction scores through our custom portal solution",
+      integration: "Seamless integration with major banking systems (FIS, Fiserv), payment processors (Stripe, PayPal), CRM platforms (Salesforce, HubSpot), and core banking systems with custom API development capabilities",
+      pricing: "Basic: $3,000 - Secure website with essential integrations\nPro: $6,000 - Full-featured portal with advanced security\nEnterprise: $10,000+ - Custom solution with unlimited features"
     },
     {
       icon: Target,
       title: "Digital Marketing Campaigns",
-      description: "Data-driven marketing campaigns specifically designed for financial services and NGOs in the Caribbean region. We combine AI-powered targeting with local market expertise.",
+      description: "Data-driven marketing campaigns specifically designed for financial services and NGOs in the Caribbean region. We combine AI-powered targeting with deep local market expertise.",
       benefits: [
-        "AI-optimized PPC campaign management",
-        "Industry-specific LinkedIn targeting strategies",
-        "Local SEO optimization for Caribbean markets",
-        "Multi-channel social media campaigns",
-        "Community engagement automation",
-        "Compliance-aware content strategy",
-        "ROI tracking and analytics"
+        "AI-powered campaign optimization with real-time bidding",
+        "Industry-specific LinkedIn targeting with Sales Navigator",
+        "Local SEO with Caribbean market focus",
+        "Omni-channel social media campaign management",
+        "Automated community engagement with sentiment analysis",
+        "Compliance-first content strategy with legal review",
+        "Advanced ROI tracking with custom metrics",
+        "A/B testing with statistical significance analysis",
+        "Competitor analysis and market positioning"
       ],
-      caseStudy: "Regional NGO achieved 300% increase in qualified leads and 150% boost in donor engagement through our targeted campaign strategy",
-      integration: "Full integration with major ad platforms, social media tools, and analytics systems including Google Ads, Meta Business Suite, LinkedIn Campaign Manager, and HubSpot",
-      pricing: "Starter: $2,000/month - Essential marketing suite\nGrowth: $4,000/month - Comprehensive campaign management\nPremium: $6,000+/month - Full-service marketing solution"
+      caseStudy: "A regional NGO achieved 300% increase in qualified leads, 150% boost in donor engagement, and 80% improvement in campaign ROI through our AI-powered targeting strategy",
+      integration: "Comprehensive integration with Google Ads, Meta Business Suite, LinkedIn Campaign Manager, HubSpot, Mailchimp, Hootsuite, and custom analytics platforms with real-time reporting dashboards",
+      pricing: "Starter: $2,000/month - Essential digital marketing suite\nGrowth: $4,000/month - Advanced campaign optimization\nPremium: $6,000+/month - Enterprise marketing solution"
     },
     {
       icon: Cpu,
       title: "Workflow Automation",
       description: "Transform your operations with AI-powered automation solutions designed specifically for financial institutions and NGOs. Streamline processes while maintaining compliance and security.",
       benefits: [
-        "Intelligent client onboarding system",
-        "AI-powered document verification",
-        "Automated grant application processing",
-        "Custom report generation and analytics",
-        "Workflow optimization with AI insights",
-        "Compliance monitoring automation",
-        "Integration with existing systems"
+        "Smart client onboarding with ID verification",
+        "AI-powered document processing with OCR",
+        "Automated grant management system",
+        "Real-time reporting with custom dashboards",
+        "Process optimization with machine learning",
+        "Automated compliance monitoring and alerts",
+        "Custom API development and integration",
+        "Secure data encryption and access control",
+        "Automated backup and disaster recovery"
       ],
-      caseStudy: "Major NGO achieved 75% reduction in processing time and 90% accuracy improvement in document processing through our automation platform",
-      integration: "Seamless integration with existing workflow systems, document management platforms, and business intelligence tools including Microsoft 365, DocuSign, and custom enterprise systems",
-      pricing: "Basic Automation: $2,500 - Essential workflow automation\nAdvanced: $5,000 - Comprehensive process automation\nEnterprise: $7,500+ - Custom automation solutions"
+      caseStudy: "A major NGO achieved 75% reduction in processing time, 90% improvement in document processing accuracy, and 50% decrease in operational costs through our intelligent automation platform",
+      integration: "Comprehensive integration with Microsoft 365, DocuSign, SharePoint, Power BI, custom enterprise systems, and major CRM platforms with automated data synchronization and custom workflow triggers",
+      pricing: "Basic Automation: $2,500 - Essential process automation\nAdvanced: $5,000 - AI-powered workflow optimization\nEnterprise: $7,500+ - Custom end-to-end automation"
     }
   ];
 
