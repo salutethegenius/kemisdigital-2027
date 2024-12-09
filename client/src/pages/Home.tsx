@@ -44,21 +44,6 @@ export default function Home() {
       pricing: "$3,000–$10,000 per project"
     },
     {
-      icon: Brain,
-      title: "Cloud CRM & Data Management",
-      description: "Implement CRMs to manage leads, clients, compliance workflows, and donor tracking",
-      benefits: [
-        "Automated compliance workflows",
-        "Donor management system",
-        "Regulatory reporting",
-        "Client relationship tracking",
-        "Data analytics dashboard"
-      ],
-      caseStudy: "NGO improved donor retention by 85%",
-      integration: "Compatible with Salesforce and Zoho",
-      pricing: "$5,000–$15,000 per implementation"
-    },
-    {
       icon: Target,
       title: "Digital Marketing Campaigns",
       description: "Lead generation and social media campaigns for financial services and NGOs",
@@ -74,21 +59,6 @@ export default function Home() {
       pricing: "$2,000–$6,000/month"
     },
     {
-      icon: Shield,
-      title: "Data Security & Compliance",
-      description: "Enterprise-grade security solutions meeting Bahamian and international standards",
-      benefits: [
-        "FATCA compliance setup",
-        "AML system integration",
-        "Encrypted communications",
-        "Secure document storage",
-        "Audit trail tracking"
-      ],
-      caseStudy: "Bank achieved 100% compliance score",
-      integration: "Works with major security frameworks",
-      pricing: "$4,000–$12,000 per project"
-    },
-    {
       icon: Cpu,
       title: "Workflow Automation",
       description: "Streamline operations with automated client onboarding and document processing",
@@ -102,21 +72,6 @@ export default function Home() {
       caseStudy: "75% reduction in processing time",
       integration: "Integrates with existing workflows",
       pricing: "$2,500–$7,500 per implementation"
-    },
-    {
-      icon: BarChart,
-      title: "Analytics & Reporting",
-      description: "Custom dashboards for KPIs, portfolio analysis, and impact measurement",
-      benefits: [
-        "Real-time KPI tracking",
-        "Portfolio analysis",
-        "Impact measurement",
-        "Donation analytics",
-        "Custom reporting"
-      ],
-      caseStudy: "40% increase in funding efficiency",
-      integration: "Compatible with major analytics tools",
-      pricing: "$3,000–$8,000 per project"
     }
   ];
 
