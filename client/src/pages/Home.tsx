@@ -99,8 +99,8 @@ export default function Home() {
   return (
     <div>
       <Hero
-        title="Transform Your Business with AI-Powered Marketing"
-        description="KemisDigital delivers cutting-edge AI marketing solutions that drive growth, enhance customer engagement, and maximize ROI through personalized strategies."
+        title="The Peoples' Choice! "
+        description="We focus on tailored marketing, sales, and technology solutions. We help startups, financial institutions, and NGOs transform their business with cutting-edge AI-powered solutions and services."
       />
 
       <section className="text-center mb-16">
