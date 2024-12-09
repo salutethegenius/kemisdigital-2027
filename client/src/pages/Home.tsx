@@ -11,7 +11,7 @@ import {
   Brain,
   Target,
   Sparkles,
-  Cpu,
+  
   BarChart,
   Rocket,
   Users,
@@ -67,25 +67,7 @@ export default function Home() {
       integration: "Comprehensive integration with Google Ads, Meta Business Suite, LinkedIn Campaign Manager, HubSpot, Mailchimp, Hootsuite, and custom analytics platforms with real-time reporting dashboards",
       pricing: "Starter: $2,000/month - Essential digital marketing suite\nGrowth: $4,000/month - Advanced campaign optimization\nPremium: $6,000+/month - Enterprise marketing solution"
     },
-    {
-      icon: Cpu,
-      title: "Workflow Automation",
-      description: "Transform your operations with AI-powered automation solutions designed specifically for financial institutions and NGOs. Streamline processes while maintaining compliance and security.",
-      benefits: [
-        "Smart client onboarding with ID verification",
-        "AI-powered document processing with OCR",
-        "Automated grant management system",
-        "Real-time reporting with custom dashboards",
-        "Process optimization with machine learning",
-        "Automated compliance monitoring and alerts",
-        "Custom API development and integration",
-        "Secure data encryption and access control",
-        "Automated backup and disaster recovery"
-      ],
-      caseStudy: "A major NGO achieved 75% reduction in processing time, 90% improvement in document processing accuracy, and 50% decrease in operational costs through our intelligent automation platform",
-      integration: "Comprehensive integration with Microsoft 365, DocuSign, SharePoint, Power BI, custom enterprise systems, and major CRM platforms with automated data synchronization and custom workflow triggers",
-      pricing: "Basic Automation: $2,500 - Essential process automation\nAdvanced: $5,000 - AI-powered workflow optimization\nEnterprise: $7,500+ - Custom end-to-end automation"
-    },
+    
     {
       icon: Code,
       title: "Custom Software/App Development",
