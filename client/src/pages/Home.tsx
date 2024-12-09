@@ -169,8 +169,19 @@ export default function Home() {
                     <p className="text-sm text-muted-foreground">{service.integration}</p>
                   </div>
                   <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Investment:</h4>
-                    <p className="text-lg font-semibold text-purple-600">{service.pricing}</p>
+                    <h4 className="font-semibold mb-2">Investment Plans:</h4>
+                    <div className="space-y-3">
+                      {service.pricing.split('\n').map((plan, index) => (
+                        <div key={index} className={`p-3 rounded-lg ${index === 1 ? 'bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-200 dark:border-purple-700' : ''}`}>
+                          <p className="text-lg font-semibold text-purple-600">
+                            {plan.split(' - ')[0]}
+                            {index === 1 && <span className="ml-2 text-sm bg-purple-600 text-white px-2 py-1 rounded">Most Popular</span>}
+                          </p>
+                          <p className="text-sm text-muted-foreground">{plan.split(' - ')[1]}</p>
+                          {index === 1 && <p className="text-sm text-purple-600 mt-1">Save 20% with annual billing</p>}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <Link href={
                     service.title === "Custom Website Development" ? "/services/web-development" :
