@@ -105,8 +105,9 @@ export default function Home() {
   return (
     <div>
       <Hero
-        title="The Peoples' Choice! "
+        title="The Peoples' Choice!"
         description="We focus on tailored marketing, sales, and technology solutions. We help startups, financial institutions, and NGOs transform their business with cutting-edge AI-powered solutions and services."
+        videoBackground="/1470870_People_Business_3840x2160.mp4"
       />
 
       <section className="text-center mb-16">
