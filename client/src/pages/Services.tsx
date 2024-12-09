@@ -155,51 +155,7 @@ const services = {
       }
     ]
   },
-  financial: {
-    icon: Building2,
-    title: "Financial Services",
-    packages: [
-      {
-        title: "Basic Package",
-        description: "Website development + social media setup",
-        price: "$5,000",
-        features: [
-          "Professional website development",
-          "Social media platform setup",
-          "Basic SEO optimization",
-          "Mobile responsiveness",
-          "Content management system"
-        ]
-      },
-      {
-        title: "Pro Package",
-        description: "CRM implementation + compliance workflows",
-        price: "$12,000",
-        features: [
-          "Complete CRM implementation",
-          "Custom compliance workflows",
-          "Document management system",
-          "Client portal integration",
-          "Security features",
-          "Staff training program"
-        ]
-      },
-      {
-        title: "Impact Package",
-        description: "End-to-end digitization: Website, CRM, and automation",
-        price: "Request Call",
-        features: [
-          "End-to-end digital transformation",
-          "Custom website & CRM integration",
-          "Advanced automation workflows",
-          "Comprehensive analytics dashboard",
-          "Custom API integrations",
-          "24/7 premium support",
-          "Full team training & onboarding"
-        ]
-      }
-    ]
-  },
+  
   tourism: {
     icon: Palmtree,
     title: "Tourism Sector",
@@ -384,7 +340,7 @@ export default function Services() {
     <div>
       <Hero
         title="AI-Powered Solutions & Services"
-        description="Comprehensive digital transformation packages tailored for Caribbean startups, financial institutions, NGOs, and tourism sector."
+        description="Comprehensive digital transformation packages tailored for Caribbean startups, NGOs, and tourism sector."
         showCTA={false}
       />
 

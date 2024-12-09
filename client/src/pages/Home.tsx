@@ -21,7 +21,7 @@ export default function Home() {
     {
       icon: Globe,
       title: "Custom Website Development",
-      description: "Enterprise-grade, secure websites with integrated client portals tailored for financial institutions and NGOs. Our solutions prioritize compliance, user experience, and seamless integration capabilities.",
+      description: "Enterprise-grade, secure websites with integrated client portals tailored for businesses and NGOs. Our solutions prioritize security, user experience, and seamless integration capabilities.",
       benefits: [
         "Bank-grade SSL security with 256-bit encryption",
         "WCAG 2.1 ADA compliance with screen reader support",
@@ -33,7 +33,7 @@ export default function Home() {
         "Custom API development and integration",
         "24/7 security monitoring and threat detection"
       ],
-      caseStudy: "A leading Caribbean financial institution achieved 200% increase in digital client onboarding, 45% reduction in support tickets, and 60% improvement in customer satisfaction scores through our custom portal solution",
+      caseStudy: "A leading Caribbean organization achieved 200% increase in digital client onboarding, 45% reduction in support tickets, and 60% improvement in customer satisfaction scores through our custom portal solution",
       integration: "Seamless integration with major banking systems (FIS, Fiserv), payment processors (Stripe, PayPal), CRM platforms (Salesforce, HubSpot), and core banking systems with custom API development capabilities",
       pricing: "Basic: $3,000 - Secure website with essential integrations\nPro: $6,000 - Full-featured portal with advanced security\nEnterprise: $10,000+ - Custom solution with unlimited features"
     },
@@ -106,7 +106,7 @@ export default function Home() {
         description="Our clients say we’ve earned this title because we’re in the game with you. Backed by 20 years of experience in the Bahamian marketplace, we craft A-Player strategies that don’t just bring your ideas to life—they stand the test of time!"
         videoBackground="/src/img/1470870_People_Business_3840x2160.mp4"
       />
-      <br></br>
+      <br></br><br></br>
       <section className="text-center mb-16">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
@@ -122,8 +122,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">AI Marketing Services</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Leverage the power of artificial intelligence to transform your marketing strategy and drive exceptional results.
-            </p>
+            Our campaigns combine cutting-edge AI technology with the expertise of certified programmers and marketers, delivering results that exceed expectations.            </p>
           </div>
 
           <motion.div
