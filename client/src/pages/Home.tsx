@@ -103,7 +103,7 @@ export default function Home() {
       ],
       caseStudy: "Developed a custom financial management platform for a regional bank, resulting in 40% improved operational efficiency, 60% faster transaction processing, and 99.99% system uptime",
       integration: "Full integration capabilities with existing enterprise systems, cloud services (AWS, Azure, GCP), database systems, and third-party APIs with custom middleware development for seamless data flow",
-      pricing: "Starter: $15,000 - Basic custom software solution\nProfessional: $30,000 - Advanced application development\nEnterprise: $50,000+ - Full-scale custom development"
+      pricing: "Starter: $3,000 - Basic custom software solution\nProfessional: $12,000 - Advanced application development\nEnterprise: $20,000+ - Full-scale custom development"
     }
   ];
 
