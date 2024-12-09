@@ -203,42 +203,42 @@ const services = {
 
 const additionalServices = [
   {
-    title: "Analytics & Reporting Dashboards",
-    description: "Custom analytics solutions for data-driven decisions",
-    icon: BarChart,
+    title: "Viral Campaigns",
+    description: "Create engaging viral marketing campaigns that drive exponential growth",
+    icon: Share2,
     price: "Request Call",
     features: [
-      "Custom KPI tracking",
-      "Real-time analytics",
-      "Automated reporting",
-      "Data visualization",
-      "Performance insights"
+      "Trend analysis and monitoring",
+      "Viral content creation",
+      "Influencer collaboration",
+      "Social media optimization",
+      "Campaign performance tracking"
     ]
   },
   {
-    title: "Digital Marketing Services",
-    description: "Targeted marketing campaigns and strategy",
-    icon: Target,
+    title: "Customer Reward Programs",
+    description: "Build customer loyalty through innovative reward systems",
+    icon: Gift,
     price: "Request Call",
     features: [
-      "Social media management",
-      "Content marketing",
-      "PPC campaigns",
-      "SEO optimization",
-      "Performance tracking"
+      "Points-based rewards",
+      "Custom loyalty programs",
+      "Digital rewards tracking",
+      "Member engagement tools",
+      "Analytics and reporting"
     ]
   },
   {
-    title: "Training & Support",
-    description: "Comprehensive training and ongoing support",
-    icon: Brain,
+    title: "Email & SMS Advertising",
+    description: "Direct marketing solutions with personalized messaging",
+    icon: Mail,
     price: "Request Call",
     features: [
-      "Staff training",
-      "Technical support",
-      "Strategy consulting",
-      "Best practices",
-      "Regular updates"
+      "Automated email campaigns",
+      "SMS marketing integration",
+      "Personalized messaging",
+      "A/B testing",
+      "Response analytics"
     ]
   }
 ];
