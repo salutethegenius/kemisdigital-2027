@@ -20,6 +20,7 @@ import {
   ArrowUpRight,
   Infinity,
   Shield,
+  Code2 as Code,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,25 @@ export default function Home() {
       caseStudy: "A major NGO achieved 75% reduction in processing time, 90% improvement in document processing accuracy, and 50% decrease in operational costs through our intelligent automation platform",
       integration: "Comprehensive integration with Microsoft 365, DocuSign, SharePoint, Power BI, custom enterprise systems, and major CRM platforms with automated data synchronization and custom workflow triggers",
       pricing: "Basic Automation: $2,500 - Essential process automation\nAdvanced: $5,000 - AI-powered workflow optimization\nEnterprise: $7,500+ - Custom end-to-end automation"
+    },
+    {
+      icon: Code,
+      title: "Custom Software/App Development",
+      description: "Tailored software solutions and mobile applications built with cutting-edge technology to address specific business challenges and enhance operational efficiency.",
+      benefits: [
+        "Custom enterprise software development",
+        "Native & cross-platform mobile apps",
+        "Cloud-based application architecture",
+        "Scalable microservices implementation",
+        "Real-time data processing capabilities",
+        "Advanced security implementations",
+        "Comprehensive testing & QA",
+        "Performance optimization",
+        "Continuous deployment & monitoring"
+      ],
+      caseStudy: "Developed a custom financial management platform for a regional bank, resulting in 40% improved operational efficiency, 60% faster transaction processing, and 99.99% system uptime",
+      integration: "Full integration capabilities with existing enterprise systems, cloud services (AWS, Azure, GCP), database systems, and third-party APIs with custom middleware development for seamless data flow",
+      pricing: "Starter: $15,000 - Basic custom software solution\nProfessional: $30,000 - Advanced application development\nEnterprise: $50,000+ - Full-scale custom development"
     }
   ];
 
