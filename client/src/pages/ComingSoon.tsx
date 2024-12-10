@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import CountdownTimer from "@/components/shared/CountdownTimer";
 import Preloader from "@/components/shared/Preloader";
+import { Link } from "wouter";
 
 export default function ComingSoon() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +62,7 @@ export default function ComingSoon() {
           transition={{ delay: 0.6 }}
           className="absolute bottom-4 text-sm text-muted-foreground"
         >
-          <a href="/privacy" className="hover:text-primary">Privacy Policy</a>
+          <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
         </motion.div>
       </motion.div>
     </div>

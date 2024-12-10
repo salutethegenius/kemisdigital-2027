@@ -102,8 +102,8 @@ export default function Home() {
   return (
     <div>
       <Hero
-        title="The Peoples' Choice!"
-        description="Our clients say we’ve earned this title because we’re in the game with you. Backed by 20 years of experience in the Bahamian marketplace, we craft A-Player strategies that don’t just bring your ideas to life—they stand the test of time!"
+        title="The People's Choice!"
+        description="Clients say we’ve earned this title because we’re in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
         videoBackground="/src/img/1470870_People_Business_3840x2160.mp4"
       />
       <br></br><br></br>

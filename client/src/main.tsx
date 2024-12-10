@@ -19,6 +19,7 @@ import CaseStudies from "./pages/CaseStudies";
 import Privacy from "./pages/Privacy";
 import DataDeletion from "./pages/DataDeletion";
 import Meet from "./pages/Meet";
+import ComingSoon from "./pages/ComingSoon";
 
 // Service Pages
 import WebDevelopment from "@/pages/services/WebDevelopment";
@@ -34,25 +35,30 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <SWRConfig value={{ fetcher }}>
         <Router>
-          <Layout>
-            <Switch>
-              <Route path="/privacy" component={Privacy} />
-              <Route path="/data-deletion" component={DataDeletion} />
-              <Route path="/services" component={Services} />
-              <Route path="/services/web-development" component={WebDevelopment} />
-              <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
-              <Route path="/services/digital-marketing" component={DigitalMarketing} />
-              <Route path="/services/training-support" component={TrainingSupport} />
-              <Route path="/about" component={About} />
-              <Route path="/resources" component={Resources} />
-              <Route path="/events" component={Events} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/meet" component={Meet} />
-              <Route path="/blog" component={Blog} />
-              <Route path="/case-studies" component={CaseStudies} />
-              <Route path="/" component={Home} />
-            </Switch>
-          </Layout>
+          <Switch>
+            <Route path="/" component={ComingSoon} />
+            <Route path="*">
+              <Layout>
+                <Switch>
+                  <Route path="/privacy" component={Privacy} />
+                  <Route path="/data-deletion" component={DataDeletion} />
+                  <Route path="/services" component={Services} />
+                  <Route path="/services/web-development" component={WebDevelopment} />
+                  <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
+                  <Route path="/services/digital-marketing" component={DigitalMarketing} />
+                  <Route path="/services/training-support" component={TrainingSupport} />
+                  <Route path="/about" component={About} />
+                  <Route path="/resources" component={Resources} />
+                  <Route path="/events" component={Events} />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/meet" component={Meet} />
+                  <Route path="/blog" component={Blog} />
+                  <Route path="/case-studies" component={CaseStudies} />
+                  <Route path="/home" component={Home} />
+                </Switch>
+              </Layout>
+            </Route>
+          </Switch>
         </Router>
         <Toaster />
       </SWRConfig>
