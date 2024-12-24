@@ -72,6 +72,7 @@ export default function AILabs() {
       <Hero
         title="KemisDigital Innovation Lab"
         description="Welcome to our AI Innovation Hub - where cutting-edge artificial intelligence meets practical marketing solutions. Explore our latest projects pushing the boundaries of digital marketing technology."
+        videoBackground="/videos/ai-innovation.mp4"
       />
 
       <section className="py-16 bg-purple-50 dark:bg-purple-900/10">

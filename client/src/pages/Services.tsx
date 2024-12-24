@@ -116,6 +116,7 @@ export default function Services() {
         title="AI-Powered Solutions & Services"
         description="Comprehensive digital transformation packages tailored for Caribbean businesses."
         showCTA={false}
+        videoBackground="/videos/tech-services.mp4"
       />
 
       <div className="py-12 lg:py-16">
