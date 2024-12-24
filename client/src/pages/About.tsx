@@ -32,106 +32,115 @@ export default function About() {
         showCTA={false}
       />
 
-      <motion.section
-        variants={staggerChildren}
-        initial="initial"
-        animate="animate"
-        className="mb-16"
-      >
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Vision</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <FeatureCard
-            title="Innovation First"
-            description="Leading the AI marketing revolution with cutting-edge solutions"
-            icon={Brain}
-          />
-          <FeatureCard
-            title="Client Success"
-            description="Delivering measurable results through AI-powered strategies"
-            icon={Target}
-          />
-          <FeatureCard
-            title="Technology Excellence"
-            description="Leveraging advanced AI tools for marketing automation"
-            icon={Sparkles}
-          />
-          <FeatureCard
-            title="Data-Driven Approach"
-            description="Making informed decisions with AI analytics"
-            icon={LineChart}
-          />
-        </div>
-      </motion.section>
-
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Leadership</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {leadershipTeam.map((member, index) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-            >
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                  <p className="text-purple-600 mb-2">{member.role}</p>
-                  <p className="text-gray-600">{member.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+      {/* Vision Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-16 text-center">Our Vision</h2>
+          <motion.div
+            variants={staggerChildren}
+            initial="initial"
+            animate="animate"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            <FeatureCard
+              title="Innovation First"
+              description="Leading the AI marketing revolution with cutting-edge solutions"
+              icon={Brain}
+            />
+            <FeatureCard
+              title="Client Success"
+              description="Delivering measurable results through AI-powered strategies"
+              icon={Target}
+            />
+            <FeatureCard
+              title="Technology Excellence"
+              description="Leveraging advanced AI tools for marketing automation"
+              icon={Sparkles}
+            />
+            <FeatureCard
+              title="Data-Driven Approach"
+              description="Making informed decisions with AI analytics"
+              icon={LineChart}
+            />
+          </motion.div>
         </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Expertise</h2>
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          variants={staggerChildren}
-          initial="initial"
-          animate="animate"
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-xl font-bold mb-4">AI Marketing Solutions</h3>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>Predictive Analytics & Targeting</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>Automated Campaign Optimization</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>AI-Powered Content Generation</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-xl font-bold mb-4">Client Benefits</h3>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>Enhanced ROI Through AI Optimization</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>Real-time Performance Analytics</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="text-purple-500">•</span>
-                  <span>Personalized Marketing Strategies</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </motion.div>
+      {/* Leadership Section */}
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-16 text-center">Our Leadership</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {leadershipTeam.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold mb-2">{member.name}</h3>
+                    <p className="text-purple-600 mb-2">{member.role}</p>
+                    <p className="text-gray-600">{member.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Expertise Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-16 text-center">Our Expertise</h2>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={staggerChildren}
+            initial="initial"
+            animate="animate"
+          >
+            <Card>
+              <CardContent className="pt-6">
+                <h3 className="text-xl font-bold mb-4">AI Marketing Solutions</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>Predictive Analytics & Targeting</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>Automated Campaign Optimization</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>AI-Powered Content Generation</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <h3 className="text-xl font-bold mb-4">Client Benefits</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>Enhanced ROI Through AI Optimization</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>Real-time Performance Analytics</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span className="text-purple-500">•</span>
+                    <span>Personalized Marketing Strategies</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </section>
     </div>
   );
