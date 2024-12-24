@@ -7,7 +7,6 @@ import {
   Globe,
   Target,
   Code,
-  ArrowRight,
   Sparkles
 } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
@@ -112,47 +111,61 @@ const services = {
 
 export default function Services() {
   return (
-    <div>
+    <div className="min-h-screen bg-background">
       <Hero
         title="AI-Powered Solutions & Services"
         description="Comprehensive digital transformation packages tailored for Caribbean businesses."
         showCTA={false}
       />
 
-      <div className="py-16 bg-purple-50 dark:bg-purple-900/10">
-        <div className="container mx-auto px-4">
+      <div className="py-12 lg:py-16">
+        <div className="container px-4 mx-auto">
           <motion.div
             variants={staggerChildren}
             initial="initial"
             animate="animate"
-            className="space-y-16"
+            className="space-y-20"
           >
-            {/* Service Packages */}
             {Object.values(services).map((service) => (
-              <section key={service.title} className="space-y-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <service.icon className="w-8 h-8 text-purple-600" />
-                  <h2 className="text-3xl font-bold">{service.title}</h2>
+              <section key={service.title} className="space-y-6">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                    <service.icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <h2 className="text-3xl font-bold tracking-tight">{service.title}</h2>
                 </div>
-                <div className="grid md:grid-cols-3 gap-8">
+
+                <div className="grid md:grid-cols-2 gap-8">
                   {service.packages.map((pkg) => (
-                    <Card key={pkg.title} className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600">
-                      <CardHeader>
-                        <CardTitle className="text-xl mb-2">{pkg.title}</CardTitle>
+                    <Card 
+                      key={pkg.title} 
+                      className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-lg"
+                    >
+                      <CardHeader className="space-y-2">
+                        <CardTitle className="text-2xl">{pkg.title}</CardTitle>
                         <p className="text-muted-foreground">{pkg.description}</p>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-3xl font-bold text-purple-600 mb-6">{pkg.price}</p>
-                        <ul className="space-y-3">
-                          {pkg.features.map((feature) => (
-                            <li key={feature} className="flex items-center gap-2">
-                              <Sparkles className="w-4 h-4 text-purple-600" />
-                              <span className="text-sm">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <Link href="/contact">
-                          <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
+                      <CardContent className="space-y-6">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl font-bold text-purple-600">{pkg.price}</span>
+                        </div>
+
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-lg">Features:</h4>
+                          <ul className="space-y-3">
+                            {pkg.features.map((feature) => (
+                              <li key={feature} className="flex items-start gap-3">
+                                <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm leading-tight">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Link href="/contact" className="block">
+                          <Button 
+                            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2"
+                          >
                             Get Started
                           </Button>
                         </Link>
@@ -164,16 +177,15 @@ export default function Services() {
             ))}
           </motion.div>
 
-          {/* CTA Section */}
-          <Card className="mt-16">
-            <CardContent className="pt-6">
-              <div className="text-center">
+          <Card className="mt-20">
+            <CardContent className="py-8">
+              <div className="text-center max-w-2xl mx-auto">
                 <h2 className="text-2xl font-bold mb-4">Ready to Transform Your Business?</h2>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-8">
                   Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
                 </p>
                 <Link href="/contact">
-                  <Button className="bg-purple-600 hover:bg-purple-700">
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8">
                     Schedule Consultation
                   </Button>
                 </Link>
