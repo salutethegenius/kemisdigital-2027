@@ -96,22 +96,25 @@ const aiServices = [
         description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
         videoBackground="/videos/business-background.mp4"
       />
-      <br></br><br></br>
-      <section className="text-center mb-16">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
-          <p className="text-muted-foreground">
-            We aim to shape the future of business in the Bahamas by driving digital transformation and empowering local startups, NGOs, and businesses in the tourism sector.
-          </p>
+
+      {/* Our Mission Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8">Our Mission</h2>
+            <p className="text-muted-foreground text-lg">
+              We aim to shape the future of business in the Bahamas by driving digital transformation and empowering local startups, NGOs, and businesses in the tourism sector.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* AI Service Showcase Section */}
-      <section className="py-16 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">AI Marketing Services</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-6">AI Marketing Services</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Our campaigns combine cutting-edge AI technology with expert marketers, delivering exceptional results for your business.
             </p>
           </div>
