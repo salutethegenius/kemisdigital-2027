@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { 
+import {
   Globe,
   Target,
   Code,
@@ -125,12 +125,14 @@ export default function Services() {
             variants={staggerChildren}
             initial="initial"
             animate="animate"
-            className="space-y-24"
+            className="space-y-12"
           >
             {Object.values(services).map((service, index) => (
               <section 
                 key={service.title} 
-                className={`py-16 ${index % 2 === 0 ? 'bg-purple-50 dark:bg-purple-900/10' : 'bg-background'}`}
+                className={`py-16 ${
+                  index % 2 === 0 ? 'bg-purple-50 dark:bg-purple-900/10' : 'bg-background'
+                }`}
               >
                 <div className="container mx-auto px-4">
                   <div className="flex items-center gap-4 mb-12">
@@ -184,7 +186,7 @@ export default function Services() {
           </motion.div>
 
           {/* Call to Action Section */}
-          <section className="mt-24">
+          <section className="mt-24 bg-purple-50 dark:bg-purple-900/10 py-16">
             <Card>
               <CardContent className="py-12">
                 <div className="text-center max-w-2xl mx-auto">

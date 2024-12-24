@@ -93,29 +93,29 @@ const aiServices = [
     <div>
       <Hero
         title="The People's Choice!"
-        description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
+        description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've crafted A-player strategies that brought ideas to life with measured success."
         videoBackground="/videos/business-background.mp4"
       />
 
       {/* Our Mission Section */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Our Mission</h2>
             <p className="text-muted-foreground text-lg">
-              We aim to shape the future of business in the Bahamas by driving digital transformation and empowering local startups, NGOs, and businesses in the tourism sector.
+              We aim to shape the future of business in the Bahamas by driving digital transformation for local startups and businesses in the tourism sector.
             </p>
           </div>
         </div>
       </section>
 
       {/* AI Service Showcase Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-6">AI Marketing Services</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Our campaigns combine cutting-edge AI technology with expert marketers, delivering exceptional results for your business.
+              Online campaigns that combine cutting-edge AI technology with expert marketers, strategists, and programmers to deliver A-1 results.
             </p>
           </div>
 
@@ -184,7 +184,7 @@ const aiServices = [
 
 
       {/* Success Metrics Section (Our Impact) */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold text-center mb-16">Our Impact</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -203,7 +203,7 @@ const aiServices = [
       </section>
 
       {/* Why Choose KemisDigital Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">Why Choose KemisDigital</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -211,7 +211,7 @@ const aiServices = [
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="w-6 h-6 text-purple-500" />
-                  Precision Marketing
+                  Leadership
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -223,7 +223,7 @@ const aiServices = [
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="w-6 h-6 text-purple-500" />
-                  Innovation Hub
+                  Expertise
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -236,7 +236,7 @@ const aiServices = [
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-24">
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
         <Card className="max-w-2xl mx-auto">
           <CardContent className="pt-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Marketing?</h2>

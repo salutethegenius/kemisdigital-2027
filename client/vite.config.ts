@@ -18,4 +18,32 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    force: true, // Force dependency pre-bundling
+    exclude: [
+      '@radix-ui/react-slot',
+      '@radix-ui/react-toast',
+      '@radix-ui/react-dialog'
+    ],
+    include: [
+      'react', 
+      'react-dom', 
+      'framer-motion',
+      'lucide-react',
+      'wouter'
+    ]
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'framer-motion'],
+          'ui': ['@radix-ui/react-slot', '@radix-ui/react-toast', '@radix-ui/react-dialog']
+        }
+      }
+    }
+  }
 })
