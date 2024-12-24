@@ -16,65 +16,54 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { staggerChildren } from "@/lib/animations";
 
-export default function Home() {
-  const aiServices = [
+const aiServices = [
     {
       icon: Globe,
-      title: "Custom Website Development",
-      description: "Enterprise-grade, secure websites with integrated client portals tailored for startups, NGOs and toursim-based businesses. Our solutions prioritize security, user experience, and seamless integration capabilities.",
+      title: "Digital Sales",
+      description: "Complete digital sales solution including landing page, sales funnel, and professional PPC campaign management for maximum ROI.",
       benefits: [
-        "Bank-grade SSL security with 256-bit encryption",
-        "WCAG 2.1 ADA compliance with screen reader support",
-        "Custom client portals with multi-factor authentication",
-        "Multi-currency payment processing with fraud detection",
-        "Progressive Web App with offline capabilities",
-        "Real-time data sync with 99.9% uptime guarantee",
-        "Automated backup with disaster recovery",
-        "Custom API development and integration",
-        "24/7 security monitoring and threat detection"
+        "Professional landing page design",
+        "Complete sales funnel setup",
+        "PPC campaign setup and management",
+        "Monthly campaign optimization",
+        "Performance tracking & reporting",
+        "Lead capture integration"
       ],
-      caseStudy: "A leading Caribbean organization achieved 200% increase in digital client onboarding, 45% reduction in support tickets, and 60% improvement in customer satisfaction scores through our custom portal solution",
-      integration: "Seamless integration with major banking systems (FIS, Fiserv), payment processors (Stripe, PayPal), CRM platforms (Salesforce, HubSpot), and core banking systems with custom API development capabilities",
-      pricing: "Basic: $3,000 - Secure website with essential integrations\nPro: $6,000 - Full-featured portal with advanced security\nEnterprise: $10,000+ - Custom solution with unlimited features"
+      caseStudy: "A local business achieved 150% increase in qualified leads through our digital sales package",
+      integration: "Seamless integration with CRM platforms and analytics systems",
+      pricing: "$1,499 + $300 minimum ad budget\nPro: $1,999 + $500 ad budget\nCustom: Contact us"
     },
     {
       icon: Target,
-      title: "Digital Marketing Campaigns",
-      description: "Data-driven marketing campaigns specifically designed for startups, NGOs, and toursim-based businesses in the Caribbean region. We combine AI-powered targeting with deep local market expertise.",
+      title: "Startup Growth Package",
+      description: "Comprehensive digital marketing solution for startups, including evergreen funnel, content creation, and multi-channel marketing.",
       benefits: [
-        "AI-powered campaign optimization with real-time bidding",
-        "Industry-specific LinkedIn targeting with Sales Navigator",
-        "Local SEO with Caribbean market focus",
-        "Omni-channel social media campaign management",
-        "Automated community engagement with sentiment analysis",
-        "Compliance-first content strategy with legal review",
-        "Advanced ROI tracking with custom metrics",
-        "A/B testing with statistical significance analysis",
-        "Competitor analysis and market positioning"
+        "Evergreen marketing funnel",
+        "Strategic email marketing",
+        "Professional content creation",
+        "Social media management",
+        "High-converting landing pages",
+        "PPC campaign setup & management"
       ],
-      caseStudy: "A regional NGO achieved 300% increase in qualified leads, 150% boost in donor engagement, and 80% improvement in campaign ROI through our AI-powered targeting strategy",
-      integration: "Comprehensive integration with Google Ads, Meta Business Suite, LinkedIn Campaign Manager, HubSpot, Mailchimp, Hootsuite, and custom analytics platforms with real-time reporting dashboards",
-      pricing: "Starter: $2,000/month - Essential digital marketing suite\nGrowth: $4,000/month - Advanced campaign optimization\nPremium: $6,000+/month - Enterprise marketing solution"
+      caseStudy: "A Bahamian startup saw 250% increase in monthly revenue within 6 months",
+      integration: "Integration with marketing platforms and analytics systems",
+      pricing: "$2,497 + $300 minimum ad budget\nPro: $3,497 + $500 ad budget\nEnterprise: Custom pricing"
     },
-    
     {
       icon: Code,
-      title: "Custom Software/App Development",
-      description: "Tailored software solutions and mobile applications built with cutting-edge technology to address specific business challenges and enhance operational efficiency.",
+      title: "Tourism Sector Solutions",
+      description: "Tailored digital solutions for tourism businesses, combining local market expertise with cutting-edge technology for maximum impact.",
       benefits: [
-        "Custom enterprise software development",
-        "Native & cross-platform mobile apps",
-        "Cloud-based application architecture",
-        "Scalable microservices implementation",
-        "Real-time data processing capabilities",
-        "Advanced security implementations",
-        "Comprehensive testing & QA",
-        "Performance optimization",
-        "Continuous deployment & monitoring"
+        "Custom booking system integration",
+        "Multi-language support",
+        "Virtual tour capabilities",
+        "Mobile booking optimization",
+        "Local SEO optimization",
+        "Review management system"
       ],
-      caseStudy: "Developed a custom financial management platform for a regional bank, resulting in 40% improved operational efficiency, 60% faster transaction processing, and 99.99% system uptime",
-      integration: "Full integration capabilities with existing enterprise systems, cloud services (AWS, Azure, GCP), database systems, and third-party APIs with custom middleware development for seamless data flow",
-      pricing: "Starter: $3,000 - Basic custom software solution\nProfessional: $12,000 - Advanced application development\nEnterprise: $20,000+ - Full-scale custom development"
+      caseStudy: "A Caribbean resort achieved 180% increase in direct bookings",
+      integration: "Integration with booking systems and payment processors",
+      pricing: "Essential: $5,000\nPremium: $10,000\nLuxury: $15,000+"
     }
   ];
 
@@ -99,11 +88,12 @@ export default function Home() {
     },
   ];
 
+  export default function Home() {
   return (
     <div>
       <Hero
         title="The People's Choice!"
-        description="Clients say we’ve earned this title because we’re in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
+        description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
         videoBackground="/src/img/1470870_People_Business_3840x2160.mp4"
       />
       <br></br><br></br>
@@ -122,7 +112,8 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">AI Marketing Services</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our campaigns combine cutting-edge AI technology with the expertise of certified programmers and marketers, delivering results that exceed expectations.            </p>
+              Our campaigns combine cutting-edge AI technology with expert marketers, delivering exceptional results for your business.
+            </p>
           </div>
 
           <motion.div
@@ -145,9 +136,22 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 <CardContent>
+                  {/* Pricing Section - Now at the top */}
+                  <div className="mb-6 bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-xl text-purple-600 mb-2">Investment Plans:</h4>
+                    <div className="space-y-2">
+                      {service.pricing.split('\n').map((plan, index) => (
+                        <div key={index} className="text-lg">
+                          {plan}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   <p className="text-muted-foreground mb-4">{service.description}</p>
+
                   <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Key Benefits:</h4>
+                    <h4 className="font-semibold mb-2">Key Features:</h4>
                     <ul className="space-y-2">
                       {service.benefits.map((benefit) => (
                         <li key={benefit} className="flex items-center gap-2">
@@ -157,36 +161,13 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
+
                   <div className="mb-4">
                     <h4 className="font-semibold mb-2">Success Story:</h4>
                     <p className="text-sm text-muted-foreground">{service.caseStudy}</p>
                   </div>
-                  <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Integration:</h4>
-                    <p className="text-sm text-muted-foreground">{service.integration}</p>
-                  </div>
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Investment Plans:</h4>
-                    <div className="space-y-3">
-                      {service.pricing.split('\n').map((plan, index) => (
-                        <div key={index} className={`p-3 rounded-lg ${index === 1 ? 'bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-200 dark:border-purple-700' : ''}`}>
-                          <p className="text-lg font-semibold text-purple-600">
-                            {plan.split(' - ')[0]}
-                            {index === 1 && <span className="ml-2 text-sm bg-purple-600 text-white px-2 py-1 rounded">Most Popular</span>}
-                          </p>
-                          <p className="text-sm text-muted-foreground">{plan.split(' - ')[1]}</p>
-                          {index === 1 && <p className="text-sm text-purple-600 mt-1">Save 20% with annual billing</p>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <Link href={
-                    service.title === "Custom Website Development" ? "/services/web-development" :
-                    service.title === "Analytics & Reporting Dashboards" ? "/services/analytics-dashboards" :
-                    service.title === "Digital Marketing Services" ? "/services/digital-marketing" :
-                    service.title === "Training & Support" ? "/services/training-support" :
-                    "/services/web-development"
-                  }>
+
+                  <Link href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
                     <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                       Learn More
                     </Button>
@@ -195,36 +176,26 @@ export default function Home() {
               </Card>
             ))}
           </motion.div>
-
-          <div className="flex justify-center mt-8">
-            <Link href="/services">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg flex items-center gap-2">
-                View More Services
-                <ArrowUpRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-
-          {/* Success Metrics Section */}
-          <div className="mt-20">
-            <h3 className="text-2xl font-bold text-center mb-12">Our Impact</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {successMetrics.map((metric) => (
-                <Card key={metric.label} className="text-center transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="pt-6">
-                    <metric.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-                    <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
-                    <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
-                    <p className="text-muted-foreground">{metric.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      
+
+      {/* Success Metrics Section */}
+      <div className="mt-20">
+        <h3 className="text-2xl font-bold text-center mb-12">Our Impact</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {successMetrics.map((metric) => (
+            <Card key={metric.label} className="text-center transition-all duration-300 hover:shadow-lg">
+              <CardContent className="pt-6">
+                <metric.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
+                <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
+                <p className="text-muted-foreground">{metric.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
 
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-center mb-8">Why Choose KemisDigital</h2>
@@ -256,7 +227,6 @@ export default function Home() {
         </div>
       </section>
 
-      
 
       <section className="mb-16">
         <Card className="max-w-2xl mx-auto">
