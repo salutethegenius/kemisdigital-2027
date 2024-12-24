@@ -14,8 +14,7 @@ import Services from "./pages/Services";
 import Resources from "./pages/Resources";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import CaseStudies from "./pages/CaseStudies";
+import LatestNews from "./pages/LatestNews";
 import Privacy from "./pages/Privacy";
 import DataDeletion from "./pages/DataDeletion";
 import Meet from "./pages/Meet";
@@ -25,6 +24,7 @@ import WebDevelopment from "@/pages/services/WebDevelopment";
 import AnalyticsDashboards from "@/pages/services/AnalyticsDashboards";
 import DigitalMarketing from "@/pages/services/DigitalMarketing";
 import TrainingSupport from "@/pages/services/TrainingSupport";
+import WebAppDev from "@/pages/WebAppDev";
 
 // Layout
 import Layout from "./components/layout/Layout";
@@ -44,13 +44,13 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
               <Route path="/services/digital-marketing" component={DigitalMarketing} />
               <Route path="/services/training-support" component={TrainingSupport} />
+              <Route path="/services/web-app-dev" component={WebAppDev} />
               <Route path="/about" component={About} />
               <Route path="/resources" component={Resources} />
               <Route path="/events" component={Events} />
               <Route path="/contact" component={Contact} />
               <Route path="/meet" component={Meet} />
-              <Route path="/blog" component={Blog} />
-              <Route path="/case-studies" component={CaseStudies} />
+              <Route path="/latest-news" component={LatestNews} />
             </Switch>
           </Layout>
         </Router>
