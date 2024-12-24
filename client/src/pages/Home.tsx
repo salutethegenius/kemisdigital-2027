@@ -94,7 +94,7 @@ const aiServices = [
       <Hero
         title="The People's Choice!"
         description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've craft A-Player! strategies that brought ideas to life with measured success."
-        videoBackground="/src/img/1470870_People_Business_3840x2160.mp4"
+        videoBackground="/videos/business-background.mp4"
       />
       <br></br><br></br>
       <section className="text-center mb-16">

@@ -83,7 +83,7 @@ const services = {
       {
         title: "Essential Package",
         description: "Digital presence for tourism businesses",
-        price: "$5,000",
+        price: "$4,997",
         features: [
           "Custom booking system integration",
           "Multi-language support",
@@ -95,7 +95,7 @@ const services = {
       {
         title: "Premium Package",
         description: "Advanced features & marketing",
-        price: "$10,000",
+        price: "Contact Us",
         features: [
           "Everything in Essential Package",
           "Advanced booking features",
