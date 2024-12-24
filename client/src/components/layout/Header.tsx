@@ -21,8 +21,8 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "AI Services", href: "/services" },
-  { name: "Case Studies", href: "/case-studies" },
-  { name: "Blog", href: "/blog" },
+  { name: "Web/App Development", href: "/services/web-app-dev" },
+  { name: "Latest News", href: "/latest-news" },
 ];
 
 export default function Header() {
