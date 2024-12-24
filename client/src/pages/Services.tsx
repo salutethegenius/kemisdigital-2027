@@ -128,51 +128,56 @@ export default function Services() {
             className="space-y-24"
           >
             {Object.values(services).map((service, index) => (
-              <section key={service.title} className={`space-y-8 ${index % 2 === 0 ? 'bg-background' : 'bg-purple-50'}`}>
-                <div className="flex items-center gap-4 mb-12">
-                  <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                    <service.icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+              <section 
+                key={service.title} 
+                className={`py-16 ${index % 2 === 0 ? 'bg-purple-50 dark:bg-purple-900/10' : 'bg-background'}`}
+              >
+                <div className="container mx-auto px-4">
+                  <div className="flex items-center gap-4 mb-12">
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                      <service.icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight">{service.title}</h2>
                   </div>
-                  <h2 className="text-3xl font-bold tracking-tight">{service.title}</h2>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                  {service.packages.map((pkg) => (
-                    <Card 
-                      key={pkg.title} 
-                      className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-lg"
-                    >
-                      <CardHeader className="space-y-2">
-                        <CardTitle className="text-2xl">{pkg.title}</CardTitle>
-                        <p className="text-muted-foreground">{pkg.description}</p>
-                      </CardHeader>
-                      <CardContent className="space-y-6">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-bold text-purple-600">{pkg.price}</span>
-                        </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {service.packages.map((pkg) => (
+                      <Card 
+                        key={pkg.title} 
+                        className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-lg"
+                      >
+                        <CardHeader className="space-y-2">
+                          <CardTitle className="text-2xl">{pkg.title}</CardTitle>
+                          <p className="text-muted-foreground">{pkg.description}</p>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-3xl font-bold text-purple-600">{pkg.price}</span>
+                          </div>
 
-                        <div className="space-y-4">
-                          <h4 className="font-semibold text-lg">Features:</h4>
-                          <ul className="space-y-3">
-                            {pkg.features.map((feature) => (
-                              <li key={feature} className="flex items-start gap-3">
-                                <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm leading-tight">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                          <div className="space-y-4">
+                            <h4 className="font-semibold text-lg">Features:</h4>
+                            <ul className="space-y-3">
+                              {pkg.features.map((feature) => (
+                                <li key={feature} className="flex items-start gap-3">
+                                  <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-sm leading-tight">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                        <Link href="/contact" className="block">
-                          <Button 
-                            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2"
-                          >
-                            Get Started
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <Link href="/contact" className="block">
+                            <Button 
+                              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2"
+                            >
+                              Get Started
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </section>
             ))}
