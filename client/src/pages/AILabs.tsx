@@ -3,58 +3,55 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { staggerChildren } from "@/lib/animations";
-import { Cpu, Code, Sparkles, Bot, Brain, LineChart } from "lucide-react";
+import { Globe, Target, Code, Sparkles } from "lucide-react";
 
 export default function AILabs() {
   const innovationProjects = [
     {
-      icon: Brain,
-      title: "NeuralSense Marketing Engine",
-      description: "AI-powered predictive analytics engine for customer behavior analysis and campaign optimization",
+      icon: Globe,
+      title: "Digital Sales",
+      description: "Complete digital sales solution including landing page, sales funnel, and professional PPC campaign management for maximum ROI.",
       status: "Released",
-      tech: ["TensorFlow", "Python", "AWS", "React"],
-      impact: "45% reduction in customer acquisition costs with 30% higher campaign ROI",
+      tech: ["Landing Page", "Sales Funnel", "PPC", "Analytics"],
+      impact: "$1,499 + $300 minimum ad budget",
+      benefits: [
+        "Professional landing page design",
+        "Complete sales funnel setup",
+        "PPC campaign setup and management",
+        "Monthly campaign optimization",
+        "Performance tracking & reporting"
+      ]
     },
     {
-      icon: Sparkles,
-      title: "ContentGenius AI",
-      description: "Advanced content generation platform leveraging latest language models for marketing copy",
-      status: "Beta",
-      tech: ["GPT-4", "Node.js", "MongoDB", "Next.js"],
-      impact: "4x faster content creation with 95% user satisfaction rate",
-    },
-    {
-      icon: LineChart,
-      title: "MarketMind Analytics",
-      description: "Real-time market intelligence and competitor analysis platform using machine learning",
+      icon: Target,
+      title: "Startup Growth Package",
+      description: "Comprehensive digital marketing solution for startups, including evergreen funnel, content creation, and multi-channel marketing.",
       status: "Released",
-      tech: ["Python", "scikit-learn", "PostgreSQL", "Vue.js"],
-      impact: "40% increase in market insight accuracy and decision-making speed",
-    },
-    {
-      icon: Bot,
-      title: "ROI Maximizer",
-      description: "Smart budget allocation and ROI optimization system powered by AI",
-      status: "Beta",
-      tech: ["Python", "TensorFlow", "SQL", "D3.js"],
-      impact: "35% improvement in marketing ROI across campaigns",
-    },
-    {
-      icon: Cpu,
-      title: "AudienceIQ Platform",
-      description: "Neural network-powered audience segmentation and targeting system",
-      status: "Released",
-      tech: ["PyTorch", "FastAPI", "Redis", "React"],
-      impact: "50% improvement in targeting accuracy and engagement",
+      tech: ["Content Creation", "Social Media", "Email Marketing", "PPC"],
+      impact: "$2,497 + $300 minimum ad budget",
+      benefits: [
+        "Evergreen marketing funnel",
+        "Strategic email marketing",
+        "Professional content creation",
+        "Social media management",
+        "High-converting landing pages"
+      ]
     },
     {
       icon: Code,
-      title: "AutoCampaign Builder",
-      description: "Automated campaign creation and optimization using reinforcement learning",
-      status: "Beta",
-      tech: ["TensorFlow", "Django", "Elasticsearch", "React"],
-      impact: "60% reduction in campaign setup time with improved performance",
-    },
+      title: "Tourism Sector Solutions",
+      description: "Tailored digital solutions for tourism businesses, combining local market expertise with cutting-edge technology for maximum impact.",
+      status: "Released",
+      tech: ["Booking Systems", "Multi-language", "SEO", "Analytics"],
+      impact: "Starting from $5,000",
+      benefits: [
+        "Custom booking system integration",
+        "Multi-language support",
+        "Virtual tour capabilities",
+        "Mobile booking optimization",
+        "Local SEO optimization"
+      ]
+    }
   ];
 
   const getStatusColor = (status: string) => {
@@ -104,7 +101,22 @@ export default function AILabs() {
                   </Badge>
                   <p className="text-muted-foreground mb-4">{project.description}</p>
                   <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Tech Stack:</h4>
+                    <h4 className="font-semibold mb-2">Investment:</h4>
+                    <p className="text-lg font-semibold text-purple-600">{project.impact}</p>
+                  </div>
+                  <div className="mb-4">
+                    <h4 className="font-semibold mb-2">Key Features:</h4>
+                    <ul className="space-y-2">
+                      {project.benefits.map((benefit) => (
+                        <li key={benefit} className="flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-purple-500 flex-shrink-0" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Technologies:</h4>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
                         <Badge key={tech} variant="outline">
@@ -112,10 +124,6 @@ export default function AILabs() {
                         </Badge>
                       ))}
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Potential Impact:</h4>
-                    <p className="text-sm text-muted-foreground">{project.impact}</p>
                   </div>
                 </CardContent>
               </Card>
