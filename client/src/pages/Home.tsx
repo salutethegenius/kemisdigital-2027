@@ -180,55 +180,60 @@ const aiServices = [
       </section>
 
 
-      {/* Success Metrics Section */}
-      <div className="mt-20">
-        <h3 className="text-2xl font-bold text-center mb-12">Our Impact</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {successMetrics.map((metric) => (
-            <Card key={metric.label} className="text-center transition-all duration-300 hover:shadow-lg">
-              <CardContent className="pt-6">
-                <metric.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-                <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
-                <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
-                <p className="text-muted-foreground">{metric.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-8">Why Choose KemisDigital</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Target className="w-6 h-6 text-purple-500" />
-                Precision Marketing
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">Our AI-powered solutions deliver targeted campaigns that reach the right audience at the right time.</p>
-              <Button>Learn More</Button>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-purple-500" />
-                Innovation Hub
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">Stay ahead with our cutting-edge AI marketing tools and strategies.</p>
-              <Button>Explore Solutions</Button>
-            </CardContent>
-          </Card>
+      {/* Success Metrics Section (Our Impact) */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <h3 className="text-3xl font-bold text-center mb-16">Our Impact</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {successMetrics.map((metric) => (
+              <Card key={metric.label} className="text-center transition-all duration-300 hover:shadow-lg">
+                <CardContent className="pt-6">
+                  <metric.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                  <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
+                  <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
+                  <p className="text-muted-foreground">{metric.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* Why Choose KemisDigital Section */}
+      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16">Why Choose KemisDigital</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="w-6 h-6 text-purple-500" />
+                  Precision Marketing
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4">Our AI-powered solutions deliver targeted campaigns that reach the right audience at the right time.</p>
+                <Button>Learn More</Button>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Sparkles className="w-6 h-6 text-purple-500" />
+                  Innovation Hub
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4">Stay ahead with our cutting-edge AI marketing tools and strategies.</p>
+                <Button>Explore Solutions</Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
-      <section className="mb-16">
+      {/* Call to Action Section */}
+      <section className="py-24">
         <Card className="max-w-2xl mx-auto">
           <CardContent className="pt-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Marketing?</h2>
