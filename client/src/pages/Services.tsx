@@ -4,202 +4,160 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
-  Palmtree,
-  Rocket,
-  HeartHandshake,
+  Globe,
+  Target,
+  Code,
   ArrowRight,
-  Share2,
-  Gift,
-  Mail
+  Sparkles
 } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
 const services = {
-  startup: {
-    icon: Rocket,
-    title: "Startups",
+  digitalSales: {
+    icon: Globe,
+    title: "Digital Sales",
     packages: [
       {
-        title: "Launch Package",
-        description: "Essential digital toolkit for startups",
-        price: "$3,500",
+        title: "Essential Package",
+        description: "Complete digital sales solution with PPC management",
+        price: "$1,499 + $300 ad budget",
         features: [
-          "Landing page",
-          "Basic branding",
-          "Social media setup",
-          "Email marketing",
-          "Analytics setup"
+          "Professional landing page design",
+          "Complete sales funnel setup",
+          "PPC campaign setup and management",
+          "Monthly campaign optimization",
+          "Performance tracking & reporting",
+          "Lead capture integration"
         ]
       },
       {
-        title: "Growth Package",
-        description: "Scaling solution for growing startups",
-        price: "$8,000",
+        title: "Pro Package",
+        description: "Enhanced features & priority support",
+        price: "$1,999 + $500 ad budget",
         features: [
-          "Full website development",
-          "CRM integration",
-          "Marketing automation",
-          "Payment gateway",
-          "Performance tracking",
-          "Technical support"
+          "Everything in Essential Package",
+          "Priority support",
+          "Advanced analytics dashboard",
+          "A/B testing implementation",
+          "Conversion optimization",
+          "Monthly strategy sessions"
         ]
       },
       {
-        title: "Impact Package",
-        description: "Complete digital infrastructure",
+        title: "Enterprise Package",
+        description: "Custom enterprise solutions",
         price: "Request Call",
         features: [
-          "Custom platform development",
+          "Fully customized solution",
+          "Dedicated account manager",
+          "Custom integrations",
           "Advanced automation",
-          "Integration APIs",
-          "Business intelligence",
-          "Marketing suite",
-          "Priority support",
-          "Team training"
+          "Multi-channel tracking",
+          "24/7 priority support",
+          "Quarterly business reviews"
         ]
       }
     ]
   },
-  ngo: {
-    icon: HeartHandshake,
-    title: "NGOs",
+  startup: {
+    icon: Target,
+    title: "Startup Growth Package",
     packages: [
       {
-        title: "Starter Package",
-        description: "Donation-focused website + online payment gateway",
-        price: "$4,000",
-        features: [
-          "Donation-optimized website",
-          "Secure payment gateway integration",
-          "Basic donor management",
-          "Social media platform setup",
-          "Content management system"
-        ]
-      },
-      {
         title: "Growth Package",
-        description: "Website + social media campaigns + analytics",
-        price: "$7,500",
+        description: "Comprehensive digital marketing solution for startups",
+        price: "$2,497 + $300 ad budget",
         features: [
-          "Advanced website features",
-          "Comprehensive social media campaigns",
-          "Enhanced donor management",
-          "Email automation system",
-          "Analytics dashboard",
-          "Impact reporting tools"
+          "Evergreen marketing funnel",
+          "Strategic email marketing",
+          "Professional content creation",
+          "Social media management",
+          "High-converting landing pages",
+          "PPC campaign setup & management"
         ]
       },
       {
-        title: "Impact Package",
-        description: "Full digital transformation: Website, CRM, and dashboards",
+        title: "Scale Package",
+        description: "Advanced features for rapid growth",
+        price: "$3,497 + $500 ad budget",
+        features: [
+          "Everything in Growth Package",
+          "Advanced automation setup",
+          "Lead nurturing sequences",
+          "Performance analytics dashboard",
+          "Marketing strategy sessions",
+          "Priority support & consulting"
+        ]
+      },
+      {
+        title: "Enterprise Package",
+        description: "Custom solutions for larger startups",
         price: "Request Call",
         features: [
-          "Custom platform development",
-          "Advanced CRM implementation",
-          "Automated campaign management",
-          "Comprehensive impact dashboards",
-          "Grant management system",
-          "Full integration support",
-          "Complete staff training"
+          "Fully customized solution",
+          "Multi-channel marketing",
+          "Custom API development",
+          "Advanced integrations",
+          "Dedicated success manager",
+          "VIP support",
+          "Strategic partnerships"
         ]
       }
     ]
   },
   tourism: {
-    icon: Palmtree,
-    title: "Tourism Sector",
+    icon: Code,
+    title: "Tourism Sector Solutions",
     packages: [
       {
-        title: "Digital Presence",
-        description: "Essential online presence for tourism businesses",
-        price: "$4,500",
+        title: "Essential Package",
+        description: "Digital presence for tourism businesses",
+        price: "$5,000",
         features: [
-          "Responsive website",
-          "Booking integration",
-          "Social media setup",
-          "Local SEO",
-          "Photo gallery"
+          "Custom booking system integration",
+          "Multi-language support",
+          "Virtual tour capabilities",
+          "Mobile booking optimization",
+          "Local SEO optimization"
         ]
       },
       {
-        title: "Experience Package",
-        description: "Enhanced digital experience platform",
+        title: "Premium Package",
+        description: "Advanced features & marketing",
         price: "$10,000",
         features: [
-          "Virtual tours",
-          "Booking management system",
-          "Review integration",
-          "Content marketing",
-          "Social media management",
-          "Analytics tracking"
+          "Everything in Essential Package",
+          "Advanced booking features",
+          "Review management system",
+          "Marketing automation",
+          "Social media integration",
+          "Analytics dashboard"
         ]
       },
       {
-        title: "Resort Elite",
-        description: "Premium digital transformation for resorts",
-        price: "Request Call",
+        title: "Luxury Package",
+        description: "Full-service solution",
+        price: "$15,000+",
         features: [
-          "Custom booking platform",
-          "Mobile app development",
+          "Everything in Premium Package",
+          "Custom mobile app",
           "AI-powered recommendations",
-          "Multi-language support",
           "Advanced analytics",
-          "Marketing automation",
-          "24/7 support"
+          "Marketing campaigns",
+          "24/7 support",
+          "Strategic consulting"
         ]
       }
     ]
   }
 };
 
-const additionalServices = [
-  {
-    title: "Viral Campaigns",
-    description: "Create engaging viral marketing campaigns that drive exponential growth",
-    icon: Share2,
-    price: "Request Call",
-    features: [
-      "Trend analysis and monitoring",
-      "Viral content creation",
-      "Influencer collaboration",
-      "Social media optimization",
-      "Campaign performance tracking"
-    ]
-  },
-  {
-    title: "Customer Reward Programs",
-    description: "Build customer loyalty through innovative reward systems",
-    icon: Gift,
-    price: "Request Call",
-    features: [
-      "Points-based rewards",
-      "Custom loyalty programs",
-      "Digital rewards tracking",
-      "Member engagement tools",
-      "Analytics and reporting"
-    ]
-  },
-  {
-    title: "Email & SMS Advertising",
-    description: "Direct marketing solutions with personalized messaging",
-    icon: Mail,
-    price: "Request Call",
-    features: [
-      "Automated email campaigns",
-      "SMS marketing integration",
-      "Personalized messaging",
-      "A/B testing",
-      "Response analytics"
-    ]
-  }
-];
-
 export default function Services() {
   return (
     <div>
       <Hero
         title="AI-Powered Solutions & Services"
-        description="Comprehensive digital transformation packages tailored for Caribbean startups, NGOs, and tourism sector."
+        description="Comprehensive digital transformation packages tailored for Caribbean businesses."
         showCTA={false}
       />
 
@@ -211,15 +169,15 @@ export default function Services() {
             animate="animate"
             className="space-y-16"
           >
-            {/* Sector Packages */}
-            {Object.values(services).map((sector) => (
-              <section key={sector.title} className="space-y-8">
+            {/* Service Packages */}
+            {Object.values(services).map((service) => (
+              <section key={service.title} className="space-y-8">
                 <div className="flex items-center gap-3 mb-8">
-                  <sector.icon className="w-8 h-8 text-purple-600" />
-                  <h2 className="text-3xl font-bold">{sector.title}</h2>
+                  <service.icon className="w-8 h-8 text-purple-600" />
+                  <h2 className="text-3xl font-bold">{service.title}</h2>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
-                  {sector.packages.map((pkg) => (
+                  {service.packages.map((pkg) => (
                     <Card key={pkg.title} className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600">
                       <CardHeader>
                         <CardTitle className="text-xl mb-2">{pkg.title}</CardTitle>
@@ -230,54 +188,22 @@ export default function Services() {
                         <ul className="space-y-3">
                           {pkg.features.map((feature) => (
                             <li key={feature} className="flex items-center gap-2">
-                              <ArrowRight className="w-4 h-4 text-purple-600" />
+                              <Sparkles className="w-4 h-4 text-purple-600" />
                               <span className="text-sm">{feature}</span>
                             </li>
                           ))}
                         </ul>
-                        <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
-                          Get Started
-                        </Button>
+                        <Link href="/contact">
+                          <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
+                            Get Started
+                          </Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               </section>
             ))}
-
-            {/* Additional Services */}
-            <section className="space-y-8">
-              <h2 className="text-3xl font-bold mb-8">Additional Services</h2>
-              <div className="grid md:grid-cols-3 gap-8">
-                {additionalServices.map((service) => (
-                  <Card key={service.title} className="border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600">
-                    <CardHeader>
-                      <div className="flex items-center gap-3 mb-4">
-                        <service.icon className="w-6 h-6 text-purple-600" />
-                        <CardTitle className="text-xl">{service.title}</CardTitle>
-                      </div>
-                      <p className="text-muted-foreground">{service.description}</p>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-2xl font-bold text-purple-600 mb-6">{service.price}</p>
-                      <ul className="space-y-3">
-                        {service.features.map((feature) => (
-                          <li key={feature} className="flex items-center gap-2">
-                            <ArrowRight className="w-4 h-4 text-purple-600" />
-                            <span className="text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link href="/contact" className="w-full">
-                        <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
-                          Learn More
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
           </motion.div>
 
           {/* CTA Section */}
@@ -288,9 +214,11 @@ export default function Services() {
                 <p className="text-muted-foreground mb-6">
                   Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
                 </p>
-                <Button className="bg-purple-600 hover:bg-purple-700">
-                  Schedule Consultation
-                </Button>
+                <Link href="/contact">
+                  <Button className="bg-purple-600 hover:bg-purple-700">
+                    Schedule Consultation
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
