@@ -42,20 +42,6 @@ const services = {
           "Conversion optimization",
           "Monthly strategy sessions"
         ]
-      },
-      {
-        title: "Enterprise Package",
-        description: "Custom enterprise solutions",
-        price: "Request Call",
-        features: [
-          "Fully customized solution",
-          "Dedicated account manager",
-          "Custom integrations",
-          "Advanced automation",
-          "Multi-channel tracking",
-          "24/7 priority support",
-          "Quarterly business reviews"
-        ]
       }
     ]
   },
@@ -88,20 +74,6 @@ const services = {
           "Marketing strategy sessions",
           "Priority support & consulting"
         ]
-      },
-      {
-        title: "Enterprise Package",
-        description: "Custom solutions for larger startups",
-        price: "Request Call",
-        features: [
-          "Fully customized solution",
-          "Multi-channel marketing",
-          "Custom API development",
-          "Advanced integrations",
-          "Dedicated success manager",
-          "VIP support",
-          "Strategic partnerships"
-        ]
       }
     ]
   },
@@ -132,20 +104,6 @@ const services = {
           "Marketing automation",
           "Social media integration",
           "Analytics dashboard"
-        ]
-      },
-      {
-        title: "Luxury Package",
-        description: "Full-service solution",
-        price: "$15,000+",
-        features: [
-          "Everything in Premium Package",
-          "Custom mobile app",
-          "AI-powered recommendations",
-          "Advanced analytics",
-          "Marketing campaigns",
-          "24/7 support",
-          "Strategic consulting"
         ]
       }
     ]
