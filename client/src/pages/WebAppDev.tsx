@@ -4,51 +4,147 @@ import PortfolioGrid from "@/components/shared/PortfolioGrid";
 const portfolioProjects = [
   {
     title: "WaitList Pro",
-    description: "Event management platform with an AI-powered chatbot for attendee management and lead collection",
+    description: "Event management platform featuring a lead-collecting chatbot that handles attendee questions and waitlist signups, with an integrated dashboard for lead communication"
   },
   {
     title: "GitHub Scanner",
-    description: "Efficient repository searching and bookmarking tool for streamlined project discovery",
+    description: "Tool for efficient GitHub repository searching and bookmarking, streamlining project discovery and management"
   },
   {
     title: "Lawbey.com",
-    description: "Comprehensive digital platform for accessing Bahamas legal resources",
+    description: "Comprehensive digital platform providing easy access to Bahamas legal resources"
   },
   {
     title: "Start.kemis.net",
-    description: "Targeted email marketing service for local Bahamian audiences",
+    description: "Email marketing service targeting local Bahamian audiences"
   },
   {
     title: "Autodialer",
-    description: "Intelligent calling system optimizing outreach efficiency",
+    description: "Intelligent calling system that connects you with prospects only when they answer, optimizing outreach efficiency"
   },
   {
-    title: "Smart Contract Escrow",
-    description: "Blockchain-powered payment protection platform for project investments",
+    title: "Smart Contract Escrow System",
+    description: "Secure payment protection platform using blockchain technology to safeguard project investments"
   },
   {
     title: "BDMA Bahamas",
-    description: "Official platform for the Bahamas Digital Marketing Association",
+    description: "Official platform for the Bahamas Digital Marketing Association, promoting digital transformation across local businesses"
   },
   {
     title: "GitNews",
-    description: "Centralized news aggregator for curated local updates",
+    description: "Centralized news aggregator delivering curated local updates"
   },
   {
     title: "KemisAcademy.com",
-    description: "Educational platform for digital marketing and entrepreneurship training",
+    description: "Educational platform specializing in digital marketing and entrepreneurship training"
   },
   {
     title: "DonateBubble.com",
-    description: "Pioneer crowdfunding platform for community-driven fundraising in the Bahamas",
+    description: "The Bahamas' pioneer crowdfunding platform enabling community-driven fundraising"
   },
   {
     title: "AccountEase",
-    description: "Simplified bookkeeping software for small business owners",
+    description: "Simplified bookkeeping software designed for small business owners"
   },
   {
     title: "BahamasChange Hub",
-    description: "Democratic polling platform amplifying citizen voices in local decision-making",
+    description: "Democratic polling platform amplifying citizen voices in local decision-making"
+  },
+  {
+    title: "DigitalMarketingBahamas.com",
+    description: "Comprehensive resource for digital marketing services and information in the Bahamas"
+  },
+  {
+    title: "Pledge.mapsweepstakes.com",
+    description: "Dedicated pledge platform for MAP Bahamas initiatives"
+  },
+  {
+    title: "Urban Nassau Rides",
+    description: "Local ride-sharing service connecting drivers with passengers"
+  },
+  {
+    title: "AISM Connect",
+    description: "Platform automating social media management and content distribution"
+  },
+  {
+    title: "Reset 2025",
+    description: "Event website showcasing upcoming professional development conference"
+  },
+  {
+    title: "Refocus 2025",
+    description: "Event landing page for professional growth summit"
+  },
+  {
+    title: "DJ Big L",
+    description: "Professional portfolio website for prominent local DJ"
+  },
+  {
+    title: "BT Loyalty Reward Program",
+    description: "Customer loyalty platform for single retail location"
+  },
+  {
+    title: "Mall At Marathon Rewards Program",
+    description: "Enterprise-scale customer rewards system"
+  },
+  {
+    title: "PatrickMoncur.com",
+    description: "Professional portfolio site for insurance services"
+  },
+  {
+    title: "OrlandoMaxTax.com",
+    description: "Full-service tax consultation and preparation website"
+  },
+  {
+    title: "IzengaBahamas.com",
+    description: "E-commerce platform featuring luxury jewelry and accessories"
+  },
+  {
+    title: "BT Monthly Giveaway",
+    description: "Lead generation landing page featuring monthly prize drawings"
+  },
+  {
+    title: "KDS Fun Run Walk",
+    description: "Fundraising event website for KDS Bahamas' annual charity run"
+  },
+  {
+    title: "First Care/BICCU",
+    description: "Informational landing page for healthcare services"
+  },
+  {
+    title: "Elle Events",
+    description: "Professional event planning and showcase website"
+  },
+  {
+    title: "SRL & IDOS",
+    description: "Targeted landing page for business services"
+  },
+  {
+    title: "DAWN and RON",
+    description: "Custom landing page for personal brand promotion"
+  },
+  {
+    title: "BACO",
+    description: "Event landing page highlighting program details and registration"
+  },
+  {
+    title: "BlueIslandAdventure.com",
+    description: "Tourism portal highlighting Bahamian adventures and experiences"
+  },
+  {
+    title: "Cryptonoobz.xyz",
+    description: "Educational resource for cryptocurrency beginners"
+  },
+  {
+    title: "WindermereDaySpa.com",
+    description: "Spa services website featuring booking capabilities and treatment information"
+  },
+  {
+    title: "SmartBlackBook.com",
+    description: "The official website for KemisDigital CEO's published work"
+  },
+  {
+    title: "StreetsidePizzeria.com",
+    description: "Restaurant website showcasing authentic Italian cuisine and online ordering"
   }
 ];
 
@@ -131,7 +227,7 @@ export default function WebAppDev() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Our Recent Work</h2>
           <p className="text-muted-foreground text-lg text-center max-w-2xl mx-auto mb-16">
-            Explore our portfolio of successful projects delivered in the past 12 months, showcasing our expertise in web and software development.
+            Explore our extensive portfolio of successful projects delivered in the past 12 months, showcasing our expertise in web and software development across various industries.
           </p>
           <PortfolioGrid projects={portfolioProjects} />
         </div>
