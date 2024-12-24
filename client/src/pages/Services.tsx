@@ -118,17 +118,18 @@ export default function Services() {
         showCTA={false}
       />
 
-      <div className="py-12 lg:py-16">
-        <div className="container px-4 mx-auto">
+      {/* Services Showcase Section */}
+      <div className="py-24">
+        <div className="container mx-auto px-4">
           <motion.div
             variants={staggerChildren}
             initial="initial"
             animate="animate"
-            className="space-y-20"
+            className="space-y-24"
           >
-            {Object.values(services).map((service) => (
-              <section key={service.title} className="space-y-6">
-                <div className="flex items-center gap-4 mb-8">
+            {Object.values(services).map((service, index) => (
+              <section key={service.title} className={`space-y-8 ${index % 2 === 0 ? 'bg-background' : 'bg-purple-50'}`}>
+                <div className="flex items-center gap-4 mb-12">
                   <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
                     <service.icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
                   </div>
@@ -177,21 +178,24 @@ export default function Services() {
             ))}
           </motion.div>
 
-          <Card className="mt-20">
-            <CardContent className="py-8">
-              <div className="text-center max-w-2xl mx-auto">
-                <h2 className="text-2xl font-bold mb-4">Ready to Transform Your Business?</h2>
-                <p className="text-muted-foreground mb-8">
-                  Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
-                </p>
-                <Link href="/contact">
-                  <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8">
-                    Schedule Consultation
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Call to Action Section */}
+          <section className="mt-24">
+            <Card>
+              <CardContent className="py-12">
+                <div className="text-center max-w-2xl mx-auto">
+                  <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+                  <p className="text-muted-foreground mb-8">
+                    Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
+                  </p>
+                  <Link href="/contact">
+                    <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8">
+                      Schedule Consultation
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
         </div>
       </div>
     </div>
