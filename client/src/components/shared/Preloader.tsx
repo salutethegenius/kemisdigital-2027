@@ -5,9 +5,10 @@ export default function Preloader() {
   const [shouldExit, setShouldExit] = useState(false);
 
   useEffect(() => {
+    // Start exit animation after 3.5 seconds
     const timer = setTimeout(() => {
       setShouldExit(true);
-    }, 3500); // Show for exactly 3.5 seconds
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -16,10 +17,10 @@ export default function Preloader() {
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: shouldExit ? 0 : 1 }}
-      transition={{ duration: 3.5, ease: "easeInOut" }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-background"
     >
-      <div className="relative">
+      <div className="relative flex flex-col items-center">
         {/* Outer spinning circle */}
         <motion.div
           animate={{ rotate: 360 }}
@@ -32,15 +33,15 @@ export default function Preloader() {
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-purple-600 rounded-full opacity-50"
         />
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-8 text-lg font-medium text-purple-600"
+        >
+          Loading...
+        </motion.span>
       </div>
-      <motion.span
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="absolute mt-24 text-lg font-medium text-purple-600"
-      >
-        Loading...
-      </motion.span>
     </motion.div>
   );
 }
