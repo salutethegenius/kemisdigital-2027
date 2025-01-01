@@ -76,7 +76,7 @@ export default function Header() {
           </NavigationMenu>
           <ThemeToggle />
           <Button asChild className="bg-primary hover:bg-primary/90 text-white">
-            <Link href="/contact">Get Started</Link>
+            <Link href="/services">Get Started</Link>
           </Button>
         </div>
 
@@ -121,7 +121,7 @@ export default function Header() {
               </div>
               <ThemeToggle />
               <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild onClick={() => setIsOpen(false)}>
-                <Link href="/contact">Get Started</Link>
+                <Link href="/services">Get Started</Link>
               </Button>
             </div>
           </SheetContent>
