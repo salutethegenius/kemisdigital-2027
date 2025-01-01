@@ -95,17 +95,9 @@ const aiServices = [
         title="The People's Choice!"
         description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've crafted A-player strategies that brought ideas to life with measured success."
         videoBackground="/videos/business-background.mp4"
-        primaryCTA={{
-          text: "Schedule Demo",
-          href: "/contact"
-        }}
         secondaryCTA={{
-          text: "Get Started",
-          onClick: () => {
-            document.getElementById('ai-marketing-services')?.scrollIntoView({ 
-              behavior: 'smooth' 
-            });
-          }
+          text: "Learn More",
+          href: "/about"
         }}
       />
 
