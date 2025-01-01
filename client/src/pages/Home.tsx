@@ -174,7 +174,7 @@ const aiServices = [
                     <p className="text-sm text-muted-foreground">{service.caseStudy}</p>
                   </div>
 
-                  <Link href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Link href="/services">
                     <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors">
                       Learn More
                     </Button>
@@ -185,6 +185,7 @@ const aiServices = [
           </motion.div>
         </div>
       </section>
+
 
 
       {/* Success Metrics Section (Our Impact) */}
@@ -220,7 +221,9 @@ const aiServices = [
               </CardHeader>
               <CardContent>
                 <p className="mb-4">Our AI-powered solutions deliver targeted campaigns that reach the right audience at the right time.</p>
-                <Button>Learn More</Button>
+                <Link href="/about">
+                  <Button>Learn More</Button>
+                </Link>
               </CardContent>
             </Card>
             <Card>
@@ -232,7 +235,9 @@ const aiServices = [
               </CardHeader>
               <CardContent>
                 <p className="mb-4">Stay ahead with our cutting-edge AI marketing tools and strategies.</p>
-                <Button>Explore Solutions</Button>
+                <Link href="/about">
+                  <Button>Learn More</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
