@@ -9,20 +9,51 @@ export default function About() {
   const leadershipTeam = [
     {
       name: "Kenneth C. Moncur, CIPM",
-      role: "Founder, CEO & AI Strategy Lead",
-      description: "Pioneer in AI-driven marketing with 20+ years of experience in digital transformation."
+      role: "Founder & CEO, Project Lead",
+      description: "Digital transformation pioneer focused on AI integration and marketing innovation across the Caribbean."
     },
     {
-      name: "Marcus Rodriguez",
-      role: "CTO & Innovation Director",
-      description: "Expert in AI implementation and marketing technology infrastructure."
+      name: "Jeffery Nikolai Ujumadu",
+      role: "CTO & Innovation Director", 
+      description: "Technical architect specializing in scalable web solutions and blockchain implementations."
     },
     {
-      name: "Sarah Williams",
-      role: "Head of Client Success",
-      description: "Specialized in AI-powered campaign optimization and client strategy."
+      name: "Mauro Hurtado",
+      role: "Digital Marketing Specialist",
+      description: "Data-driven marketer focused on AI campaign optimization and market analysis."
+    },
+    {
+      name: "Jason Sawyer",
+      role: "Customer Success Agent",
+      description: "Customer experience specialist focused on AI-enhanced service delivery."
+    },
+    {
+      name: "Daodu Olaoluwa",
+      role: "Graphic Design Specialist",
+      description: "Creative designer specializing in brand identity and UI/UX for Caribbean markets."
+    },
+    {
+      name: "Naomi Dohiling",
+      role: "Social Media Manager",
+      description: "Social strategy expert focused on AI-powered content optimization."
+    },
+    {
+      name: "Angel Andonov",
+      role: "Email Marketing Specialist",
+      description: "Email campaign strategist specializing in automated marketing sequences."
+    },
+    {
+    name: "Mike Khlebas",
+    role: "Digital Strategist",
+    description: "Digital transformation expert specializing in online business growth strategies."
+    },
+    {
+    name: "Tony S.",
+    role: "Backend Framework Architect",
+    description: "Framework architecture specialist focused on scalable backend solutions."
     }
   ];
+  
 
   return (
     <div>
@@ -69,7 +100,7 @@ export default function About() {
       {/* Leadership Section */}
       <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-16 text-center">Our Leadership</h2>
+          <h2 className="text-3xl font-bold mb-16 text-center">Meet our A-Players!</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {leadershipTeam.map((member, index) => (
               <motion.div

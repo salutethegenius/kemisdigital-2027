@@ -1,14 +1,53 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
+
+interface CTAButton {
+  text: string;
+  href?: string;
+  onClick?: () => void;
+}
 
 interface HeroProps {
   title: string;
   description: string;
   showCTA?: boolean;
   videoBackground?: string;
+  primaryCTA?: CTAButton;
+  secondaryCTA?: CTAButton;
 }
 
-export default function Hero({ title, description, showCTA = true, videoBackground }: HeroProps) {
+export default function Hero({ 
+  title, 
+  description, 
+  showCTA = true, 
+  videoBackground,
+  primaryCTA,
+  secondaryCTA 
+}: HeroProps) {
+  const renderCTAButton = (cta: CTAButton) => {
+    const buttonProps = {
+      size: "lg" as const,
+      className: cta === primaryCTA 
+        ? "bg-purple-600 hover:bg-purple-700 text-white"
+        : "border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/10",
+      variant: cta === primaryCTA ? "default" as const : "outline" as const,
+      onClick: cta.onClick
+    };
+
+    return cta.href ? (
+      <Link href={cta.href}>
+        <Button {...buttonProps}>
+          {cta.text}
+        </Button>
+      </Link>
+    ) : (
+      <Button {...buttonProps}>
+        {cta.text}
+      </Button>
+    );
+  };
+
   return (
     <section className="relative text-center min-h-screen w-full flex items-center justify-center overflow-hidden">
       {videoBackground && (
@@ -46,26 +85,15 @@ export default function Hero({ title, description, showCTA = true, videoBackgrou
         >
           {description}
         </motion.p>
-        {showCTA && (
+        {showCTA && (primaryCTA || secondaryCTA) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             className="flex justify-center gap-4"
           >
-            <Button 
-              size="lg" 
-              className="bg-purple-600 hover:bg-purple-700 text-white"
-            >
-              Get Started
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/10"
-            >
-              Schedule Demo
-            </Button>
+            {primaryCTA && renderCTAButton(primaryCTA)}
+            {secondaryCTA && renderCTAButton(secondaryCTA)}
           </motion.div>
         )}
       </div>

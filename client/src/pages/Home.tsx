@@ -95,6 +95,18 @@ const aiServices = [
         title="The People's Choice!"
         description="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've crafted A-player strategies that brought ideas to life with measured success."
         videoBackground="/videos/business-background.mp4"
+        primaryCTA={{
+          text: "Schedule Demo",
+          href: "/contact"
+        }}
+        secondaryCTA={{
+          text: "Get Started",
+          onClick: () => {
+            document.getElementById('ai-marketing-services')?.scrollIntoView({ 
+              behavior: 'smooth' 
+            });
+          }
+        }}
       />
 
       {/* Our Mission Section */}
@@ -110,7 +122,7 @@ const aiServices = [
       </section>
 
       {/* AI Service Showcase Section */}
-      <section className="py-24 bg-background">
+      <section id="ai-marketing-services" className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-6">AI Marketing Services</h2>
