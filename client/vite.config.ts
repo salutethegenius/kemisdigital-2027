@@ -8,13 +8,6 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
     strictPort: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        secure: false
-      }
-    },
     hmr: {
       clientPort: 443,
       timeout: 120000
@@ -25,9 +18,32 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    force: true, // Force dependency pre-bundling
+    exclude: [
+      '@radix-ui/react-slot',
+      '@radix-ui/react-toast',
+      '@radix-ui/react-dialog'
+    ],
+    include: [
+      'react', 
+      'react-dom', 
+      'framer-motion',
+      'lucide-react',
+      'wouter'
+    ]
+  },
   build: {
-    outDir: '../dist/public',
-    emptyOutDir: true,
-    sourcemap: true
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'framer-motion'],
+          'ui': ['@radix-ui/react-slot', '@radix-ui/react-toast', '@radix-ui/react-dialog']
+        }
+      }
+    }
   }
 })

@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const app = express();
 app.use(cors({
-  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : true,
+  origin: true,  // Allow all origins temporarily for testing
   methods: ['GET', 'POST'],
   credentials: true
 }));
@@ -14,54 +14,36 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 (async () => {
-  try {
-    registerRoutes(app);
-    const server = createServer(app);
+  registerRoutes(app);
+  const server = createServer(app);
 
-    // Error handling middleware
-    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      console.error('Error:', err);
-      const status = err.status || err.statusCode || 500;
-      const message = err.message || "Internal Server Error";
-      res.status(status).json({ message });
-    });
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
 
-    // Setup vite in development
-    if (process.env.NODE_ENV === "development") {
-      console.log("Setting up Vite in development mode");
-      await setupVite(app, server);
-    } else {
-      console.log("Setting up static serving in production mode");
-      serveStatic(app);
-    }
+    res.status(status).json({ message });
+    throw err;
+  });
 
-    const PORT = process.env.NODE_ENV === "development" ? 3001 : (process.env.PORT || 3000);
-
-    // Improved error handling for port binding
-    server.on('error', (error: any) => {
-      if (error.code === 'EADDRINUSE') {
-        console.error(`Port ${PORT} is already in use. Please make sure no other process is using this port.`);
-        process.exit(1);
-      } else {
-        console.error('Server error:', error);
-        process.exit(1);
-      }
-    });
-
-    // More detailed logging
-    console.log(`Attempting to start server on port ${PORT}...`);
-
-    server.listen(PORT, "0.0.0.0", () => {
-      const formattedTime = new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      });
-      console.log(`${formattedTime} [express] Server started successfully on http://0.0.0.0:${PORT}`);
-    });
-  } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
+  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
   }
+
+  // ALWAYS serve the app on port 80 or the port specified in the environment
+  const PORT = process.env.PORT || 80;
+  server.listen(PORT, "0.0.0.0", () => {
+    const formattedTime = new Date().toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+    console.log(`${formattedTime} [express] serving on port ${PORT}`);
+  });
 })();

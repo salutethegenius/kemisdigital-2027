@@ -31,8 +31,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto px-4 h-16 flex items-center justify-between" aria-label="Main navigation">
-        <Link href="/" className="flex items-center space-x-2 font-bold text-2xl" aria-label="Kemis Digital home">
+      <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-2 font-bold text-2xl">
           <span className="text-primary">Kemis</span>
           <span>Digital</span>
         </Link>
@@ -45,7 +45,6 @@ export default function Header() {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 location === item.href ? "text-primary" : "text-muted-foreground"
               }`}
-              aria-current={location === item.href ? "page" : undefined}
             >
               {item.name}
             </Link>
@@ -53,25 +52,20 @@ export default function Header() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger 
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location === "/contact" || location === "/meet" ? "text-primary" : "text-muted-foreground"
-                  }`}
-                  aria-label="Contact options"
-                >
-                  Contact
-                </NavigationMenuTrigger>
+                <NavigationMenuTrigger className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location === "/contact" || location === "/meet" ? "text-primary" : "text-muted-foreground"
+                }`}>Contact</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid gap-3 p-4 w-[200px]" role="menu">
+                  <div className="grid gap-3 p-4 w-[200px]">
                     <NavigationMenuLink asChild>
-                      <Link href="/contact" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md" role="menuitem">
-                        <Mail className="w-4 h-4" aria-hidden="true" />
+                      <Link href="/contact" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md">
+                        <Mail className="w-4 h-4" />
                         <span>Contact Us</span>
                       </Link>
                     </NavigationMenuLink>
                     <NavigationMenuLink asChild>
-                      <Link href="/meet" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md" role="menuitem">
-                        <Video className="w-4 h-4" aria-hidden="true" />
+                      <Link href="/meet" className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md">
+                        <Video className="w-4 h-4" />
                         <span>Video Meeting</span>
                       </Link>
                     </NavigationMenuLink>
@@ -88,12 +82,12 @@ export default function Header() {
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" aria-label="Open menu">
-              <Menu className="h-6 w-6" aria-hidden="true" />
+            <Button variant="ghost" size="icon">
+              <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
           <SheetContent>
-            <nav className="flex flex-col space-y-4 mt-6" aria-label="Mobile navigation">
+            <div className="flex flex-col space-y-4 mt-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -102,7 +96,6 @@ export default function Header() {
                     location === item.href ? "text-primary" : "text-muted-foreground"
                   }`}
                   onClick={() => setIsOpen(false)}
-                  aria-current={location === item.href ? "page" : undefined}
                 >
                   {item.name}
                 </Link>
@@ -114,7 +107,7 @@ export default function Header() {
                   className="flex items-center space-x-2 text-sm hover:text-primary"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Mail className="w-4 h-4" aria-hidden="true" />
+                  <Mail className="w-4 h-4" />
                   <span>Contact Us</span>
                 </Link>
                 <Link
@@ -122,7 +115,7 @@ export default function Header() {
                   className="flex items-center space-x-2 text-sm hover:text-primary"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Video className="w-4 h-4" aria-hidden="true" />
+                  <Video className="w-4 h-4" />
                   <span>Video Meeting</span>
                 </Link>
               </div>
@@ -130,7 +123,7 @@ export default function Header() {
               <Button className="w-full bg-primary hover:bg-primary/90 text-white" asChild onClick={() => setIsOpen(false)}>
                 <Link href="/services">Get Started</Link>
               </Button>
-            </nav>
+            </div>
           </SheetContent>
         </Sheet>
       </nav>
