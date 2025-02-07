@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Brain, Sparkles, AlertCircle } from "lucide-react";
 import { getChatbotResponse } from "@/lib/openai";
 
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface Recommendation {

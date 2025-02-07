@@ -13,7 +13,7 @@ interface State {
   error?: Error;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false
   };
@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>
-            There was an error loading the chart.
+            There was an error loading this component.
             <Button
               variant="link"
               className="pl-0"
@@ -49,3 +49,5 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
+
+export default ErrorBoundary;
