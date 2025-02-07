@@ -8,7 +8,7 @@ channel = "stable-24_05"
 [deployment]
 deploymentTarget = "cloudrun"
 build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
+run = ["sh", "-c", "cd client && NODE_ENV=development npm run dev"]
 
 [[ports]]
 localPort = 80
@@ -45,14 +45,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "fullstack"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "client"
+args = "Start application"
 
 [[workflows.workflow]]
-name = "fullstack"
+name = "Start application"
 author = "agent"
 
 [workflows.workflow.metadata]
@@ -63,20 +59,5 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
-[[workflows.workflow]]
-name = "client"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd client && rm -rf node_modules/.vite && NODE_ENV=development npx vite --port 3000 --host 0.0.0.0 --force"
+args = "cd client && NODE_ENV=development npm run dev"
 waitForPort = 3000
