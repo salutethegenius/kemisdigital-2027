@@ -7,21 +7,33 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Simplified CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'development' 
-    ? ['http://localhost:3000'] 
-    : ['https://your-production-domain.com'],
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+// Enhanced CORS configuration
+const corsOptions = {
+  origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    const allowedOrigins = process.env.NODE_ENV === 'development'
+      ? ['http://localhost:3000', 'http://0.0.0.0:3000']
+      : ['https://kemisdigital.com']; // Replace with your production domain
 
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 (async () => {
   try {
     console.log('[Server] Starting server initialization...');
+    console.log(`[Server] Environment: ${process.env.NODE_ENV}`);
+    console.log(`[Server] Port: ${PORT}`);
+
     registerRoutes(app);
     const server = createServer(app);
 
@@ -30,6 +42,7 @@ app.use(express.urlencoded({ extended: false }));
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
       console.error(`[Error] ${status}: ${message}`);
+      console.error(err.stack);
       res.status(status).json({ message });
     });
 
@@ -42,7 +55,7 @@ app.use(express.urlencoded({ extended: false }));
     }
 
     server.listen(PORT, "0.0.0.0", () => {
-      console.log(`[Server] 🚀 Server is running at http://localhost:${PORT}`);
+      console.log(`[Server] 🚀 Server is running at http://0.0.0.0:${PORT}`);
     });
 
     server.on('error', (error: any) => {

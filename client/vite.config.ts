@@ -9,7 +9,7 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
     hmr: {
-      clientPort: 443,
+      clientPort: 3000,
       timeout: 120000
     }
   },
@@ -18,27 +18,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  optimizeDeps: {
-    force: true,
-    exclude: [
-      '@radix-ui/react-slot',
-      '@radix-ui/react-toast',
-      '@radix-ui/react-dialog'
-    ],
-    include: [
-      'react', 
-      'react-dom', 
-      'framer-motion',
-      'lucide-react',
-      'wouter'
-    ]
-  },
   build: {
     outDir: '../dist/public',
     emptyOutDir: true,
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
     rollupOptions: {
       output: {
         manualChunks: {

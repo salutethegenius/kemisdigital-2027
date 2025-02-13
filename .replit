@@ -8,7 +8,7 @@ channel = "stable-24_05"
 [deployment]
 deploymentTarget = "cloudrun"
 build = ["npm", "run", "build"]
-run = ["sh", "-c", "NODE_ENV=development npm run dev"]
+run = ["sh", "-c", "NODE_ENV=production npm run start"]
 
 [[ports]]
 localPort = 80
@@ -17,10 +17,6 @@ externalPort = 3001
 [[ports]]
 localPort = 3000
 externalPort = 3000
-
-[[ports]]
-localPort = 5000
-externalPort = 80
 
 [[ports]]
 localPort = 5001
@@ -46,22 +42,3 @@ runButton = "Project"
 name = "Project"
 mode = "parallel"
 author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Backend"
-
-[[workflows.workflow]]
-name = "Backend"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "NODE_ENV=development npm run dev"
-waitForPort = 3000
