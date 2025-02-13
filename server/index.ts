@@ -5,10 +5,10 @@ import { createServer } from "http";
 import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Consistent port for backend
+const PORT = process.env.PORT || 5001; // Changed to 5001 to avoid conflicts
 
 app.use(cors({
-  origin: ['http://localhost:5173'], // Only allow frontend Vite server
+  origin: ['http://localhost:5173', 'http://localhost:5001'], // Updated port
   methods: ['GET', 'POST'],
   credentials: true
 }));
@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: false }));
 
     server.on('error', (error: any) => {
       if (error.code === 'EADDRINUSE') {
-        console.error(`[Error] Port ${PORT} is already in use. Please try a different port.`);
+        console.error(`[Error] Port ${PORT} is already in use. Please try a different port or ensure no other service is using port ${PORT}.`);
       } else {
         console.error('[Error] Server error:', error);
       }
