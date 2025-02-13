@@ -2,7 +2,7 @@ import { ReactNode, Suspense, lazy } from "react";
 import { Link, useLocation } from "wouter";
 
 const Analytics = lazy(() => import("@/pages/Analytics"));
-import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart, Brain } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, FileText, Settings, LogOut, BarChart, Brain, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Preloader from "@/components/shared/Preloader";
@@ -17,6 +17,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const navigation = [
     { name: "Home", href: "/", icon: LayoutDashboard },
     { name: "AI Services", href: "/services", icon: Brain },
+    { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard },
     { name: "Case Studies", href: "/case-studies", icon: FileText },
     { name: "Resources", href: "/resources", icon: FileText },
     { name: "Contact", href: "/contact", icon: Users },

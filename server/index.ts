@@ -19,16 +19,19 @@ process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
 });
 
 // Debug logging for environment
+console.log('[Server] Starting with configuration:');
 console.log('[Server] Environment:', process.env.NODE_ENV);
 console.log('[Server] Port:', PORT);
+console.log('[Server] REPL_SLUG:', process.env.REPL_SLUG);
+console.log('[Server] REPL_OWNER:', process.env.REPL_OWNER);
 
 // Enhanced CORS configuration with better error handling and debugging
 const corsOptions = {
   origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
     console.log('[CORS] Incoming request from origin:', origin);
 
-    // In development mode, be more permissive
-    if (process.env.NODE_ENV === 'development') {
+    // In development mode or Replit environment, be more permissive
+    if (process.env.NODE_ENV === 'development' || process.env.REPL_SLUG) {
       callback(null, true);
       return;
     }
@@ -51,9 +54,14 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Health check endpoint
+// Health check endpoint with detailed status
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
+  res.status(200).json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
+    version: process.env.npm_package_version || 'unknown'
+  });
 });
 
 // Graceful shutdown handling
