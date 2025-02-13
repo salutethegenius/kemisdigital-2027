@@ -29,21 +29,7 @@ console.log('[Server] REPL_OWNER:', process.env.REPL_OWNER);
 const corsOptions = {
   origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
     console.log('[CORS] Incoming request from origin:', origin);
-
-    // In development mode or Replit environment, be more permissive
-    if (process.env.NODE_ENV === 'development' || process.env.REPL_SLUG) {
-      callback(null, true);
-      return;
-    }
-
-    // Production CORS checks
-    const allowedOrigins = ['https://kemisdigital.com'];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.error('[CORS] Rejected origin:', origin);
-      callback(new Error('CORS not allowed'));
-    }
+    callback(null, true); // Allow all origins in development
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
@@ -83,6 +69,7 @@ function gracefulShutdown(server: any) {
   try {
     console.log('[Server] Starting server initialization...');
 
+    // Set up API routes first
     registerRoutes(app);
     const server = createServer(app);
 
@@ -91,11 +78,9 @@ function gracefulShutdown(server: any) {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
 
-      // Log error details
       console.error(`[Error] ${status}: ${message}`);
       console.error(err.stack);
 
-      // Send sanitized error response
       res.status(status).json({
         error: {
           message: process.env.NODE_ENV === 'development' ? message : 'An error occurred',
@@ -107,7 +92,7 @@ function gracefulShutdown(server: any) {
 
     if (process.env.NODE_ENV === "development") {
       console.log('[Server] Setting up Vite in development mode...');
-      await setupVite(app, server);
+      await setupVite(app);
     } else {
       console.log('[Server] Setting up static serving in production mode...');
       serveStatic(app);

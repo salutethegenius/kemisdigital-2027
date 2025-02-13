@@ -18,6 +18,7 @@ import LatestNews from "./pages/LatestNews";
 import Privacy from "./pages/Privacy";
 import DataDeletion from "./pages/DataDeletion";
 import Meet from "./pages/Meet";
+import PaymentSolutions from "./pages/PaymentSolutions";  // Add import
 
 // Service Pages
 import WebDevelopment from "@/pages/services/WebDevelopment";
@@ -51,6 +52,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/contact" component={Contact} />
               <Route path="/meet" component={Meet} />
               <Route path="/latest-news" component={LatestNews} />
+              <Route path="/payment-solutions" component={PaymentSolutions} />  {/* Add route */}
             </Switch>
           </Layout>
         </Router>
