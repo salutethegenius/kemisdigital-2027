@@ -22,6 +22,7 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "AI Services", href: "/services" },
   { name: "Web/App Development", href: "/services/web-app-dev" },
+  { name: "Payment Solutions", href: "/payment-solutions" },
   { name: "Latest News", href: "/latest-news" },
 ];
 
