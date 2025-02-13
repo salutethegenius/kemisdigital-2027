@@ -9,8 +9,9 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
     hmr: {
-      clientPort: 3000,
-      timeout: 120000
+      clientPort: 443,
+      host: process.env.REPL_SLUG ? `${process.env.REPL_SLUG}.id.repl.co` : '0.0.0.0',
+      protocol: process.env.REPL_SLUG ? 'wss' : 'ws'
     }
   },
   resolve: {
