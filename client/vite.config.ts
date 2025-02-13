@@ -5,7 +5,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 5173,
     host: '0.0.0.0',
     strictPort: true,
     hmr: {
@@ -19,7 +19,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    force: true, // Force dependency pre-bundling
+    force: true,
     exclude: [
       '@radix-ui/react-slot',
       '@radix-ui/react-toast',
