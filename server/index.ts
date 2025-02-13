@@ -5,13 +5,17 @@ import { createServer } from "http";
 import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 5001; // Changed to 5001 to avoid conflicts
+const PORT = process.env.PORT || 3000;
 
+// Simplified CORS configuration
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5001'], // Updated port
+  origin: process.env.NODE_ENV === 'development' 
+    ? ['http://localhost:3000'] 
+    : ['https://your-production-domain.com'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -21,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
     registerRoutes(app);
     const server = createServer(app);
 
+    // Global error handler
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
@@ -28,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
       res.status(status).json({ message });
     });
 
-    if (app.get("env") === "development") {
+    if (process.env.NODE_ENV === "development") {
       console.log('[Server] Setting up Vite in development mode...');
       await setupVite(app, server);
     } else {
@@ -36,23 +41,16 @@ app.use(express.urlencoded({ extended: false }));
       serveStatic(app);
     }
 
-    console.log(`[Server] Attempting to start server on port ${PORT}...`);
     server.listen(PORT, "0.0.0.0", () => {
-      const formattedTime = new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      });
-      console.log(`${formattedTime} [express] Server started successfully on port ${PORT}`);
+      console.log(`[Server] 🚀 Server is running at http://localhost:${PORT}`);
     });
 
     server.on('error', (error: any) => {
       if (error.code === 'EADDRINUSE') {
-        console.error(`[Error] Port ${PORT} is already in use. Please try a different port or ensure no other service is using port ${PORT}.`);
-      } else {
-        console.error('[Error] Server error:', error);
+        console.error(`[Error] Port ${PORT} is already in use`);
+        process.exit(1);
       }
+      console.error('[Error] Server error:', error);
       process.exit(1);
     });
   } catch (error) {
