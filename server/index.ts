@@ -92,7 +92,7 @@ function gracefulShutdown(server: any) {
 
     if (process.env.NODE_ENV === "development") {
       console.log('[Server] Setting up Vite in development mode...');
-      await setupVite(app);
+      await setupVite(app, server);
     } else {
       console.log('[Server] Setting up static serving in production mode...');
       serveStatic(app);

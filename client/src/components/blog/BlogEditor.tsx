@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import useSWR, { mutate } from "swr";
+import { getApiUrl, fetcher } from "@/lib/fetcher";
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -36,9 +37,9 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: categories } = useSWR("/api/blog/categories");
-  const { data: tags } = useSWR("/api/blog/tags");
-  const { data: post } = useSWR(postId ? `/api/blog/posts/${postId}` : null);
+  const { data: categories } = useSWR("/api/blog/categories", fetcher);
+  const { data: tags } = useSWR("/api/blog/tags", fetcher);
+  const { data: post } = useSWR(postId ? `/api/blog/posts/${postId}` : null, fetcher);
 
   const {
     register,
@@ -54,12 +55,18 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   const onSubmit = async (data: BlogPostForm) => {
     try {
       setIsSubmitting(true);
-      const url = postId ? `/api/blog/posts/${postId}` : "/api/blog/posts";
+      const endpoint = postId ? `/api/blog/posts/${postId}` : "/api/blog/posts";
+      const url = getApiUrl(endpoint);
       const method = postId ? "PUT" : "POST";
 
+      console.log(`Submitting to: ${url}`);
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        credentials: "include",
         body: JSON.stringify(data),
       });
 
@@ -70,7 +77,7 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
         description: `Post ${postId ? "updated" : "created"} successfully`,
       });
 
-      mutate("/api/blog/posts");
+      mutate(getApiUrl("/api/blog/posts"));
       onSuccess?.();
     } catch (error) {
       toast({
