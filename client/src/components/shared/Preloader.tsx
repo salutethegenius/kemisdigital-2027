@@ -25,19 +25,19 @@ export default function Preloader() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="w-16 h-16 border-4 border-purple-200 rounded-full border-t-purple-600"
+          className="w-16 h-16 border-4 border-[#00A0E3]/20 rounded-full border-t-[#00A0E3]"
         />
         {/* Inner pulsing circle */}
         <motion.div
           animate={{ scale: [0.8, 1.2, 0.8] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-purple-600 rounded-full opacity-50"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-[#00A0E3] rounded-full opacity-50"
         />
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-8 text-lg font-medium text-purple-600"
+          className="mt-8 text-lg font-medium text-[#00A0E3]"
         >
           Loading...
         </motion.span>

@@ -29,7 +29,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
         >
           <CardContent className="p-0">
             <AspectRatio ratio={16 / 9}>
-              <div className="w-full h-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+              <div className="w-full h-full bg-[#00A0E3]/10 dark:bg-[#00A0E3]/20 flex items-center justify-center">
                 {project.imageUrl ? (
                   <img
                     src={project.imageUrl}
@@ -37,7 +37,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="text-purple-500">Image Coming Soon</div>
+                  <div className="text-[#00A0E3]">Image Coming Soon</div>
                 )}
               </div>
             </AspectRatio>
@@ -49,7 +49,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-purple-600 hover:text-purple-700 text-sm mt-4 inline-block"
+                  className="text-[#00A0E3] hover:text-[#0078A8] text-sm mt-4 inline-block"
                 >
                   Visit Project →
                 </a>

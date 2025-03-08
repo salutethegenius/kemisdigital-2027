@@ -72,7 +72,7 @@ export default function Chatbot() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 rounded-full p-4 bg-purple-600 hover:bg-purple-700"
+        className="fixed bottom-4 right-4 rounded-full p-4 bg-[#00A0E3] hover:bg-[#0078A8]"
       >
         <MessageSquare className="h-6 w-6" />
       </Button>
@@ -115,7 +115,7 @@ export default function Chatbot() {
                   <div
                     className={`max-w-[80%] rounded-lg p-3 ${
                       message.role === "user"
-                        ? "bg-purple-600 text-white"
+                        ? "bg-[#00A0E3] text-white"
                         : "bg-muted"
                     }`}
                   >
@@ -128,9 +128,9 @@ export default function Chatbot() {
               <div className="flex justify-start">
                 <div className="max-w-[80%] rounded-lg p-3 bg-muted">
                   <div className="flex space-x-2">
-                    <div className="w-2 h-2 rounded-full bg-purple-600 animate-bounce" />
-                    <div className="w-2 h-2 rounded-full bg-purple-600 animate-bounce [animation-delay:0.2s]" />
-                    <div className="w-2 h-2 rounded-full bg-purple-600 animate-bounce [animation-delay:0.4s]" />
+                    <div className="w-2 h-2 rounded-full bg-[#00A0E3] animate-bounce" />
+                    <div className="w-2 h-2 rounded-full bg-[#00A0E3] animate-bounce [animation-delay:0.2s]" />
+                    <div className="w-2 h-2 rounded-full bg-[#00A0E3] animate-bounce [animation-delay:0.4s]" />
                   </div>
                 </div>
               </div>

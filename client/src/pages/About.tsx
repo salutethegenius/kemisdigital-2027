@@ -99,7 +99,7 @@ export default function About() {
       </section>
 
       {/* Leadership Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-16 text-center">Meet our A-Players!</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -113,7 +113,7 @@ export default function About() {
                 <Card>
                   <CardContent className="pt-6">
                     <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                    <p className="text-purple-600 mb-2">{member.role}</p>
+                    <p className="text-[#00A0E3] mb-2">{member.role}</p>
                     <p className="text-gray-600">{member.description}</p>
                   </CardContent>
                 </Card>
@@ -138,15 +138,15 @@ export default function About() {
                 <h3 className="text-xl font-bold mb-4">AI Marketing Solutions</h3>
                 <ul className="space-y-2">
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>Predictive Analytics & Targeting</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>Automated Campaign Optimization</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>AI-Powered Content Generation</span>
                   </li>
                 </ul>
@@ -157,15 +157,15 @@ export default function About() {
                 <h3 className="text-xl font-bold mb-4">Client Benefits</h3>
                 <ul className="space-y-2">
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>Enhanced ROI Through AI Optimization</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>Real-time Performance Analytics</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#F7BE00]">•</span>
                     <span>Personalized Marketing Strategies</span>
                   </li>
                 </ul>

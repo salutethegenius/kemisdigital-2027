@@ -24,12 +24,12 @@ export default function MembershipTier({
     >
       <Card
         className={`h-full relative ${
-          recommended ? "border-gold-dark dark:border-gold border-2" : ""
+          recommended ? "border-[#F7BE00] dark:border-[#F7BE00] border-2" : ""
         }`}
       >
         {recommended && (
           <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-            <span className="bg-gold-dark dark:bg-gold text-white px-4 py-1 rounded-full text-sm">
+            <span className="bg-[#F7BE00] text-white px-4 py-1 rounded-full text-sm">
               Recommended
             </span>
           </div>
@@ -37,7 +37,7 @@ export default function MembershipTier({
         <CardHeader>
           <h3 className="text-2xl font-bold text-center">{title}</h3>
           <div className="text-center">
-            <span className="text-3xl font-bold text-gold-dark dark:text-gold">{price}</span>
+            <span className="text-3xl font-bold text-[#F7BE00]">{price}</span>
             {price !== "Contact Us" && <span className="text-gray-600 dark:text-gray-400">/year</span>}
           </div>
         </CardHeader>
@@ -47,7 +47,7 @@ export default function MembershipTier({
             {features.map((feature, index) => (
               <li key={index} className="flex items-start space-x-3">
                 <svg
-                  className="w-5 h-5 text-cyan-500 mt-1"
+                  className="w-5 h-5 text-[#00A0E3] mt-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -68,8 +68,8 @@ export default function MembershipTier({
           <Button
             className={`w-full ${
               recommended 
-                ? "bg-gold-dark hover:bg-gold dark:bg-gold dark:hover:bg-gold-dark text-white" 
-                : ""
+                ? "bg-[#F7BE00] hover:bg-[#F7BE00]/90 text-white" 
+                : "bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white"
             }`}
           >
             Get Started

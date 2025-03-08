@@ -143,12 +143,12 @@ export default function ServiceLayout({
             <Card>
               <CardContent className="pt-6 text-center">
                 <h2 className="text-2xl font-bold mb-4">Investment</h2>
-                <p className="text-3xl font-bold text-purple-600 mb-2">
+                <p className="text-3xl font-bold text-[#00A0E3] mb-2">
                   Starting at {pricing.startingAt}
                 </p>
                 <p className="text-muted-foreground mb-6">{pricing.description}</p>
                 <Link href="/contact">
-                  <Button className="bg-purple-600 hover:bg-purple-700">
+                  <Button className="bg-[#00A0E3] hover:bg-[#0078A8]">
                     Request Consultation
                   </Button>
                 </Link>

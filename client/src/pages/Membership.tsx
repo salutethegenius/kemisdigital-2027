@@ -121,7 +121,7 @@ export default function Membership() {
         animate="animate"
         className="mb-16"
       >
-        <h2 className="text-3xl font-bold mb-8 text-center">Member Benefits</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#00A0E3]">Member Benefits</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {membershipBenefits.map((benefit) => (
             <FeatureCard
@@ -136,7 +136,7 @@ export default function Membership() {
       </motion.section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Membership Tiers</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#00A0E3]">Membership Tiers</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {membershipTiers.map((tier) => (
             <MembershipTier
@@ -158,7 +158,7 @@ export default function Membership() {
       >
         <Card>
           <CardContent className="pt-6">
-            <h2 className="text-2xl font-bold mb-4">How to Join</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#00A0E3]">How to Join</h2>
             <p className="text-gray-600 mb-6">
               Becoming a member is easy! Follow these simple steps to join our community:
             </p>
@@ -170,7 +170,7 @@ export default function Membership() {
               <li>Receive welcome package and access credentials</li>
             </ol>
             <div className="flex justify-center">
-              <Button size="lg">Apply for Membership</Button>
+              <Button size="lg" className="bg-[#00A0E3] hover:bg-[#00A0E3]/90">Apply for Membership</Button>
             </div>
           </CardContent>
         </Card>
@@ -179,18 +179,18 @@ export default function Membership() {
       <section className="mb-16">
         <Card>
           <CardContent className="pt-6">
-            <h2 className="text-2xl font-bold mb-4">Membership FAQs</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#00A0E3]">Membership FAQs</h2>
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">How long is the membership term?</h3>
+                <h3 className="font-semibold mb-2 text-[#F7BE00]">How long is the membership term?</h3>
                 <p className="text-gray-600">Memberships are valid for one year from the date of joining, except for Lifetime memberships.</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Can I upgrade my membership?</h3>
+                <h3 className="font-semibold mb-2 text-[#F7BE00]">Can I upgrade my membership?</h3>
                 <p className="text-gray-600">Yes, you can upgrade your membership tier at any time. The difference in fees will be prorated.</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">What payment methods do you accept?</h3>
+                <h3 className="font-semibold mb-2 text-[#F7BE00]">What payment methods do you accept?</h3>
                 <p className="text-gray-600">We accept all major credit cards, bank transfers, and digital payment methods.</p>
               </div>
             </div>

@@ -28,7 +28,7 @@ export default function CalendarWidget({ className }: CalendarWidgetProps) {
     <div className={className}>
       <Button 
         onClick={() => setIsOpen(true)}
-        className="bg-purple-600 hover:bg-purple-700 text-white"
+        className="bg-[#00A0E3] hover:bg-[#0078A8] text-white"
       >
         Schedule Demo
       </Button>
@@ -45,7 +45,7 @@ export default function CalendarWidget({ className }: CalendarWidgetProps) {
             </p>
             <Button 
               onClick={handleScheduleRequest}
-              className="bg-purple-600 hover:bg-purple-700 text-white"
+              className="bg-[#00A0E3] hover:bg-[#0078A8] text-white"
             >
               Request Demo
             </Button>

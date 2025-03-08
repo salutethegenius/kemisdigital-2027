@@ -31,6 +31,12 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        kemis: {
+          blue: "#00A0E3",
+          "blue-dark": "#0078A8",
+          yellow: "#F7BE00",
+          "yellow-dark": "#E7A600",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

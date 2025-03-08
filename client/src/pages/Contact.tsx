@@ -158,8 +158,8 @@ export default function Contact() {
             <Card key={reason.title}>
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center">
-                  <reason.icon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h3 className="font-semibold mb-2">{reason.title}</h3>
+                  <reason.icon className="w-12 h-12 text-[#00A0E3] mb-4" />
+                  <h3 className="font-semibold mb-2 text-[#F7BE00]">{reason.title}</h3>
                   <p className="text-muted-foreground">{reason.description}</p>
                 </div>
               </CardContent>
@@ -175,7 +175,7 @@ export default function Contact() {
         >
           <Card>
             <CardContent className="pt-6">
-              <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#00A0E3]">Send us a Message</h2>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -183,7 +183,7 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">Name</FormLabel>
                         <FormControl>
                           <Input placeholder="Your name" {...field} />
                         </FormControl>
@@ -197,7 +197,7 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">Email</FormLabel>
                         <FormControl>
                           <Input placeholder="your@email.com" {...field} />
                         </FormControl>
@@ -211,13 +211,13 @@ export default function Contact() {
                     name="service"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Service Interest</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">Service Interest</FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="border-[#00A0E3] focus:ring-[#00A0E3]">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
                           </FormControl>
@@ -240,7 +240,7 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">Message</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Tell us about your AI marketing needs..."
@@ -256,7 +256,7 @@ export default function Contact() {
                   <div className="space-y-4">
                     <Button 
                       type="submit" 
-                      className="w-full bg-purple-600 hover:bg-purple-700"
+                      className="w-full bg-[#00A0E3] hover:bg-[#0085BC] text-white"
                       disabled={isLoading}
                     >
                       {isLoading ? "Sending..." : "Send Message"}
@@ -276,12 +276,12 @@ export default function Contact() {
               <Card key={item.title}>
                 <CardContent className="pt-6">
                   <div className="flex items-start space-x-4">
-                    <item.icon className="w-6 h-6 text-purple-600" />
+                    <item.icon className="w-6 h-6 text-[#00A0E3]" />
                     <div>
-                      <h3 className="font-semibold">{item.title}</h3>
+                      <h3 className="font-semibold text-[#F7BE00]">{item.title}</h3>
                       <a
                         href={item.link}
-                        className="text-gray-600 hover:text-purple-600 transition-colors"
+                        className="text-gray-600 hover:text-[#00A0E3] transition-colors"
                       >
                         {item.content}
                       </a>

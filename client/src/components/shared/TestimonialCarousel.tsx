@@ -85,9 +85,9 @@ export default function TestimonialCarousel({
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center"
           >
-            <Card className="border-none shadow-lg max-w-3xl mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
+            <Card className="border-none shadow-lg max-w-3xl mx-auto bg-gradient-to-r from-[#00A0E3]/5 to-[#0078A8]/5 dark:from-[#00A0E3]/10 dark:to-[#0078A8]/10">
               <CardContent className="pt-8 px-8 pb-8">
-                <div className="text-purple-600 dark:text-purple-400 mb-6 flex justify-center">
+                <div className="text-[#00A0E3] dark:text-[#00A0E3]/80 mb-6 flex justify-center">
                   <Quote size={48} strokeWidth={1.5} />
                 </div>
                 <p className="text-lg md:text-xl text-center mb-8 italic">
@@ -95,7 +95,7 @@ export default function TestimonialCarousel({
                 </p>
                 <div className="flex flex-col items-center">
                   {testimonials[currentIndex].image && (
-                    <div className="mb-4 w-16 h-16 overflow-hidden rounded-full border-2 border-purple-300 dark:border-purple-700">
+                    <div className="mb-4 w-16 h-16 overflow-hidden rounded-full border-2 border-[#00A0E3]/30 dark:border-[#00A0E3]/50">
                       <img 
                         src={testimonials[currentIndex].image} 
                         alt={testimonials[currentIndex].author}
@@ -122,7 +122,7 @@ export default function TestimonialCarousel({
           onClick={handlePrev} 
           variant="outline" 
           size="icon" 
-          className="rounded-full h-10 w-10 p-0 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+          className="rounded-full h-10 w-10 p-0 hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20"
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
@@ -136,8 +136,8 @@ export default function TestimonialCarousel({
               }}
               className={`h-2.5 rounded-full transition-all ${
                 index === currentIndex 
-                  ? 'w-6 bg-purple-600 dark:bg-purple-500' 
-                  : 'w-2.5 bg-purple-200 dark:bg-purple-800'
+                  ? 'w-6 bg-[#00A0E3] dark:bg-[#00A0E3]' 
+                  : 'w-2.5 bg-[#00A0E3]/20 dark:bg-[#00A0E3]/40'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
@@ -147,7 +147,7 @@ export default function TestimonialCarousel({
           onClick={handleNext} 
           variant="outline" 
           size="icon" 
-          className="rounded-full h-10 w-10 p-0 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+          className="rounded-full h-10 w-10 p-0 hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20"
         >
           <ChevronRight className="h-5 w-5" />
         </Button>

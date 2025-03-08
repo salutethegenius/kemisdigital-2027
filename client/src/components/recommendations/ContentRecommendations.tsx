@@ -158,9 +158,9 @@ Ensure response contains only a valid JSON array.`;
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full bg-purple-600 animate-pulse" />
-              <div className="w-4 h-4 rounded-full bg-purple-600 animate-pulse delay-75" />
-              <div className="w-4 h-4 rounded-full bg-purple-600 animate-pulse delay-150" />
+              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse" />
+              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse delay-75" />
+              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse delay-150" />
             </div>
           </CardContent>
         </Card>
@@ -171,7 +171,7 @@ Ensure response contains only a valid JSON array.`;
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Brain className="w-5 h-5 text-purple-600" />
+            <Brain className="w-5 h-5 text-[#00A0E3]" />
             Recommended for You
           </CardTitle>
         </CardHeader>
@@ -190,7 +190,7 @@ Ensure response contains only a valid JSON array.`;
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="font-semibold flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-purple-600" />
+                        <Sparkles className="w-4 h-4 text-[#00A0E3]" />
                         {recommendation.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -202,7 +202,7 @@ Ensure response contains only a valid JSON array.`;
                     </Button>
                   </div>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-600 dark:bg-purple-900/30">
+                    <span className="text-xs px-2 py-1 rounded-full bg-purple-100 text-[#00A0E3] dark:bg-purple-900/30">
                       {recommendation.type}
                     </span>
                     <span className="text-xs text-muted-foreground">

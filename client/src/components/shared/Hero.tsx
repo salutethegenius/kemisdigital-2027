@@ -81,8 +81,8 @@ export default function Hero({
     const buttonProps = {
       size: "lg" as const,
       className: cta === primaryCTA 
-        ? "bg-purple-600 hover:bg-purple-700 text-white"
-        : "border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/10",
+        ? "bg-[#00A0E3] hover:bg-[#0078A8] text-white"
+        : "border-[#00A0E3] text-[#00A0E3] hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20",
       variant: cta === primaryCTA ? "default" as const : "outline" as const,
       onClick: cta.onClick
     };

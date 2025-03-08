@@ -74,19 +74,19 @@ export default function Events() {
                     <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
                     <div className="flex flex-wrap gap-4 text-gray-600">
                       <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-2 text-purple-500" />
+                        <Calendar className="w-4 h-4 mr-2 text-[#00A0E3]" />
                         {event.date}
                       </div>
                       <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-2 text-purple-500" />
+                        <MapPin className="w-4 h-4 mr-2 text-[#00A0E3]" />
                         {event.location}
                       </div>
                       <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-2 text-purple-500" />
+                        <Clock className="w-4 h-4 mr-2 text-[#00A0E3]" />
                         {event.time}
                       </div>
                       <div className="flex items-center">
-                        <Users className="w-4 h-4 mr-2 text-purple-500" />
+                        <Users className="w-4 h-4 mr-2 text-[#00A0E3]" />
                         {event.capacity}
                       </div>
                     </div>

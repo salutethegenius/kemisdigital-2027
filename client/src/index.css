@@ -46,11 +46,12 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Dark blue from the logo spectrum: #001a25 */
+    --background: 200 100% 7%;
     --foreground: 0 0% 100%;
-    --card: 222.2 47.4% 11.2%;
+    --card: 200 100% 5%;
     --card-foreground: 0 0% 100%;
-    --popover: 222.2 47.4% 11.2%;
+    --popover: 200 100% 5%;
     --popover-foreground: 0 0% 100%;
     
     /* Blue from logo: #00A0E3 (brighter in dark mode) */
@@ -61,8 +62,8 @@
     --secondary: 197 70% 25%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 200 60% 15%;
+    --muted-foreground: 215 20.2% 75%;
     
     /* Yellow/Gold from logo: #F7BE00 (slightly brighter in dark mode) */
     --accent: 45 100% 50%;
@@ -71,8 +72,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 200 50% 15%;
+    --input: 200 50% 15%;
     --ring: 197 100% 50%;
     
     /* Chart colors based on brand palette - dark theme */

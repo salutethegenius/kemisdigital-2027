@@ -82,13 +82,13 @@ export default function Advocacy() {
         <h2 className="text-3xl font-bold mb-8 text-center">Our Advocacy Goals</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {advocacyGoals.map((goal) => (
-            <Card key={goal.title}>
+            <Card key={goal.title} className="border-2 border-[#00A0E3]/10 dark:border-[#00A0E3]/30 hover:border-[#00A0E3]/30 hover:shadow-md transition-all duration-300">
               <CardContent className="pt-6">
                 <div className="flex items-start space-x-4">
-                  <goal.icon className="w-6 h-6 text-cyan-500 mt-1" />
+                  <goal.icon className="w-6 h-6 text-[#00A0E3] mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">{goal.title}</h3>
-                    <p className="text-gray-600">{goal.description}</p>
+                    <p className="text-muted-foreground">{goal.description}</p>
                   </div>
                 </div>
               </CardContent>
@@ -125,19 +125,19 @@ export default function Advocacy() {
             <h2 className="text-2xl font-bold mb-4">Policy Positions</h2>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#00A0E3]">•</span>
                 <span>Support for data privacy regulations that protect consumers while enabling business growth</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#00A0E3]">•</span>
                 <span>Advocacy for digital infrastructure development in the Bahamas</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#00A0E3]">•</span>
                 <span>Promotion of fair competition in digital advertising</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#00A0E3]">•</span>
                 <span>Support for small business digital transformation</span>
               </li>
             </ul>
@@ -152,19 +152,19 @@ export default function Advocacy() {
             </p>
             <ul className="space-y-4 mb-6">
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#F7BE00]">•</span>
                 <span>Join our advocacy committees</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#F7BE00]">•</span>
                 <span>Participate in industry surveys</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#F7BE00]">•</span>
                 <span>Attend policy forums</span>
               </li>
               <li className="flex items-start space-x-3">
-                <span className="text-cyan-500">•</span>
+                <span className="text-[#F7BE00]">•</span>
                 <span>Share your expertise</span>
               </li>
             </ul>
@@ -184,7 +184,7 @@ export default function Advocacy() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00A0E3]"
               />
               <Button>Subscribe</Button>
             </div>
