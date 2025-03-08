@@ -50,6 +50,7 @@ export default function LatestNews() {
         title="Latest News"
         description="Stay updated with KemisDigital's latest developments, success stories, and upcoming events."
         showCTA={false}
+        pageContext="tourism"
       />
 
       <div className="py-12 lg:py-16">

@@ -50,6 +50,7 @@ export default function ServiceLayout({
         title={title}
         description={description}
         showCTA={false}
+        pageContext="tourism"
       />
 
       <div className="container mx-auto py-12">

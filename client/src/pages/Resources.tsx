@@ -1,209 +1,257 @@
 import Hero from "@/components/shared/Hero";
-import { Card, CardContent } from "@/components/ui/card";
-import ContentRecommendations from "@/components/recommendations/ContentRecommendations";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { Book, Video, FileText, Wrench } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Download, ExternalLink, ChevronRight } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
 
 export default function Resources() {
-  const tools = [
+  // Sample resources
+  const resources = [
     {
-      category: "AI Tools",
-      items: [
-        { name: "ChatGPT", description: "AI-powered content generation and assistance" },
-        { name: "Notion AI", description: "Intelligent workspace and note-taking" },
-        { name: "Copy.ai", description: "AI copywriting and content creation" }
-      ]
+      title: "Digital Marketing Playbook",
+      description: "A comprehensive guide to building effective digital marketing strategies for businesses of all sizes.",
+      type: "guide",
+      format: "PDF",
+      size: "4.2 MB",
+      downloadLink: "#",
+      isFeatured: true,
     },
     {
-      category: "Analytics",
-      items: [
-        { name: "Google Analytics", description: "Web analytics and tracking" },
-        { name: "Hotjar", description: "User behavior analysis and heatmaps" },
-        { name: "SEMrush", description: "SEO and competitive analysis" }
-      ]
+      title: "SEO Best Practices 2025",
+      description: "Stay ahead of the curve with the latest search engine optimization techniques and algorithm changes.",
+      type: "whitepaper",
+      format: "PDF",
+      size: "2.8 MB",
+      downloadLink: "#",
+      isFeatured: true,
     },
     {
-      category: "Social Media",
-      items: [
-        { name: "Hootsuite", description: "Social media management platform" },
-        { name: "Buffer", description: "Social media scheduling and analytics" },
-        { name: "Canva", description: "Graphic design for social media" }
-      ]
-    }
+      title: "Social Media Content Calendar Template",
+      description: "Plan your social media content strategy with this ready-to-use template.",
+      type: "template",
+      format: "XLSX",
+      size: "1.5 MB",
+      downloadLink: "#",
+      isFeatured: false,
+    },
+    {
+      title: "Email Marketing Automation Workflow",
+      description: "Visualize and implement effective email marketing automation sequences.",
+      type: "template",
+      format: "PDF",
+      size: "3.1 MB",
+      downloadLink: "#",
+      isFeatured: false,
+    },
+    {
+      title: "Digital Advertising Benchmark Report 2025",
+      description: "Industry benchmarks for digital advertising performance across multiple channels.",
+      type: "report",
+      format: "PDF",
+      size: "5.7 MB",
+      downloadLink: "#",
+      isFeatured: true,
+    },
+    {
+      title: "Customer Journey Mapping Toolkit",
+      description: "Visualize and optimize your customer's experience with these mapping tools.",
+      type: "toolkit",
+      format: "ZIP",
+      size: "8.3 MB",
+      downloadLink: "#",
+      isFeatured: false,
+    },
   ];
+
+  // Webinars
+  const webinars = [
+    {
+      title: "Mastering AI in Marketing Automation",
+      date: "March 15, 2025",
+      host: "Kenneth Moncur",
+      description: "Learn how to leverage AI to create sophisticated marketing automation workflows.",
+      registerLink: "#",
+      isUpcoming: true,
+    },
+    {
+      title: "Local SEO Strategies for Bahamian Businesses",
+      date: "March 22, 2025",
+      host: "Jeffery Ujumadu",
+      description: "Discover techniques to improve your local search visibility in the Bahamas.",
+      registerLink: "#",
+      isUpcoming: true,
+    },
+    {
+      title: "Data-Driven Content Marketing",
+      date: "February 28, 2025",
+      host: "Mauro Hurtado",
+      description: "How to use data analytics to guide your content marketing decisions.",
+      recordingLink: "#",
+      isUpcoming: false,
+    },
+  ];
+
+  function getTypeBadgeColor(type: string) {
+    const colors: Record<string, string> = {
+      guide: "bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100",
+      whitepaper: "bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-purple-100",
+      template: "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100",
+      report: "bg-amber-100 text-amber-800 dark:bg-amber-800 dark:text-amber-100",
+      toolkit: "bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-100",
+    };
+    return colors[type.toLowerCase()] || "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100";
+  }
 
   return (
     <div>
       <Hero
         title="Resources"
-        description="Access our comprehensive collection of digital marketing tools, guides, and educational materials."
+        description="Access our library of digital marketing guides, templates, and reports to help you grow your business."
         showCTA={false}
-        pageContext="professional"
+        pageContext="tourism"
       />
-      
-      <div className="mb-8">
-        <ContentRecommendations />
-      </div>
 
-      <Tabs defaultValue="tools" className="mb-16">
-        <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 mb-8">
-          <TabsTrigger value="tools">Marketing Tools</TabsTrigger>
-          <TabsTrigger value="guides">Guides & Templates</TabsTrigger>
-          <TabsTrigger value="webinars">Webinars</TabsTrigger>
-          <TabsTrigger value="research">Research</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="tools">
-          <motion.div
+      {/* Featured Resources */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Featured Resources</h2>
+          <motion.div 
             variants={staggerChildren}
             initial="initial"
             animate="animate"
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            {tools.map((category) => (
-              <Card key={category.category}>
-                <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-4 flex items-center">
-                    <Wrench className="w-5 h-5 mr-2 text-[#00A0E3]" />
-                    {category.category}
-                  </h3>
-                  <ul className="space-y-4">
-                    {category.items.map((tool) => (
-                      <li key={tool.name}>
-                        <h4 className="font-semibold">{tool.name}</h4>
-                        <p className="text-gray-600 text-sm">{tool.description}</p>
-                      </li>
-                    ))}
-                  </ul>
+            {resources
+              .filter(resource => resource.isFeatured)
+              .map((resource, index) => (
+                <Card key={index} className="overflow-hidden border-2 border-[#00A0E3]/10 hover:border-[#00A0E3]/30 transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-start mb-3">
+                      <Badge variant="outline" className={getTypeBadgeColor(resource.type)}>
+                        {resource.type}
+                      </Badge>
+                      <span className="text-sm text-gray-500">{resource.format} • {resource.size}</span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{resource.title}</h3>
+                    <p className="text-gray-600 mb-6">{resource.description}</p>
+                    <Button asChild variant="default" className="w-full">
+                      <a href={resource.downloadLink}>
+                        <Download className="h-4 w-4 mr-2" />
+                        Download
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Upcoming Webinars */}
+      <section className="py-16 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Upcoming Webinars</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {webinars
+              .filter(webinar => webinar.isUpcoming)
+              .map((webinar, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <Card>
+                    <CardContent className="p-6">
+                      <Badge variant="secondary" className="mb-3">
+                        {webinar.date}
+                      </Badge>
+                      <h3 className="text-xl font-bold mb-2">{webinar.title}</h3>
+                      <p className="text-[#00A0E3] mb-2">Hosted by: {webinar.host}</p>
+                      <p className="text-gray-600 mb-6">{webinar.description}</p>
+                      <Button asChild variant="default">
+                        <a href={webinar.registerLink}>
+                          Register Now
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Resources */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Resource Library</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {resources.map((resource, index) => (
+              <Card key={index} className="flex flex-col md:flex-row overflow-hidden">
+                <CardContent className="p-6 flex-1">
+                  <div className="flex justify-between items-center mb-3">
+                    <Badge variant="outline" className={getTypeBadgeColor(resource.type)}>
+                      {resource.type}
+                    </Badge>
+                    <span className="text-sm text-gray-500">{resource.format}</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{resource.title}</h3>
+                  <p className="text-gray-600 mb-4 text-sm">{resource.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500">{resource.size}</span>
+                    <Button asChild variant="ghost" size="sm">
+                      <a href={resource.downloadLink} className="flex items-center">
+                        <Download className="h-4 w-4 mr-1" />
+                        Download
+                      </a>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
-          </motion.div>
-        </TabsContent>
+          </div>
+        </div>
+      </section>
 
-        <TabsContent value="guides">
-          <motion.div
-            variants={staggerChildren}
-            initial="initial"
-            animate="animate"
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Book className="w-5 h-5 mr-2 text-[#00A0E3]" />
-                  Marketing Guides
-                </h3>
-                <ul className="space-y-2">
-                  <li>Social Media Strategy Guide</li>
-                  <li>Email Marketing Best Practices</li>
-                  <li>SEO Optimization Checklist</li>
-                  <li>Content Marketing Playbook</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FileText className="w-5 h-5 mr-2 text-[#00A0E3]" />
-                  Templates
-                </h3>
-                <ul className="space-y-2">
-                  <li>Marketing Plan Template</li>
-                  <li>Social Media Calendar</li>
-                  <li>Content Brief Template</li>
-                  <li>Campaign Tracking Sheet</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </TabsContent>
-
-        <TabsContent value="webinars">
-          <motion.div
-            variants={staggerChildren}
-            initial="initial"
-            animate="animate"
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Video className="w-5 h-5 mr-2 text-[#00A0E3]" />
-                  Upcoming Webinars
-                </h3>
-                <ul className="space-y-4">
-                  <li>
-                    <h4 className="font-semibold">Digital Marketing Trends 2024</h4>
-                    <p className="text-gray-600">Date: March 15, 2024</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold">Advanced SEO Techniques</h4>
-                    <p className="text-gray-600">Date: April 1, 2024</p>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4">Recorded Sessions</h3>
-                <ul className="space-y-4">
-                  <li>
-                    <h4 className="font-semibold">Social Media Marketing Masterclass</h4>
-                    <p className="text-gray-600">Duration: 1h 30min</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold">Email Marketing Automation</h4>
-                    <p className="text-gray-600">Duration: 1h 15min</p>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </TabsContent>
-
-        <TabsContent value="research">
-          <motion.div
-            variants={staggerChildren}
-            initial="initial"
-            animate="animate"
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4">Industry Reports</h3>
-                <ul className="space-y-2">
-                  <li>Bahamas Digital Marketing Report 2024</li>
-                  <li>Social Media Usage Statistics</li>
-                  <li>E-commerce Trends Analysis</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4">Case Studies</h3>
-                <ul className="space-y-2">
-                  <li>Local Business Success Stories</li>
-                  <li>Campaign Performance Analysis</li>
-                  <li>ROI Optimization Studies</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4">Market Research</h3>
-                <ul className="space-y-2">
-                  <li>Consumer Behavior Insights</li>
-                  <li>Digital Adoption Trends</li>
-                  <li>Competitive Analysis</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </TabsContent>
-      </Tabs>
+      {/* Webinar Recordings */}
+      <section className="py-16 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Webinar Recordings</h2>
+          <div className="space-y-6">
+            {webinars
+              .filter(webinar => !webinar.isUpcoming)
+              .map((webinar, index) => (
+                <Card key={index} className="overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center mb-3">
+                      <Badge variant="secondary">
+                        Recorded: {webinar.date}
+                      </Badge>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{webinar.title}</h3>
+                    <p className="text-[#00A0E3] mb-2">Hosted by: {webinar.host}</p>
+                    <p className="text-gray-600 mb-6">{webinar.description}</p>
+                    <Button asChild variant="default">
+                      <a href={webinar.recordingLink} className="flex items-center">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Watch Recording
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button variant="outline" className="group">
+              View All Webinar Recordings
+              <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

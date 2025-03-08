@@ -145,6 +145,7 @@ export default function Contact() {
         title="Contact KemisDigital"
         description="Get in touch with our AI marketing experts to transform your digital presence and drive exceptional results."
         showCTA={false}
+        pageContext="tourism"
       />
 
       <div className="container mx-auto py-12">

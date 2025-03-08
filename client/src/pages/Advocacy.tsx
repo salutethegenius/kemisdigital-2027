@@ -70,7 +70,7 @@ export default function Advocacy() {
         title="Advocacy"
         description="Supporting and advancing the interests of digital marketers while promoting ethical practices and industry growth in the Bahamas."
         showCTA={false}
-        pageContext="ngo"
+        pageContext="tourism"
       />
 
       <motion.section

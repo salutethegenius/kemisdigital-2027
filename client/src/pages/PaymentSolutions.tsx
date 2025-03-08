@@ -11,6 +11,7 @@ const PaymentSolutions = () => {
         title="Payment Solutions"
         description="Secure and efficient payment processing solutions for your business"
         showCTA={false}
+        pageContext="tourism"
       />
       <div className="container mx-auto px-4 py-12">
         <motion.div
