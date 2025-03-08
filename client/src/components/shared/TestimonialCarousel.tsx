@@ -90,9 +90,23 @@ export default function TestimonialCarousel({
                 <div className="text-[#00A0E3] dark:text-[#00A0E3]/80 mb-6 flex justify-center">
                   <Quote size={48} strokeWidth={1.5} />
                 </div>
-                <p className="text-lg md:text-xl text-center mb-8 italic">
-                  {testimonials[currentIndex].quote}
-                </p>
+                {testimonials[currentIndex].quote.startsWith('https://youtu.be/') || testimonials[currentIndex].quote.startsWith('https://www.youtube.com/') ? (
+                  <div className="aspect-video w-full max-w-xl mx-auto mb-8">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${testimonials[currentIndex].quote.includes('youtu.be/') ? 
+                        testimonials[currentIndex].quote.split('youtu.be/')[1] : 
+                        testimonials[currentIndex].quote.split('v=')[1]}`}
+                      title="Video testimonial"
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ) : (
+                  <p className="text-lg md:text-xl text-center mb-8 italic">
+                    {testimonials[currentIndex].quote}
+                  </p>
+                )}
                 <div className="flex flex-col items-center">
                   {testimonials[currentIndex].image && (
                     <div className="mb-4 w-16 h-16 overflow-hidden rounded-full border-2 border-[#00A0E3]/30 dark:border-[#00A0E3]/50">

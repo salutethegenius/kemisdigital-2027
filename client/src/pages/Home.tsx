@@ -92,27 +92,27 @@ const aiServices = [
   const testimonials = [
     {
       id: 1,
-      quote: "KemisDigital completely transformed our digital presence. Their AI-powered approach to marketing helped us increase our bookings by over 200% in just six months.",
-      author: "Sarah Johnson",
-      role: "Marketing Director",
-      company: "Paradise Bay Resort",
-      image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+      quote: "KemisDigital has been a true game-changer for my non-profit! Since the launch of our landing page in October 2024, we've captured over 1,200 leads and achieved an impressive increase in social media engagement. Their expertise and dedication have elevated our digital presence and propelled us to new heights. We look forward to a long relationship with KemisDigital.",
+      author: "MAP Bahamas",
+      role: "CEO",
+      company: "MAP Bahamas Non-Profit",
+      image: "https://lightning.kemisdigital.com/assets/map-bahamas-ceo.jpeg"
     },
     {
       id: 2,
-      quote: "The team at KemisDigital understood our needs as a local startup. Their strategies were tailored to our market and delivered measurable results that exceeded our expectations.",
-      author: "Michael Thompson",
-      role: "Founder & CEO",
-      company: "Bahamas Tech Solutions",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+      quote: "Kenneth Moncur is a dynamic digital sales consultant with a global sales agency. He specializes in helping businesses generate high-quality leads and convert them into long-term clients. His innovative approaches to sales and client engagement have consistently delivered measurable results for our partners.",
+      author: "Nathaniel Butler, CFP",
+      role: "CEO",
+      company: "Drewber Solutions",
+      image: "https://lightning.kemisdigital.com/assets/nat%20(1).jpg"
     },
     {
       id: 3,
-      quote: "As an NGO with limited resources, we needed a marketing partner who could maximize our impact. KemisDigital helped us reach more donors and beneficiaries than we ever thought possible.",
-      author: "Lisa Williams",
-      role: "Executive Director",
-      company: "Bahamas Community Foundation",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+      quote: "https://youtu.be/YQWbgUtp-4A",
+      author: "Video Testimonial",
+      role: "Client",
+      company: "KemisDigital",
+      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
     }
   ];
 

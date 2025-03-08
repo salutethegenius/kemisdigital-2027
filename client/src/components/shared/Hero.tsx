@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import { MouseIcon, ChevronDown } from "lucide-react";
 import Preloader from "./Preloader";
 
 interface CTAButton {
@@ -104,19 +105,10 @@ export default function Hero({
     return <Preloader />;
   }
 
-  // Function to get gradient overlay based on page context using KemisDigital brand colors
-  const getOverlayGradient = () => {
-    // Using brand colors: Blue #00A0E3 and Yellow/Gold #F7BE00
-    switch (pageContext) {
-      case 'ngo':
-        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#00A0E3]/60'; // Blue brand theme for NGO
-      case 'professional':
-        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#0078A8]/60'; // Blue brand theme for professional
-      case 'tourism':
-        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#F7BE00]/60'; // Blue-Yellow brand theme for tourism/Bahamas
-      default:
-        return 'bg-gradient-to-b from-[#00A0E3]/80 to-[#00A0E3]/70'; // Default blue overlay
-    }
+  // Function to get simple dark tint overlay
+  const getOverlayTint = () => {
+    // Simple dark tint with medium opacity
+    return 'bg-black/60'; // 60% opacity black overlay
   };
 
   return (
@@ -124,7 +116,7 @@ export default function Hero({
       {/* Background media - prioritize video, fall back to image if video fails or isn't provided */}
       {((videoBackground && !videoError) || (heroImage && !imageError)) && (
         <div className="absolute inset-0 w-full h-full">
-          <div className={`absolute inset-0 ${getOverlayGradient()} z-10`} />
+          <div className={`absolute inset-0 ${getOverlayTint()} z-10`} />
           
           {/* Video background */}
           {videoBackground && !videoError && (
@@ -190,6 +182,49 @@ export default function Hero({
           </motion.div>
         )}
       </div>
+      
+      {/* Animated Scroll Icon */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ 
+          opacity: 1, 
+          y: 0,
+        }}
+        transition={{ 
+          delay: 1.2,
+          duration: 0.5 
+        }}
+        onClick={() => window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        })}
+      >
+        <motion.div
+          animate={{ 
+            y: [0, 12, 0],
+          }}
+          transition={{ 
+            repeat: Infinity,
+            duration: 1.5,
+            ease: "easeInOut" 
+          }}
+          className="flex flex-col items-center"
+        >
+          <div className={`p-2 rounded-full border-2 ${
+            (videoBackground && !videoError) || (heroImage && !imageError) 
+              ? 'border-white text-white' 
+              : 'border-[#00A0E3] text-[#00A0E3]'
+          } mb-2`}>
+            <MouseIcon className="w-5 h-5" />
+          </div>
+          <ChevronDown className={`w-5 h-5 ${
+            (videoBackground && !videoError) || (heroImage && !imageError) 
+              ? 'text-white' 
+              : 'text-[#00A0E3]'
+          }`} />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
