@@ -41,6 +41,7 @@ export async function setupVite(app: Express, server: Server) {
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
+  const oneYear = 31536000; // Cache for one year in seconds
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -48,7 +49,21 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Serve static assets with proper caching headers
+  app.use(express.static(distPath, {
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, path) => {
+      // Set cache control headers based on file type
+      if (path.match(/\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+        // Cache static assets for 1 year (aggressive caching)
+        res.setHeader('Cache-Control', `public, max-age=${oneYear}, immutable`);
+      } else {
+        // Other static assets - cache for 1 day
+        res.setHeader('Cache-Control', 'public, max-age=86400');
+      }
+    }
+  }));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {

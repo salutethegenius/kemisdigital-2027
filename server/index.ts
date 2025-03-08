@@ -3,9 +3,10 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic } from "./vite";
 import { createServer } from "http";
 import cors from 'cors';
+import compression from 'compression';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Improved error handling for uncaught exceptions and unhandled rejections
 process.on('uncaughtException', (error: Error) => {
@@ -24,6 +25,20 @@ console.log('[Server] Environment:', process.env.NODE_ENV);
 console.log('[Server] Port:', PORT);
 console.log('[Server] REPL_SLUG:', process.env.REPL_SLUG);
 console.log('[Server] REPL_OWNER:', process.env.REPL_OWNER);
+
+// Enable GZIP compression
+app.use(compression());
+
+// Set cache control headers
+app.use((req, res, next) => {
+  // Set Expires headers for static assets
+  if (req.url.match(/\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+    // Cache static assets for 7 days (604800 seconds)
+    res.setHeader('Cache-Control', 'public, max-age=604800');
+    res.setHeader('Expires', new Date(Date.now() + 604800000).toUTCString());
+  }
+  next();
+});
 
 // Enhanced CORS configuration with better error handling and debugging
 const corsOptions = {
