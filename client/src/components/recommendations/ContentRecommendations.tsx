@@ -202,7 +202,7 @@ Ensure response contains only a valid JSON array.`;
                     </Button>
                   </div>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-purple-100 text-[#00A0E3] dark:bg-purple-900/30">
+                    <span className="text-xs px-2 py-1 rounded-full bg-[#00A0E3]/10 text-[#00A0E3] dark:bg-[#00A0E3]/20">
                       {recommendation.type}
                     </span>
                     <span className="text-xs text-muted-foreground">

@@ -226,7 +226,7 @@ export default function WebAppDev() {
       />
 
       {/* Portfolio Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Our Recent Work</h2>
           <p className="text-muted-foreground text-lg text-center max-w-2xl mx-auto mb-16">

@@ -91,7 +91,7 @@ export default function Events() {
                       </div>
                     </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-[#00A0E3]/10 text-[#00A0E3]">
                     {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
                   </span>
                 </div>
@@ -101,7 +101,7 @@ export default function Events() {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
                 <Button variant="outline">Learn More</Button>
-                <Button className="bg-purple-600 hover:bg-purple-700">Register Now</Button>
+                <Button className="bg-[#00A0E3] hover:bg-[#0085bb]">Register Now</Button>
               </CardFooter>
             </Card>
           </motion.div>
@@ -119,9 +119,9 @@ export default function Events() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00A0E3]"
               />
-              <Button className="bg-purple-600 hover:bg-purple-700">Subscribe</Button>
+              <Button className="bg-[#00A0E3] hover:bg-[#0085bb]">Subscribe</Button>
             </div>
           </CardContent>
         </Card>

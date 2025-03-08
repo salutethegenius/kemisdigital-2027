@@ -76,7 +76,7 @@ export default function LatestNews() {
                   <p className="text-muted-foreground mb-4">{item.description}</p>
                   <a
                     href={item.link}
-                    className="inline-flex items-center text-purple-600 hover:text-purple-700"
+                    className="inline-flex items-center text-[#00A0E3] hover:text-[#0085bb]"
                   >
                     Read More <ArrowRight className="w-4 h-4 ml-1" />
                   </a>

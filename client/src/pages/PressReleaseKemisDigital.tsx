@@ -18,7 +18,7 @@ export default function PressReleaseKemisDigital() {
       />
       <div className="container mx-auto px-4 py-12">
         <Link href="/latest-news">
-          <div className="inline-flex items-center text-purple-600 hover:text-purple-700 mb-6">
+          <div className="inline-flex items-center text-[#00A0E3] hover:text-[#0085bb] mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Latest News
           </div>
@@ -52,7 +52,7 @@ export default function PressReleaseKemisDigital() {
                   </div>
                 </div>
                 
-                <blockquote className="border-l-4 border-purple-500 pl-4 italic my-6">
+                <blockquote className="border-l-4 border-[#00A0E3] pl-4 italic my-6">
                   "We've launched KemisDigital.com for our KemisDigital AI marketing firm that is focused on increasing digital sales, geared towards the tourism and NGO sectors and releasing the KemisEMAIL online store at kemis.net," said Moncur.
                 </blockquote>
 
@@ -68,7 +68,7 @@ export default function PressReleaseKemisDigital() {
 
                 <h3 className="text-xl font-semibold mt-8 mb-4">Current Offerings</h3>
 
-                <p>The digital agency is currently running a landing page special, which you can learn more about at <span className="text-purple-600">www.lightning.kemisdigital.com</span>. The founder is passionate about sharing knowledge through "The Bahamas Digital Marketing Association," a platform geared towards digitisation in the local SBs, SMEs and NGO sectors.</p>
+                <p>The digital agency is currently running a landing page special, which you can learn more about at <span className="text-[#00A0E3]">www.lightning.kemisdigital.com</span>. The founder is passionate about sharing knowledge through "The Bahamas Digital Marketing Association," a platform geared towards digitisation in the local SBs, SMEs and NGO sectors.</p>
 
                 <p>Kemis Group of Companies is more than a marketing corporation - its companies support moving forward with innovation, community engagement, and digitalisation for Bahamian businesses. Registered in The Bahamas, USA, and Europe, they offer e-commerce solutions like Stripe payment and automated marketing that help keep their clients on the cutting edge of technology and ease of doing business with customers. They can process credit cards for small Bahamian companies and professionals via Stripe.</p>
 

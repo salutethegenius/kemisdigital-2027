@@ -131,7 +131,7 @@ const aiServices = [
       />
 
       {/* Our Mission Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <div className="container mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -143,7 +143,7 @@ const aiServices = [
             <h2 className="text-3xl font-bold mb-8 relative">
               Our Mission
               <motion.div 
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 bg-purple-500" 
+                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 bg-[#00A0E3]" 
                 initial={{ width: 0 }}
                 whileInView={{ width: "60px" }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -161,8 +161,8 @@ const aiServices = [
       <section id="ai-marketing-services" className="py-24 bg-background relative">
         {/* Background decoration */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-16 -left-16 w-64 h-64 bg-purple-200 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute bottom-16 right-16 w-96 h-96 bg-purple-200 dark:bg-purple-900/20 rounded-full blur-3xl opacity-40"></div>
+          <div className="absolute -top-16 -left-16 w-64 h-64 bg-[#00A0E3]/20 dark:bg-[#00A0E3]/20 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute bottom-16 right-16 w-96 h-96 bg-[#F7BE00]/20 dark:bg-[#F7BE00]/20 rounded-full blur-3xl opacity-40"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -176,7 +176,7 @@ const aiServices = [
             <h2 className="text-3xl font-bold mb-6 inline-block relative">
               AI Marketing Services
               <motion.div 
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 bg-purple-500" 
+                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 bg-[#00A0E3]" 
                 initial={{ width: 0 }}
                 whileInView={{ width: "60px" }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -204,23 +204,23 @@ const aiServices = [
                 viewport={{ once: true }}
               >
                 <Card
-                  className="border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600 overflow-hidden group"
+                  className="border-2 border-[#00A0E3]/20 dark:border-[#00A0E3]/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-[#00A0E3] dark:hover:border-[#00A0E3] overflow-hidden group"
                 >
                   {/* Card top colorful decoration bar */}
-                  <div className="h-2 bg-gradient-to-r from-purple-400 to-purple-600 transform origin-left transition-all duration-500 group-hover:scale-x-110"></div>
+                  <div className="h-2 bg-gradient-to-r from-[#00A0E3] to-[#F7BE00] transform origin-left transition-all duration-500 group-hover:scale-x-110"></div>
                   
                   <CardHeader>
                     <div className="flex items-center gap-4">
-                      <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                        <service.icon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                      <div className="p-3 bg-[#00A0E3]/10 dark:bg-[#00A0E3]/20 rounded-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <service.icon className="w-6 h-6 text-[#00A0E3] dark:text-[#00A0E3]" />
                       </div>
                       <CardTitle className="text-xl">{service.title}</CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
                     {/* Pricing Section - Now at the top */}
-                    <div className="mb-6 bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
-                      <h4 className="font-semibold text-xl text-purple-600 mb-2">Investment Plans:</h4>
+                    <div className="mb-6 bg-[#F7BE00]/10 dark:bg-[#F7BE00]/10 p-4 rounded-lg">
+                      <h4 className="font-semibold text-xl text-[#00A0E3] mb-2">Investment Plans:</h4>
                       <div className="space-y-2">
                         {service.pricing.split('\n').map((plan, index) => (
                           <div key={index} className="text-lg">
@@ -244,8 +244,8 @@ const aiServices = [
                             viewport={{ once: true }}
                             className="flex items-center gap-2"
                           >
-                            <div className="p-1 bg-purple-100 dark:bg-purple-900/30 rounded-full">
-                              <Sparkles className="w-3 h-3 text-purple-600 flex-shrink-0" />
+                            <div className="p-1 bg-[#F7BE00]/20 dark:bg-[#F7BE00]/30 rounded-full">
+                              <Sparkles className="w-3 h-3 text-[#F7BE00] flex-shrink-0" />
                             </div>
                             <span>{benefit}</span>
                           </motion.li>
@@ -253,13 +253,13 @@ const aiServices = [
                       </ul>
                     </div>
 
-                    <div className="mb-6 p-3 bg-purple-50 dark:bg-purple-900/10 rounded-lg border-l-4 border-purple-500">
+                    <div className="mb-6 p-3 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10 rounded-lg border-l-4 border-[#00A0E3]">
                       <h4 className="font-semibold mb-2">Success Story:</h4>
                       <p className="text-sm text-muted-foreground italic">{service.caseStudy}</p>
                     </div>
 
                     <Link href="/services">
-                      <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors group-hover:scale-105 transition-transform duration-300">
+                      <Button className="w-full bg-[#00A0E3] hover:bg-[#0085bb] transition-colors group-hover:scale-105 transition-transform duration-300">
                         Learn More
                       </Button>
                     </Link>
@@ -278,7 +278,7 @@ const aiServices = [
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-6 inline-block relative">
               Client Testimonials
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-purple-500"></div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-[#00A0E3]"></div>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Hear what our clients have to say about their experience working with KemisDigital.
@@ -290,11 +290,11 @@ const aiServices = [
       </section>
       
       {/* Success Metrics Section (Our Impact) */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold text-center mb-16 inline-block relative">
             Our Impact
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-purple-500"></div>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-[#00A0E3]"></div>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {successMetrics.map((metric, index) => (
@@ -305,12 +305,12 @@ const aiServices = [
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="text-center transition-all duration-300 hover:shadow-lg border-2 border-purple-100 dark:border-purple-800 hover:border-purple-300 dark:hover:border-purple-600">
+                <Card className="text-center transition-all duration-300 hover:shadow-lg border-2 border-[#00A0E3]/20 dark:border-[#00A0E3]/30 hover:border-[#00A0E3] dark:hover:border-[#00A0E3]">
                   <CardContent className="pt-6">
-                    <div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                      <metric.icon className="w-8 h-8 text-purple-600 mx-auto" />
+                    <div className="p-4 bg-[#00A0E3]/10 dark:bg-[#00A0E3]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                      <metric.icon className="w-8 h-8 text-[#00A0E3] mx-auto" />
                     </div>
-                    <div className="text-4xl font-bold text-purple-600 mb-2">{metric.metric}</div>
+                    <div className="text-4xl font-bold text-[#00A0E3] mb-2">{metric.metric}</div>
                     <h4 className="text-xl font-semibold mb-2">{metric.label}</h4>
                     <p className="text-muted-foreground">{metric.description}</p>
                   </CardContent>
@@ -329,7 +329,7 @@ const aiServices = [
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Target className="w-6 h-6 text-purple-500" />
+                  <Target className="w-6 h-6 text-[#00A0E3]" />
                   Leadership
                 </CardTitle>
               </CardHeader>
@@ -343,7 +343,7 @@ const aiServices = [
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-purple-500" />
+                  <Sparkles className="w-6 h-6 text-[#F7BE00]" />
                   Expertise
                 </CardTitle>
               </CardHeader>
@@ -359,14 +359,14 @@ const aiServices = [
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-24 bg-purple-50 dark:bg-purple-900/10">
+      <section className="py-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <Card className="max-w-2xl mx-auto">
           <CardContent className="pt-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Marketing?</h2>
             <p className="mb-6">Get a free consultation and discover how our AI solutions can revolutionize your marketing strategy.</p>
             <div className="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
               <Input type="email" placeholder="Enter your email" />
-              <Button className="bg-purple-600 hover:bg-purple-700 whitespace-nowrap">Schedule Consultation</Button>
+              <Button className="bg-[#00A0E3] hover:bg-[#0085bb] whitespace-nowrap">Schedule Consultation</Button>
             </div>
           </CardContent>
         </Card>

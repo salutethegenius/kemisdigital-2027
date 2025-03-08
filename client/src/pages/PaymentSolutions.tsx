@@ -24,7 +24,7 @@ const PaymentSolutions = () => {
 
           {/* Initial Setup Section */}
           <Card className="p-6 mb-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Initial Setup Fees</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Initial Setup Fees</h3>
             <ul className="space-y-3">
               <li className="flex justify-between items-center">
                 <span>Account Creation & Configuration</span>
@@ -40,14 +40,14 @@ const PaymentSolutions = () => {
               </li>
               <li className="flex justify-between items-center pt-2 border-t">
                 <span className="font-bold">Total Setup</span>
-                <span className="font-bold text-purple-600 dark:text-purple-400">$600</span>
+                <span className="font-bold text-[#00A0E3] dark:text-[#00A0E3]">$600</span>
               </li>
             </ul>
           </Card>
 
           {/* Transaction Fees Section */}
           <Card className="p-6 mb-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Transaction Fees</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Transaction Fees</h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>Payment Processing</span>
@@ -62,7 +62,7 @@ const PaymentSolutions = () => {
 
           {/* Funds Transfer Services Section */}
           <Card className="p-6 mb-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Funds Transfer Services</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-[#00A0E3] dark:text-[#00A0E3]">Funds Transfer Services</h3>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <h4 className="text-xl font-semibold">Standard Transfer</h4>
@@ -111,19 +111,19 @@ const PaymentSolutions = () => {
 
           {/* Monthly Plans Section */}
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-purple-400">
-              <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Basic Plan</h3>
+            <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-[#00A0E3]">
+              <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Basic Plan</h3>
               <div className="text-3xl font-bold mb-4">$49/month</div>
               <ul className="space-y-2 mb-6">
                 <li>✓ Dashboard access</li>
                 <li>✓ Basic reporting</li>
                 <li>✓ Email support</li>
               </ul>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">Select Basic Plan</Button>
+              <Button className="w-full bg-[#00A0E3] hover:bg-[#0085bb]">Select Basic Plan</Button>
             </Card>
 
-            <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-purple-400">
-              <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Premium Plan</h3>
+            <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-[#00A0E3]">
+              <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Premium Plan</h3>
               <div className="text-3xl font-bold mb-4">$99/month</div>
               <ul className="space-y-2 mb-6">
                 <li>✓ Advanced reporting</li>
@@ -131,13 +131,13 @@ const PaymentSolutions = () => {
                 <li>✓ Monthly account review</li>
                 <li>✓ Chargeback assistance</li>
               </ul>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">Select Premium Plan</Button>
+              <Button className="w-full bg-[#00A0E3] hover:bg-[#0085bb]">Select Premium Plan</Button>
             </Card>
           </div>
 
           {/* Additional Services Section */}
           <Card className="p-6 mb-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Additional Services</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Additional Services</h3>
             <ul className="space-y-3">
               <li className="flex justify-between items-center">
                 <span>Custom Integration Support</span>
@@ -160,7 +160,7 @@ const PaymentSolutions = () => {
 
           {/* Volume Discounts Section */}
           <Card className="p-6 mb-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Volume Discounts</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Volume Discounts</h3>
             <ul className="space-y-3">
               <li className="flex justify-between items-center">
                 <span>$10,000+ monthly</span>
@@ -179,7 +179,7 @@ const PaymentSolutions = () => {
 
           {/* Terms Section */}
           <Card className="p-6">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Terms & Conditions</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Terms & Conditions</h3>
             <ul className="space-y-2">
               <li>• All fees are in USD</li>
               <li>• Setup fees due before account activation</li>
