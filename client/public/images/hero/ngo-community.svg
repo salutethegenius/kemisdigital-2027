@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#3b82f6" />
+  
+  <!-- Bahamas Flag Colors Background -->
+  <rect x="0" y="0" width="1200" height="200" fill="#00778B" />
+  <rect x="0" y="200" width="1200" height="200" fill="#FFC72C" />
+  <rect x="0" y="400" width="1200" height="200" fill="#00778B" />
+  
+  <!-- Triangle accent -->
+  <polygon points="0,0 400,0 0,300" fill="#000000" opacity="0.1" />
+  
+  <!-- Group of diverse people outlines -->
+  <g transform="translate(800, 300)" fill="#ffffff" opacity="0.9">
+    <!-- Person 1 -->
+    <circle cx="-200" cy="-50" r="40" />
+    <rect x="-225" y="0" width="50" height="100" rx="10" />
+    
+    <!-- Person 2 -->
+    <circle cx="-100" cy="-50" r="40" />
+    <rect x="-125" y="0" width="50" height="90" rx="10" />
+    
+    <!-- Person 3 -->
+    <circle cx="0" cy="-50" r="40" />
+    <rect x="-25" y="0" width="50" height="110" rx="10" />
+    
+    <!-- Person 4 -->
+    <circle cx="100" cy="-50" r="40" />
+    <rect x="75" y="0" width="50" height="95" rx="10" />
+    
+    <!-- Person 5 -->
+    <circle cx="200" cy="-50" r="40" />
+    <rect x="175" y="0" width="50" height="105" rx="10" />
+  </g>
+  
+  <!-- Smiles on people -->
+  <path d="M570 270 Q 600 310, 630 270" stroke="#000000" stroke-width="5" fill="none" />
+  <path d="M670 270 Q 700 310, 730 270" stroke="#000000" stroke-width="5" fill="none" />
+  <path d="M770 270 Q 800 310, 830 270" stroke="#000000" stroke-width="5" fill="none" />
+  <path d="M870 270 Q 900 310, 930 270" stroke="#000000" stroke-width="5" fill="none" />
+  <path d="M970 270 Q 1000 310, 1030 270" stroke="#000000" stroke-width="5" fill="none" />
+  
+  <!-- Community Building Icon -->
+  <g transform="translate(250, 300)" fill="#ffffff" opacity="0.8">
+    <rect x="-100" y="-50" width="200" height="150" rx="10" />
+    <polygon points="-120,-50 0,-120 120,-50" fill="#ffffff" />
+    <rect x="-60" y="50" width="40" height="50" />
+    <rect x="20" y="50" width="40" height="50" />
+  </g>
+  
+  <!-- Text "NGO COMMUNITY" -->
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">
+    NGO COMMUNITY
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="50" fill="#ffffff" opacity="0.1" />
+  <circle cx="1100" cy="500" r="70" fill="#ffffff" opacity="0.1" />
+</svg>

@@ -4,48 +4,83 @@
 
 @layer base {
   :root {
+    /* Using KemisDigital Logo Colors */
+    /* Blue #00A0E3 (primary), Yellow #F7BE00 (accent), White (foreground/text) */
+    
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 273 100% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 273 30% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
+    
+    /* Blue from logo: #00A0E3 */
+    --primary: 197 100% 44.5%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Light blue for secondary */
+    --secondary: 197 80% 90%;
+    --secondary-foreground: 197 100% 25%;
+    
+    --muted: 197 15% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 273 30% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    /* Yellow/Gold from logo: #F7BE00 */
+    --accent: 45 100% 48.4%;
+    --accent-foreground: 0 0% 0%;
+    
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 273 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 197 30% 90%;
+    --input: 197 30% 90%;
+    --ring: 197 100% 44.5%;
     --radius: 0.5rem;
+    
+    /* Chart colors based on brand palette */
+    --chart-1: 197 100% 44.5%;
+    --chart-2: 45 100% 48.4%;
+    --chart-3: 197 70% 65%;
+    --chart-4: 45 80% 60%;
+    --chart-5: 197 50% 35%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 273 100% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --foreground: 0 0% 100%;
+    --card: 222.2 47.4% 11.2%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 0 0% 100%;
+    
+    /* Blue from logo: #00A0E3 (brighter in dark mode) */
+    --primary: 197 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Darker blue for secondary in dark mode */
+    --secondary: 197 70% 25%;
+    --secondary-foreground: 0 0% 100%;
+    
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    
+    /* Yellow/Gold from logo: #F7BE00 (slightly brighter in dark mode) */
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
+    
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 273 100% 50%;
+    --ring: 197 100% 50%;
+    
+    /* Chart colors based on brand palette - dark theme */
+    --chart-1: 197 100% 50%;
+    --chart-2: 45 100% 50%;
+    --chart-3: 197 70% 75%;
+    --chart-4: 45 80% 70%;
+    --chart-5: 197 50% 45%;
   }
 }
 

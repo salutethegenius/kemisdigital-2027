@@ -61,7 +61,6 @@ export default function About() {
         title="About KemisDigital"
         description="Pioneering the future of marketing with artificial intelligence and data-driven strategies that deliver exceptional results."
         showCTA={false}
-        heroImage="/images/heroes/about-hero.jpg"
         pageContext="professional"
       />
 

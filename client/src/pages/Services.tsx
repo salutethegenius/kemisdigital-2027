@@ -116,7 +116,6 @@ export default function Services() {
         title="AI-Powered Solutions & Services"
         description="Comprehensive digital transformation packages tailored for Caribbean businesses."
         showCTA={false}
-        heroImage="/images/heroes/services-hero.jpg"
         pageContext="tourism"
       />
 
@@ -133,13 +132,13 @@ export default function Services() {
               <section 
                 key={service.title} 
                 className={`py-16 ${
-                  index % 2 === 0 ? 'bg-purple-50 dark:bg-purple-900/10' : 'bg-background'
+                  index % 2 === 0 ? 'bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10' : 'bg-background'
                 }`}
               >
                 <div className="container mx-auto px-4">
                   <div className="flex items-center gap-4 mb-12">
-                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                      <service.icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                    <div className="p-3 bg-[#00A0E3]/10 dark:bg-[#00A0E3]/30 rounded-lg">
+                      <service.icon className="w-8 h-8 text-[#00A0E3] dark:text-[#6CCFF6]" />
                     </div>
                     <h2 className="text-3xl font-bold tracking-tight">{service.title}</h2>
                   </div>
@@ -148,7 +147,7 @@ export default function Services() {
                     {service.packages.map((pkg) => (
                       <Card 
                         key={pkg.title} 
-                        className="relative overflow-hidden border-2 border-purple-100 dark:border-purple-800 transition-all duration-300 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-lg"
+                        className="relative overflow-hidden border-2 border-[#00A0E3]/10 dark:border-[#00A0E3]/30 transition-all duration-300 hover:border-[#00A0E3] dark:hover:border-[#00A0E3]/60 hover:shadow-lg"
                       >
                         <CardHeader className="space-y-2">
                           <CardTitle className="text-2xl">{pkg.title}</CardTitle>
@@ -156,7 +155,7 @@ export default function Services() {
                         </CardHeader>
                         <CardContent className="space-y-6">
                           <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold text-purple-600">{pkg.price}</span>
+                            <span className="text-3xl font-bold text-[#00A0E3]">{pkg.price}</span>
                           </div>
 
                           <div className="space-y-4">
@@ -164,7 +163,7 @@ export default function Services() {
                             <ul className="space-y-3">
                               {pkg.features.map((feature) => (
                                 <li key={feature} className="flex items-start gap-3">
-                                  <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                                  <Sparkles className="w-5 h-5 text-[#F7BE00] flex-shrink-0 mt-0.5" />
                                   <span className="text-sm leading-tight">{feature}</span>
                                 </li>
                               ))}
@@ -173,7 +172,7 @@ export default function Services() {
 
                           <Link href="/contact" className="block">
                             <Button 
-                              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2"
+                              className="w-full bg-[#00A0E3] hover:bg-[#0078A8] text-white font-semibold py-2"
                             >
                               Get Started
                             </Button>
@@ -188,7 +187,7 @@ export default function Services() {
           </motion.div>
 
           {/* Call to Action Section */}
-          <section className="mt-24 bg-purple-50 dark:bg-purple-900/10 py-16">
+          <section className="mt-24 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10 py-16">
             <Card>
               <CardContent className="py-12">
                 <div className="text-center max-w-2xl mx-auto">
@@ -197,7 +196,7 @@ export default function Services() {
                     Book a free consultation to discuss how our AI-powered services can help your organization thrive in the digital age.
                   </p>
                   <Link href="/contact">
-                    <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8">
+                    <Button className="bg-[#00A0E3] hover:bg-[#0078A8] text-lg px-8">
                       Schedule Consultation
                     </Button>
                   </Link>

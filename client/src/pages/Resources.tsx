@@ -40,7 +40,6 @@ export default function Resources() {
         title="Resources"
         description="Access our comprehensive collection of digital marketing tools, guides, and educational materials."
         showCTA={false}
-        heroImage="/images/heroes/resources-hero.jpg"
         pageContext="professional"
       />
       
@@ -67,7 +66,7 @@ export default function Resources() {
               <Card key={category.category}>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
-                    <Wrench className="w-5 h-5 mr-2 text-cyan-500" />
+                    <Wrench className="w-5 h-5 mr-2 text-[#00A0E3]" />
                     {category.category}
                   </h3>
                   <ul className="space-y-4">
@@ -94,7 +93,7 @@ export default function Resources() {
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Book className="w-5 h-5 mr-2 text-cyan-500" />
+                  <Book className="w-5 h-5 mr-2 text-[#00A0E3]" />
                   Marketing Guides
                 </h3>
                 <ul className="space-y-2">
@@ -108,7 +107,7 @@ export default function Resources() {
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FileText className="w-5 h-5 mr-2 text-cyan-500" />
+                  <FileText className="w-5 h-5 mr-2 text-[#00A0E3]" />
                   Templates
                 </h3>
                 <ul className="space-y-2">
@@ -132,7 +131,7 @@ export default function Resources() {
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Video className="w-5 h-5 mr-2 text-cyan-500" />
+                  <Video className="w-5 h-5 mr-2 text-[#00A0E3]" />
                   Upcoming Webinars
                 </h3>
                 <ul className="space-y-4">

@@ -21,6 +21,14 @@ interface HeroProps {
   pageContext?: 'ngo' | 'professional' | 'tourism' | 'default';
 }
 
+// Placeholder for hero images (to be replaced with actual photos later)
+const contextImages = {
+  ngo: '',
+  professional: '',
+  tourism: '',
+  default: ''
+};
+
 export default function Hero({ 
   title, 
   description, 
@@ -35,6 +43,15 @@ export default function Hero({
   const [videoError, setVideoError] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  // Get the appropriate hero image based on context
+  const getContextImage = () => {
+    // If a specific hero image is provided, use that one
+    if (heroImage) return heroImage;
+    
+    // Otherwise use the default image for this page context
+    return contextImages[pageContext];
+  };
+  
   useEffect(() => {
     // Check if this is the first visit to the homepage
     const hasVisitedBefore = sessionStorage.getItem('hasVisitedHomepage');
@@ -51,13 +68,14 @@ export default function Hero({
       return () => clearTimeout(timer);
     }
     
-    // Preload the hero image if provided
-    if (heroImage) {
+    // Preload the contextual hero image
+    const contextImage = getContextImage();
+    if (contextImage) {
       const img = new Image();
-      img.src = heroImage;
+      img.src = contextImage;
       img.onerror = () => setImageError(true);
     }
-  }, [heroImage]);
+  }, [heroImage, pageContext]);
 
   const renderCTAButton = (cta: CTAButton) => {
     const buttonProps = {
@@ -86,17 +104,18 @@ export default function Hero({
     return <Preloader />;
   }
 
-  // Function to get gradient overlay based on page context
+  // Function to get gradient overlay based on page context using KemisDigital brand colors
   const getOverlayGradient = () => {
+    // Using brand colors: Blue #00A0E3 and Yellow/Gold #F7BE00
     switch (pageContext) {
       case 'ngo':
-        return 'bg-gradient-to-b from-emerald-900/60 to-emerald-700/60'; // Green theme for NGO
+        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#00A0E3]/60'; // Blue brand theme for NGO
       case 'professional':
-        return 'bg-gradient-to-b from-blue-900/60 to-blue-700/60'; // Blue theme for professional
+        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#0078A8]/60'; // Blue brand theme for professional
       case 'tourism':
-        return 'bg-gradient-to-b from-cyan-900/60 to-amber-700/60'; // Cyan-Amber theme for tourism/Bahamas
+        return 'bg-gradient-to-b from-[#00A0E3]/70 to-[#F7BE00]/60'; // Blue-Yellow brand theme for tourism/Bahamas
       default:
-        return 'bg-black/50'; // Default overlay
+        return 'bg-gradient-to-b from-[#00A0E3]/80 to-[#00A0E3]/70'; // Default blue overlay
     }
   };
 
@@ -123,9 +142,9 @@ export default function Hero({
           )}
           
           {/* Hero image background - shown when video not available or errored */}
-          {(!videoBackground || videoError) && heroImage && !imageError && (
+          {(!videoBackground || videoError) && !imageError && (
             <img
-              src={heroImage}
+              src={getContextImage()}
               alt={`${title} - Hero Image`}
               className="absolute inset-0 w-full h-full object-cover object-center scale-105"
               onError={() => setImageError(true)}
@@ -141,7 +160,7 @@ export default function Hero({
           animate={{ opacity: 1, y: 0 }}
           className={`text-4xl md:text-6xl font-bold mb-6 ${
             (!videoBackground || videoError) && (!heroImage || imageError) 
-              ? 'bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400' 
+              ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00A0E3] to-[#6CCFF6]' 
               : 'text-white drop-shadow-lg'
           }`}
         >
