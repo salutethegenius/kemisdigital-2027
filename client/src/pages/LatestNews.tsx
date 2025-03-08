@@ -4,8 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
+import SEO from "@/components/shared/SEO";
 
 const newsItems = [
+  {
+    title: "KemisDigital Revolutionizes Digital Marketing for Bahamian SBs & SMEs",
+    date: "March 6, 2025",
+    category: "Press Release",
+    description: "Kenneth Moncur, founder and CEO of KemisDigital, is transforming the digital landscape with AI-powered marketing strategies for Bahamian businesses.",
+    link: "/news/kemisdigital-revolutionizes-digital-marketing"
+  },
   {
     title: "KemisDigital Launches New AI-Powered Marketing Solutions",
     date: "December 20, 2024",
@@ -32,6 +40,12 @@ const newsItems = [
 export default function LatestNews() {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Latest News | KemisDigital" 
+        description="Stay updated with KemisDigital's latest press releases, developments, success stories, and upcoming events in digital marketing and web development."
+        keywords="KemisDigital news, Bahamas digital marketing, Kenneth Moncur, press releases, digital transformation, AI marketing news"
+        ogUrl="/latest-news"
+      />
       <Hero
         title="Latest News"
         description="Stay updated with KemisDigital's latest developments, success stories, and upcoming events."
