@@ -27,16 +27,24 @@ export default function Hero({
   primaryCTA,
   secondaryCTA 
 }: HeroProps) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
-    // Simulate loading time for other assets
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3500); // Match with preloader duration
+    // Check if this is the first visit to the homepage
+    const hasVisitedBefore = sessionStorage.getItem('hasVisitedHomepage');
+    
+    if (!hasVisitedBefore && window.location.pathname === '/') {
+      setIsLoading(true);
+      // Simulate loading time for other assets
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // Mark that the user has visited the homepage
+        sessionStorage.setItem('hasVisitedHomepage', 'true');
+      }, 3500); // Match with preloader duration
 
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const renderCTAButton = (cta: CTAButton) => {

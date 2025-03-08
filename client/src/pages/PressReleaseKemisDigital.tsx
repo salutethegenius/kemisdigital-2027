@@ -68,7 +68,7 @@ export default function PressReleaseKemisDigital() {
 
                 <h3 className="text-xl font-semibold mt-8 mb-4">Current Offerings</h3>
 
-                <p>The digital agency is currently running a landing page special, which you can learn more about at <a href="https://www.lightning.kemisdigital.com" className="text-purple-600 hover:underline">www.lightning.kemisdigital.com</a>. The founder is passionate about sharing knowledge through "The Bahamas Digital Marketing Association," a platform geared towards digitisation in the local SBs, SMEs and NGO sectors.</p>
+                <p>The digital agency is currently running a landing page special, which you can learn more about at <span className="text-purple-600">www.lightning.kemisdigital.com</span>. The founder is passionate about sharing knowledge through "The Bahamas Digital Marketing Association," a platform geared towards digitisation in the local SBs, SMEs and NGO sectors.</p>
 
                 <p>Kemis Group of Companies is more than a marketing corporation - its companies support moving forward with innovation, community engagement, and digitalisation for Bahamian businesses. Registered in The Bahamas, USA, and Europe, they offer e-commerce solutions like Stripe payment and automated marketing that help keep their clients on the cutting edge of technology and ease of doing business with customers. They can process credit cards for small Bahamian companies and professionals via Stripe.</p>
 
