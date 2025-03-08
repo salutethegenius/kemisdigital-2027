@@ -22,12 +22,19 @@ interface HeroProps {
   pageContext?: 'ngo' | 'professional' | 'tourism' | 'default';
 }
 
-// Placeholder for hero images (to be replaced with actual photos later)
+// Contextual hero images reflecting Bahamas spirit and "People's Choice" theme
 const contextImages = {
-  ngo: '',
-  professional: '',
-  tourism: '',
-  default: ''
+  // NGO focused image showing community and collaboration in Bahamas
+  ngo: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1920&auto=format&fit=crop',
+  
+  // Professional business setting with tropical Bahamian aesthetic
+  professional: 'https://images.unsplash.com/photo-1617170788899-45af79abc4f7?q=80&w=1920&auto=format&fit=crop',
+  
+  // Tourism image showcasing Bahamas' beautiful beaches and clear waters
+  tourism: 'https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=1920&auto=format&fit=crop',
+  
+  // Default image showing Paradise Island with vibrant colors matching brand
+  default: 'https://images.unsplash.com/photo-1575526164828-c31bcd857cf4?q=80&w=1920&auto=format&fit=crop'
 };
 
 export default function Hero({ 
@@ -105,10 +112,10 @@ export default function Hero({
     return <Preloader />;
   }
 
-  // Function to get simple dark tint overlay
+  // Function to get dark tint overlay with blue/yellow accent
   const getOverlayTint = () => {
-    // Simple dark tint with medium opacity
-    return 'bg-black/60'; // 60% opacity black overlay
+    // 60% dark tint overlay with subtle brand color gradient
+    return 'bg-gradient-to-br from-black/60 via-black/60 to-[#00A0E3]/30'; // Brand-aware overlay
   };
 
   return (
