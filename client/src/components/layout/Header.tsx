@@ -7,7 +7,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "./ThemeToggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -74,7 +73,6 @@ export default function Header() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <ThemeToggle />
           <Button asChild className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white">
             <Link href="/services">Get Started</Link>
           </Button>
@@ -122,7 +120,6 @@ export default function Header() {
                   <span>Video Meeting</span>
                 </Link>
               </div>
-              <ThemeToggle />
               <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild onClick={() => setIsOpen(false)}>
                 <Link href="/services">Get Started</Link>
               </Button>

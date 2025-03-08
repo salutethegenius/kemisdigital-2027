@@ -119,7 +119,7 @@ export default function Hero({
   };
 
   return (
-    <section className="relative text-center min-h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="relative text-center min-h-[90vh] md:min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background media - prioritize video, fall back to image if video fails or isn't provided */}
       {((videoBackground && !videoError) || (heroImage && !imageError)) && (
         <div className="absolute inset-0 w-full h-full">
@@ -153,11 +153,11 @@ export default function Hero({
       )}
       
       {/* Hero content */}
-      <div className={`relative z-20 py-16 md:py-24 px-4 ${(videoBackground && !videoError) || (heroImage && !imageError) ? 'text-white' : ''}`}>
+      <div className={`relative z-20 py-12 md:py-24 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto ${(videoBackground && !videoError) || (heroImage && !imageError) ? 'text-white' : ''}`}>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-6xl font-bold mb-6 ${
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
             (!videoBackground || videoError) && (!heroImage || imageError) 
               ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00A0E3] to-[#6CCFF6]' 
               : 'text-white drop-shadow-lg'
@@ -169,7 +169,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className={`text-lg max-w-2xl mx-auto mb-8 ${
+          className={`text-base sm:text-lg md:text-xl max-w-md sm:max-w-xl md:max-w-2xl mx-auto mb-6 md:mb-8 ${
             (videoBackground && !videoError) || (heroImage && !imageError) 
               ? 'text-gray-100 drop-shadow-md' 
               : 'text-muted-foreground'
@@ -182,7 +182,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-3 md:gap-4"
           >
             {primaryCTA && renderCTAButton(primaryCTA)}
             {secondaryCTA && renderCTAButton(secondaryCTA)}
@@ -190,9 +190,9 @@ export default function Hero({
         )}
       </div>
       
-      {/* Animated Scroll Icon */}
+      {/* Animated Scroll Icon - Hidden on Mobile */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
+        className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer hidden sm:flex flex-col items-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ 
           opacity: 1, 
@@ -223,9 +223,9 @@ export default function Hero({
               ? 'border-white text-white' 
               : 'border-[#00A0E3] text-[#00A0E3]'
           } mb-2`}>
-            <MouseIcon className="w-5 h-5" />
+            <MouseIcon className="w-4 h-4 md:w-5 md:h-5" />
           </div>
-          <ChevronDown className={`w-5 h-5 ${
+          <ChevronDown className={`w-4 h-4 md:w-5 md:h-5 ${
             (videoBackground && !videoError) || (heroImage && !imageError) 
               ? 'text-white' 
               : 'text-[#00A0E3]'

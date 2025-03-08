@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
 import "./index.css";
@@ -7,6 +7,7 @@ import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
+import Preloader from "./components/shared/Preloader";
 
 // Pages
 import Home from "./pages/Home";

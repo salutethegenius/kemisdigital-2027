@@ -1,6 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 
-type Theme = "dark" | "light";
+// Type is now only "dark"
+type Theme = "dark";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -8,34 +9,27 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext<{
   theme: Theme;
+  // Keep toggleTheme for API compatibility, but it won't actually toggle
   toggleTheme: () => void;
 }>({
-  theme: "light",
+  theme: "dark",
   toggleTheme: () => null,
 });
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage and system preference
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme") as Theme;
-      if (stored) return stored;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return "light";
-  });
+  // Always use dark theme
+  const theme: Theme = "dark";
 
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    root.classList.remove("light");
+    root.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  }, []);
 
+  // Empty function for API compatibility
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    // Does nothing - site is always in dark mode
   };
 
   return (

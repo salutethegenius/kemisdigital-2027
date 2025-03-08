@@ -37,7 +37,7 @@ const footerSections = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-100 py-12 mt-12">
+    <footer className="bg-[#001621] text-gray-100 py-12 mt-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {footerSections.map((section) => (
@@ -48,7 +48,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-[#00A0E3] transition-colors"
+                      className="text-gray-300 hover:text-[#00A0E3] transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
           <p>&copy; {new Date().getFullYear()} KemisDigital AI Marketing. All rights reserved.</p>
         </div>
       </div>
