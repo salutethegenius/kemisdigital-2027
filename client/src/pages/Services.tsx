@@ -116,6 +116,8 @@ export default function Services() {
         title="AI-Powered Solutions & Services"
         description="Comprehensive digital transformation packages tailored for Caribbean businesses."
         showCTA={false}
+        heroImage="/images/heroes/services-hero.jpg"
+        pageContext="tourism"
       />
 
       {/* Services Showcase Section */}

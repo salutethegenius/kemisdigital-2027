@@ -40,6 +40,8 @@ export default function Resources() {
         title="Resources"
         description="Access our comprehensive collection of digital marketing tools, guides, and educational materials."
         showCTA={false}
+        heroImage="/images/heroes/resources-hero.jpg"
+        pageContext="professional"
       />
       
       <div className="mb-8">

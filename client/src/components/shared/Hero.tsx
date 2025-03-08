@@ -15,8 +15,10 @@ interface HeroProps {
   description: string;
   showCTA?: boolean;
   videoBackground?: string;
+  heroImage?: string;
   primaryCTA?: CTAButton;
   secondaryCTA?: CTAButton;
+  pageContext?: 'ngo' | 'professional' | 'tourism' | 'default';
 }
 
 export default function Hero({ 
@@ -24,11 +26,14 @@ export default function Hero({
   description, 
   showCTA = true, 
   videoBackground,
+  heroImage,
   primaryCTA,
-  secondaryCTA 
+  secondaryCTA,
+  pageContext = 'default'
 }: HeroProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     // Check if this is the first visit to the homepage
@@ -45,7 +50,14 @@ export default function Hero({
 
       return () => clearTimeout(timer);
     }
-  }, []);
+    
+    // Preload the hero image if provided
+    if (heroImage) {
+      const img = new Image();
+      img.src = heroImage;
+      img.onerror = () => setImageError(true);
+    }
+  }, [heroImage]);
 
   const renderCTAButton = (cta: CTAButton) => {
     const buttonProps = {
@@ -74,30 +86,63 @@ export default function Hero({
     return <Preloader />;
   }
 
+  // Function to get gradient overlay based on page context
+  const getOverlayGradient = () => {
+    switch (pageContext) {
+      case 'ngo':
+        return 'bg-gradient-to-b from-emerald-900/60 to-emerald-700/60'; // Green theme for NGO
+      case 'professional':
+        return 'bg-gradient-to-b from-blue-900/60 to-blue-700/60'; // Blue theme for professional
+      case 'tourism':
+        return 'bg-gradient-to-b from-cyan-900/60 to-amber-700/60'; // Cyan-Amber theme for tourism/Bahamas
+      default:
+        return 'bg-black/50'; // Default overlay
+    }
+  };
+
   return (
     <section className="relative text-center min-h-screen w-full flex items-center justify-center overflow-hidden">
-      {videoBackground && !videoError && (
+      {/* Background media - prioritize video, fall back to image if video fails or isn't provided */}
+      {((videoBackground && !videoError) || (heroImage && !imageError)) && (
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-black/50 z-10" />
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover object-center scale-105"
-            onError={() => setVideoError(true)}
-          >
-            <source src={videoBackground} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className={`absolute inset-0 ${getOverlayGradient()} z-10`} />
+          
+          {/* Video background */}
+          {videoBackground && !videoError && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+              onError={() => setVideoError(true)}
+            >
+              <source src={videoBackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+          
+          {/* Hero image background - shown when video not available or errored */}
+          {(!videoBackground || videoError) && heroImage && !imageError && (
+            <img
+              src={heroImage}
+              alt={`${title} - Hero Image`}
+              className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+              onError={() => setImageError(true)}
+            />
+          )}
         </div>
       )}
-      <div className={`relative z-20 py-16 md:py-24 ${videoBackground && !videoError ? 'text-white' : ''}`}>
+      
+      {/* Hero content */}
+      <div className={`relative z-20 py-16 md:py-24 px-4 ${(videoBackground && !videoError) || (heroImage && !imageError) ? 'text-white' : ''}`}>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className={`text-4xl md:text-6xl font-bold mb-6 ${
-            !videoBackground || videoError ? 'bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400' : ''
+            (!videoBackground || videoError) && (!heroImage || imageError) 
+              ? 'bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400' 
+              : 'text-white drop-shadow-lg'
           }`}
         >
           {title}
@@ -107,7 +152,9 @@ export default function Hero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className={`text-lg max-w-2xl mx-auto mb-8 ${
-            videoBackground && !videoError ? 'text-gray-200' : 'text-muted-foreground'
+            (videoBackground && !videoError) || (heroImage && !imageError) 
+              ? 'text-gray-100 drop-shadow-md' 
+              : 'text-muted-foreground'
           }`}
         >
           {description}
@@ -117,7 +164,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex justify-center gap-4"
+            className="flex flex-wrap justify-center gap-4"
           >
             {primaryCTA && renderCTAButton(primaryCTA)}
             {secondaryCTA && renderCTAButton(secondaryCTA)}
