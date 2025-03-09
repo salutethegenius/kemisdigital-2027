@@ -25,21 +25,14 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-
-
-const navigation = [
-  { name: "Home", href: "/", icon: Home, description: "Return to our homepage" },
-  { name: "About", href: "/about", icon: Info, description: "Learn about our company" },
-  { name: "AI Services", href: "/services", icon: Sparkles, description: "Explore our AI-powered solutions" },
-  { name: "Web/App Development", href: "/services/web-app-dev", icon: Code, description: "Custom web and mobile app development" },
-  { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard, description: "Secure payment processing options" },
-  { name: "Latest News", href: "/latest-news", icon: Newspaper, description: "Stay updated with our latest news" },
-];
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "../shared/LanguageSelector";
 
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   // Handle scroll restoration on navigation
   useEffect(() => {
@@ -57,6 +50,15 @@ export default function Header() {
     window.scrollTo(0, 0);
     setHoveredItem(null);
   };
+
+  const navigation = [
+    { name: t('header.home'), href: "/", icon: Home, description: "Return to our homepage" },
+    { name: t('header.about'), href: "/about", icon: Info, description: "Learn about our company" },
+    { name: t('header.services'), href: "/services", icon: Sparkles, description: "Explore our AI-powered solutions" },
+    { name: t('header.ai_labs'), href: "/services/web-app-dev", icon: Code, description: "Custom web and mobile app development" },
+    { name: t('header.events'), href: "/events", icon: CreditCard, description: "Our events and workshops" },
+    { name: t('header.latest_news'), href: "/latest-news", icon: Newspaper, description: "Stay updated with our latest news" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -112,7 +114,7 @@ export default function Header() {
                   onMouseLeave={() => setHoveredItem(null)}
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  Contact
+                  {t('header.contact')}
                 </div>
                 {hoveredItem === "contact" && (
                   <div 
@@ -128,7 +130,7 @@ export default function Header() {
                           onClick={handleContactNavigation}
                         >
                           <Mail className="w-4 h-4" />
-                          <span>Contact Us</span>
+                          <span>{t('header.contact')}</span>
                         </Link>
                         <Link 
                           href="/meet" 
@@ -145,8 +147,9 @@ export default function Header() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          <LanguageSelector />
           <Button asChild className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white">
-            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>Get Started</Link>
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>{t('homepage.cta.get_started')}</Link>
           </Button>
         </div>
 
@@ -175,14 +178,14 @@ export default function Header() {
                 </Link>
               ))}
               <div className="space-y-2 border-t pt-4">
-                <h3 className="text-sm font-medium text-[#F7BE00]">Contact</h3>
+                <h3 className="text-sm font-medium text-[#F7BE00]">{t('header.contact')}</h3>
                 <Link
                   href="/contact"
                   className="flex items-center space-x-2 text-sm hover:text-[#00A0E3]"
                   onClick={handleNavigation}
                 >
                   <Mail className="w-4 h-4" />
-                  <span>Contact Us</span>
+                  <span>{t('header.contact')}</span>
                 </Link>
                 <Link
                   href="/meet"
@@ -193,8 +196,11 @@ export default function Header() {
                   <span>Video Meeting</span>
                 </Link>
               </div>
+              <div className="flex justify-center my-2">
+                <LanguageSelector />
+              </div>
               <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild>
-                <Link href="/services" onClick={handleNavigation}>Get Started</Link>
+                <Link href="/services" onClick={handleNavigation}>{t('homepage.cta.get_started')}</Link>
               </Button>
             </div>
           </SheetContent>

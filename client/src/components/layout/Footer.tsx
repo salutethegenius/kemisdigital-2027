@@ -1,41 +1,44 @@
 import { Link } from "wouter";
-
-const footerSections = [
-  {
-    title: "Company",
-    links: [
-      { name: "About Us", href: "/about" },
-      { name: "Case Studies", href: "/case-studies" },
-      { name: "Blog", href: "/blog" },
-    ],
-  },
-  {
-    title: "Services",
-    links: [
-      { name: "AI Marketing", href: "/services#ai-marketing" },
-      { name: "Content Creation", href: "/services#content" },
-      { name: "Analytics", href: "/services#analytics" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { name: "AI Tools", href: "/resources#ai-tools" },
-      { name: "Marketing Tools", href: "/resources#marketing-tools" },
-      { name: "Documentation", href: "/resources" },
-    ],
-  },
-  {
-    title: "Contact",
-    links: [
-      { name: "Get in Touch", href: "/contact" },
-      { name: "Support", href: "/support" },
-      { name: "Schedule Demo", href: "/contact" },
-    ],
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
+  const footerSections = [
+    {
+      title: t('footer.company'),
+      links: [
+        { name: t('header.about'), href: "/about" },
+        { name: t('header.services'), href: "/services" },
+        { name: t('header.latest_news'), href: "/latest-news" },
+      ],
+    },
+    {
+      title: t('footer.services'),
+      links: [
+        { name: t('header.ai_labs'), href: "/services#ai-marketing" },
+        { name: t('footer.web_development'), href: "/services/web-development" },
+        { name: t('footer.analytics'), href: "/services/analytics-dashboards" },
+      ],
+    },
+    {
+      title: t('footer.quick_links'),
+      links: [
+        { name: t('header.resources'), href: "/resources" },
+        { name: t('header.events'), href: "/events" },
+        { name: t('header.membership'), href: "/membership" },
+      ],
+    },
+    {
+      title: t('header.contact'),
+      links: [
+        { name: t('header.contact'), href: "/contact" },
+        { name: t('footer.support'), href: "/contact" },
+        { name: t('footer.schedule_demo'), href: "/meet" },
+      ],
+    },
+  ];
+
   return (
     <footer className="bg-[#001621] text-gray-100 py-12 mt-12">
       <div className="container mx-auto px-4">
@@ -59,7 +62,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
-          <p>&copy; {new Date().getFullYear()} KemisDigital AI Marketing. All rights reserved.</p>
+          <p>{t('footer.copyright')}</p>
         </div>
       </div>
     </footer>

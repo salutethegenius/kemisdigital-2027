@@ -1,0 +1,125 @@
+{
+  "header": {
+    "home": "Akèy",
+    "about": "Sou Nou",
+    "services": "Sèvis",
+    "ai_labs": "Laboratwa IA",
+    "events": "Evènman",
+    "membership": "Manm",
+    "resources": "Resous",
+    "advocacy": "Pledwaye",
+    "contact": "Kontakte Nou",
+    "latest_news": "Dènye Nouvèl"
+  },
+  "footer": {
+    "company": "Konpayi",
+    "services": "Sèvis",
+    "quick_links": "Lyen Rapid",
+    "stay_connected": "Rete Konekte",
+    "copyright": "© 2025 KemisDigital. Tout dwa rezève.",
+    "privacy_policy": "Politik Konfidansyalite",
+    "terms_of_service": "Kondisyon Sèvis",
+    "web_development": "Devlopman Wèb",
+    "analytics": "Analitik",
+    "support": "Sipò",
+    "schedule_demo": "Planifye Demo"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Chwa Pèp la!",
+      "description": "Kliyan yo di nou merite tit sa a paske nou nan jwèt la avèk yo. Avèk 20 lane eksperyans nan mache Bahamas la, nou devlope estrateji premye klas ki te bay lavi ak lide avèk siksè mezirab."
+    },
+    "cta": {
+      "get_started": "Kòmanse",
+      "learn_more": "Aprann Plis"
+    },
+    "mission_section": {
+      "title": "Misyon Nou",
+      "description": "Nou vize fòme lavni biznis nan Bahamas yo nan pouse transfòmasyon dijital pou demaraj lokal yo ak biznis nan sektè touris la."
+    },
+    "services_section": {
+      "title": "Sèvis Marketing IA",
+      "subtitle": "Kanpay sou entènèt ki konbine teknoloji IA avanse avèk ekspè nan maketing, estratejis, ak pwogramè pou bay rezilta ekselan."
+    },
+    "testimonials": {
+      "title": "Temwayaj Kliyan",
+      "subtitle": "Tande sa kliyan nou yo gen pou di sou eksperyans yo ak KemisDigital."
+    },
+    "impact_section": {
+      "title": "Enpak Nou",
+      "client_success_rate": "To Siksè Kliyan",
+      "client_success_desc": "Kliyan k ap reyalize objektif maketing yo",
+      "average_roi": "Mwayèn ROI",
+      "average_roi_desc": "Retou sou envestisman maketing",
+      "client_retention": "Retansyon Kliyan",
+      "client_retention_desc": "Siksè patenarya alontèm"
+    },
+    "why_choose_section": {
+      "title": "Poukisa Chwazi KemisDigital",
+      "leadership_title": "Lidèchip",
+      "leadership_desc1": "Solisyon AI nou yo ofri kanpay sible ki rive jwenn bon odyans la nan bon moman an.",
+      "leadership_desc2": "Nou itilize algoritm avanse aprantisaj machin pou analize tandans mache epi rafine estrateji maketing ou pou gen enpak maksimòm.",
+      "innovation_title": "Inovasyon",
+      "innovation_desc1": "Nou rete nan tèt teknoloji maketing dijital, pote solisyon inovatè nan mache Karayib la.",
+      "innovation_desc2": "Ekip nou an eksplore kontinye nouvo teknoloji ak metodoloji pou bay biznis ou yon avantaj konpetitif."
+    },
+    "subscribe_section": {
+      "title": "Rete Enfòme",
+      "description": "Abòne w nan bilten nou an pou dènye nouvèl, enfòmasyon endistri, ak konsèy maketing dijital.",
+      "placeholder": "Antre imèl ou",
+      "button": "Abòne"
+    }
+  },
+  "contact": {
+    "title": "Kontakte KemisDigital",
+    "description": "Pran kontak ak ekspè nou yo nan maketing IA pou transfòme prezans dijital ou epi jwenn rezilta eksepsyonèl.",
+    "form": {
+      "title": "Voye nou yon Mesaj",
+      "name": "Non",
+      "name_placeholder": "Non ou",
+      "email": "Imèl",
+      "email_placeholder": "ou@imèl.com",
+      "service": "Enterè Sèvis",
+      "service_placeholder": "Chwazi yon sèvis",
+      "message": "Mesaj",
+      "message_placeholder": "Di nou bezwen maketing IA ou yo...",
+      "submit": "Voye Mesaj",
+      "sending": "Ap voye...",
+      "or": "oswa",
+      "success_description": "Mèsi pou mesaj ou. Ekip nou ap kontakte ou byento!",
+      "error_title": "Mesaj Echwe",
+      "error_description": "Te gen yon pwoblèm nan voye mesaj ou. Tanpri eseye ankò pita.",
+      "services": {
+        "ai_strategy": "Estrateji Maketing IA",
+        "automation": "Otomatizasyon Maketing",
+        "analytics": "Analiz ak Insight IA",
+        "content": "Jenerasyon Kontni IA",
+        "social": "IA pou Medya Sosyal",
+        "other": "Lòt Sèvis"
+      }
+    },
+    "reasons": {
+      "consultation": "Konsiltasyon Maketing IA",
+      "consultation_desc": "Diskite sou estrateji maketing IA ou ak bezwen otomatizasyon ou",
+      "partnership": "Opòtinite Patenarya",
+      "partnership_desc": "Eksplore kolaborasyon ak patenarya estratejik",
+      "inquiries": "Demand Sèvis",
+      "inquiries_desc": "Aprann plis sou solisyon maketing IA nou yo ak pri",
+      "support": "Sipò",
+      "support_desc": "Jwenn asistans ak zouti maketing IA nou yo ak sèvis yo"
+    },
+    "address_label": "Adrès",
+    "address": "Nassau, Bahamas",
+    "phone": "Telefòn",
+    "email": "Imèl",
+    "social": "Medya Sosyal",
+    "social_handle": "Konekte @KemisDigital",
+    "success_message": "Mesaj voye avèk siksè!"
+  },
+  "language_selector": {
+    "en": "Anglè",
+    "fr": "Franse",
+    "es": "Panyòl",
+    "ht": "Kreyòl Ayisyen"
+  }
+}

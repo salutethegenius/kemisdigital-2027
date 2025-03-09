@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useTranslation } from "react-i18next";
 
 import Hero from "@/components/shared/Hero";
 import CalendarWidget from "@/components/shared/CalendarWidget";
@@ -40,6 +41,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function Contact() {
+  const { t } = useTranslation();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,8 +73,8 @@ export default function Contact() {
       }
       
       toast({
-        title: "Message Sent",
-        description: "Thank you for your message. Our team will be in touch soon!",
+        title: t('contact.success_message'),
+        description: t('contact.form.success_description'),
       });
 
       form.reset();
@@ -81,8 +83,8 @@ export default function Contact() {
       
       toast({
         variant: "destructive",
-        title: "Message Failed",
-        description: error instanceof Error ? error.message : "There was a problem sending your message. Please try again later.",
+        title: t('contact.form.error_title'),
+        description: error instanceof Error ? error.message : t('contact.form.error_description'),
       });
     } finally {
       setIsLoading(false);
@@ -92,49 +94,49 @@ export default function Contact() {
   const contactReasons = [
     {
       icon: Brain,
-      title: "AI Marketing Consultation",
-      description: "Discuss your AI-powered marketing strategy and automation needs"
+      title: t('contact.reasons.consultation'),
+      description: t('contact.reasons.consultation_desc')
     },
     {
       icon: Target,
-      title: "Partnership Opportunities",
-      description: "Explore collaboration and strategic partnerships"
+      title: t('contact.reasons.partnership'),
+      description: t('contact.reasons.partnership_desc')
     },
     {
       icon: LineChart,
-      title: "Service Inquiries",
-      description: "Learn more about our AI marketing solutions and pricing"
+      title: t('contact.reasons.inquiries'),
+      description: t('contact.reasons.inquiries_desc')
     },
     {
       icon: Sparkles,
-      title: "Support",
-      description: "Get assistance with our AI marketing tools and services"
+      title: t('contact.reasons.support'),
+      description: t('contact.reasons.support_desc')
     }
   ];
 
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      title: t('contact.email'),
       content: "frontdesk@kemisdigital.com",
       link: "mailto:frontdesk@kemisdigital.com",
     },
     {
       icon: Phone,
-      title: "Phone",
+      title: t('contact.phone'),
       content: "+1 (242) 605-1522",
       link: "tel:+12426051522",
     },
     {
       icon: MapPin,
-      title: "Address",
-      content: "Nassau, Bahamas",
+      title: t('contact.address_label'),
+      content: t('contact.address'),
       link: "https://maps.google.com",
     },
     {
       icon: MessageSquare,
-      title: "Social Media",
-      content: "Connect @KemisDigital",
+      title: t('contact.social'),
+      content: t('contact.social_handle'),
       link: "#",
     },
   ];
@@ -142,8 +144,8 @@ export default function Contact() {
   return (
     <div>
       <Hero
-        title="Contact KemisDigital"
-        description="Get in touch with our AI marketing experts to transform your digital presence and drive exceptional results."
+        title={t('contact.title')}
+        description={t('contact.description')}
         showCTA={false}
         pageContext="tourism"
       />
@@ -176,7 +178,7 @@ export default function Contact() {
         >
           <Card>
             <CardContent className="pt-6">
-              <h2 className="text-2xl font-bold mb-6 text-[#00A0E3]">Send us a Message</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#00A0E3]">{t('contact.form.title')}</h2>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -184,9 +186,9 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[#F7BE00]">Name</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">{t('contact.form.name')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your name" {...field} />
+                          <Input placeholder={t('contact.form.name_placeholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -198,9 +200,9 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[#F7BE00]">Email</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">{t('contact.form.email')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="your@email.com" {...field} />
+                          <Input placeholder={t('contact.form.email_placeholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -212,23 +214,23 @@ export default function Contact() {
                     name="service"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[#F7BE00]">Service Interest</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">{t('contact.form.service')}</FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <FormControl>
                             <SelectTrigger className="border-[#00A0E3] focus:ring-[#00A0E3]">
-                              <SelectValue placeholder="Select a service" />
+                              <SelectValue placeholder={t('contact.form.service_placeholder')} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="ai-strategy">AI Marketing Strategy</SelectItem>
-                            <SelectItem value="automation">Marketing Automation</SelectItem>
-                            <SelectItem value="analytics">AI Analytics & Insights</SelectItem>
-                            <SelectItem value="content">AI Content Generation</SelectItem>
-                            <SelectItem value="social">Social Media AI</SelectItem>
-                            <SelectItem value="other">Other Services</SelectItem>
+                            <SelectItem value="ai-strategy">{t('contact.form.services.ai_strategy')}</SelectItem>
+                            <SelectItem value="automation">{t('contact.form.services.automation')}</SelectItem>
+                            <SelectItem value="analytics">{t('contact.form.services.analytics')}</SelectItem>
+                            <SelectItem value="content">{t('contact.form.services.content')}</SelectItem>
+                            <SelectItem value="social">{t('contact.form.services.social')}</SelectItem>
+                            <SelectItem value="other">{t('contact.form.services.other')}</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -241,10 +243,10 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[#F7BE00]">Message</FormLabel>
+                        <FormLabel className="text-[#F7BE00]">{t('contact.form.message')}</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us about your AI marketing needs..."
+                            placeholder={t('contact.form.message_placeholder')}
                             className="min-h-[120px]"
                             {...field}
                           />
@@ -260,10 +262,10 @@ export default function Contact() {
                       className="w-full bg-[#00A0E3] hover:bg-[#0085BC] text-white"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Sending..." : "Send Message"}
+                      {isLoading ? t('contact.form.sending') : t('contact.form.submit')}
                     </Button>
                     <div className="text-center">
-                      <p className="text-sm text-muted-foreground mb-2">or</p>
+                      <p className="text-sm text-muted-foreground mb-2">{t('contact.form.or')}</p>
                       <CalendarWidget />
                     </div>
                   </div>

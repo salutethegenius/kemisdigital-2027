@@ -7,6 +7,8 @@ import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
+// Import i18n configuration
+import "./i18n";
 import Preloader from "./components/shared/Preloader";
 
 // Eager load only the Home component for fast initial load

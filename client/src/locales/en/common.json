@@ -1,0 +1,125 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "ai_labs": "AI Labs",
+    "events": "Events",
+    "membership": "Membership",
+    "resources": "Resources",
+    "advocacy": "Advocacy",
+    "contact": "Contact Us",
+    "latest_news": "Latest News"
+  },
+  "footer": {
+    "company": "Company",
+    "services": "Services",
+    "quick_links": "Quick Links",
+    "stay_connected": "Stay Connected",
+    "copyright": "© 2025 KemisDigital. All rights reserved.",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service",
+    "web_development": "Web Development",
+    "analytics": "Analytics",
+    "support": "Support",
+    "schedule_demo": "Schedule Demo"
+  },
+  "homepage": {
+    "hero": {
+      "title": "The People's Choice!",
+      "description": "Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've crafted A-player strategies that brought ideas to life with measured success."
+    },
+    "cta": {
+      "get_started": "Get Started",
+      "learn_more": "Learn More"
+    },
+    "mission_section": {
+      "title": "Our Mission",
+      "description": "We aim to shape the future of business in the Bahamas by driving digital transformation for local startups and businesses in the tourism sector."
+    },
+    "services_section": {
+      "title": "AI Marketing Services",
+      "subtitle": "Online campaigns that combine cutting-edge AI technology with expert marketers, strategists, and programmers to deliver A-1 results."
+    },
+    "testimonials": {
+      "title": "Client Testimonials",
+      "subtitle": "Hear what our clients have to say about their experience working with KemisDigital."
+    },
+    "impact_section": {
+      "title": "Our Impact",
+      "client_success_rate": "Client Success Rate",
+      "client_success_desc": "Clients achieving their marketing goals",
+      "average_roi": "Average ROI",
+      "average_roi_desc": "Return on marketing investment",
+      "client_retention": "Client Retention",
+      "client_retention_desc": "Long-term partnership success"
+    },
+    "why_choose_section": {
+      "title": "Why Choose KemisDigital",
+      "leadership_title": "Leadership",
+      "leadership_desc1": "Our AI-powered solutions deliver targeted campaigns that reach the right audience at the right time.",
+      "leadership_desc2": "We use advanced machine learning algorithms to analyze market trends and fine-tune your marketing strategy for maximum impact.",
+      "innovation_title": "Innovation",
+      "innovation_desc1": "We stay at the forefront of digital marketing technology, bringing innovative solutions to the Caribbean marketplace.",
+      "innovation_desc2": "Our team continuously explores new technologies and methodologies to give your business a competitive edge."
+    },
+    "subscribe_section": {
+      "title": "Stay Updated",
+      "description": "Subscribe to our newsletter for the latest updates, industry insights, and digital marketing tips.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    }
+  },
+  "contact": {
+    "title": "Contact KemisDigital",
+    "description": "Get in touch with our AI marketing experts to transform your digital presence and drive exceptional results.",
+    "form": {
+      "title": "Send us a Message",
+      "name": "Name",
+      "name_placeholder": "Your name",
+      "email": "Email",
+      "email_placeholder": "your@email.com",
+      "service": "Service Interest",
+      "service_placeholder": "Select a service",
+      "message": "Message",
+      "message_placeholder": "Tell us about your AI marketing needs...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "or": "or",
+      "success_description": "Thank you for your message. Our team will be in touch soon!",
+      "error_title": "Message Failed",
+      "error_description": "There was a problem sending your message. Please try again later.",
+      "services": {
+        "ai_strategy": "AI Marketing Strategy",
+        "automation": "Marketing Automation",
+        "analytics": "AI Analytics & Insights",
+        "content": "AI Content Generation",
+        "social": "Social Media AI",
+        "other": "Other Services"
+      }
+    },
+    "reasons": {
+      "consultation": "AI Marketing Consultation",
+      "consultation_desc": "Discuss your AI-powered marketing strategy and automation needs",
+      "partnership": "Partnership Opportunities",
+      "partnership_desc": "Explore collaboration and strategic partnerships",
+      "inquiries": "Service Inquiries",
+      "inquiries_desc": "Learn more about our AI marketing solutions and pricing",
+      "support": "Support",
+      "support_desc": "Get assistance with our AI marketing tools and services"
+    },
+    "address_label": "Address",
+    "address": "Nassau, Bahamas",
+    "phone": "Phone",
+    "email": "Email",
+    "social": "Social Media",
+    "social_handle": "Connect @KemisDigital",
+    "success_message": "Message sent successfully!"
+  },
+  "language_selector": {
+    "en": "English",
+    "fr": "French",
+    "es": "Spanish",
+    "ht": "Haitian Creole"
+  }
+}
