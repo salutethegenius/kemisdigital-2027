@@ -4,7 +4,6 @@ import TestimonialCarousel from "@/components/shared/TestimonialCarousel";
 import SEO from "@/components/shared/SEO";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import testimonials from "@/data/testimonials";
 import {
   Globe,
   Target,
@@ -91,6 +90,9 @@ const aiServices = [
     },
   ];
   
+  // Import testimonials from centralized data file
+  import testimonials from "@/data/testimonials";
+
   export default function Home() {
     return (
       <div>
