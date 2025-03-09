@@ -4,6 +4,7 @@ import { setupVite, serveStatic } from "./vite";
 import { createServer } from "http";
 import cors from 'cors';
 import compression from 'compression';
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 5000;

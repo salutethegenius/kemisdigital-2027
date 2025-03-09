@@ -25,7 +25,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import ThemeToggle from "./ThemeToggle";
+
 
 const navigation = [
   { name: "Home", href: "/", icon: Home, description: "Return to our homepage" },
@@ -145,7 +145,6 @@ export default function Header() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <ThemeToggle />
           <Button asChild className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white">
             <Link href="/services" onClick={() => window.scrollTo(0, 0)}>Get Started</Link>
           </Button>
@@ -194,7 +193,6 @@ export default function Header() {
                   <span>Video Meeting</span>
                 </Link>
               </div>
-              <ThemeToggle />
               <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild>
                 <Link href="/services" onClick={handleNavigation}>Get Started</Link>
               </Button>

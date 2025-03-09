@@ -23,7 +23,8 @@ interface HeroProps {
 }
 
 // Contextual hero images reflecting Bahamas spirit and "People's Choice" theme
-// Optimized with better performance loading patterns and strategies 
+// Optimized with better performance loading patterns and strategies
+// Using pre-generated optimized images for better performance
 const contextImages = {
   // NGO focused image showing community and collaboration in Bahamas
   ngo: {
@@ -42,12 +43,12 @@ const contextImages = {
   },
   
   // Tourism image - KemisDigital Beach Bahamas brand image
-  // Using a single optimized image to reduce HTTP requests
+  // Using pre-optimized images with proper sizes for different devices
   tourism: {
-    small: '/images/beachbahamas.jpg?width=800',
-    medium: '/images/beachbahamas.jpg?width=1280',
-    large: '/images/beachbahamas.jpg', 
-    blur: '/images/beachbahamas.jpg?width=20&quality=10' // URL parameters for on-demand resizing
+    small: '/images/optimized/beachbahamas-small.jpg', // 800px width, optimized for mobile
+    medium: '/images/optimized/beachbahamas-medium.jpg', // 1280px width, optimized for tablets
+    large: '/images/optimized/beachbahamas-large.jpg', // Full size for desktops
+    blur: '/images/optimized/beachbahamas-blur.jpg' // Tiny blurred image for immediate display
   },
   
   // Default image showing Paradise Island with vibrant colors matching brand

@@ -30,7 +30,7 @@ const footerSections = [
     links: [
       { name: "Get in Touch", href: "/contact" },
       { name: "Support", href: "/support" },
-      { name: "Schedule Demo", href: "/demo" },
+      { name: "Schedule Demo", href: "/contact" },
     ],
   },
 ];

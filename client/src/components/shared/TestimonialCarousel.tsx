@@ -73,43 +73,79 @@ export default function TestimonialCarousel({
   // Use useRef to track if component is mounted
   const isMounted = useRef(true);
   
-  // Preload next testimonial image to improve user experience
+  // Make sure we have valid testimonials
   useEffect(() => {
-    const nextIndex = (currentIndex + 1) % testimonials.length;
-    const nextTestimonial = testimonials[nextIndex];
-    
-    if (nextTestimonial?.image) {
-      const img = new Image();
-      img.src = nextTestimonial.image;
+    if (!testimonials || testimonials.length === 0) {
+      console.error("No testimonials provided to TestimonialCarousel");
     }
+    
+    // Set isMounted to true when component mounts
+    isMounted.current = true;
     
     // Cleanup function
     return () => {
       isMounted.current = false;
     };
+  }, [testimonials]);
+  
+  // Preload next testimonial image to improve user experience
+  useEffect(() => {
+    if (!testimonials || testimonials.length <= 1) return;
+    
+    // Preload both next and previous images to enhance UX during navigation
+    const nextIndex = (currentIndex + 1) % testimonials.length;
+    const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    
+    const imagesToPreload = [
+      testimonials[nextIndex]?.image,
+      testimonials[prevIndex]?.image
+    ].filter(Boolean);
+    
+    imagesToPreload.forEach(imageSrc => {
+      if (imageSrc) {
+        const img = new Image();
+        img.src = imageSrc;
+      }
+    });
   }, [currentIndex, testimonials]);
 
   const handleNext = useCallback(() => {
-    if (!isMounted.current) return;
+    if (!isMounted.current || !testimonials || testimonials.length <= 1) {
+      console.log("Next testimonial click ignored - invalid state:", 
+                 { isMounted: isMounted.current, 
+                   testimonialsLength: testimonials?.length });
+      return;
+    }
+    
+    console.log("Next testimonial clicked, moving from index", currentIndex, 
+               "to", (currentIndex + 1) % testimonials.length);
     setDirection(1);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  }, [testimonials.length]);
+  }, [testimonials, currentIndex]);
 
   const handlePrev = useCallback(() => {
-    if (!isMounted.current) return;
+    if (!isMounted.current || !testimonials || testimonials.length <= 1) {
+      console.log("Previous testimonial click ignored - invalid state:", 
+                 { isMounted: isMounted.current, 
+                   testimonialsLength: testimonials?.length });
+      return;
+    }
+    
+    console.log("Previous testimonial clicked, moving from index", currentIndex, 
+               "to", (currentIndex - 1 + testimonials.length) % testimonials.length);
     setDirection(-1);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-  }, [testimonials.length]);
+  }, [testimonials, currentIndex]);
 
   useEffect(() => {
-    if (!autoplay || isPaused || !isMounted.current) return;
+    if (!autoplay || isPaused || !isMounted.current || !testimonials || testimonials.length <= 1) return;
 
     const timer = setInterval(() => {
       handleNext();
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoplay, interval, handleNext, isPaused]);
+  }, [autoplay, interval, handleNext, isPaused, testimonials]);
 
   if (!testimonials.length) return null;
 
@@ -263,11 +299,23 @@ export default function TestimonialCarousel({
       {/* Navigation Controls - Enhanced for mobile */}
       <div className="flex justify-center mt-6 gap-2 sm:gap-4">
         <Button 
-          onClick={handlePrev} 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (testimonials.length > 1) {
+              console.log("Previous button clicked");
+              handlePrev();
+            }
+          }} 
           variant="outline" 
           size="icon" 
-          className="rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20"
+          className={`rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 
+            ${testimonials.length > 1 
+              ? 'hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20 cursor-pointer' 
+              : 'opacity-50 cursor-not-allowed'}`}
           aria-label="Previous testimonial"
+          type="button"
+          disabled={testimonials.length <= 1}
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
@@ -275,25 +323,44 @@ export default function TestimonialCarousel({
           {testimonials.map((testimonial, index) => (
             <button
               key={testimonial.id}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (index !== currentIndex) {
+                  console.log(`Dot clicked, moving from index ${currentIndex} to ${index}`);
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }
               }}
+              type="button"
               className={`h-2.5 rounded-full transition-all ${
                 index === currentIndex 
                   ? 'w-5 sm:w-6 bg-[#00A0E3] dark:bg-[#00A0E3]' 
-                  : 'w-2.5 bg-[#00A0E3]/20 dark:bg-[#00A0E3]/40'
+                  : 'w-2.5 bg-[#00A0E3]/20 dark:bg-[#00A0E3]/40 hover:bg-[#00A0E3]/60'
               } ${isVideoTestimonial(testimonial.quote) ? 'sm:h-3 sm:w-8' : ''}`}
               aria-label={`Go to testimonial ${index + 1}`}
+              aria-current={index === currentIndex ? 'true' : 'false'}
             />
           ))}
         </div>
         <Button 
-          onClick={handleNext} 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (testimonials.length > 1) {
+              console.log("Next button clicked");
+              handleNext();
+            }
+          }} 
           variant="outline" 
           size="icon" 
-          className="rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20"
+          className={`rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 
+            ${testimonials.length > 1 
+              ? 'hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20 cursor-pointer' 
+              : 'opacity-50 cursor-not-allowed'}`}
           aria-label="Next testimonial"
+          type="button"
+          disabled={testimonials.length <= 1}
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
