@@ -32,7 +32,7 @@ const PaymentSolutions = () => {
                 <span className="font-semibold">$250</span>
               </li>
               <li className="flex justify-between items-center">
-                <span>Dashboard Access Setup & Training</span>
+                <span>Dashboard Access Setup & Training (if needed)</span>
                 <span className="font-semibold">$150</span>
               </li>
               <li className="flex justify-between items-center">
@@ -41,7 +41,7 @@ const PaymentSolutions = () => {
               </li>
               <li className="flex justify-between items-center pt-2 border-t">
                 <span className="font-bold">Total Setup</span>
-                <span className="font-bold text-[#00A0E3] dark:text-[#00A0E3]">$600</span>
+                <span className="font-bold text-[#00A0E3] dark:text-[#00A0E3]">$250</span>
               </li>
             </ul>
           </Card>

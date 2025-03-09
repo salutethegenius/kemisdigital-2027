@@ -23,7 +23,7 @@ interface HeroProps {
 }
 
 // Contextual hero images reflecting Bahamas spirit and "People's Choice" theme
-// Updated with better image optimization parameters - quality, format, and proper width values
+// Optimized with better performance loading patterns and strategies 
 const contextImages = {
   // NGO focused image showing community and collaboration in Bahamas
   ngo: {
@@ -41,12 +41,13 @@ const contextImages = {
     blur: 'https://images.unsplash.com/photo-1617170788899-45af79abc4f7?q=10&w=20&auto=format&fit=crop&blur=10'
   },
   
-  // Tourism image showcasing Bahamas' beautiful beaches and clear waters
+  // Tourism image - KemisDigital Beach Bahamas brand image
+  // Using a single optimized image to reduce HTTP requests
   tourism: {
-    small: 'https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=75&w=800&auto=format&fit=crop',
-    medium: 'https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=75&w=1280&auto=format&fit=crop',
-    large: 'https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=75&w=1920&auto=format&fit=crop',
-    blur: 'https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=10&w=20&auto=format&fit=crop&blur=10'
+    small: '/images/beachbahamas.jpg?width=800',
+    medium: '/images/beachbahamas.jpg?width=1280',
+    large: '/images/beachbahamas.jpg', 
+    blur: '/images/beachbahamas.jpg?width=20&quality=10' // URL parameters for on-demand resizing
   },
   
   // Default image showing Paradise Island with vibrant colors matching brand
@@ -58,7 +59,7 @@ const contextImages = {
   }
 };
 
-// Memoized optimal image loading component
+// Enhanced memoized optimal image loading component with performance improvements
 const OptimizedBackgroundImage = memo(({ 
   imageKey, 
   title, 
@@ -70,19 +71,43 @@ const OptimizedBackgroundImage = memo(({
 }) => {
   const [loaded, setLoaded] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
-
+  
+  // Prefetch higher resolution images once component mounts
+  useEffect(() => {
+    // Only prefetch if this is a local image (tourism context with beachbahamas.jpg)
+    // For external images like Unsplash, browser will handle caching automatically
+    if (imageKey === 'tourism') {
+      // Timeout to ensure it doesn't compete with critical resources
+      const prefetchTimeout = setTimeout(() => {
+        const prefetchMedium = new Image();
+        prefetchMedium.src = contextImages[imageKey].medium;
+        
+        // Wait until medium resolution is loaded before loading the large one
+        prefetchMedium.onload = () => {
+          const prefetchLarge = new Image();
+          prefetchLarge.src = contextImages[imageKey].large;
+        };
+      }, 1000); // 1 second delay to prioritize visible content
+      
+      return () => clearTimeout(prefetchTimeout);
+    }
+  }, [imageKey]);
+  
   return (
     <>
-      {/* Low quality placeholder */}
+      {/* Enhanced low quality blur-up placeholder with early loading */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat filter blur-md scale-105 transition-opacity duration-500"
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat filter blur-md scale-105 transition-opacity duration-700"
         style={{ 
           backgroundImage: `url(${contextImages[imageKey].blur})`,
-          opacity: loaded ? 0 : 1
+          opacity: loaded ? 0 : 1,
+          // Adding transform properties for better hardware acceleration
+          transform: 'translateZ(0)'
         }}
+        aria-hidden="true"
       />
       
-      {/* Main responsive image with srcset */}
+      {/* Main responsive image with improved srcset and fetchpriority */}
       <img
         ref={imageRef}
         src={contextImages[imageKey].large}
@@ -91,14 +116,19 @@ const OptimizedBackgroundImage = memo(({
           ${contextImages[imageKey].medium} 1280w,
           ${contextImages[imageKey].large} 1920w
         `}
-        sizes="100vw"
-        alt={`${title} - Hero Image`}
-        className="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-opacity duration-500"
-        style={{ opacity: loaded ? 1 : 0 }}
+        sizes="(max-width: 800px) 800px, (max-width: 1280px) 1280px, 1920px"
+        alt={`${title} - Hero Background`}
+        className="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-opacity duration-700"
+        style={{ 
+          opacity: loaded ? 1 : 0,
+          // Adding transform properties for better hardware acceleration
+          transform: 'translateZ(0)'
+        }}
         onLoad={() => setLoaded(true)}
         onError={onError}
-        loading="eager"
-        decoding="async"
+        loading="eager" // Load immediately as it's above the fold
+        decoding="async" // Allow the browser to decode the image asynchronously
+        fetchPriority="high" // Signal high priority for the resource
       />
     </>
   );
@@ -160,17 +190,17 @@ export default function Hero({
     
     if (!hasVisitedBefore && window.location.pathname === '/') {
       setIsLoading(true);
-      // Reduce loading time for better performance
+      // Reduced loading time even further for better performance and UX
       const timer = setTimeout(() => {
         setIsLoading(false);
         // Mark that the user has visited the homepage
         sessionStorage.setItem('hasVisitedHomepage', 'true');
-      }, 2000); // Reduced from 3500ms for better performance
+      }, 1500); // Further reduced from 2000ms for faster page display
 
       return () => clearTimeout(timer);
     }
     
-    // Determine what type of background to show
+    // Determine what type of background to show with priority order
     if (videoBackground && !videoError) {
       setBackgroundType('video');
     } else if ((heroImage || pageContext) && !imageError) {
@@ -179,10 +209,27 @@ export default function Hero({
       setBackgroundType('none');
     }
     
-    // Preload only the blur thumbnail for better initial performance
+    // Performance optimization - always preload the blur thumbnail
+    // and mark critical resources for priority loading
     if (pageContext && !heroImage) {
-      const img = new Image();
-      img.src = contextImages[getContextImageKey()].blur;
+      // Create and configure link rel=preload for the blur image
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      preloadLink.href = contextImages[getContextImageKey()].blur;
+      preloadLink.importance = 'high';
+      document.head.appendChild(preloadLink);
+      
+      // Also preload the small version after a slight delay
+      setTimeout(() => {
+        const img = new Image();
+        img.src = contextImages[getContextImageKey()].small;
+      }, 200);
+
+      // Clean up preload link on unmount
+      return () => {
+        document.head.removeChild(preloadLink);
+      };
     }
   }, [heroImage, pageContext, videoBackground, videoError, imageError]);
 

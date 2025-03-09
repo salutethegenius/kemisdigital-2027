@@ -29,9 +29,32 @@ console.log('[Server] REPL_OWNER:', process.env.REPL_OWNER);
 // Enable GZIP compression
 app.use(compression());
 
-// Set cache control headers
+// Enhanced cache control and responsive image handling
 app.use((req, res, next) => {
-  // Set Expires headers for static assets
+  // Basic URL parameter parsing for responsive image support
+  if (req.url.includes('images/beachbahamas.jpg') && req.url.includes('?')) {
+    // Extract query parameters for responsive versions
+    // This is a simplified implementation - ideally would use a proper image processing library
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const width = url.searchParams.get('width');
+    const quality = url.searchParams.get('quality');
+    
+    // In a production app, would resize the image based on width parameter
+    // Here we just set appropriate headers for client-side rendering optimization
+    if (width) {
+      res.setHeader('Content-Disposition', `inline; filename="beachbahamas-${width}.jpg"`);
+      res.setHeader('Vary', 'Accept');
+    }
+    
+    // Apply longer cache times for smaller/lower quality versions
+    if (width === '20' || quality === '10') {
+      // Cache placeholders even longer (30 days)
+      res.setHeader('Cache-Control', 'public, max-age=2592000');
+      res.setHeader('Expires', new Date(Date.now() + 2592000000).toUTCString());
+    }
+  }
+  
+  // Set Expires headers for all static assets
   if (req.url.match(/\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
     // Cache static assets for 7 days (604800 seconds)
     res.setHeader('Cache-Control', 'public, max-age=604800');

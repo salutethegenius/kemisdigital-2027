@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { 
   Menu, 
@@ -41,10 +41,27 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
+  // Handle scroll restoration on navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  // Function to handle navigation
+  const handleNavigation = () => {
+    window.scrollTo(0, 0);
+    setIsOpen(false);
+  };
+
+  // Function to handle contact navigation from dropdown
+  const handleContactNavigation = (href: string) => {
+    window.scrollTo(0, 0);
+    setHoveredItem(null);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
           <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-10" />
         </Link>
 
@@ -60,6 +77,7 @@ export default function Header() {
                     }`}
                     onMouseEnter={() => setHoveredItem(item.name)}
                     onMouseLeave={() => setHoveredItem(null)}
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     <item.icon className="w-4 h-4 mr-2" />
                     {item.name}
@@ -70,6 +88,7 @@ export default function Header() {
                         <Link 
                           href={item.href} 
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                          onClick={() => window.scrollTo(0, 0)}
                         >
                           <div className="flex items-center gap-2">
                             <item.icon className="h-5 w-5 text-[#00A0E3]" />
@@ -85,9 +104,8 @@ export default function Header() {
                 </NavigationMenuItem>
               ))}
               <NavigationMenuItem className="relative">
-                <Link
-                  href="/contact"
-                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
+                <div
+                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 cursor-pointer ${
                     location === "/contact" || location === "/meet" ? "text-[#00A0E3]" : "text-muted-foreground"
                   }`}
                   onMouseEnter={() => setHoveredItem("contact")}
@@ -95,14 +113,19 @@ export default function Header() {
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   Contact
-                </Link>
+                </div>
                 {hoveredItem === "contact" && (
-                  <div className="absolute top-full left-0 mt-1 z-50">
+                  <div 
+                    className="absolute top-full left-0 mt-1 z-50"
+                    onMouseEnter={() => setHoveredItem("contact")}
+                    onMouseLeave={() => setHoveredItem(null)}
+                  >
                     <div className="p-4 w-[270px] bg-background rounded-md shadow-md border">
                       <div className="grid gap-3">
                         <Link 
                           href="/contact" 
                           className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md"
+                          onClick={handleContactNavigation}
                         >
                           <Mail className="w-4 h-4" />
                           <span>Contact Us</span>
@@ -110,6 +133,7 @@ export default function Header() {
                         <Link 
                           href="/meet" 
                           className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md"
+                          onClick={handleContactNavigation}
                         >
                           <Video className="w-4 h-4" />
                           <span>Video Meeting</span>
@@ -123,7 +147,7 @@ export default function Header() {
           </NavigationMenu>
           <ThemeToggle />
           <Button asChild className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white">
-            <Link href="/services">Get Started</Link>
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>Get Started</Link>
           </Button>
         </div>
 
@@ -145,7 +169,7 @@ export default function Header() {
                   className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center space-x-2 ${
                     location === item.href ? "text-[#00A0E3]" : "text-muted-foreground"
                   }`}
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleNavigation}
                 >
                   <item.icon className="w-4 h-4" />
                   <span>{item.name}</span>
@@ -156,7 +180,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   className="flex items-center space-x-2 text-sm hover:text-[#00A0E3]"
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleNavigation}
                 >
                   <Mail className="w-4 h-4" />
                   <span>Contact Us</span>
@@ -164,15 +188,15 @@ export default function Header() {
                 <Link
                   href="/meet"
                   className="flex items-center space-x-2 text-sm hover:text-[#00A0E3]"
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleNavigation}
                 >
                   <Video className="w-4 h-4" />
                   <span>Video Meeting</span>
                 </Link>
               </div>
               <ThemeToggle />
-              <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild onClick={() => setIsOpen(false)}>
-                <Link href="/services">Get Started</Link>
+              <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild>
+                <Link href="/services" onClick={handleNavigation}>Get Started</Link>
               </Button>
             </div>
           </SheetContent>
