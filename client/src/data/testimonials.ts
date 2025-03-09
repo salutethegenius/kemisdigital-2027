@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 1,
     quote: "KemisDigital has been a true game-changer for my non-profit! Since the launch of our landing page in October 2024, we've captured over 1,200 leads and achieved an impressive increase in social media engagement. Their expertise and dedication have elevated our digital presence and propelled us to new heights. We look forward to a long relationship with KemisDigital.",
-    author: "Azaleta Ishmael-Newry",
+    author: "Nekia Watson",
     role: "CEO",
     company: "MAP Bahamas Non-Profit",
     image: "https://lightning.kemisdigital.com/assets/map-bahamas-ceo.jpeg"

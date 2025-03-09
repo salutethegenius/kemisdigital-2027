@@ -68,6 +68,12 @@
       "description": "Suscríbete a nuestro boletín para recibir las últimas actualizaciones, información del sector y consejos de marketing digital.",
       "placeholder": "Ingresa tu email",
       "button": "Suscribirse"
+    },
+    "popup": {
+      "title": "Servicio KemisEMAIL",
+      "question": "¿Estás buscando llegar a miles de bahameños usando nuestro servicio KemisEMAIL?",
+      "button_yes": "Haz Clic Aquí",
+      "button_no": "Ahora No"
     }
   },
   "contact": {

@@ -1,15 +1,15 @@
 {
   "header": {
     "home": "Home",
-    "about": "About Us",
+    "about": "About",
     "services": "Services",
     "ai_labs": "AI Labs",
     "events": "Events",
     "membership": "Membership",
     "resources": "Resources",
     "advocacy": "Advocacy",
-    "contact": "Contact Us",
-    "latest_news": "Latest News"
+    "contact": "Contact",
+    "latest_news": "News"
   },
   "footer": {
     "company": "Company",
@@ -21,13 +21,13 @@
     "terms_of_service": "Terms of Service",
     "web_development": "Web Development",
     "analytics": "Analytics",
-    "support": "Support",
+    "support": "Support", 
     "schedule_demo": "Schedule Demo"
   },
   "homepage": {
     "hero": {
       "title": "The People's Choice!",
-      "description": "Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace, we've crafted A-player strategies that brought ideas to life with measured success."
+      "description": "Clients say we've earned this title because we're in the game with them. Backed by 20 years in the Bahamas market, we've crafted top-tier strategies that brought ideas to life with measurable success."
     },
     "cta": {
       "get_started": "Get Started",
@@ -39,7 +39,7 @@
     },
     "services_section": {
       "title": "AI Marketing Services",
-      "subtitle": "Online campaigns that combine cutting-edge AI technology with expert marketers, strategists, and programmers to deliver A-1 results."
+      "subtitle": "Online campaigns that combine cutting-edge AI technology with marketing experts, strategists, and developers to deliver exceptional results."
     },
     "testimonials": {
       "title": "Client Testimonials",
@@ -52,7 +52,7 @@
       "average_roi": "Average ROI",
       "average_roi_desc": "Return on marketing investment",
       "client_retention": "Client Retention",
-      "client_retention_desc": "Long-term partnership success"
+      "client_retention_desc": "Success of long-term partnerships"
     },
     "why_choose_section": {
       "title": "Why Choose KemisDigital",
@@ -60,7 +60,7 @@
       "leadership_desc1": "Our AI-powered solutions deliver targeted campaigns that reach the right audience at the right time.",
       "leadership_desc2": "We use advanced machine learning algorithms to analyze market trends and fine-tune your marketing strategy for maximum impact.",
       "innovation_title": "Innovation",
-      "innovation_desc1": "We stay at the forefront of digital marketing technology, bringing innovative solutions to the Caribbean marketplace.",
+      "innovation_desc1": "We stay at the forefront of digital marketing technology, bringing innovative solutions to the Caribbean market.",
       "innovation_desc2": "Our team continuously explores new technologies and methodologies to give your business a competitive edge."
     },
     "subscribe_section": {
@@ -68,17 +68,23 @@
       "description": "Subscribe to our newsletter for the latest updates, industry insights, and digital marketing tips.",
       "placeholder": "Enter your email",
       "button": "Subscribe"
+    },
+    "popup": {
+      "title": "KemisEMAIL Service",
+      "question": "Are you looking to reach thousands of Bahamians using our KemisEMAIL service?",
+      "button_yes": "Click Here",
+      "button_no": "Not Now"
     }
   },
   "contact": {
     "title": "Contact KemisDigital",
-    "description": "Get in touch with our AI marketing experts to transform your digital presence and drive exceptional results.",
+    "description": "Get in touch with our AI marketing experts to transform your digital presence and achieve exceptional results.",
     "form": {
-      "title": "Send us a Message",
+      "title": "Send Us a Message",
       "name": "Name",
       "name_placeholder": "Your name",
       "email": "Email",
-      "email_placeholder": "your@email.com",
+      "email_placeholder": "you@email.com",
       "service": "Service Interest",
       "service_placeholder": "Select a service",
       "message": "Message",
@@ -86,7 +92,7 @@
       "submit": "Send Message",
       "sending": "Sending...",
       "or": "or",
-      "success_description": "Thank you for your message. Our team will be in touch soon!",
+      "success_description": "Thank you for your message. Our team will contact you soon!",
       "error_title": "Message Failed",
       "error_description": "There was a problem sending your message. Please try again later.",
       "services": {
@@ -94,15 +100,15 @@
         "automation": "Marketing Automation",
         "analytics": "AI Analytics & Insights",
         "content": "AI Content Generation",
-        "social": "Social Media AI",
+        "social": "AI for Social Media",
         "other": "Other Services"
       }
     },
     "reasons": {
       "consultation": "AI Marketing Consultation",
-      "consultation_desc": "Discuss your AI-powered marketing strategy and automation needs",
+      "consultation_desc": "Discuss your AI-based marketing strategy and automation needs",
       "partnership": "Partnership Opportunities",
-      "partnership_desc": "Explore collaboration and strategic partnerships",
+      "partnership_desc": "Explore collaborations and strategic partnerships",
       "inquiries": "Service Inquiries",
       "inquiries_desc": "Learn more about our AI marketing solutions and pricing",
       "support": "Support",

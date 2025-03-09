@@ -68,6 +68,12 @@
       "description": "Abòne w nan bilten nou an pou dènye nouvèl, enfòmasyon endistri, ak konsèy maketing dijital.",
       "placeholder": "Antre imèl ou",
       "button": "Abòne"
+    },
+    "popup": {
+      "title": "Sèvis KemisEMAIL",
+      "question": "Èske w ap chèche rive jwenn milye Bahamyen ak sèvis KemisEMAIL nou an?",
+      "button_yes": "Klike Isit",
+      "button_no": "Pa Kounye a"
     }
   },
   "contact": {

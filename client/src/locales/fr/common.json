@@ -22,12 +22,12 @@
     "web_development": "Développement Web",
     "analytics": "Analytique",
     "support": "Support",
-    "schedule_demo": "Réserver une Démo"
+    "schedule_demo": "Planifier une Démo"
   },
   "homepage": {
     "hero": {
-      "title": "Le Choix du Peuple!",
-      "description": "Les clients disent que nous avons mérité ce titre parce que nous sommes dans le jeu avec eux. Fort de 20 ans d'expérience sur le marché bahamien, nous avons élaboré des stratégies de premier ordre qui ont donné vie à des idées avec un succès mesurable."
+      "title": "Le Choix du Peuple !",
+      "description": "Les clients disent que nous avons gagné ce titre parce que nous sommes dans le jeu avec eux. Avec 20 ans d'expérience sur le marché bahaméen, nous avons élaboré des stratégies de premier ordre qui ont donné vie à des idées avec un succès mesurable."
     },
     "cta": {
       "get_started": "Commencer",
@@ -35,15 +35,15 @@
     },
     "mission_section": {
       "title": "Notre Mission",
-      "description": "Nous visons à façonner l'avenir des entreprises aux Bahamas en stimulant la transformation numérique des startups locales et des entreprises du secteur touristique."
+      "description": "Nous visons à façonner l'avenir des entreprises aux Bahamas en stimulant la transformation numérique pour les startups locales et les entreprises du secteur touristique."
     },
     "services_section": {
       "title": "Services de Marketing IA",
-      "subtitle": "Campagnes en ligne qui combinent une technologie IA de pointe avec des experts en marketing, des stratèges et des programmeurs pour offrir des résultats exceptionnels."
+      "subtitle": "Campagnes en ligne combinant une technologie IA de pointe avec des experts en marketing, des stratèges et des développeurs pour fournir des résultats exceptionnels."
     },
     "testimonials": {
-      "title": "Témoignages de Clients",
-      "subtitle": "Découvrez ce que nos clients disent de leur expérience avec KemisDigital."
+      "title": "Témoignages Clients",
+      "subtitle": "Écoutez ce que nos clients disent de leur expérience de travail avec KemisDigital."
     },
     "impact_section": {
       "title": "Notre Impact",
@@ -51,34 +51,40 @@
       "client_success_desc": "Clients atteignant leurs objectifs marketing",
       "average_roi": "ROI Moyen",
       "average_roi_desc": "Retour sur investissement marketing",
-      "client_retention": "Fidélisation Client",
+      "client_retention": "Rétention Client",
       "client_retention_desc": "Succès des partenariats à long terme"
     },
     "why_choose_section": {
       "title": "Pourquoi Choisir KemisDigital",
       "leadership_title": "Leadership",
-      "leadership_desc1": "Nos solutions basées sur l'IA offrent des campagnes ciblées qui atteignent le bon public au bon moment.",
+      "leadership_desc1": "Nos solutions alimentées par l'IA offrent des campagnes ciblées qui atteignent le bon public au bon moment.",
       "leadership_desc2": "Nous utilisons des algorithmes avancés d'apprentissage automatique pour analyser les tendances du marché et affiner votre stratégie marketing pour un impact maximal.",
       "innovation_title": "Innovation",
-      "innovation_desc1": "Nous restons à la pointe de la technologie de marketing numérique, apportant des solutions innovantes au marché des Caraïbes.",
+      "innovation_desc1": "Nous restons à la pointe de la technologie du marketing numérique, apportant des solutions innovantes au marché des Caraïbes.",
       "innovation_desc2": "Notre équipe explore continuellement de nouvelles technologies et méthodologies pour donner à votre entreprise un avantage concurrentiel."
     },
     "subscribe_section": {
       "title": "Restez Informé",
-      "description": "Abonnez-vous à notre newsletter pour les dernières mises à jour, analyses sectorielles et conseils en marketing numérique.",
+      "description": "Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour, informations sectorielles et conseils de marketing numérique.",
       "placeholder": "Entrez votre email",
       "button": "S'abonner"
+    },
+    "popup": {
+      "title": "Service KemisEMAIL",
+      "question": "Cherchez-vous à atteindre des milliers de Bahaméens à l'aide de notre service KemisEMAIL ?",
+      "button_yes": "Cliquez Ici",
+      "button_no": "Pas Maintenant"
     }
   },
   "contact": {
-    "title": "Contactez KemisDigital",
+    "title": "Contacter KemisDigital",
     "description": "Contactez nos experts en marketing IA pour transformer votre présence numérique et obtenir des résultats exceptionnels.",
     "form": {
       "title": "Envoyez-nous un Message",
       "name": "Nom",
       "name_placeholder": "Votre nom",
       "email": "Email",
-      "email_placeholder": "votre@email.com",
+      "email_placeholder": "vous@email.com",
       "service": "Service d'Intérêt",
       "service_placeholder": "Sélectionnez un service",
       "message": "Message",
@@ -86,12 +92,12 @@
       "submit": "Envoyer le Message",
       "sending": "Envoi en cours...",
       "or": "ou",
-      "success_description": "Merci pour votre message. Notre équipe vous contactera bientôt!",
+      "success_description": "Merci pour votre message. Notre équipe vous contactera bientôt !",
       "error_title": "Échec du Message",
       "error_description": "Un problème est survenu lors de l'envoi de votre message. Veuillez réessayer plus tard.",
       "services": {
-        "ai_strategy": "Stratégie de Marketing IA",
-        "automation": "Automatisation du Marketing",
+        "ai_strategy": "Stratégie Marketing IA",
+        "automation": "Automatisation Marketing",
         "analytics": "Analyses et Insights IA",
         "content": "Génération de Contenu IA",
         "social": "IA pour Médias Sociaux",
@@ -100,9 +106,9 @@
     },
     "reasons": {
       "consultation": "Consultation Marketing IA",
-      "consultation_desc": "Discutez de votre stratégie de marketing basée sur l'IA et de vos besoins en automatisation",
+      "consultation_desc": "Discutez de votre stratégie marketing basée sur l'IA et de vos besoins d'automatisation",
       "partnership": "Opportunités de Partenariat",
-      "partnership_desc": "Explorez la collaboration et les partenariats stratégiques",
+      "partnership_desc": "Explorez les collaborations et partenariats stratégiques",
       "inquiries": "Demandes de Services",
       "inquiries_desc": "En savoir plus sur nos solutions de marketing IA et nos tarifs",
       "support": "Support",
