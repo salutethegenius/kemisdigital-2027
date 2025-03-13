@@ -1,11 +1,29 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import Hero from "@/components/shared/Hero";
 import SEOHelmet from "@/components/shared/SEOHelmet";
+import PaymentModal from "@/components/payment/PaymentModal";
+import { toast } from "@/hooks/use-toast";
 
 const PaymentSolutions = () => {
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<'basic' | 'premium'>('basic');
+
+  const handlePlanSelect = (plan: 'basic' | 'premium') => {
+    setSelectedPlan(plan);
+    setIsPaymentModalOpen(true);
+  };
+
+  const handlePaymentSuccess = (paymentIntentId: string) => {
+    toast({
+      title: "Subscription Successful",
+      description: `Thank you for subscribing to our ${selectedPlan === 'basic' ? 'Basic' : 'Premium'} plan!`,
+    });
+  };
+
   return (
     <div>
       <SEOHelmet
@@ -19,6 +37,15 @@ const PaymentSolutions = () => {
         showCTA={false}
         pageContext="tourism"
       />
+      
+      {/* Payment Modal */}
+      <PaymentModal 
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+        onSuccess={handlePaymentSuccess}
+        planType={selectedPlan}
+      />
+      
       <div className="container mx-auto px-4 py-12">
         <motion.div
           variants={staggerChildren}
@@ -120,25 +147,45 @@ const PaymentSolutions = () => {
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-[#00A0E3]">
               <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Basic Plan</h3>
-              <div className="text-3xl font-bold mb-4">$49/month</div>
+              <div className="bg-yellow-100 p-4 rounded-md border border-yellow-300 mb-4">
+                <div className="text-xl font-bold text-yellow-800">Initial payment: $295</div>
+                <div className="text-sm text-yellow-700 mb-2">Includes $250 setup fee + first month ($45)</div>
+                <div className="text-lg font-bold text-yellow-800">Recurring: $45/month</div>
+              </div>
               <ul className="space-y-2 mb-6">
                 <li>✓ Dashboard access</li>
                 <li>✓ Basic reporting</li>
                 <li>✓ Email support</li>
+                <li>✓ Account setup & configuration</li>
               </ul>
-              <Button className="w-full bg-[#00A0E3] hover:bg-[#0085bb]">Select Basic Plan</Button>
+              <Button 
+                className="w-full bg-[#00A0E3] hover:bg-[#0085bb]"
+                onClick={() => handlePlanSelect('basic')}
+              >
+                Select Basic Plan
+              </Button>
             </Card>
 
             <Card className="p-6 hover:shadow-lg transition-shadow border-2 hover:border-[#00A0E3]">
               <h3 className="text-2xl font-semibold mb-4 text-[#00A0E3] dark:text-[#00A0E3]">Premium Plan</h3>
-              <div className="text-3xl font-bold mb-4">$99/month</div>
+              <div className="bg-yellow-100 p-4 rounded-md border border-yellow-300 mb-4">
+                <div className="text-xl font-bold text-yellow-800">Initial payment: $349</div>
+                <div className="text-sm text-yellow-700 mb-2">Includes $250 setup fee + first month ($99)</div>
+                <div className="text-lg font-bold text-yellow-800">Recurring: $99/month</div>
+              </div>
               <ul className="space-y-2 mb-6">
                 <li>✓ Advanced reporting</li>
                 <li>✓ Priority support</li>
                 <li>✓ Monthly account review</li>
                 <li>✓ Chargeback assistance</li>
+                <li>✓ Premium account setup & configuration</li>
               </ul>
-              <Button className="w-full bg-[#00A0E3] hover:bg-[#0085bb]">Select Premium Plan</Button>
+              <Button 
+                className="w-full bg-[#00A0E3] hover:bg-[#0085bb]"
+                onClick={() => handlePlanSelect('premium')}
+              >
+                Select Premium Plan
+              </Button>
             </Card>
           </div>
 

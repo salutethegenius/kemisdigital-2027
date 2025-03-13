@@ -1,11 +1,22 @@
+import { useState } from "react";
 import Hero from "@/components/shared/Hero";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { staggerChildren } from "@/lib/animations";
 import { Globe, Target, Code, Sparkles } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import AIServicePaymentModal from "@/components/payment/AIServicePaymentModal";
 
 export default function AILabs() {
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<{
+    title: string;
+    price: number;
+    description: string;
+  } | null>(null);
+
   const innovationProjects = [
     {
       icon: Globe,
@@ -13,6 +24,8 @@ export default function AILabs() {
       description: "Complete digital sales solution including landing page, sales funnel, and professional PPC campaign management for maximum ROI.",
       status: "Released",
       tech: ["Landing Page", "Sales Funnel", "PPC", "Analytics"],
+      price: 1499,
+      adBudget: 300,
       impact: "$1,499 + $300 minimum ad budget",
       benefits: [
         "Professional landing page design",
@@ -28,6 +41,8 @@ export default function AILabs() {
       description: "Comprehensive digital marketing solution for startups, including evergreen funnel, content creation, and multi-channel marketing.",
       status: "Released",
       tech: ["Content Creation", "Social Media", "Email Marketing", "PPC"],
+      price: 2497,
+      adBudget: 300,
       impact: "$2,497 + $300 minimum ad budget",
       benefits: [
         "Evergreen marketing funnel",
@@ -43,6 +58,7 @@ export default function AILabs() {
       description: "Tailored digital solutions for tourism businesses, combining local market expertise with cutting-edge technology for maximum impact.",
       status: "Released",
       tech: ["Booking Systems", "Multi-language", "SEO", "Analytics"],
+      price: 5000,
       impact: "Starting from $5,000",
       benefits: [
         "Custom booking system integration",
@@ -67,12 +83,40 @@ export default function AILabs() {
     }
   };
 
+  const handlePaymentClick = (project: any) => {
+    setSelectedService({
+      title: project.title,
+      price: project.price,
+      description: project.description
+    });
+    setIsPaymentModalOpen(true);
+  };
+
+  const handlePaymentSuccess = (paymentIntentId: string) => {
+    toast({
+      title: "Payment Successful",
+      description: `Thank you for your purchase! Our team will contact you shortly to get started.`,
+    });
+    setIsPaymentModalOpen(false);
+  };
+
   return (
     <div>
       <Hero
         title="KemisDigital Innovation Lab"
         description="Welcome to our AI Innovation Hub - where cutting-edge artificial intelligence meets practical marketing solutions. Explore our latest projects pushing the boundaries of digital marketing technology."
       />
+
+      {selectedService && (
+        <AIServicePaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          onSuccess={handlePaymentSuccess}
+          serviceName={selectedService.title}
+          servicePrice={selectedService.price}
+          serviceDescription={selectedService.description}
+        />
+      )}
 
       <section className="py-16 bg-[#00A0E3]/5 dark:bg-[#00A0E3]/10">
         <div className="container mx-auto px-4">
@@ -85,7 +129,7 @@ export default function AILabs() {
             {innovationProjects.map((project) => (
               <Card
                 key={project.title}
-                className="border-2 border-[#00A0E3]/20 dark:border-[#00A0E3]/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-[#00A0E3] dark:hover:border-[#00A0E3]"
+                className="border-2 border-[#00A0E3]/20 dark:border-[#00A0E3]/30 transition-all duration-300 hover:shadow-xl hover:border-[#00A0E3] dark:hover:border-[#00A0E3] flex flex-col"
               >
                 <CardHeader>
                   <div className="flex items-center gap-4">
@@ -95,7 +139,7 @@ export default function AILabs() {
                     <CardTitle className="text-xl">{project.title}</CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-grow">
                   <Badge className={`${getStatusColor(project.status)} text-white mb-4`}>
                     {project.status}
                   </Badge>
@@ -126,6 +170,14 @@ export default function AILabs() {
                     </div>
                   </div>
                 </CardContent>
+                <CardFooter className="mt-4 pt-4 border-t">
+                  <Button 
+                    className="w-full bg-[#00A0E3] hover:bg-[#0085bb]"
+                    onClick={() => handlePaymentClick(project)}
+                  >
+                    Purchase Now
+                  </Button>
+                </CardFooter>
               </Card>
             ))}
           </motion.div>
