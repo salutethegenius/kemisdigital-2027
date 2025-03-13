@@ -3,10 +3,16 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import Hero from "@/components/shared/Hero";
+import SEOHelmet from "@/components/shared/SEOHelmet";
 
 const PaymentSolutions = () => {
   return (
     <div>
+      <SEOHelmet
+        title="Payment Solutions | KemisDigital"
+        description="Secure and efficient payment processing solutions for Bahamian businesses. Simplify transactions with our Stripe integration."
+        keywords="payment processing, Bahamas, Stripe, financial services, transaction processing"
+      />
       <Hero
         title="Payment Solutions"
         description="Secure and efficient payment processing solutions for your business"

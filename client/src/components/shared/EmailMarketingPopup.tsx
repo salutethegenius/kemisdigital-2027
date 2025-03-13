@@ -24,9 +24,9 @@ export default function EmailMarketingPopup({ onClose }: EmailMarketingPopupProp
           onClick={(e) => e.stopPropagation()}
         >
           <Card className="p-6 max-w-md w-full border-2 border-[#00A0E3] overflow-hidden relative">
-            {/* Background Image with 80% opacity */}
+            {/* Background Image with 60% opacity */}
             <div 
-              className="absolute inset-0 bg-cover bg-center opacity-80" 
+              className="absolute inset-0 bg-cover bg-center opacity-60" 
               style={{ backgroundImage: `url('/images/beachbahamas.jpg')` }}
             ></div>
             

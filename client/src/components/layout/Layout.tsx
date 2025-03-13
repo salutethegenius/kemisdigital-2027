@@ -25,10 +25,6 @@ export default function Layout({ children }: LayoutProps) {
       setLoading(false);
     }
     
-    // Force preloader to show on every visit for now (for testing)
-    // Comment this out in production if you only want preloader on first visit
-    setLoading(true);
-    
     // Preload any critical assets here
     const preloadAssets = async () => {
       try {

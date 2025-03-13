@@ -2,8 +2,9 @@
   "header": {
     "home": "Home",
     "about": "About",
-    "services": "Services",
-    "ai_labs": "AI Labs",
+    "services": "AI Lab",
+    "ai_labs": "Web Development",
+    "payment_solutions": "Payment Solutions",
     "events": "Events",
     "membership": "Membership",
     "resources": "Resources",
@@ -13,7 +14,7 @@
   },
   "footer": {
     "company": "Company",
-    "services": "Services",
+    "services": "AI Lab",
     "quick_links": "Quick Links",
     "stay_connected": "Stay Connected",
     "copyright": "© 2025 KemisDigital. All rights reserved.",

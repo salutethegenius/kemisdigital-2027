@@ -79,10 +79,10 @@ if (typeof window !== 'undefined') {
   }
 }
 
-// Custom loading component with fallback UI
+// Simple loading component for page transitions - no preloader for internal navigation
 const PageLoader = () => (
   <div className="h-screen w-full flex items-center justify-center">
-    <Preloader />
+    <div className="w-16 h-16 border-4 border-[#00A0E3]/20 rounded-full border-t-[#00A0E3] animate-spin"></div>
   </div>
 );
 
