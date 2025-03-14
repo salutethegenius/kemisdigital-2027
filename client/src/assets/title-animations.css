@@ -1,0 +1,164 @@
+/* Enhanced hover effects for the animated title letters */
+.animated-title-letter {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.animated-title-letter:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+/* Add animation to the waves */
+.animated-wave {
+  animation: wave 2s infinite ease-in-out;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Add animation to the fish */
+.animated-fish {
+  animation: swim 4s infinite ease-in-out;
+}
+
+@keyframes swim {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* Add animation to the sun */
+.animated-sun {
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to the cocktail */
+.animated-cocktail {
+  animation: sway 2s infinite ease-in-out;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* Add animation to the island */
+.animated-island {
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Add animation to the dolphin */
+.animated-dolphin {
+  animation: jump 3s infinite ease-in-out;
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px) translateX(3px); }
+}
+
+/* Add animation to the boat */
+.animated-boat {
+  animation: rock 4s infinite ease-in-out;
+}
+
+@keyframes rock {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* Add animation to the shell */
+.animated-shell {
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Add animation to the starfish */
+.animated-starfish {
+  animation: twinkle 5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.05); }
+}
+
+/* Add animation to the crab */
+.animated-crab {
+  animation: sidestep 3s infinite ease-in-out;
+}
+
+@keyframes sidestep {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Add animation to the coral */
+.animated-coral {
+  animation: sway-slow 6s infinite ease-in-out;
+}
+
+@keyframes sway-slow {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.03) rotate(2deg); }
+}
+
+/* Add animation to the lighthouse */
+.animated-lighthouse-beam {
+  opacity: 0;
+  animation: beam 4s infinite;
+}
+
+@keyframes beam {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.8; }
+}
+
+/* Add animation to the bubbles */
+.animated-bubble {
+  animation: rise 5s infinite linear;
+  animation-delay: var(--delay, 0s);
+  opacity: 0.6;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 0.6; }
+  100% { transform: translateY(-15px); opacity: 0; }
+}
+
+/* Add tooltip style for hover information */
+.animated-title-tooltip {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.animated-title-letter:hover .animated-title-tooltip {
+  opacity: 1;
+}

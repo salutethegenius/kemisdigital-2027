@@ -2,6 +2,8 @@ import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
 import "./index.css";
+import "./styles/animated-title.css";
+import "./styles/animated-title.css";
 import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";

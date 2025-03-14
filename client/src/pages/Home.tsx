@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowUpRight, CheckCircle2, Infinity } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Infinity, X } from 'lucide-react';
 
 import Hero from '../components/shared/Hero';
 import { Card, CardContent } from '../components/ui/card';
@@ -9,11 +9,13 @@ import { Button } from '../components/ui/button';
 import TestimonialCarousel from '../components/shared/TestimonialCarousel';
 import { testimonials } from '../data/testimonials';
 import EmailMarketingPopup from '../components/shared/EmailMarketingPopup';
+import FirstVisitPopup from '../components/shared/FirstVisitPopup';
 
 export default function Home() {
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const scrollRef = useRef(false);
+  const [showFirstVisitPopup, setShowFirstVisitPopup] = useState(false);
   const imagesPreloaded = useRef(false);
 
   // Preload critical images as soon as the component mounts
@@ -39,6 +41,25 @@ export default function Home() {
       });
     }
   }, []);
+
+  // First visit popup
+  useEffect(() => {
+    // Check if this is the user's first visit
+    const hasVisitedBefore = localStorage.getItem('kemisDigital_firstVisit') === 'true';
+    
+    if (!hasVisitedBefore) {
+      // Show the popup with a slight delay for better UX
+      setTimeout(() => {
+        setShowFirstVisitPopup(true);
+      }, 1500);
+    }
+  }, []);
+
+  const handleCloseFirstVisitPopup = () => {
+    setShowFirstVisitPopup(false);
+    // Mark as visited in localStorage
+    localStorage.setItem('kemisDigital_firstVisit', 'true');
+  };
 
   useEffect(() => {
     // Check if popup has already been shown to this user
@@ -82,6 +103,11 @@ export default function Home() {
     <div>
       {/* Email Marketing Popup */}
       {showPopup && <EmailMarketingPopup onClose={handleClosePopup} />}
+      
+      {/* First Visit Popup */}
+      <AnimatePresence>
+        {showFirstVisitPopup && <FirstVisitPopup onClose={handleCloseFirstVisitPopup} />}
+      </AnimatePresence>
       
       {/* Hero Section */}
       <Hero

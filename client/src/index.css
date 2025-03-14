@@ -94,3 +94,158 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* Caribbean-themed animated title enhancements */
+@layer components {
+  /* Letter hover effect */
+  .flex.items-end.gap-2 .relative {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .flex.items-end.gap-2 .relative:hover {
+    transform: scale(1.1) translateY(-5px);
+  }
+  
+  /* Waves animation */
+  svg path[d*="C10 85 15 95 20 90C25 85 30 95 35 90"] {
+    animation: wave 2s infinite ease-in-out;
+  }
+  
+  /* Fish animation */
+  svg path[d*="40 45C45 45 48 42 48 40"] {
+    animation: swim 4s infinite ease-in-out;
+  }
+  
+  /* Sun animation */
+  svg circle[cx="25"][cy="5"][r="5"] {
+    animation: rotate 20s linear infinite;
+    transform-origin: 25px 5px;
+  }
+  
+  /* Cocktail animation */
+  svg path[d*="40 30L35 40L45 40L40 30"] {
+    animation: sway 2s infinite ease-in-out;
+    transform-origin: center;
+  }
+  
+  /* Island animation */
+  svg path[d*="20 80C20 80 22 75 25 75C28 75 30 80 30 80"] {
+    animation: float 3s infinite ease-in-out;
+  }
+  
+  /* Dolphin animation */
+  svg path[d*="40 60C40 60 47 55 45 50C43 45 40 50"] {
+    animation: jump 3s infinite ease-in-out;
+  }
+  
+  /* Boat animation */
+  svg path[d*="30 60C30 60 40 60 40 65C40 65 35 65 30 60"] {
+    animation: rock 4s infinite ease-in-out;
+    transform-origin: center;
+  }
+  
+  /* Shell animation */
+  svg path[d*="40 60C40 60 45 58 45 55C45 52 42 50 40 50"] {
+    animation: pulse 3s infinite ease-in-out;
+  }
+  
+  /* Starfish animation */
+  svg path[d*="10 5L12 10L17 10L13 13L14 18L10 15L6 18"] {
+    animation: twinkle 5s infinite ease-in-out;
+    transform-origin: center;
+  }
+  
+  /* Crab animation */
+  svg circle[cx="40"][cy="50"][r="5"][fill="#FF5A5A"] {
+    animation: sidestep 3s infinite ease-in-out;
+  }
+  
+  /* Coral animation */
+  svg path[d*="45 50C45 50 48 55 45 60C42 65 40 60"] {
+    animation: sway-slow 6s infinite ease-in-out;
+    transform-origin: center;
+  }
+  
+  /* Bubbles animation */
+  svg circle[cx="45"][cy="30"][r="3"][fill*="#81D4FA"],
+  svg circle[cx="42"][cy="20"][r="2"][fill*="#81D4FA"],
+  svg circle[cx="47"][cy="40"][r="2"][fill*="#81D4FA"] {
+    animation: rise 5s infinite linear;
+    animation-delay: calc(var(--index, 0) * 1s);
+    opacity: 0.6;
+  }
+  
+  /* Sailboat animation */
+  svg path[d*="40 15L50 30H40V15"] {
+    animation: sail 6s infinite ease-in-out;
+    transform-origin: 40px 30px;
+  }
+  
+  /* Animation keyframes */
+  @keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  @keyframes swim {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  
+  @keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px) translateX(3px); }
+  }
+  
+  @keyframes rock {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.05); }
+  }
+  
+  @keyframes sidestep {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+  
+  @keyframes sway-slow {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.03) rotate(2deg); }
+  }
+  
+  @keyframes rise {
+    0% { transform: translateY(0); opacity: 0.6; }
+    100% { transform: translateY(-15px); opacity: 0; }
+  }
+  
+  @keyframes sail {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+}
