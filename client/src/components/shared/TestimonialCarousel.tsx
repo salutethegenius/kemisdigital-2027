@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, memo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { SoundButton } from '@/components/ui/sound-button';
+import { useSound } from '@/hooks/use-sound-effects';
 
 interface Testimonial {
   id: number;
@@ -69,6 +70,7 @@ export default function TestimonialCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { play } = useSound();
   
   // Use useRef to track if component is mounted
   const isMounted = useRef(true);
@@ -121,7 +123,8 @@ export default function TestimonialCarousel({
                "to", (currentIndex + 1) % testimonials.length);
     setDirection(1);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  }, [testimonials, currentIndex]);
+    play("click");
+  }, [testimonials, currentIndex, play]);
 
   const handlePrev = useCallback(() => {
     if (!isMounted.current || !testimonials || testimonials.length <= 1) {
@@ -135,7 +138,8 @@ export default function TestimonialCarousel({
                "to", (currentIndex - 1 + testimonials.length) % testimonials.length);
     setDirection(-1);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-  }, [testimonials, currentIndex]);
+    play("click");
+  }, [testimonials, currentIndex, play]);
 
   useEffect(() => {
     if (!autoplay || isPaused || !isMounted.current || !testimonials || testimonials.length <= 1) return;
@@ -193,6 +197,16 @@ export default function TestimonialCarousel({
   const isCurrentVideoTestimonial = isVideoTestimonial(currentTestimonial.quote);
   const youtubeEmbedId = isCurrentVideoTestimonial ? getYoutubeEmbedId(currentTestimonial.quote) : '';
 
+  // Handler for dot indicator clicks
+  const handleDotClick = (index: number) => {
+    if (index !== currentIndex) {
+      console.log(`Dot clicked, moving from index ${currentIndex} to ${index}`);
+      setDirection(index > currentIndex ? 1 : -1);
+      setCurrentIndex(index);
+      play("click");
+    }
+  };
+
   return (
     <div 
       className={`relative ${className}`}
@@ -210,95 +224,48 @@ export default function TestimonialCarousel({
             exit="exit"
             transition={{ 
               duration: 0.4, // Reduced from 0.5 for better performance
-              ease: "easeInOut" 
+              ease: "easeInOut",
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
             }}
-            className="flex flex-col items-center"
+            className="w-full"
           >
-            <Card 
-              className={`border-none shadow-lg mx-auto ${
-                isCurrentVideoTestimonial 
-                  ? 'max-w-4xl bg-gradient-to-r from-[#00A0E3]/10 to-[#F7BE00]/10 dark:from-[#00A0E3]/15 dark:to-[#F7BE00]/15' 
-                  : 'max-w-3xl bg-gradient-to-r from-[#00A0E3]/5 to-[#0078A8]/5 dark:from-[#00A0E3]/10 dark:to-[#0078A8]/10'
-              }`}
-            >
-              <CardContent className="pt-6 px-4 sm:px-6 md:px-8 pb-6 md:pb-8">
-                {/* Video testimonial gets special treatment */}
+            <Card className="border-[#00A0E3]/10 dark:border-[#00A0E3]/20 bg-transparent shadow-sm overflow-hidden">
+              <CardContent className="p-6 sm:p-8">
                 {isCurrentVideoTestimonial ? (
-                  <div className="space-y-6">
-                    {/* Video badge */}
-                    <div className="mx-auto w-fit px-3 py-1 rounded-full bg-[#F7BE00]/20 text-[#F7BE00] dark:bg-[#F7BE00]/30 dark:text-[#F7BE00] text-sm font-medium flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="m17 5 5 5-5 5" />
-                        <path d="M2 5v14" />
-                        <path d="M8 5v14" />
-                        <rect width="4" height="14" x="4" y="5" />
-                      </svg>
-                      Video Testimonial
-                    </div>
-                    
-                    {/* Video embed with special border */}
-                    <div className="aspect-video w-full max-w-xl mx-auto border-4 border-[#00A0E3]/30 dark:border-[#00A0E3]/40 rounded-lg overflow-hidden shadow-lg">
-                      {youtubeEmbedId ? (
-                        <YouTubeEmbed embedId={youtubeEmbedId} />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-black/5 dark:bg-black/20">
-                          <p className="text-muted-foreground text-sm">Video could not be loaded</p>
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Caption below video */}
-                    <div className="flex items-center justify-center gap-3 mt-2">
-                      {currentTestimonial.image && (
-                        <TestimonialImage 
-                          image={currentTestimonial.image} 
-                          author={currentTestimonial.author} 
-                          className="w-12 h-12"
-                        />
-                      )}
-                      <div className="text-left">
-                        <h4 className="font-semibold">{currentTestimonial.author}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {currentTestimonial.role}, {currentTestimonial.company}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="w-full aspect-video mb-5 rounded-md overflow-hidden">
+                    {youtubeEmbedId && <YouTubeEmbed embedId={youtubeEmbedId} />}
                   </div>
                 ) : (
-                  // Text testimonial - original design with enhancements
-                  <>
-                    <div className="text-[#00A0E3] dark:text-[#00A0E3]/80 mb-6 flex justify-center">
-                      <Quote size={48} strokeWidth={1.5} />
-                    </div>
-                    <p className="text-lg md:text-xl text-center mb-8 italic">
-                      {currentTestimonial.quote}
-                    </p>
-                    <div className="flex flex-col items-center">
-                      {currentTestimonial.image && (
-                        <TestimonialImage 
-                          image={currentTestimonial.image} 
-                          author={currentTestimonial.author}
-                          className="mb-4 w-16 h-16"
-                        />
-                      )}
-                      <div className="text-center">
-                        <h4 className="font-semibold text-lg">{currentTestimonial.author}</h4>
-                        <p className="text-muted-foreground">
-                          {currentTestimonial.role}, {currentTestimonial.company}
-                        </p>
-                      </div>
-                    </div>
-                  </>
+                  <div className="flex items-start gap-2 mb-5">
+                    <Quote className="text-[#00A0E3] h-6 w-6 flex-shrink-0 mt-1" />
+                    <p className="text-base sm:text-lg leading-relaxed text-pretty">{currentTestimonial.quote}</p>
+                  </div>
                 )}
+                
+                <div className="flex items-center mt-4 gap-3">
+                  {currentTestimonial.image && (
+                    <TestimonialImage 
+                      image={currentTestimonial.image} 
+                      author={currentTestimonial.author} 
+                      className="h-12 w-12 sm:h-14 sm:w-14" 
+                    />
+                  )}
+                  <div>
+                    <p className="font-medium">{currentTestimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {currentTestimonial.role}, {currentTestimonial.company}
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Navigation Controls - Enhanced for mobile */}
-      <div className="flex justify-center mt-6 gap-2 sm:gap-4">
-        <Button 
+      
+      <div className="flex items-center justify-between mt-4">
+        <SoundButton 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -316,9 +283,10 @@ export default function TestimonialCarousel({
           aria-label="Previous testimonial"
           type="button"
           disabled={testimonials.length <= 1}
+          soundEffect="click"
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-        </Button>
+        </SoundButton>
         <div className="flex items-center gap-1.5 sm:gap-2">
           {testimonials.map((testimonial, index) => (
             <button
@@ -326,12 +294,9 @@ export default function TestimonialCarousel({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                if (index !== currentIndex) {
-                  console.log(`Dot clicked, moving from index ${currentIndex} to ${index}`);
-                  setDirection(index > currentIndex ? 1 : -1);
-                  setCurrentIndex(index);
-                }
+                handleDotClick(index);
               }}
+              onMouseEnter={() => play("hover")}
               type="button"
               className={`h-2.5 rounded-full transition-all ${
                 index === currentIndex 
@@ -343,7 +308,7 @@ export default function TestimonialCarousel({
             />
           ))}
         </div>
-        <Button 
+        <SoundButton 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -361,9 +326,10 @@ export default function TestimonialCarousel({
           aria-label="Next testimonial"
           type="button"
           disabled={testimonials.length <= 1}
+          soundEffect="click"
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-        </Button>
+        </SoundButton>
       </div>
     </div>
   );

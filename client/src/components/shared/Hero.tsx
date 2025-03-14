@@ -4,9 +4,6 @@ import { Link } from "wouter";
 import { useState, useEffect, useRef, memo } from "react";
 import { MouseIcon, ChevronDown } from "lucide-react";
 import Preloader from "./Preloader";
-import AnimatedTitle from "./AnimatedTitle";
-import EnhancedAnimatedTitle from "./EnhancedAnimatedTitle";
-import TitleEnhancementStyles from "./TitleEnhancementStyles";
 
 interface CTAButton {
   text: string;
@@ -345,25 +342,17 @@ export default function Hero({
       
       {/* Hero content */}
       <div className={`relative z-20 py-12 md:py-24 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto ${backgroundType !== 'none' ? 'text-white' : ''}`}>
-        {/* Special handling for "The People's Choice!" with fun animated Caribbean characters */}
-        {title === "The People's Choice!" ? (
-          <div className="caribbean-animated-title-container">
-            <TitleEnhancementStyles />
-            <EnhancedAnimatedTitle className="mb-4 md:mb-6 caribbean-animated-title" />
-          </div>
-        ) : (
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
-              backgroundType === 'none'
-                ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00A0E3] to-[#6CCFF6]' 
-                : 'text-white drop-shadow-lg'
-            }`}
-          >
-            {title}
-          </motion.h1>
-        )}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
+            backgroundType === 'none'
+              ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#00A0E3] to-[#6CCFF6]' 
+              : 'text-white drop-shadow-lg'
+          }`}
+        >
+          {title}
+        </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { 
   Menu, 
   Video, 
@@ -29,11 +29,17 @@ import {
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "../shared/LanguageSelector";
 
+// Import new sound components
+import { useSound } from "@/hooks/use-sound-effects";
+import SoundLink from "@/components/shared/SoundLink";
+import SoundToggle from "@/components/shared/SoundToggle";
+
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const { t } = useTranslation();
+  const { play } = useSound();
 
   // Handle scroll restoration on navigation
   useEffect(() => {
@@ -52,6 +58,12 @@ export default function Header() {
     setHoveredItem(null);
   };
 
+  // Function to handle hover sound effect
+  const handleHover = (itemName: string) => {
+    setHoveredItem(itemName);
+    play("hover");
+  };
+
   const navigation = [
     { name: t('header.home'), href: "/", icon: Home, description: "Return to our homepage" },
     { name: t('header.about'), href: "/about", icon: Info, description: "Learn about our company" },
@@ -65,148 +77,164 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
-          <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-10" />
-        </Link>
+        <SoundLink href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
+          <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-8" />
+        </SoundLink>
 
         <div className="hidden md:flex items-center space-x-6">
           <NavigationMenu>
             <NavigationMenuList className="relative">
               {navigation.map((item) => (
                 <NavigationMenuItem key={item.name} className="relative">
-                  <Link
+                  <SoundLink
                     href={item.href}
                     className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
                       location === item.href ? "text-[#00A0E3]" : "text-muted-foreground"
                     }`}
-                    onMouseEnter={() => setHoveredItem(item.name)}
+                    onMouseEnter={() => handleHover(item.name)}
                     onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => window.scrollTo(0, 0)}
                   >
                     <item.icon className="w-4 h-4 mr-2" />
                     {item.name}
-                  </Link>
+                  </SoundLink>
                   {hoveredItem === item.name && (
                     <div className="absolute top-full left-0 mt-1 z-50">
                       <div className="p-4 w-[270px] bg-background rounded-md shadow-md border">
-                        <Link 
+                        <SoundLink 
                           href={item.href} 
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                          onClick={() => window.scrollTo(0, 0)}
+                          className="flex items-center mb-2 text-sm font-medium text-[#00A0E3]"
+                          onClick={() => handleNavigation()}
                         >
-                          <div className="flex items-center gap-2">
-                            <item.icon className="h-5 w-5 text-[#00A0E3]" />
-                            <div className="text-sm font-medium leading-none">{item.name}</div>
-                          </div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-2">
-                            {item.description}
-                          </p>
-                        </Link>
+                          <item.icon className="w-4 h-4 mr-2" />
+                          {item.name}
+                        </SoundLink>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                        
+                        {/* Show contact link for all navigation items */}
+                        <div className="mt-3 pt-3 border-t">
+                          <SoundLink
+                            href="/contact"
+                            className="flex items-center text-sm text-muted-foreground hover:text-foreground"
+                            onClick={() => handleContactNavigation("/contact")}
+                            soundEffect="click"
+                          >
+                            <Mail className="w-4 h-4 mr-2" />
+                            Contact us about {item.name.toLowerCase()}
+                          </SoundLink>
+                        </div>
                       </div>
                     </div>
                   )}
                 </NavigationMenuItem>
               ))}
-              <NavigationMenuItem className="relative">
-                <div
-                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 cursor-pointer ${
-                    location === "/contact" || location === "/meet" ? "text-[#00A0E3]" : "text-muted-foreground"
+              
+              <NavigationMenuItem>
+                <SoundLink
+                  href="/meet"
+                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
+                    location === "/meet" ? "text-[#00A0E3]" : "text-muted-foreground"
                   }`}
-                  onMouseEnter={() => setHoveredItem("contact")}
-                  onMouseLeave={() => setHoveredItem(null)}
+                  onClick={() => handleNavigation()}
+                >
+                  <Video className="w-4 h-4 mr-2" />
+                  Meet
+                </SoundLink>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <SoundLink
+                  href="/contact"
+                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
+                    location === "/contact" ? "text-[#00A0E3]" : "text-muted-foreground"
+                  }`}
+                  onClick={() => handleNavigation()}
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   {t('header.contact')}
-                </div>
-                {hoveredItem === "contact" && (
-                  <div 
-                    className="absolute top-full left-0 mt-1 z-50"
-                    onMouseEnter={() => setHoveredItem("contact")}
-                    onMouseLeave={() => setHoveredItem(null)}
-                  >
-                    <div className="p-4 w-[270px] bg-background rounded-md shadow-md border">
-                      <div className="grid gap-3">
-                        <Link 
-                          href="/contact" 
-                          className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md"
-                          onClick={handleContactNavigation}
-                        >
-                          <Mail className="w-4 h-4" />
-                          <span>{t('header.contact')}</span>
-                        </Link>
-                        <Link 
-                          href="/meet" 
-                          className="flex items-center space-x-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md"
-                          onClick={handleContactNavigation}
-                        >
-                          <Video className="w-4 h-4" />
-                          <span>Video Meeting</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </SoundLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <LanguageSelector />
-          <Button asChild className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white">
-            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>{t('homepage.cta.get_started')}</Link>
-          </Button>
+          
+          <div className="flex items-center space-x-2">
+            <LanguageSelector />
+            {/* Add Sound Toggle Button */}
+            <SoundToggle className="ml-2" />
+          </div>
         </div>
 
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-6 w-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <div className="flex justify-center mb-4 mt-2">
-              <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-8" />
-            </div>
-            <div className="flex flex-col space-y-4 mt-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center space-x-2 ${
-                    location === item.href ? "text-[#00A0E3]" : "text-muted-foreground"
-                  }`}
-                  onClick={handleNavigation}
-                >
-                  <item.icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-              <div className="space-y-2 border-t pt-4">
-                <h3 className="text-sm font-medium text-[#F7BE00]">{t('header.contact')}</h3>
-                <Link
-                  href="/contact"
-                  className="flex items-center space-x-2 text-sm hover:text-[#00A0E3]"
-                  onClick={handleNavigation}
-                >
-                  <Mail className="w-4 h-4" />
-                  <span>{t('header.contact')}</span>
-                </Link>
-                <Link
-                  href="/meet"
-                  className="flex items-center space-x-2 text-sm hover:text-[#00A0E3]"
-                  onClick={handleNavigation}
-                >
-                  <Video className="w-4 h-4" />
-                  <span>Video Meeting</span>
-                </Link>
-              </div>
-              <div className="flex justify-center my-2">
-                <LanguageSelector />
-              </div>
-              <Button className="w-full bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white" asChild>
-                <Link href="/services" onClick={handleNavigation}>{t('homepage.cta.get_started')}</Link>
+        <div className="md:hidden flex items-center">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8" 
+                onClick={() => play("click")}
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
               </Button>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetTrigger>
+            <SheetContent>
+              <div className="flex justify-center mb-4 mt-2">
+                <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-8" />
+              </div>
+              <div className="flex flex-col space-y-4 mt-2">
+                {navigation.map((item) => (
+                  <SoundLink
+                    key={item.name}
+                    href={item.href}
+                    className={`text-sm flex items-center py-2 ${
+                      location === item.href ? "text-[#00A0E3] font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      handleNavigation();
+                      setIsOpen(false);
+                    }}
+                  >
+                    <item.icon className="w-4 h-4 mr-3" />
+                    {item.name}
+                  </SoundLink>
+                ))}
+                
+                <SoundLink
+                  href="/meet"
+                  className={`text-sm flex items-center py-2 ${
+                    location === "/meet" ? "text-[#00A0E3] font-medium" : ""
+                  }`}
+                  onClick={() => {
+                    handleNavigation();
+                    setIsOpen(false);
+                  }}
+                >
+                  <Video className="w-4 h-4 mr-3" />
+                  Meet
+                </SoundLink>
+                
+                <SoundLink
+                  href="/contact"
+                  className={`text-sm flex items-center py-2 ${
+                    location === "/contact" ? "text-[#00A0E3] font-medium" : ""
+                  }`}
+                  onClick={() => {
+                    handleNavigation();
+                    setIsOpen(false);
+                  }}
+                >
+                  <Mail className="w-4 h-4 mr-3" />
+                  {t('header.contact')}
+                </SoundLink>
+                
+                <div className="flex items-center space-x-2 pt-4 mt-2 border-t">
+                  <LanguageSelector />
+                  <SoundToggle className="ml-2" />
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

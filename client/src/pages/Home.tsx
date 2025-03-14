@@ -113,15 +113,7 @@ export default function Home() {
       <Hero
         title="The People's Choice!"
         description="Clients say we've earned this title because we're in the game with them. Backed by 20 years in the Bahamas market, we've crafted top-tier strategies that brought ideas to life with measurable success."
-        showCTA={true}
-        primaryCTA={{
-          text: "Get Started",
-          href: "/contact"
-        }}
-        secondaryCTA={{
-          text: "Learn More",
-          href: "/about"
-        }}
+        showCTA={false}
         heroImage="/images/optimized/beachbahamas-large.jpg"
       />
 

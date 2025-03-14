@@ -12,6 +12,8 @@ import { HelmetProvider } from 'react-helmet-async';
 // Import i18n configuration
 import "./i18n";
 import Preloader from "./components/shared/Preloader";
+// Import SoundProvider
+import { SoundProvider } from "./hooks/use-sound-effects";
 
 // Eager load only the Home component for fast initial load
 import Home from "./pages/Home";
@@ -92,41 +94,43 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider>
       <ThemeProvider>
-        <SWRConfig 
-          value={{ 
-            fetcher,
-            revalidateOnFocus: false, // Disable revalidation on window focus
-            revalidateIfStale: true,
-            dedupingInterval: 10000 // Dedupe requests within 10 seconds
-          }}
-        >
-          <Router>
-            <Layout>
-              <Suspense fallback={<PageLoader />}>
-                <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/privacy" component={Privacy} />
-                  <Route path="/data-deletion" component={DataDeletion} />
-                  <Route path="/services" component={Services} />
-                  <Route path="/services/web-development" component={WebDevelopment} />
-                  <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
-                  <Route path="/services/digital-marketing" component={DigitalMarketing} />
-                  <Route path="/services/training-support" component={TrainingSupport} />
-                  <Route path="/services/web-app-dev" component={WebAppDev} />
-                  <Route path="/about" component={About} />
-                  <Route path="/resources" component={Resources} />
-                  <Route path="/events" component={Events} />
-                  <Route path="/contact" component={Contact} />
-                  <Route path="/meet" component={Meet} />
-                  <Route path="/latest-news" component={LatestNews} />
-                  <Route path="/payment-solutions" component={PaymentSolutions} />
-                  <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
-                </Switch>
-              </Suspense>
-            </Layout>
-          </Router>
-          <Toaster />
-        </SWRConfig>
+        <SoundProvider>
+          <SWRConfig 
+            value={{ 
+              fetcher,
+              revalidateOnFocus: false, // Disable revalidation on window focus
+              revalidateIfStale: true,
+              dedupingInterval: 10000 // Dedupe requests within 10 seconds
+            }}
+          >
+            <Router>
+              <Layout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/" component={Home} />
+                    <Route path="/privacy" component={Privacy} />
+                    <Route path="/data-deletion" component={DataDeletion} />
+                    <Route path="/services" component={Services} />
+                    <Route path="/services/web-development" component={WebDevelopment} />
+                    <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
+                    <Route path="/services/digital-marketing" component={DigitalMarketing} />
+                    <Route path="/services/training-support" component={TrainingSupport} />
+                    <Route path="/services/web-app-dev" component={WebAppDev} />
+                    <Route path="/about" component={About} />
+                    <Route path="/resources" component={Resources} />
+                    <Route path="/events" component={Events} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/meet" component={Meet} />
+                    <Route path="/latest-news" component={LatestNews} />
+                    <Route path="/payment-solutions" component={PaymentSolutions} />
+                    <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
+                  </Switch>
+                </Suspense>
+              </Layout>
+            </Router>
+            <Toaster />
+          </SWRConfig>
+        </SoundProvider>
       </ThemeProvider>
     </HelmetProvider>
   </StrictMode>

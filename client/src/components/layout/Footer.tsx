@@ -1,8 +1,10 @@
-import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
+import SoundLink from "@/components/shared/SoundLink";
+import { useSound } from "@/hooks/use-sound-effects";
 
 export default function Footer() {
   const { t } = useTranslation();
+  const { play } = useSound();
 
   const footerSections = [
     {
@@ -39,6 +41,14 @@ export default function Footer() {
     },
   ];
 
+  const handleExternalLinkHover = () => {
+    play("hover");
+  };
+
+  const handleExternalLinkClick = () => {
+    play("click");
+  };
+
   return (
     <footer className="bg-[#001621] text-gray-100 py-12 mt-12">
       <div className="container mx-auto px-4">
@@ -49,12 +59,12 @@ export default function Footer() {
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <Link
+                    <SoundLink
                       href={link.href}
                       className="text-gray-300 hover:text-[#00A0E3] transition-colors"
                     >
                       {link.name}
-                    </Link>
+                    </SoundLink>
                   </li>
                 ))}
               </ul>
@@ -69,6 +79,8 @@ export default function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-[#00A0E3] transition-colors flex items-center"
+              onMouseEnter={handleExternalLinkHover}
+              onClick={handleExternalLinkClick}
             >
               <span className="mr-2">KemisEMAIL</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail">
