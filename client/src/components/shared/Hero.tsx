@@ -179,29 +179,34 @@ export default function Hero({
   const [videoError, setVideoError] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [backgroundType, setBackgroundType] = useState<'image' | 'video' | 'none'>('none');
+  const imagesPreloaded = useRef(false);
   
   // Get the appropriate hero image based on context
   const getContextImageKey = (): keyof typeof contextImages => {
     return pageContext as keyof typeof contextImages;
   };
   
+  // First effect to handle the loading screen and set visited state
   useEffect(() => {
     // Check if this is the first visit to the homepage
     const hasVisitedBefore = sessionStorage.getItem('hasVisitedHomepage');
     
     if (!hasVisitedBefore && window.location.pathname === '/') {
       setIsLoading(true);
-      // Reduced loading time even further for better performance and UX
+      // Reduced loading time for better UX
       const timer = setTimeout(() => {
         setIsLoading(false);
         // Mark that the user has visited the homepage
         sessionStorage.setItem('hasVisitedHomepage', 'true');
-      }, 1500); // Further reduced from 2000ms for faster page display
+      }, 1500);
 
       return () => clearTimeout(timer);
     }
-    
-    // Determine what type of background to show with priority order
+  }, []);
+  
+  // Second effect to determine background type and preload images
+  useEffect(() => {
+    // Immediately determine what type of background to show with priority order
     if (videoBackground && !videoError) {
       setBackgroundType('video');
     } else if ((heroImage || pageContext) && !imageError) {
@@ -210,27 +215,44 @@ export default function Hero({
       setBackgroundType('none');
     }
     
-    // Performance optimization - always preload the blur thumbnail
-    // and mark critical resources for priority loading
-    if (pageContext && !heroImage) {
-      // Create and configure link rel=preload for the blur image
-      const preloadLink = document.createElement('link');
-      preloadLink.rel = 'preload';
-      preloadLink.as = 'image';
-      preloadLink.href = contextImages[getContextImageKey()].blur;
-      preloadLink.importance = 'high';
-      document.head.appendChild(preloadLink);
+    // Preload images but make sure we only do it once
+    if (!imagesPreloaded.current) {
+      imagesPreloaded.current = true;
       
-      // Also preload the small version after a slight delay
-      setTimeout(() => {
+      // Preload direct hero image if provided
+      if (heroImage) {
         const img = new Image();
-        img.src = contextImages[getContextImageKey()].small;
-      }, 200);
-
-      // Clean up preload link on unmount
-      return () => {
-        document.head.removeChild(preloadLink);
-      };
+        img.src = heroImage;
+      }
+      
+      // Performance optimization - always preload contextual images when applicable
+      if (pageContext && !heroImage) {
+        // Create and configure link rel=preload for the blur image
+        const preloadLink = document.createElement('link');
+        preloadLink.rel = 'preload';
+        preloadLink.as = 'image';
+        preloadLink.href = contextImages[getContextImageKey()].blur;
+        preloadLink.importance = 'high';
+        document.head.appendChild(preloadLink);
+        
+        // Immediately preload small and medium versions
+        const preloadSmall = new Image();
+        preloadSmall.src = contextImages[getContextImageKey()].small;
+        
+        const preloadMedium = new Image();
+        preloadMedium.src = contextImages[getContextImageKey()].medium;
+        
+        // Preload the large version immediately as well
+        const preloadLarge = new Image();
+        preloadLarge.src = contextImages[getContextImageKey()].large;
+        
+        // Return cleanup function to remove preload link on unmount
+        return () => {
+          if (document.head.contains(preloadLink)) {
+            document.head.removeChild(preloadLink);
+          }
+        };
+      }
     }
   }, [heroImage, pageContext, videoBackground, videoError, imageError]);
 
@@ -289,7 +311,7 @@ export default function Hero({
           {backgroundType === 'image' && (
             <>
               {heroImage ? (
-                // Custom hero image
+                // Custom hero image with improved loading attributes
                 <img
                   src={heroImage}
                   alt={`${title} - Hero Image`}
@@ -299,6 +321,8 @@ export default function Hero({
                     setBackgroundType('none');
                   }}
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               ) : (
                 // Contextual responsive image

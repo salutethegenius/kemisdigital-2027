@@ -14,35 +14,62 @@ export default function Home() {
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const scrollRef = useRef(false);
+  const imagesPreloaded = useRef(false);
+
+  // Preload critical images as soon as the component mounts
+  useEffect(() => {
+    if (!imagesPreloaded.current) {
+      imagesPreloaded.current = true;
+      
+      // Preload the hero background image with high priority
+      const heroImage = new Image();
+      heroImage.src = '/images/optimized/beachbahamas-large.jpg';
+      heroImage.fetchPriority = 'high';
+      
+      // Preload other sizes for responsive display
+      const preloadImageSizes = [
+        '/images/optimized/beachbahamas-medium.jpg',
+        '/images/optimized/beachbahamas-small.jpg',
+        '/images/optimized/beachbahamas-blur.jpg'
+      ];
+      
+      preloadImageSizes.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    // Set up scroll event listener
-    const handleScroll = () => {
-      if (!scrollRef.current && !showPopup) {
-        // Only show popup on first scroll and if not shown before
-        scrollRef.current = true;
-        
-        // Add a short delay before showing the popup
-        setTimeout(() => {
-          setShowPopup(true);
-        }, 800);
-        
-        // Remove event listener after first trigger
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    // Check if popup has been shown during this session
+    // Check if popup has already been shown to this user
     const hasShownPopup = sessionStorage.getItem('emailPopupShown');
+    
+    // Only set up scroll listener if popup hasn't been shown before
     if (hasShownPopup !== 'true') {
-      scrollRef.current = false;
-    }
+      // Set up scroll event listener
+      const handleScroll = () => {
+        if (!scrollRef.current && !showPopup) {
+          // Only show popup on first scroll and if not shown before
+          scrollRef.current = true;
+          
+          // Add a short delay before showing the popup
+          setTimeout(() => {
+            setShowPopup(true);
+            // Store in session storage that popup has been shown - moved here to ensure it's set right when popup shows
+            sessionStorage.setItem('emailPopupShown', 'true');
+          }, 800);
+          
+          // Remove event listener after first trigger
+          window.removeEventListener('scroll', handleScroll);
+        }
+      };
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      window.addEventListener('scroll', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
   }, [showPopup]);
 
   const handleClosePopup = () => {

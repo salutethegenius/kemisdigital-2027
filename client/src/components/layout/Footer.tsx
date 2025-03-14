@@ -61,8 +61,22 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between text-gray-300">
           <p>{t('footer.copyright')}</p>
+          <div className="mt-4 md:mt-0 flex items-center">
+            <a 
+              href="https://start.kemis.net" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-[#00A0E3] transition-colors flex items-center"
+            >
+              <span className="mr-2">KemisEMAIL</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

@@ -6,17 +6,32 @@ export default function Preloader() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Start longer loading animation (minimum 5 seconds to ensure 50% loading time)
-    const minLoadTime = 5000; // 5 seconds minimum loading time
+    // Start loading animation (reduced to 3 seconds for better UX)
+    const minLoadTime = 3000; // 3 seconds minimum loading time
     
     // Update progress every 50ms
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         // Increase progress gradually, ensuring we stay at 99% until fully loaded
-        const nextValue = prev + (prev < 50 ? 1 : prev < 90 ? 0.5 : 0.25);
+        const nextValue = prev + (prev < 50 ? 1.5 : prev < 90 ? 0.8 : 0.4);
         return Math.min(nextValue, 99);
       });
     }, 50);
+    
+    // Preload critical homepage images while showing the preloader
+    const heroImages = [
+      '/images/optimized/beachbahamas-blur.jpg',
+      '/images/optimized/beachbahamas-small.jpg',
+      '/images/optimized/beachbahamas-medium.jpg',
+      '/images/optimized/beachbahamas-large.jpg'
+    ];
+    
+    // Create an array to track loaded images
+    const preloadedImages = heroImages.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
     
     // Exit animation after minimum load time
     const timer = setTimeout(() => {
