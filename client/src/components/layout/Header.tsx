@@ -29,39 +29,49 @@ import {
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "../shared/LanguageSelector";
 
-// Import new sound components
+// Import sound components
 import { useSound } from "@/hooks/use-sound-effects";
 import SoundLink from "@/components/shared/SoundLink";
 import SoundToggle from "@/components/shared/SoundToggle";
+import { SoundButton } from "@/components/ui/sound-button";
 
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const { t } = useTranslation();
-  const { play } = useSound();
+  const { play, enabled } = useSound();
 
   // Handle scroll restoration on navigation
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Function to handle navigation
+  // Function to handle navigation with sound
   const handleNavigation = () => {
     window.scrollTo(0, 0);
     setIsOpen(false);
+    if (enabled) play("click");
   };
 
   // Function to handle contact navigation from dropdown
   const handleContactNavigation = (href: string) => {
     window.scrollTo(0, 0);
     setHoveredItem(null);
+    if (enabled) play("success");
   };
 
   // Function to handle hover sound effect
   const handleHover = (itemName: string) => {
-    setHoveredItem(itemName);
-    play("hover");
+    if (hoveredItem !== itemName) {
+      setHoveredItem(itemName);
+      if (enabled) play("hover");
+    }
+  };
+
+  // Function to handle hover end
+  const handleHoverEnd = () => {
+    setHoveredItem(null);
   };
 
   const navigation = [
@@ -77,7 +87,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <SoundLink href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
+        <SoundLink href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)} soundEffect="click">
           <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-8" />
         </SoundLink>
 
@@ -92,8 +102,9 @@ export default function Header() {
                       location === item.href ? "text-[#00A0E3]" : "text-muted-foreground"
                     }`}
                     onMouseEnter={() => handleHover(item.name)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    onClick={() => window.scrollTo(0, 0)}
+                    onMouseLeave={handleHoverEnd}
+                    onClick={handleNavigation}
+                    soundEffect="click"
                   >
                     <item.icon className="w-4 h-4 mr-2" />
                     {item.name}
@@ -105,6 +116,7 @@ export default function Header() {
                           href={item.href} 
                           className="flex items-center mb-2 text-sm font-medium text-[#00A0E3]"
                           onClick={() => handleNavigation()}
+                          soundEffect="click"
                         >
                           <item.icon className="w-4 h-4 mr-2" />
                           {item.name}
@@ -117,7 +129,7 @@ export default function Header() {
                             href="/contact"
                             className="flex items-center text-sm text-muted-foreground hover:text-foreground"
                             onClick={() => handleContactNavigation("/contact")}
-                            soundEffect="click"
+                            soundEffect="success"
                           >
                             <Mail className="w-4 h-4 mr-2" />
                             Contact us about {item.name.toLowerCase()}
@@ -136,6 +148,9 @@ export default function Header() {
                     location === "/meet" ? "text-[#00A0E3]" : "text-muted-foreground"
                   }`}
                   onClick={() => handleNavigation()}
+                  onMouseEnter={() => handleHover("meet")}
+                  onMouseLeave={handleHoverEnd}
+                  soundEffect="click"
                 >
                   <Video className="w-4 h-4 mr-2" />
                   Meet
@@ -149,6 +164,9 @@ export default function Header() {
                     location === "/contact" ? "text-[#00A0E3]" : "text-muted-foreground"
                   }`}
                   onClick={() => handleNavigation()}
+                  onMouseEnter={() => handleHover("contact")}
+                  onMouseLeave={handleHoverEnd}
+                  soundEffect="click"
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   {t('header.contact')}
@@ -167,15 +185,15 @@ export default function Header() {
         <div className="md:hidden flex items-center">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button 
+              <SoundButton 
                 variant="ghost" 
                 size="icon" 
                 className="h-8 w-8" 
-                onClick={() => play("click")}
+                soundEffect="click"
               >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
-              </Button>
+              </SoundButton>
             </SheetTrigger>
             <SheetContent>
               <div className="flex justify-center mb-4 mt-2">
@@ -193,6 +211,7 @@ export default function Header() {
                       handleNavigation();
                       setIsOpen(false);
                     }}
+                    soundEffect="click"
                   >
                     <item.icon className="w-4 h-4 mr-3" />
                     {item.name}
@@ -208,6 +227,7 @@ export default function Header() {
                     handleNavigation();
                     setIsOpen(false);
                   }}
+                  soundEffect="click"
                 >
                   <Video className="w-4 h-4 mr-3" />
                   Meet
@@ -222,6 +242,7 @@ export default function Header() {
                     handleNavigation();
                     setIsOpen(false);
                   }}
+                  soundEffect="click"
                 >
                   <Mail className="w-4 h-4 mr-3" />
                   {t('header.contact')}

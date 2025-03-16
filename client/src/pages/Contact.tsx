@@ -32,6 +32,7 @@ import { Card, CardContent } from "@/components/ui/card";
 // Import sound components
 import { useSound } from "@/hooks/use-sound-effects";
 import { SoundButton } from "@/components/ui/sound-button";
+import { SoundInput, SoundTextarea } from "@/components/ui/sound-form-fields";
 
 // Form schema
 const formSchema = z.object({
@@ -97,10 +98,6 @@ export default function Contact() {
     }
   }
 
-  const handleFieldFocus = () => {
-    play("hover");
-  };
-
   return (
     <div className="min-h-screen">
       <Hero
@@ -150,7 +147,7 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-[#00A0E3] mt-1" />
                   <div>
                     <h4 className="font-medium">Phone</h4>
-                    <p className="text-muted-foreground">+1 (242) 555-1234</p>
+                    <p className="text-muted-foreground">+1 (242) 447-9692</p>
                   </div>
                 </motion.div>
                 
@@ -208,10 +205,10 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Name</FormLabel>
                             <FormControl>
-                              <Input 
+                              <SoundInput 
                                 placeholder="Your name" 
                                 {...field} 
-                                onFocus={handleFieldFocus}
+                                soundEffect="click"
                               />
                             </FormControl>
                             <FormMessage />
@@ -226,10 +223,10 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Email</FormLabel>
                             <FormControl>
-                              <Input 
+                              <SoundInput 
                                 placeholder="you@email.com" 
-                                {...field} 
-                                onFocus={handleFieldFocus}
+                                {...field}
+                                soundEffect="click" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -244,9 +241,14 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Service Interest</FormLabel>
                             <Select 
-                              onValueChange={field.onChange} 
+                              onValueChange={(value) => {
+                                field.onChange(value);
+                                play("click"); // Play sound on selection
+                              }} 
                               defaultValue={field.value}
-                              onOpenChange={() => play("hover")}
+                              onOpenChange={(open) => {
+                                if (open) play("hover"); // Play sound when dropdown opens
+                              }}
                             >
                               <FormControl>
                                 <SelectTrigger>
@@ -273,11 +275,11 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Message</FormLabel>
                             <FormControl>
-                              <Textarea 
+                              <SoundTextarea 
                                 placeholder="Tell us about your AI marketing needs..." 
                                 className="min-h-[120px]" 
-                                {...field} 
-                                onFocus={handleFieldFocus}
+                                {...field}
+                                soundEffect="click" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -290,7 +292,7 @@ export default function Contact() {
                           type="submit" 
                           className="w-full bg-[#00A0E3] hover:bg-[#0085BC] text-white"
                           disabled={isLoading}
-                          soundEffect="click"
+                          soundEffect="success"
                         >
                           {isLoading ? "Sending..." : "Send Message"}
                         </SoundButton>

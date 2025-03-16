@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
+import { useSound } from '../../hooks/use-sound-effects';
 
 interface AnimatedTitleProps {
   className?: string;
@@ -53,6 +54,7 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
   const containerRef = useRef<HTMLDivElement>(null);
   const containerControls = useAnimationControls();
   const [letterHovering, setLetterHovering] = useState<number | null>(null);
+  const { play } = useSound(); // Using our sound hook
   
   // Calculate responsive scale based on container width
   useEffect(() => {
@@ -76,10 +78,23 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
   useEffect(() => {
     const timeout = setTimeout(() => {
       containerControls.start("pulse");
+      // Play a subtle sound when the animation starts
+      play("click");
     }, 2000);
     
     return () => clearTimeout(timeout);
-  }, [containerControls]);
+  }, [containerControls, play]);
+
+  // Function to handle hover start
+  const handleHoverStart = (index: number) => {
+    setLetterHovering(index);
+    play("hover"); // Play hover sound effect
+  };
+
+  // Function to handle hover end
+  const handleHoverEnd = () => {
+    setLetterHovering(null);
+  };
 
   return (
     <div className={`flex justify-center items-center overflow-hidden ${className}`}>
@@ -100,8 +115,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(0)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(0)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="30" height="10" fill="#00A0E3" />
@@ -126,8 +141,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(1)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(1)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -148,8 +163,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(2)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(2)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -174,8 +189,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(3)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(3)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -206,8 +221,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(4)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(4)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -236,8 +251,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(5)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(5)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M25 15C15 15 10 25 10 45C10 65 15 85 25 85C35 85 40 65 40 45C40 25 35 15 25 15Z" fill="#00A0E3" />
@@ -264,8 +279,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(6)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(6)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -291,8 +306,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(7)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(7)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -317,8 +332,8 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(8)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(8)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -342,19 +357,19 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(9)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(9)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="20" height="90" viewBox="0 0 20 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 15C5 15 10 15 10 20C10 25 5 30 5 30" stroke="#00A0E3" strokeWidth="5" strokeLinecap="round" />
-              {/* Enhanced Caribbean starfish */}
-              <path d="M10 5L12 10L17 10L13 13L14 18L10 15L6 18L7 13L3 10L8 10L10 5Z" fill="#FF9A5A" />
-              <path d="M10 5L12 10L17 10L13 13L14 18L10 15L6 18L7 13L3 10L8 10L10 5Z" stroke="#FF7F50" strokeWidth="0.5" />
-              <circle cx="10" cy="11" r="1" fill="#FF7F50" />
+              <path d="M5 15C5 15 10 15 10 20L5 30" stroke="#00A0E3" strokeWidth="5" strokeLinecap="round" />
+              {/* Starfish */}
+              <path d="M10 35L12 40L7 38L10 42L5 42L10 44L5 48L12 46L10 50L15 45" fill="#FF6B6B" />
+              <path d="M10 35L12 40L7 38L10 42L5 42L10 44L5 48L12 46L10 50L15 45" stroke="#FF6B6B" strokeWidth="1" />
+              <circle cx="10" cy="42" r="1" fill="#FFEC5F" />
             </svg>
           </motion.div>
 
-          {/* S with crab */}
+          {/* S with sea turtle */}
           <motion.div
             custom={10}
             initial="hidden"
@@ -362,29 +377,25 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(10)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(10)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 25C10 25 10 15 25 15C40 15 40 25 40 35C40 45 10 45 10 55C10 65 10 75 25 75C40 75 40 65 40 65" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
-              {/* Enhanced Caribbean crab */}
-              <circle cx="40" cy="50" r="5" fill="#FF5A5A" />
-              <circle cx="38" cy="48" r="1" fill="black" />
-              <circle cx="42" cy="48" r="1" fill="black" />
-              <path d="M35 50L30 45" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M35 53L30 55" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M45 50L50 45" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M45 53L50 55" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M40 55L40 58" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M38 52L40 54L42 52" stroke="#FF0000" strokeWidth="1" />
-              <path d="M29 44L31 46" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M29 56L31 54" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M51 44L49 46" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M51 56L49 54" stroke="#FF5A5A" strokeWidth="1" />
+              <path d="M15 25C15 20 20 15 25 15C30 15 35 20 35 25C35 30 30 35 25 35C20 35 15 40 15 45C15 50 20 55 25 55C30 55 35 50 35 45" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
+              {/* Sea Turtle */}
+              <path d="M25 65C22 65 20 70 25 72C30 74 35 70 32 67C29 64 28 65 25 65Z" fill="#00BB77" />
+              <path d="M25 65C25 65 23 69 25 70" stroke="#008855" strokeWidth="1" />
+              <path d="M25 65C25 65 27 69 25 70" stroke="#008855" strokeWidth="1" />
+              <circle cx="24" cy="67" r="0.5" fill="black" />
+              <circle cx="26" cy="67" r="0.5" fill="black" />
+              <path d="M22 66L20 64" stroke="#00BB77" strokeWidth="1" />
+              <path d="M28 66L30 64" stroke="#00BB77" strokeWidth="1" />
+              <path d="M23 70L20 72" stroke="#00BB77" strokeWidth="1" />
+              <path d="M27 70L30 72" stroke="#00BB77" strokeWidth="1" />
             </svg>
           </motion.div>
 
-          {/* C with coral */}
+          {/* D with beach umbrella */}
           <motion.div
             custom={11}
             initial="hidden"
@@ -392,22 +403,26 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(11)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(11)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M40 25C40 25 30 15 20 15C10 15 10 25 10 45C10 65 10 75 20 75C30 75 40 65 40 65" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
-              {/* Enhanced Caribbean coral */}
-              <path d="M45 50C45 50 48 55 45 60C42 65 40 60 40 60C40 60 38 65 35 60C32 55 35 50 35 50" fill="#FF7EB6" />
-              <path d="M45 50C45 50 48 55 45 60C42 65 40 60 40 60C40 60 38 65 35 60C32 55 35 50 35 50" stroke="#FF5A8C" strokeWidth="0.5" />
-              <path d="M40 50C40 50 41 46 40 42" stroke="#FF5A8C" strokeWidth="1" />
-              <path d="M40 50C40 50 39 46 40 42" stroke="#FF5A8C" strokeWidth="1" />
-              <path d="M38 52C38 52 36 50 37 47" stroke="#FF5A8C" strokeWidth="1" />
-              <path d="M42 52C42 52 44 50 43 47" stroke="#FF5A8C" strokeWidth="1" />
+              <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
+              <path d="M10 15C10 15 25 15 35 25C45 35 45 65 35 75C25 85 10 85 10 85" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
+              {/* Beach Umbrella */}
+              <path d="M45 60L45 75" stroke="#8B4513" strokeWidth="1" />
+              <path d="M45 60C40 55 35 60 45 60" fill="#FF6B6B" />
+              <path d="M45 60C50 55 55 60 45 60" fill="#F7BE00" />
+              <path d="M45 60C40 65 35 60 45 60" fill="#00BB77" />
+              <path d="M45 60C50 65 55 60 45 60" fill="#FF9EAB" />
+              <path d="M45 60C40 55 35 60 45 60" stroke="#FF6B6B" strokeWidth="0.5" />
+              <path d="M45 60C50 55 55 60 45 60" stroke="#F7BE00" strokeWidth="0.5" />
+              <path d="M45 60C40 65 35 60 45 60" stroke="#00BB77" strokeWidth="0.5" />
+              <path d="M45 60C50 65 55 60 45 60" stroke="#FF9EAB" strokeWidth="0.5" />
             </svg>
           </motion.div>
 
-          {/* H with sail */}
+          {/* I with lighthouse */}
           <motion.div
             custom={12}
             initial="hidden"
@@ -415,24 +430,26 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(12)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(12)}
+            onHoverEnd={handleHoverEnd}
           >
-            <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30" height="90" viewBox="0 0 30 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
-              <rect x="30" y="15" width="10" height="70" fill="#00A0E3" />
-              <rect x="10" y="45" width="30" height="10" fill="#00A0E3" />
-              {/* Enhanced Caribbean sailboat */}
-              <path d="M40 15L50 30H40V15Z" fill="#F7BE00" />
-              <path d="M40 30L45 30" stroke="#8B4513" strokeWidth="2" />
-              <path d="M45 25L47 22" stroke="#00BFFF" strokeWidth="1" strokeDasharray="1 1" />
-              <path d="M45 28L47 29" stroke="#00BFFF" strokeWidth="1" strokeDasharray="1 1" />
-              <path d="M40 15L50 30H40V15Z" stroke="#FF7F00" strokeWidth="0.5" />
-              <path d="M43 22L46 20" stroke="#FF7F00" strokeWidth="1" />
+              {/* Lighthouse */}
+              <path d="M15 0L10 15L20 15L15 0Z" fill="#FF6B6B" />
+              <rect x="11" y="5" width="8" height="2" fill="white" />
+              <rect x="11" y="9" width="8" height="2" fill="white" />
+              <path d="M14 0L16 0L15 -2L14 0Z" fill="#F7BE00" />
+              <circle cx="15" cy="2" r="1" fill="#F7BE00" />
+              {/* Light beams */}
+              <path d="M12 0L10 -2" stroke="#F7BE00" strokeWidth="0.5" strokeDasharray="0.5 0.5" />
+              <path d="M18 0L20 -2" stroke="#F7BE00" strokeWidth="0.5" strokeDasharray="0.5 0.5" />
+              <path d="M20 4L22 2" stroke="#F7BE00" strokeWidth="0.5" strokeDasharray="0.5 0.5" />
+              <path d="M10 4L8 2" stroke="#F7BE00" strokeWidth="0.5" strokeDasharray="0.5 0.5" />
             </svg>
           </motion.div>
 
-          {/* O with bubbles */}
+          {/* G with parrot */}
           <motion.div
             custom={13}
             initial="hidden"
@@ -440,28 +457,22 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(13)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(13)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M25 15C15 15 10 25 10 45C10 65 15 85 25 85C35 85 40 65 40 45C40 25 35 15 25 15Z" fill="#00A0E3" />
-              <path d="M25 25C20 25 18 30 18 45C18 60 20 75 25 75C30 75 32 60 32 45C32 30 30 25 25 25Z" fill="white" />
-              {/* Enhanced Caribbean bubbles */}
-              <circle cx="45" cy="30" r="3" fill="#81D4FA" fillOpacity="0.7" />
-              <circle cx="45" cy="30" r="3" stroke="#5DADE2" strokeWidth="0.5" />
-              <circle cx="42" cy="20" r="2" fill="#81D4FA" fillOpacity="0.7" />
-              <circle cx="42" cy="20" r="2" stroke="#5DADE2" strokeWidth="0.5" />
-              <circle cx="47" cy="40" r="2" fill="#81D4FA" fillOpacity="0.7" />
-              <circle cx="47" cy="40" r="2" stroke="#5DADE2" strokeWidth="0.5" />
-              <circle cx="44" cy="25" r="1" fill="#81D4FA" fillOpacity="0.7" />
-              <circle cx="46" cy="36" r="1" fill="#81D4FA" fillOpacity="0.7" />
-              <circle cx="43" cy="35" r="1" fill="#81D4FA" fillOpacity="0.7" />
-              <path d="M43 33L44 30" stroke="#5DADE2" strokeWidth="0.5" strokeDasharray="1 1" />
-              <path d="M44 23L43 18" stroke="#5DADE2" strokeWidth="0.5" strokeDasharray="1 1" />
+              <path d="M35 25C35 20 30 15 25 15C20 15 15 20 15 25C15 45 15 65 15 65C15 70 20 75 25 75C30 75 35 70 35 65L35 45L25 45" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Tropical Parrot */}
+              <path d="M45 25C45 25 40 20 35 25C30 30 35 35 40 35C45 35 48 30 45 25Z" fill="#FF6B6B" />
+              <path d="M40 30C40 30 36 35 39 40C42 45 45 40 45 35" fill="#F7BE00" />
+              <path d="M45 25C45 25 48 20 43 20C38 20 40 30 45 25Z" fill="#00BB77" />
+              <circle cx="43" cy="28" r="1" fill="black" />
+              <path d="M44 26C44 26 46 26 46 28" stroke="#F7BE00" strokeWidth="1" />
+              <path d="M45 30L48 35" stroke="#F7BE00" strokeWidth="1" />
             </svg>
           </motion.div>
 
-          {/* I with lighthouse */}
+          {/* I with floating balloon */}
           <motion.div
             custom={14}
             initial="hidden"
@@ -469,26 +480,23 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(14)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(14)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="30" height="90" viewBox="0 0 30 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
-              <rect x="5" y="15" width="20" height="10" fill="#00A0E3" />
-              <rect x="5" y="75" width="20" height="10" fill="#00A0E3" />
-              {/* Enhanced Caribbean lighthouse */}
-              <rect x="12" y="0" width="6" height="12" fill="#FFFFFF" />
-              <rect x="10" y="12" width="10" height="3" fill="#FF0000" />
-              <rect x="12" y="6" width="6" height="3" fill="#FF0000" />
-              <circle cx="15" cy="3" r="2" fill="#FFDD00" />
-              <path d="M17 3L19 1" stroke="#FFDD00" strokeWidth="0.5" />
-              <path d="M17 3L19 5" stroke="#FFDD00" strokeWidth="0.5" />
-              <path d="M13 3L11 1" stroke="#FFDD00" strokeWidth="0.5" />
-              <path d="M13 3L11 5" stroke="#FFDD00" strokeWidth="0.5" />
+              {/* Floating Balloon */}
+              <path d="M15 5C13 5 11 7 11 10C11 13 13 15 15 15C17 15 19 13 19 10C19 7 17 5 15 5Z" fill="#FF6B6B" />
+              <path d="M15 15L15 20" stroke="#F7BE00" strokeWidth="1" />
+              <path d="M15 20L14 18" stroke="#F7BE00" strokeWidth="1" />
+              <path d="M15 20L16 18" stroke="#F7BE00" strokeWidth="1" />
+              {/* Reflections on balloon */}
+              <path d="M14 8C14 8 15 7 16 8" stroke="white" strokeWidth="0.5" />
+              <path d="M16 6L17 7" stroke="white" strokeWidth="0.5" />
             </svg>
           </motion.div>
 
-          {/* C with flamingo */}
+          {/* T with coconut */}
           <motion.div
             custom={15}
             initial="hidden"
@@ -496,21 +504,29 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(15)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(15)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M40 25C40 25 30 15 20 15C10 15 10 25 10 45C10 65 10 75 20 75C30 75 40 65 40 65" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
-              {/* Caribbean flamingo */}
-              <path d="M45 45C44 38 40 38 40 40C40 42 42 43 42 46C42 49 40 50 40 50" stroke="#FF80AB" strokeWidth="2" />
-              <circle cx="45" cy="45" r="1.5" fill="#FF80AB" />
-              <path d="M42 46L38 54" stroke="#FF80AB" strokeWidth="1" />
-              <path d="M38 54L36 54" stroke="#FF80AB" strokeWidth="1" />
-              <path d="M36 54L37 56" stroke="#FF80AB" strokeWidth="1" />
+              <rect x="10" y="15" width="30" height="10" fill="#00A0E3" />
+              <rect x="20" y="15" width="10" height="70" fill="#00A0E3" />
+              {/* Coconut */}
+              <circle cx="15" cy="5" r="5" fill="#8B4513" />
+              <path d="M15 0C15 0 13 3 16 5" stroke="#8B4513" strokeWidth="1" />
+              <path d="M15 0C15 0 17 3 14 5" stroke="#8B4513" strokeWidth="1" />
+              <path d="M15 0C15 0 10 0 12 5" stroke="#8B4513" strokeWidth="1" />
+              <path d="M11 3C11 3 10 5 13 5" stroke="#5D3A1A" strokeWidth="0.5" />
+              <path d="M15 2C15 2 18 1 17 4" stroke="#5D3A1A" strokeWidth="0.5" />
+              {/* Palm tree stem */}
+              <path d="M15 5L17 10" stroke="#8B4513" strokeWidth="1" />
+              {/* Palm tree leaves */}
+              <path d="M17 10C17 10 20 8 21 10" stroke="#00BB77" strokeWidth="1" />
+              <path d="M17 10C17 10 20 12 21 10" stroke="#00BB77" strokeWidth="1" />
+              <path d="M17 10C17 10 14 8 13 10" stroke="#00BB77" strokeWidth="1" />
             </svg>
           </motion.div>
 
-          {/* E with turtle */}
+          {/* A with mermaid's tail */}
           <motion.div
             custom={16}
             initial="hidden"
@@ -518,28 +534,27 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(16)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(16)}
+            onHoverEnd={handleHoverEnd}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
-              <rect x="10" y="15" width="30" height="10" fill="#00A0E3" />
-              <rect x="10" y="45" width="25" height="10" fill="#00A0E3" />
-              <rect x="10" y="75" width="30" height="10" fill="#00A0E3" />
-              {/* Caribbean sea turtle */}
-              <ellipse cx="40" cy="40" rx="5" ry="4" fill="#00BB77" />
-              <path d="M43 38L46 36" stroke="#00BB77" strokeWidth="1" />
-              <path d="M37 38L34 36" stroke="#00BB77" strokeWidth="1" />
-              <path d="M43 42L46 44" stroke="#00BB77" strokeWidth="1" />
-              <path d="M37 42L34 44" stroke="#00BB77" strokeWidth="1" />
-              <path d="M40 44L40 46" stroke="#00BB77" strokeWidth="1" />
-              <path d="M38 40L39 41" stroke="#004D34" strokeWidth="1" />
-              <path d="M42 40L41 41" stroke="#004D34" strokeWidth="1" />
-              <path d="M38 38L42 38" stroke="#004D34" strokeWidth="1" />
+              <path d="M10 85L25 15L40 85" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
+              <path d="M15 65L35 65" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />
+              {/* Mermaid's Tail */}
+              <path d="M25 5C25 5 20 0 20 4C20 8 25 12 25 12C25 12 30 8 30 4C30 0 25 5 25 5Z" fill="#00BB77" />
+              <path d="M25 12L25 15" stroke="#00BB77" strokeWidth="1" />
+              <path d="M20 4C20 4 21 3 22 4" stroke="#008855" strokeWidth="0.5" />
+              <path d="M28 4C28 4 29 3 30 4" stroke="#008855" strokeWidth="0.5" />
+              <path d="M23 8C23 8 24 10 25 9" stroke="#008855" strokeWidth="0.5" />
+              <path d="M27 8C27 8 26 10 25 9" stroke="#008855" strokeWidth="0.5" />
+              {/* Bubbles */}
+              <circle cx="22" cy="2" r="1" fill="#81D4FA" />
+              <circle cx="28" cy="2" r="0.5" fill="#81D4FA" />
+              <circle cx="23" cy="6" r="0.5" fill="#81D4FA" />
             </svg>
           </motion.div>
 
-          {/* ! with beach ball */}
+          {/* L with beach chair */}
           <motion.div
             custom={17}
             initial="hidden"
@@ -547,18 +562,24 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
             whileHover="hover"
             variants={characterVariants}
             className="relative cursor-pointer"
-            onHoverStart={() => setLetterHovering(17)}
-            onHoverEnd={() => setLetterHovering(null)}
+            onHoverStart={() => handleHoverStart(17)}
+            onHoverEnd={handleHoverEnd}
           >
-            <svg width="30" height="90" viewBox="0 0 30 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="10" y="15" width="10" height="50" fill="#00A0E3" />
-              <rect x="10" y="75" width="10" height="10" fill="#00A0E3" />
-              {/* Caribbean beach ball */}
-              <circle cx="15" cy="5" r="5" fill="#FFFFFF" />
-              <path d="M15 0L15 10" stroke="#FF5A5A" strokeWidth="1" />
-              <path d="M10 5L20 5" stroke="#5DADE2" strokeWidth="1" />
-              <path d="M11 1L19 9" stroke="#FFDD00" strokeWidth="1" />
-              <path d="M11 9L19 1" stroke="#00BB77" strokeWidth="1" />
+            <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
+              <rect x="10" y="75" width="30" height="10" fill="#00A0E3" />
+              {/* Beach Chair */}
+              <path d="M35 45L40 60" stroke="#F7BE00" strokeWidth="2" />
+              <path d="M45 45L40 60" stroke="#F7BE00" strokeWidth="2" />
+              <path d="M35 45L45 45" stroke="#F7BE00" strokeWidth="2" />
+              <path d="M37 50L43 50" stroke="#FF6B6B" strokeWidth="4" />
+              <path d="M36 55L44 55" stroke="#FF6B6B" strokeWidth="4" />
+              <path d="M40 60L38 65" stroke="#F7BE00" strokeWidth="1" />
+              <path d="M40 60L42 65" stroke="#F7BE00" strokeWidth="1" />
+              {/* Beach Ball */}
+              <circle cx="47" cy="63" r="3" fill="white" />
+              <path d="M45 61L49 65" stroke="#FF6B6B" strokeWidth="1" />
+              <path d="M49 61L45 65" stroke="#00BB77" strokeWidth="1" />
             </svg>
           </motion.div>
         </div>

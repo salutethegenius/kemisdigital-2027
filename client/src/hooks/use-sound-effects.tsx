@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 
 export type SoundEffect = 'click' | 'hover' | 'success' | 'toggle';
 
@@ -21,10 +22,22 @@ export function useSoundEffects() {
   useEffect(() => {
     const loadAudio = (type: SoundEffect) => {
       if (!audioCache[type]) {
-        const audio = new Audio(`/sounds/${type}.mp3`);
-        audio.preload = 'auto';
-        audio.volume = 0.2; // Set default volume to 20%
-        audioCache[type] = audio;
+        try {
+          // Use the correct path for the Vite public directory
+          const audio = new Audio(`/sounds/${type}.mp3`);
+          audio.preload = 'auto';
+          audio.volume = 0.3; // Set default volume to 30%
+          audioCache[type] = audio;
+          
+          // Add debugging info
+          console.log(`Loaded sound: ${type} from /sounds/${type}.mp3`);
+          
+          audio.addEventListener('error', (e) => {
+            console.error(`Error loading sound: ${type}`, e);
+          });
+        } catch (error) {
+          console.error(`Failed to load sound: ${type}`, error);
+        }
       }
     };
 
@@ -53,33 +66,47 @@ export function useSoundEffects() {
   const play = useCallback((type: SoundEffect) => {
     if (!enabled) return;
     
-    // Ensure audio is loaded
-    if (!audioCache[type]) {
-      const audio = new Audio(`/sounds/${type}.mp3`);
-      audio.volume = 0.2;
-      audioCache[type] = audio;
-    }
-    
-    const audio = audioCache[type];
-    if (audio) {
-      // Stop and reset current playing sound
-      audio.pause();
-      audio.currentTime = 0;
+    try {
+      // Get the audio object from cache or create new one
+      let audio = audioCache[type];
       
-      // Play the sound
-      const playPromise = audio.play();
-      
-      // Handle play promises (required for some browsers)
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.warn('Audio playback prevented:', error);
-        });
+      if (!audio) {
+        console.log(`Loading new audio for ${type}`);
+        audio = new Audio(`/sounds/${type}.mp3`);
+        audio.volume = 0.3;
+        audioCache[type] = audio;
       }
+      
+      if (audio) {
+        console.log(`Playing sound: ${type}`);
+        
+        // Stop and reset current playing sound
+        audio.pause();
+        audio.currentTime = 0;
+        
+        // Play the sound
+        const playPromise = audio.play();
+        
+        // Handle play promises (required for some browsers)
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.error('Audio playback prevented:', error);
+          });
+        }
+      } else {
+        console.error(`Sound not available: ${type}`);
+      }
+    } catch (error) {
+      console.error(`Error playing sound ${type}:`, error);
     }
   }, [enabled]);
 
   const toggleSoundEffects = useCallback(() => {
-    setEnabled(prev => !prev);
+    setEnabled(prev => {
+      const newState = !prev;
+      console.log(`Sound effects ${newState ? 'enabled' : 'disabled'}`);
+      return newState;
+    });
   }, []);
 
   return {
@@ -88,9 +115,6 @@ export function useSoundEffects() {
     toggleSoundEffects
   };
 }
-
-// Create a global sound provider context
-import React, { createContext, useContext, ReactNode } from 'react';
 
 interface SoundContextType {
   enabled: boolean;
