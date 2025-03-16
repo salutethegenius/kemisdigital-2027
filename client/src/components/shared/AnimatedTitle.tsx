@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useSound } from '@/hooks/use-sound-effects';
 
 interface AnimatedTitleProps {
   className?: string;
@@ -53,7 +52,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerControls = useAnimationControls();
   const [letterHovering, setLetterHovering] = useState<number | null>(null);
-  const { play } = useSound();
   
   // Calculate responsive scale based on container width
   useEffect(() => {
@@ -77,17 +75,14 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       containerControls.start("pulse");
-      // Play a subtle toggle sound when pulse animation starts
-      play("toggle");
     }, 2000);
     
     return () => clearTimeout(timeout);
-  }, [containerControls, play]);
+  }, [containerControls]);
 
   // Function to handle hover start
   const handleHoverStart = (index: number) => {
     setLetterHovering(index);
-    play("hover");
   };
 
   // Function to handle hover end
@@ -116,7 +111,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(0)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="30" height="10" fill="#00A0E3" />
@@ -141,7 +135,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(1)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -163,7 +156,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(2)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -194,7 +186,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(3)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -217,7 +208,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(4)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -240,7 +230,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(5)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="60" height="90" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="5" y="15" width="10" height="70" fill="#00A0E3" />
@@ -263,7 +252,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(6)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="30" height="90" viewBox="0 0 30 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="15" width="10" height="70" fill="#00A0E3" />
@@ -282,7 +270,6 @@ export default function AnimatedTitle({ className = "" }: AnimatedTitleProps) {
             className="relative"
             onHoverStart={() => handleHoverStart(7)}
             onHoverEnd={handleHoverEnd}
-            onTap={() => play("click")}
           >
             <svg width="50" height="90" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 30C15 20 35 20 35 30C35 40 15 50 15 60C15 70 35 70 35 60" stroke="#00A0E3" strokeWidth="10" strokeLinecap="round" />

@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback, memo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { SoundButton } from '@/components/ui/sound-button';
-import { useSound } from '@/hooks/use-sound-effects';
+import { Button } from '@/components/ui/button';
 
 interface Testimonial {
   id: number;
@@ -70,7 +69,6 @@ export default function TestimonialCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const { play } = useSound();
   
   // Use useRef to track if component is mounted
   const isMounted = useRef(true);
@@ -123,8 +121,7 @@ export default function TestimonialCarousel({
                "to", (currentIndex + 1) % testimonials.length);
     setDirection(1);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    play("click");
-  }, [testimonials, currentIndex, play]);
+  }, [testimonials, currentIndex]);
 
   const handlePrev = useCallback(() => {
     if (!isMounted.current || !testimonials || testimonials.length <= 1) {
@@ -138,8 +135,7 @@ export default function TestimonialCarousel({
                "to", (currentIndex - 1 + testimonials.length) % testimonials.length);
     setDirection(-1);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-    play("click");
-  }, [testimonials, currentIndex, play]);
+  }, [testimonials, currentIndex]);
 
   useEffect(() => {
     if (!autoplay || isPaused || !isMounted.current || !testimonials || testimonials.length <= 1) return;
@@ -203,7 +199,6 @@ export default function TestimonialCarousel({
       console.log(`Dot clicked, moving from index ${currentIndex} to ${index}`);
       setDirection(index > currentIndex ? 1 : -1);
       setCurrentIndex(index);
-      play("click");
     }
   };
 
@@ -265,7 +260,7 @@ export default function TestimonialCarousel({
       </div>
       
       <div className="flex items-center justify-between mt-4">
-        <SoundButton 
+        <Button 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -283,10 +278,9 @@ export default function TestimonialCarousel({
           aria-label="Previous testimonial"
           type="button"
           disabled={testimonials.length <= 1}
-          soundEffect="click"
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-        </SoundButton>
+        </Button>
         <div className="flex items-center gap-1.5 sm:gap-2">
           {testimonials.map((testimonial, index) => (
             <button
@@ -296,7 +290,6 @@ export default function TestimonialCarousel({
                 e.stopPropagation();
                 handleDotClick(index);
               }}
-              onMouseEnter={() => play("hover")}
               type="button"
               className={`h-2.5 rounded-full transition-all ${
                 index === currentIndex 
@@ -308,7 +301,7 @@ export default function TestimonialCarousel({
             />
           ))}
         </div>
-        <SoundButton 
+        <Button 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -326,10 +319,9 @@ export default function TestimonialCarousel({
           aria-label="Next testimonial"
           type="button"
           disabled={testimonials.length <= 1}
-          soundEffect="click"
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-        </SoundButton>
+        </Button>
       </div>
     </div>
   );

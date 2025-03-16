@@ -29,43 +29,33 @@ import {
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "../shared/LanguageSelector";
 
-// Import sound components
-import { useSound } from "@/hooks/use-sound-effects";
-import SoundLink from "@/components/shared/SoundLink";
-import SoundToggle from "@/components/shared/SoundToggle";
-import { SoundButton } from "@/components/ui/sound-button";
-
 export default function Header() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const { t } = useTranslation();
-  const { play, enabled } = useSound();
 
   // Handle scroll restoration on navigation
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Function to handle navigation with sound
+  // Function to handle navigation
   const handleNavigation = () => {
     window.scrollTo(0, 0);
     setIsOpen(false);
-    if (enabled) play("click");
   };
 
   // Function to handle contact navigation from dropdown
   const handleContactNavigation = (href: string) => {
     window.scrollTo(0, 0);
     setHoveredItem(null);
-    if (enabled) play("success");
   };
 
-  // Function to handle hover sound effect
+  // Function to handle hover
   const handleHover = (itemName: string) => {
     if (hoveredItem !== itemName) {
       setHoveredItem(itemName);
-      if (enabled) play("hover");
     }
   };
 
@@ -87,16 +77,16 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <SoundLink href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)} soundEffect="click">
+        <a href="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
           <img src="/images/logo.png" alt="Kemis Digital Logo" className="h-8" />
-        </SoundLink>
+        </a>
 
         <div className="hidden md:flex items-center space-x-6">
           <NavigationMenu>
             <NavigationMenuList className="relative">
               {navigation.map((item) => (
                 <NavigationMenuItem key={item.name} className="relative">
-                  <SoundLink
+                  <a
                     href={item.href}
                     className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
                       location === item.href ? "text-[#00A0E3]" : "text-muted-foreground"
@@ -104,36 +94,33 @@ export default function Header() {
                     onMouseEnter={() => handleHover(item.name)}
                     onMouseLeave={handleHoverEnd}
                     onClick={handleNavigation}
-                    soundEffect="click"
                   >
                     <item.icon className="w-4 h-4 mr-2" />
                     {item.name}
-                  </SoundLink>
+                  </a>
                   {hoveredItem === item.name && (
                     <div className="absolute top-full left-0 mt-1 z-50">
                       <div className="p-4 w-[270px] bg-background rounded-md shadow-md border">
-                        <SoundLink 
+                        <a 
                           href={item.href} 
                           className="flex items-center mb-2 text-sm font-medium text-[#00A0E3]"
                           onClick={() => handleNavigation()}
-                          soundEffect="click"
                         >
                           <item.icon className="w-4 h-4 mr-2" />
                           {item.name}
-                        </SoundLink>
+                        </a>
                         <p className="text-sm text-muted-foreground">{item.description}</p>
                         
                         {/* Show contact link for all navigation items */}
                         <div className="mt-3 pt-3 border-t">
-                          <SoundLink
+                          <a
                             href="/contact"
                             className="flex items-center text-sm text-muted-foreground hover:text-foreground"
                             onClick={() => handleContactNavigation("/contact")}
-                            soundEffect="success"
                           >
                             <Mail className="w-4 h-4 mr-2" />
                             Contact us about {item.name.toLowerCase()}
-                          </SoundLink>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -142,7 +129,7 @@ export default function Header() {
               ))}
               
               <NavigationMenuItem>
-                <SoundLink
+                <a
                   href="/meet"
                   className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
                     location === "/meet" ? "text-[#00A0E3]" : "text-muted-foreground"
@@ -150,15 +137,14 @@ export default function Header() {
                   onClick={() => handleNavigation()}
                   onMouseEnter={() => handleHover("meet")}
                   onMouseLeave={handleHoverEnd}
-                  soundEffect="click"
                 >
                   <Video className="w-4 h-4 mr-2" />
                   Meet
-                </SoundLink>
+                </a>
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <SoundLink
+                <a
                   href="/contact"
                   className={`text-sm font-medium transition-colors hover:text-[#00A0E3] flex items-center px-3 py-2 ${
                     location === "/contact" ? "text-[#00A0E3]" : "text-muted-foreground"
@@ -166,34 +152,30 @@ export default function Header() {
                   onClick={() => handleNavigation()}
                   onMouseEnter={() => handleHover("contact")}
                   onMouseLeave={handleHoverEnd}
-                  soundEffect="click"
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   {t('header.contact')}
-                </SoundLink>
+                </a>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           
           <div className="flex items-center space-x-2">
             <LanguageSelector />
-            {/* Add Sound Toggle Button */}
-            <SoundToggle className="ml-2" />
           </div>
         </div>
 
         <div className="md:hidden flex items-center">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <SoundButton 
+              <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-8 w-8" 
-                soundEffect="click"
+                className="h-8 w-8"
               >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
-              </SoundButton>
+              </Button>
             </SheetTrigger>
             <SheetContent>
               <div className="flex justify-center mb-4 mt-2">
@@ -201,7 +183,7 @@ export default function Header() {
               </div>
               <div className="flex flex-col space-y-4 mt-2">
                 {navigation.map((item) => (
-                  <SoundLink
+                  <a
                     key={item.name}
                     href={item.href}
                     className={`text-sm flex items-center py-2 ${
@@ -211,14 +193,13 @@ export default function Header() {
                       handleNavigation();
                       setIsOpen(false);
                     }}
-                    soundEffect="click"
                   >
                     <item.icon className="w-4 h-4 mr-3" />
                     {item.name}
-                  </SoundLink>
+                  </a>
                 ))}
                 
-                <SoundLink
+                <a
                   href="/meet"
                   className={`text-sm flex items-center py-2 ${
                     location === "/meet" ? "text-[#00A0E3] font-medium" : ""
@@ -227,13 +208,12 @@ export default function Header() {
                     handleNavigation();
                     setIsOpen(false);
                   }}
-                  soundEffect="click"
                 >
                   <Video className="w-4 h-4 mr-3" />
                   Meet
-                </SoundLink>
+                </a>
                 
-                <SoundLink
+                <a
                   href="/contact"
                   className={`text-sm flex items-center py-2 ${
                     location === "/contact" ? "text-[#00A0E3] font-medium" : ""
@@ -242,15 +222,13 @@ export default function Header() {
                     handleNavigation();
                     setIsOpen(false);
                   }}
-                  soundEffect="click"
                 >
                   <Mail className="w-4 h-4 mr-3" />
                   {t('header.contact')}
-                </SoundLink>
+                </a>
                 
                 <div className="flex items-center space-x-2 pt-4 mt-2 border-t">
                   <LanguageSelector />
-                  <SoundToggle className="ml-2" />
                 </div>
               </div>
             </SheetContent>

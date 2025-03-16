@@ -11,44 +11,84 @@ const audioCache: Record<SoundEffect, HTMLAudioElement | null> = {
   toggle: null
 };
 
+// Preload all sound files at once (browser needs user interaction to play sounds)
+const preloadSounds = () => {
+  const sounds: SoundEffect[] = ['click', 'hover', 'success', 'toggle'];
+  sounds.forEach(sound => {
+    try {
+      const audio = new Audio();
+      audio.src = `/sounds/${sound}.mp3`;
+      audio.preload = 'auto';
+      audio.volume = 0.3;
+      audioCache[sound] = audio;
+      
+      // Add debugging logs
+      console.log(`Preloaded sound: ${sound}`);
+      
+      // Log any errors
+      audio.addEventListener('error', (e) => {
+        console.error(`Error loading sound: ${sound}`, e);
+      });
+    } catch (error) {
+      console.error(`Failed to preload sound: ${sound}`, error);
+    }
+  });
+};
+
 export function useSoundEffects() {
   const [enabled, setEnabled] = useState<boolean>(() => {
     // Check if sound is enabled in localStorage
     const storedPreference = localStorage.getItem('sound-effects-enabled');
     return storedPreference !== null ? storedPreference === 'true' : true;
   });
-
-  // Initialize audio cache on first load
+  
+  // Preload all sounds on first hook initialization
   useEffect(() => {
-    const loadAudio = (type: SoundEffect) => {
-      if (!audioCache[type]) {
-        try {
-          // Use the correct path for the Vite public directory
-          const audio = new Audio(`/sounds/${type}.mp3`);
-          audio.preload = 'auto';
-          audio.volume = 0.3; // Set default volume to 30%
-          audioCache[type] = audio;
-          
-          // Add debugging info
-          console.log(`Loaded sound: ${type} from /sounds/${type}.mp3`);
-          
-          audio.addEventListener('error', (e) => {
-            console.error(`Error loading sound: ${type}`, e);
-          });
-        } catch (error) {
-          console.error(`Failed to load sound: ${type}`, error);
+    // Make sure this only runs once
+    if (!audioCache.click && !audioCache.hover && !audioCache.success && !audioCache.toggle) {
+      console.log('Initializing sound system...');
+      preloadSounds();
+    }
+    
+    // Attempt to unlock audio on first user interaction
+    const unlockAudio = () => {
+      console.log('Unlocking audio...');
+      // Play and immediately pause all sounds to unlock them
+      Object.values(audioCache).forEach(audio => {
+        if (audio) {
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              audio.pause();
+              audio.currentTime = 0;
+              console.log('Audio unlocked successfully');
+            }).catch(error => {
+              console.log('Audio unlock failed, will retry on next interaction', error);
+            });
+          }
         }
-      }
+      });
+      
+      // Remove the event listeners after first interaction
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('touchstart', unlockAudio);
+      document.removeEventListener('keydown', unlockAudio);
     };
-
-    // Load all audio files
-    loadAudio('click');
-    loadAudio('hover');
-    loadAudio('success');
-    loadAudio('toggle');
-
+    
+    // Add event listeners to unlock audio on first interaction
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('keydown', unlockAudio, { once: true });
+    
+    // Update localStorage when enabled state changes
+    localStorage.setItem('sound-effects-enabled', String(enabled));
+    
     // Clean up audio objects on unmount
     return () => {
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('touchstart', unlockAudio);
+      document.removeEventListener('keydown', unlockAudio);
+      
       Object.values(audioCache).forEach(audio => {
         if (audio) {
           audio.pause();
@@ -56,22 +96,17 @@ export function useSoundEffects() {
         }
       });
     };
-  }, []);
-
-  // Update localStorage when enabled state changes
-  useEffect(() => {
-    localStorage.setItem('sound-effects-enabled', String(enabled));
   }, [enabled]);
 
   const play = useCallback((type: SoundEffect) => {
     if (!enabled) return;
     
     try {
-      // Get the audio object from cache or create new one
+      // Get the audio object from cache or create a new one
       let audio = audioCache[type];
       
       if (!audio) {
-        console.log(`Loading new audio for ${type}`);
+        console.log(`Creating new audio instance for ${type}`);
         audio = new Audio(`/sounds/${type}.mp3`);
         audio.volume = 0.3;
         audioCache[type] = audio;
@@ -80,17 +115,20 @@ export function useSoundEffects() {
       if (audio) {
         console.log(`Playing sound: ${type}`);
         
-        // Stop and reset current playing sound
-        audio.pause();
-        audio.currentTime = 0;
+        // Create a clone to allow overlapping sounds
+        const soundClone = audio.cloneNode() as HTMLAudioElement;
+        soundClone.volume = 0.3;
         
         // Play the sound
-        const playPromise = audio.play();
+        const playPromise = soundClone.play();
         
         // Handle play promises (required for some browsers)
         if (playPromise !== undefined) {
           playPromise.catch(error => {
             console.error('Audio playback prevented:', error);
+            // Try to recover by recreating the audio element
+            audioCache[type] = new Audio(`/sounds/${type}.mp3`);
+            audioCache[type]!.volume = 0.3;
           });
         }
       } else {

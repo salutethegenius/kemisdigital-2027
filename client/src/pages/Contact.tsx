@@ -28,11 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-
-// Import sound components
-import { useSound } from "@/hooks/use-sound-effects";
-import { SoundButton } from "@/components/ui/sound-button";
-import { SoundInput, SoundTextarea } from "@/components/ui/sound-form-fields";
+import { Button } from "@/components/ui/button";
 
 // Form schema
 const formSchema = z.object({
@@ -48,7 +44,6 @@ export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const { play } = useSound();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -76,9 +71,6 @@ export default function Contact() {
         const error = await response.json();
         throw new Error(error.details || 'Failed to send message');
       }
-
-      // Play success sound on successful submission
-      play("success");
       
       toast({
         title: "Success",
@@ -205,10 +197,9 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Name</FormLabel>
                             <FormControl>
-                              <SoundInput 
+                              <Input 
                                 placeholder="Your name" 
                                 {...field} 
-                                soundEffect="click"
                               />
                             </FormControl>
                             <FormMessage />
@@ -223,10 +214,9 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Email</FormLabel>
                             <FormControl>
-                              <SoundInput 
+                              <Input 
                                 placeholder="you@email.com" 
                                 {...field}
-                                soundEffect="click" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -241,14 +231,8 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Service Interest</FormLabel>
                             <Select 
-                              onValueChange={(value) => {
-                                field.onChange(value);
-                                play("click"); // Play sound on selection
-                              }} 
+                              onValueChange={field.onChange}
                               defaultValue={field.value}
-                              onOpenChange={(open) => {
-                                if (open) play("hover"); // Play sound when dropdown opens
-                              }}
                             >
                               <FormControl>
                                 <SelectTrigger>
@@ -275,11 +259,10 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel className="text-[#F7BE00]">Message</FormLabel>
                             <FormControl>
-                              <SoundTextarea 
+                              <Textarea 
                                 placeholder="Tell us about your AI marketing needs..." 
                                 className="min-h-[120px]" 
                                 {...field}
-                                soundEffect="click" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -288,14 +271,13 @@ export default function Contact() {
                       />
 
                       <div className="pt-4">
-                        <SoundButton 
+                        <Button 
                           type="submit" 
                           className="w-full bg-[#00A0E3] hover:bg-[#0085BC] text-white"
                           disabled={isLoading}
-                          soundEffect="success"
                         >
                           {isLoading ? "Sending..." : "Send Message"}
-                        </SoundButton>
+                        </Button>
                         <div className="text-center">
                           <p className="text-sm text-muted-foreground mb-2">or</p>
                           <CalendarWidget />
