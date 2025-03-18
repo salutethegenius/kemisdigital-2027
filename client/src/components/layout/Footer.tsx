@@ -10,14 +10,15 @@ export default function Footer() {
         { name: t('header.about'), href: "/about" },
         { name: t('header.services'), href: "/services" },
         { name: t('header.latest_news'), href: "/latest-news" },
+        { name: t('header.advocacy'), href: "/advocacy" },
       ],
     },
     {
       title: t('footer.services'),
       links: [
-        { name: t('header.ai_labs'), href: "/services#ai-marketing" },
+        { name: t('header.membership'), href: "/membership" },
         { name: t('footer.web_development'), href: "/services/web-development" },
-        { name: t('footer.analytics'), href: "/services/analytics-dashboards" },
+        { name: t('footer.analytics'), href: "/analytics" },
       ],
     },
     {
@@ -46,8 +47,8 @@ export default function Footer() {
             <div key={section.title}>
               <h3 className="text-lg font-semibold mb-4 text-[#F7BE00]">{section.title}</h3>
               <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.name}>
+                {section.links.map((link, index) => (
+                  <li key={`${section.title}-${link.name}-${index}`}>
                     <a
                       href={link.href}
                       className="text-gray-300 hover:text-[#00A0E3] transition-colors"

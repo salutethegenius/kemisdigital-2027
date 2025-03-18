@@ -28,6 +28,9 @@ const DataDeletion = lazy(() => import("./pages/DataDeletion"));
 const Meet = lazy(() => import("./pages/Meet"));
 const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
 const PressReleaseKemisDigital = lazy(() => import("./pages/PressReleaseKemisDigital"));
+const Advocacy = lazy(() => import("./pages/Advocacy"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const AILabs = lazy(() => import("./pages/AILabs"));
 
 // Service Pages - Lazy Loaded
 const WebDevelopment = lazy(() => import("@/pages/services/WebDevelopment"));
@@ -120,6 +123,9 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/meet" component={Meet} />
                   <Route path="/latest-news" component={LatestNews} />
                   <Route path="/payment-solutions" component={PaymentSolutions} />
+                  <Route path="/advocacy" component={Advocacy} />
+                  <Route path="/analytics" component={Analytics} />
+                  <Route path="/ai-labs" component={AILabs} />
                   <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
                 </Switch>
               </Suspense>
