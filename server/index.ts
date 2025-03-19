@@ -66,17 +66,13 @@ app.use((req, res, next) => {
 
 // Enhanced CORS configuration with better error handling and debugging
 const corsOptions = {
-  origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-    console.log('[CORS] Incoming request from origin:', origin);
-    callback(null, true); // Allow all origins in development
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: true, // Allow all origins for now
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   maxAge: 86400 // CORS preflight cache for 24 hours
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Health check endpoint with detailed status
@@ -139,6 +135,10 @@ function gracefulShutdown(server: any) {
 
     server.listen(PORT, "0.0.0.0", () => {
       console.log(`[Server] 🚀 Server is running at http://0.0.0.0:${PORT}`);
+      console.log(`[Server] Environment: ${process.env.NODE_ENV}`);
+      console.log(`[Server] REPL_SLUG: ${process.env.REPL_SLUG}`);
+      console.log(`[Server] REPL_OWNER: ${process.env.REPL_OWNER}`);
+      console.log(`[Server] REPL_ID: ${process.env.REPL_ID}`);
     });
 
     // Setup graceful shutdown handlers
