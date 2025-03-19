@@ -26,10 +26,12 @@ const LatestNews = lazy(() => import("./pages/LatestNews"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const DataDeletion = lazy(() => import("./pages/DataDeletion"));
 const Meet = lazy(() => import("./pages/Meet"));
+const USCompanyFormation = lazy(() => import("./pages/USCompanyFormation"));
 const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
 const PressReleaseKemisDigital = lazy(() => import("./pages/PressReleaseKemisDigital"));
 const Advocacy = lazy(() => import("./pages/Advocacy"));
 const Analytics = lazy(() => import("./pages/Analytics"));
+const Membership = lazy(() => import("./pages/Membership"));
 const AILabs = lazy(() => import("./pages/AILabs"));
 
 // Service Pages - Lazy Loaded
@@ -125,7 +127,9 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/payment-solutions" component={PaymentSolutions} />
                   <Route path="/advocacy" component={Advocacy} />
                   <Route path="/analytics" component={Analytics} />
+                    <Route path="/membership" component={Membership} />
                   <Route path="/ai-labs" component={AILabs} />
+                    <Route path="/us-company-formation" component={USCompanyFormation} />
                   <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
                 </Switch>
               </Suspense>
