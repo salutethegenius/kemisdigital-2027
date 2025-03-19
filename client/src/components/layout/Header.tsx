@@ -77,18 +77,20 @@ export default function Header() {
               <SoundLink
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors ${
+                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors flex items-center ${
                   location === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground"
                 }`}
               >
+                <item.icon size={16} className="mr-1.5" />
                 {item.name}
               </SoundLink>
             ))}
             
             <SoundLink
               href="/contact"
-              className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#0085B9] transition-colors"
+              className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#0085B9] transition-colors flex items-center"
             >
+              <ChevronDown size={16} className="mr-1.5" />
               {t('header.contact')}
             </SoundLink>
           </nav>
@@ -137,6 +139,7 @@ export default function Header() {
                     href="/contact"
                     className="flex items-center px-3 py-3 mt-4 rounded-md bg-[#00A0E3] text-white"
                   >
+                    <ChevronDown size={18} className="mr-2" />
                     <span>{t('header.contact')}</span>
                     <ArrowRight size={16} className="ml-auto" />
                   </SoundLink>
