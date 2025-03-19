@@ -290,7 +290,7 @@ export default function Hero({
   };
 
   return (
-    <section className="relative text-center min-h-[90vh] md:min-h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="relative text-center min-h-[90vh] md:min-h-screen w-full flex items-center justify-center overflow-hidden mt-0 pt-0">
       {/* Background media - prioritize video, fall back to image if video fails or isn't provided */}
       {backgroundType !== 'none' && (
         <div className="absolute inset-0 w-full h-full">

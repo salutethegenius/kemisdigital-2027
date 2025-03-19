@@ -1,16 +1,38 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
-import { Menu, X, ArrowRight, ChevronDown, Home, Info, Calendar, Newspaper, Code, CreditCard, Award, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown, Home, Info, Calendar, Newspaper, Code, CreditCard, Award, Sparkles, Phone, Video } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SoundLink from "@/components/shared/SoundLink";
+import LanguageSelector from "../shared/LanguageSelector";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
   const { t } = useTranslation();
   const isMobile = useIsMobile();
+
+  // Handle scroll effect for glass-like background
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -55,8 +77,23 @@ export default function Header() {
     { name: t('header.latest_news'), href: "/latest-news", icon: Newspaper, description: "Stay updated with our latest news" },
   ];
 
+  const contactOptions = [
+    { name: t('header.contact'), href: "/contact", icon: Phone, description: "Get in touch with us" },
+    { name: t('header.meet'), href: "/meet", icon: Video, description: "Schedule a virtual meeting" },
+  ];
+
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg shadow-sm">
+    <header 
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? "bg-background/75 backdrop-blur-md shadow-sm" 
+          : "bg-background/30 backdrop-blur-sm"
+      }`}
+      style={{
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)'
+      }}
+    >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -66,7 +103,7 @@ export default function Header() {
               alt="KemisDigital Logo" 
               className="h-8 md:h-10"
               onError={(e) => {
-                e.currentTarget.src = "/images/kemis-icon.png"; // Fallback to icon if logo fails
+                e.currentTarget.src = "/images/fav.png"; // Fallback to icon if logo fails
               }}
             />
           </SoundLink>
@@ -77,8 +114,8 @@ export default function Header() {
               <SoundLink
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground transition-colors flex items-center ${
-                  location === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-accent/70 hover:text-accent-foreground transition-colors flex items-center ${
+                  location === item.href ? "bg-accent/80 text-accent-foreground" : "text-foreground/80"
                 }`}
               >
                 <item.icon size={16} className="mr-1.5" />
@@ -86,22 +123,44 @@ export default function Header() {
               </SoundLink>
             ))}
             
-            <SoundLink
-              href="/contact"
-              className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#0085B9] transition-colors flex items-center"
-            >
-              <ChevronDown size={16} className="mr-1.5" />
-              {t('header.contact')}
-            </SoundLink>
+            {/* Contact Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#0085B9] transition-colors flex items-center">
+                  <ChevronDown size={16} className="mr-1.5" />
+                  {t('header.contact')}
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[200px]">
+                {contactOptions.map((option) => (
+                  <DropdownMenuItem key={option.name} asChild>
+                    <SoundLink href={option.href} className="flex items-center w-full">
+                      <option.icon size={16} className="mr-2" />
+                      {option.name}
+                    </SoundLink>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            {/* Language Selector */}
+            <div className="ml-2">
+              <LanguageSelector />
+            </div>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00A0E3]"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Button and Language Selector */}
+          <div className="md:hidden flex items-center">
+            <div className="mr-2">
+              <LanguageSelector />
+            </div>
+            <button
+              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00A0E3]"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -113,7 +172,7 @@ export default function Header() {
             animate="open"
             exit="closed"
             variants={mobileMenuVariants}
-            className="md:hidden w-full bg-background border-t"
+            className="md:hidden w-full bg-background/95 backdrop-blur-lg border-t"
           >
             <div className="container mx-auto px-4 py-3">
               <div className="space-y-1">
@@ -123,8 +182,8 @@ export default function Header() {
                       href={item.href}
                       className={`flex items-center px-3 py-3 rounded-md ${
                         location === item.href
-                          ? "bg-accent text-accent-foreground"
-                          : "hover:bg-accent hover:text-accent-foreground"
+                          ? "bg-accent/80 text-accent-foreground"
+                          : "hover:bg-accent/70 hover:text-accent-foreground"
                       }`}
                     >
                       <item.icon size={18} className="mr-2" />
@@ -134,16 +193,28 @@ export default function Header() {
                   </motion.div>
                 ))}
                 
-                <motion.div variants={itemVariants}>
-                  <SoundLink
-                    href="/contact"
-                    className="flex items-center px-3 py-3 mt-4 rounded-md bg-[#00A0E3] text-white"
-                  >
-                    <ChevronDown size={18} className="mr-2" />
-                    <span>{t('header.contact')}</span>
-                    <ArrowRight size={16} className="ml-auto" />
-                  </SoundLink>
-                </motion.div>
+                {/* Contact options in mobile menu */}
+                <div className="mt-4 border-t pt-2">
+                  <h3 className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                    {t('header.contact_us')}
+                  </h3>
+                  {contactOptions.map((option) => (
+                    <motion.div key={option.name} variants={itemVariants}>
+                      <SoundLink
+                        href={option.href}
+                        className={`flex items-center px-3 py-3 rounded-md ${
+                          location === option.href
+                            ? "bg-accent/80 text-accent-foreground"
+                            : "hover:bg-accent/70 hover:text-accent-foreground"
+                        }`}
+                      >
+                        <option.icon size={18} className="mr-2" />
+                        <span>{option.name}</span>
+                        {location === option.href && <ArrowRight size={16} className="ml-auto" />}
+                      </SoundLink>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>

@@ -42,7 +42,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen flex flex-col bg-background">
       {loading && <Preloader />}
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8">
+      <main className="flex-grow container mx-auto px-4 pt-24 md:pt-28">
         {children}
       </main>
       <Footer />
