@@ -2,7 +2,6 @@ import { ReactNode, lazy, Suspense, useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Preloader from "@/components/shared/Preloader";
-import { useLocation } from "wouter";
 
 const Chatbot = lazy(() => import("@/components/chat/Chatbot"));
 
@@ -12,7 +11,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const [loading, setLoading] = useState(true);
-  const [location] = useLocation();
   
   useEffect(() => {
     // Check if this is the first visit to the site during this session
@@ -40,15 +38,11 @@ export default function Layout({ children }: LayoutProps) {
     preloadAssets();
   }, []);
 
-  // Determine if this page should have header padding
-  // Home page with hero section doesn't need top padding
-  const isHomePage = location === '/';
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {loading && <Preloader />}
       <Header />
-      <main className={`flex-grow container mx-auto px-4 ${isHomePage ? '' : 'pt-24 md:pt-28'}`}>
+      <main className="flex-grow container mx-auto px-4 pt-24 md:pt-28">
         {children}
       </main>
       <Footer />

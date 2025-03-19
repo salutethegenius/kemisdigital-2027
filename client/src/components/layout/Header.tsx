@@ -114,7 +114,7 @@ export default function Header() {
               <SoundLink
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-yellow-400/80 hover:text-black transition-colors flex items-center ${
+                className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-accent/70 hover:text-accent-foreground transition-colors flex items-center ${
                   location === item.href ? "bg-accent/80 text-accent-foreground" : "text-foreground/80"
                 }`}
               >
@@ -183,7 +183,7 @@ export default function Header() {
                       className={`flex items-center px-3 py-3 rounded-md ${
                         location === item.href
                           ? "bg-accent/80 text-accent-foreground"
-                          : "hover:bg-yellow-400/80 hover:text-black"
+                          : "hover:bg-accent/70 hover:text-accent-foreground"
                       }`}
                     >
                       <item.icon size={18} className="mr-2" />
@@ -205,7 +205,7 @@ export default function Header() {
                         className={`flex items-center px-3 py-3 rounded-md ${
                           location === option.href
                             ? "bg-accent/80 text-accent-foreground"
-                            : "hover:bg-yellow-400/80 hover:text-black"
+                            : "hover:bg-accent/70 hover:text-accent-foreground"
                         }`}
                       >
                         <option.icon size={18} className="mr-2" />

@@ -20,11 +20,12 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       strictPort: true,
       hmr: {
-        // In Replit, use the correct settings for HMR
-        clientPort: 443,
-        port: 5000,
-        host: '0.0.0.0',
-        protocol: 'wss'
+        // In Replit, we need to use SSL for the WebSocket connection
+        clientPort: isReplEnv ? 443 : 5000,
+        // Use the Replit domain if available, otherwise use default host
+        host: isReplEnv ? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co` : '0.0.0.0',
+        // Use secure WebSockets in Replit, regular WebSockets locally
+        protocol: isReplEnv ? 'wss' : 'ws'
       },
       watch: {
         // Explicitly excluded the node_modules folder for better performance
