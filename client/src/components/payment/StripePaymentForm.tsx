@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
+/**
+ * Props for the StripePaymentForm component
+ * Used to configure payment options and callback functions
+ */
 interface PaymentFormProps {
   planType: 'basic' | 'premium';
   amount: number;

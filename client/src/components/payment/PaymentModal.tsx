@@ -1,8 +1,13 @@
-import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import StripePaymentForm from './StripePaymentForm';
-import StripeProvider from '../stripe/StripeProvider';
+import StripePaymentForm from "./StripePaymentForm";
+import StripeProvider from "../stripe/StripeProvider";
 
+/**
+ * PaymentModal Component
+ * 
+ * This modal handles subscription payments for basic and premium plans
+ * It displays plan information and embeds a Stripe payment form
+ */
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -11,42 +16,57 @@ interface PaymentModalProps {
 }
 
 const PaymentModal = ({ isOpen, onClose, onSuccess, planType }: PaymentModalProps) => {
-  const [amount, setAmount] = useState(0);
-  const [interval, setInterval] = useState<'month' | 'year'>('month');
-
-  // Set plan details based on type
-  useEffect(() => {
-    if (planType === 'basic') {
-      setAmount(45); // Changed from 49 to 45
-    } else if (planType === 'premium') {
-      setAmount(99);
+  // Pricing information based on plan type
+  const plans = {
+    basic: {
+      name: "Basic Plan",
+      monthly: 499.99,
+      yearly: 4999.90,
+      features: [
+        "Up to 5 users",
+        "Basic analytics",
+        "Standard support",
+        "Core features"
+      ]
+    },
+    premium: {
+      name: "Premium Plan",
+      monthly: 999.99,
+      yearly: 9999.90,
+      features: [
+        "Unlimited users",
+        "Advanced analytics",
+        "Priority support",
+        "All features included",
+        "Custom integrations"
+      ]
     }
-  }, [planType]);
-
-  const handleSuccess = (paymentIntentId: string) => {
-    if (onSuccess) {
-      onSuccess(paymentIntentId);
-    }
-    onClose();
   };
+
+  const selectedPlan = plans[planType];
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            Subscribe to {planType === 'basic' ? 'Basic' : 'Premium'} Plan
+            Subscribe to {selectedPlan.name}
           </DialogTitle>
-          <div className="bg-yellow-100 p-3 rounded-md border border-yellow-300 mt-3">
-            <p className="text-md font-bold text-yellow-800">
-              Initial payment: ${250 + amount}
+          <div className="bg-blue-50 p-3 rounded-md border border-blue-200 mt-3">
+            <p className="text-md font-bold text-blue-800">
+              Monthly: ${selectedPlan.monthly.toFixed(2)}/month
             </p>
-            <p className="text-sm text-yellow-700">
-              Includes $250 setup fee + first month (${amount})
+            <p className="text-sm text-blue-700 mb-2">
+              Billed monthly. Annual plan available for savings.
             </p>
-            <p className="text-sm font-semibold text-yellow-800 mt-1">
-              Recurring payment: ${amount}/month
-            </p>
+            <ul className="space-y-1">
+              {selectedPlan.features.map((feature, index) => (
+                <li key={index} className="text-sm text-blue-700 flex">
+                  <span className="mr-2">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
         </DialogHeader>
         
@@ -54,9 +74,9 @@ const PaymentModal = ({ isOpen, onClose, onSuccess, planType }: PaymentModalProp
           <StripeProvider>
             <StripePaymentForm
               planType={planType}
-              amount={amount}
-              interval={interval}
-              onSuccess={handleSuccess}
+              amount={selectedPlan.monthly}
+              interval="month"
+              onSuccess={onSuccess}
               onCancel={onClose}
             />
           </StripeProvider>

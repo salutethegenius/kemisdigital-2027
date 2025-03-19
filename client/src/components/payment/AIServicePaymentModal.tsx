@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import StripeProvider from '../stripe/StripeProvider';
+import { toast } from "@/hooks/use-toast";
 
+/**
+ * AI Service Payment Modal props interface
+ * Extends the standard dialog props with payment-specific properties
+ */
 interface AIServicePaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,16 +24,15 @@ export default function AIServicePaymentModal({
   onClose, 
   onSuccess, 
   serviceName, 
-  servicePrice,
-  serviceDescription
+  servicePrice, 
+  serviceDescription 
 }: AIServicePaymentModalProps) {
-  
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            Purchase {serviceName}
+            Pay for {serviceName}
           </DialogTitle>
           <div className="bg-yellow-100 p-3 rounded-md border border-yellow-300 mt-3">
             <p className="text-md font-bold text-yellow-800">
@@ -61,6 +64,9 @@ export default function AIServicePaymentModal({
   );
 }
 
+/**
+ * Payment form specifically for AI services
+ */
 interface AIServicePaymentFormProps {
   serviceName: string;
   servicePrice: number;
@@ -134,7 +140,7 @@ function AIServicePaymentForm({
         throw new Error('Failed to create payment method');
       }
 
-      // Create one-time payment
+      // Create payment intent for one-time payment
       const response = await fetch('/api/payment/create-payment', {
         method: 'POST',
         headers: {
@@ -142,22 +148,23 @@ function AIServicePaymentForm({
         },
         body: JSON.stringify({
           amount: servicePrice,
-          planType: serviceName, // Using service name as identifier
-          email,
+          planType: 'ai-service',
           name,
-          paymentMethod: paymentMethod.id,
+          email,
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to process payment');
+        throw new Error(errorData.error || 'Failed to create payment');
       }
 
       const { clientSecret, paymentIntentId } = await response.json();
 
       // Confirm payment
-      const { error: confirmationError } = await stripe.confirmCardPayment(clientSecret);
+      const { error: confirmationError } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id
+      });
 
       if (confirmationError) {
         throw new Error(confirmationError.message);
@@ -165,7 +172,7 @@ function AIServicePaymentForm({
 
       toast({
         title: "Payment Successful",
-        description: `Thank you for purchasing ${serviceName}! We'll be in touch shortly to get started.`,
+        description: `Thank you for purchasing ${serviceName}!`,
       });
 
       if (onSuccess) {
@@ -256,7 +263,7 @@ function AIServicePaymentForm({
               Processing...
             </>
           ) : (
-            `Purchase Now`
+            `Pay $${servicePrice}`
           )}
         </Button>
       </div>

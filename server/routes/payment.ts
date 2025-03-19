@@ -1,134 +1,178 @@
-import { Router, Request, Response } from "express";
-import Stripe from "stripe";
+import express, { Request, Response } from 'express';
+import Stripe from 'stripe';
 
-const router = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2023-10-16",
+if (!process.env.STRIPE_SECRET_KEY) {
+  console.error("STRIPE_SECRET_KEY is not defined in environment variables");
+  process.exit(1);
+}
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2023-10-16',
 });
 
-// Create a payment intent for a one-time payment
+const router = express.Router();
+
+/**
+ * Create a one-time payment intent
+ * Used for single purchases or one-time services
+ */
 router.post("/create-payment", async (req: Request, res: Response) => {
   try {
-    const { amount, planType, email, name } = req.body;
+    const { amount, planType, name, email } = req.body;
 
-    // Create a customer
-    const customer = await stripe.customers.create({
-      email,
-      name,
-      metadata: {
-        planType,
-      },
-    });
+    if (!amount || !planType || !name || !email) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
 
     // Create a payment intent
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Stripe uses cents
-      currency: "usd",
-      customer: customer.id,
+      amount: Math.round(amount * 100), // Convert to cents
+      currency: 'usd',
       metadata: {
         planType,
+        name,
+        email,
       },
       receipt_email: email,
+      description: `Payment for ${planType}`,
     });
 
-    res.status(200).json({
+    // Return the client secret
+    res.json({
       clientSecret: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id,
     });
-  } catch (error) {
-    console.error("Payment creation error:", error);
-    res.status(500).json({ error: "Failed to create payment." });
+  } catch (error: any) {
+    console.error('Payment creation error:', error);
+    res.status(500).json({ error: error.message || 'An error occurred while processing your payment' });
   }
 });
 
-// Create a subscription
+/**
+ * Create a subscription
+ * Used for recurring billing plans
+ */
 router.post("/create-subscription", async (req: Request, res: Response) => {
   try {
-    const { email, name, planId, paymentMethod, setupFee = 250 } = req.body;
+    const { name, email, planId, paymentMethod, setupFee } = req.body;
 
-    // Create a customer
-    const customer = await stripe.customers.create({
+    if (!name || !email || !planId || !paymentMethod) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
+
+    // Create or get customer
+    let customer;
+    const existingCustomers = await stripe.customers.list({
       email,
-      name,
-      payment_method: paymentMethod,
+      limit: 1,
+    });
+
+    if (existingCustomers.data.length > 0) {
+      customer = existingCustomers.data[0];
+    } else {
+      customer = await stripe.customers.create({
+        name,
+        email,
+      });
+    }
+
+    // Attach payment method to customer
+    await stripe.paymentMethods.attach(paymentMethod, {
+      customer: customer.id,
+    });
+
+    // Set as default payment method
+    await stripe.customers.update(customer.id, {
       invoice_settings: {
         default_payment_method: paymentMethod,
       },
     });
 
-    // Add the setup fee as a one-time invoice item
-    if (setupFee > 0) {
+    // Add setup fee if applicable
+    let subscription;
+    if (setupFee && setupFee > 0) {
+      // Create a one-time invoice item for the setup fee
       await stripe.invoiceItems.create({
         customer: customer.id,
-        amount: setupFee * 100, // Convert to cents
+        amount: Math.round(setupFee * 100), // Convert to cents
         currency: 'usd',
         description: 'One-time setup fee',
       });
     }
 
-    // Create a subscription
-    const subscription = await stripe.subscriptions.create({
+    // Create subscription
+    subscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [{ price: planId }],
-      payment_behavior: "default_incomplete",
-      payment_settings: {
-        payment_method_types: ["card"],
-        save_default_payment_method: "on_subscription",
-      },
-      expand: ["latest_invoice.payment_intent"],
-      // Add the invoice item to the first invoice
-      add_invoice_items: setupFee > 0 ? [
+      items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'One-time setup fee',
-            },
-            unit_amount: setupFee * 100,
-          },
+          price: planId,
         },
-      ] : undefined,
+      ],
+      payment_behavior: 'default_incomplete',
+      payment_settings: {
+        payment_method_types: ['card'],
+        save_default_payment_method: 'on_subscription',
+      },
+      expand: ['latest_invoice.payment_intent'],
     });
 
-    // @ts-ignore - Stripe types don't properly define the nested expand
+    // @ts-ignore - We know this will exist based on the expand parameter
     const clientSecret = subscription.latest_invoice.payment_intent.client_secret;
 
-    res.status(200).json({
+    res.json({
       subscriptionId: subscription.id,
       clientSecret,
     });
-  } catch (error) {
-    console.error("Subscription creation error:", error);
-    res.status(500).json({ error: "Failed to create subscription." });
+  } catch (error: any) {
+    console.error('Subscription creation error:', error);
+    res.status(500).json({ error: error.message || 'An error occurred while processing your subscription' });
   }
 });
 
-// Create price IDs for our plans
+/**
+ * Create a product in Stripe
+ * For admin use only, typically not exposed to clients
+ */
 router.post("/create-product", async (req: Request, res: Response) => {
   try {
-    const { name, description, amount, interval } = req.body;
-    
-    // Create a product
+    const { name, description, type, amount, interval } = req.body;
+
+    if (!name || !amount || (type === 'subscription' && !interval)) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
+
+    // Create a product first
     const product = await stripe.products.create({
       name,
       description,
     });
-    
-    // Create a price for the product
-    const price = await stripe.prices.create({
-      product: product.id,
-      unit_amount: amount * 100,
-      currency: "usd",
-      recurring: interval ? { interval } : undefined,
-    });
-    
-    res.status(200).json({
+
+    // Create price based on type
+    let price;
+    if (type === 'subscription') {
+      price = await stripe.prices.create({
+        product: product.id,
+        unit_amount: Math.round(amount * 100), // Convert to cents
+        currency: 'usd',
+        recurring: {
+          interval: interval, // 'month' or 'year'
+        },
+      });
+    } else {
+      price = await stripe.prices.create({
+        product: product.id,
+        unit_amount: Math.round(amount * 100), // Convert to cents
+        currency: 'usd',
+      });
+    }
+
+    res.json({
       productId: product.id,
       priceId: price.id,
     });
-  } catch (error) {
-    console.error("Product creation error:", error);
-    res.status(500).json({ error: "Failed to create product." });
+  } catch (error: any) {
+    console.error('Product creation error:', error);
+    res.status(500).json({ error: error.message || 'An error occurred while creating the product' });
   }
 });
 
