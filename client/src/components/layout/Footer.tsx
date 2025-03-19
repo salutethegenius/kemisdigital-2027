@@ -26,7 +26,7 @@ export default function Footer() {
       links: [
         { name: t('header.resources'), href: "/resources" },
         { name: t('header.events'), href: "/events" },
-        { name: t('header.membership'), href: "/membership" },
+        { name: t('header.ai_labs'), href: "/ai-labs" },
       ],
     },
     {

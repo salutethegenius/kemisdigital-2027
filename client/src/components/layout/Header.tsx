@@ -10,7 +10,10 @@ import {
   Code, 
   CreditCard, 
   Newspaper,
-  Calendar
+  Calendar,
+  BarChart,
+  Users,
+  Award
 } from "lucide-react";
 import {
   Sheet,
@@ -67,9 +70,12 @@ export default function Header() {
   const navigation = [
     { name: t('header.home'), href: "/", icon: Home, description: "Return to our homepage" },
     { name: t('header.about'), href: "/about", icon: Info, description: "Learn about our company" },
-    { name: "AI Lab", href: "/services", icon: Sparkles, description: "Explore our AI-powered solutions" },
+    { name: "AI Labs", href: "/ai-labs", icon: Sparkles, description: "Explore our AI-powered solutions" },
     { name: "Web Development", href: "/services/web-app-dev", icon: Code, description: "Custom web and mobile app development" },
     { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard, description: "Secure payment processing and financial solutions" },
+    { name: "Analytics", href: "/analytics", icon: BarChart, description: "Data analytics and visualization solutions" },
+    { name: "Advocacy", href: "/advocacy", icon: Users, description: "Digital advocacy initiatives and programs" },
+    { name: "Membership", href: "/membership", icon: Award, description: "Become a member and access exclusive benefits" },
     { name: t('header.events'), href: "/events", icon: Calendar, description: "Our events and workshops" },
     { name: t('header.latest_news'), href: "/latest-news", icon: Newspaper, description: "Stay updated with our latest news" },
   ];
