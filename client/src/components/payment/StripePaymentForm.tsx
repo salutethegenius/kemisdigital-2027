@@ -11,7 +11,7 @@ import { toast } from "@/hooks/use-toast";
 interface PaymentFormProps {
   planType: 'basic' | 'premium';
   amount: number;
-  interval: 'month' | 'year';
+  interval: 'month' | 'year' | 'once';
   onSuccess?: (paymentIntentId: string) => void;
   onCancel?: () => void;
 }
@@ -23,9 +23,8 @@ const StripePaymentForm = ({ planType, amount, interval, onSuccess, onCancel }: 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   
-  // Calculate total first payment (setup fee + first month)
-  const setupFee = 250; // $250 setup fee
-  const totalInitialPayment = setupFee + amount;
+  // Use one-time payment amount
+  const totalPayment = amount; // $97 one-time setup fee
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

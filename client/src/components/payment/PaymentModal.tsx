@@ -19,26 +19,24 @@ const PaymentModal = ({ isOpen, onClose, onSuccess, planType }: PaymentModalProp
   // Pricing information based on plan type
   const plans = {
     basic: {
-      name: "Basic Plan",
-      monthly: 499.99,
-      yearly: 4999.90,
+      name: "Stripe Setup Package",
+      price: 97,
       features: [
-        "Up to 5 users",
-        "Basic analytics",
-        "Standard support",
-        "Core features"
+        "Stripe Account Creation & Configuration",
+        "Dashboard Access & Training",
+        "Integration Support (if needed)",
+        "One-time fee (no monthly charges)"
       ]
     },
     premium: {
       name: "Premium Plan",
-      monthly: 999.99,
-      yearly: 9999.90,
+      price: 299,
       features: [
-        "Unlimited users",
-        "Advanced analytics",
+        "Everything in Basic package",
+        "Advanced integrations",
         "Priority support",
-        "All features included",
-        "Custom integrations"
+        "Custom payment portal",
+        "Business automation setup"
       ]
     }
   };
@@ -50,14 +48,14 @@ const PaymentModal = ({ isOpen, onClose, onSuccess, planType }: PaymentModalProp
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            Subscribe to {selectedPlan.name}
+            {selectedPlan.name}
           </DialogTitle>
           <div className="bg-blue-50 p-3 rounded-md border border-blue-200 mt-3">
             <p className="text-md font-bold text-blue-800">
-              Monthly: ${selectedPlan.monthly.toFixed(2)}/month
+              One-time Fee: ${selectedPlan.price.toFixed(2)}
             </p>
             <p className="text-sm text-blue-700 mb-2">
-              Billed monthly. Annual plan available for savings.
+              No monthly charges! Simple, one-time setup fee.
             </p>
             <ul className="space-y-1">
               {selectedPlan.features.map((feature, index) => (
@@ -74,8 +72,8 @@ const PaymentModal = ({ isOpen, onClose, onSuccess, planType }: PaymentModalProp
           <StripeProvider>
             <StripePaymentForm
               planType={planType}
-              amount={selectedPlan.monthly}
-              interval="month"
+              amount={selectedPlan.price}
+              interval="once"
               onSuccess={onSuccess}
               onCancel={onClose}
             />

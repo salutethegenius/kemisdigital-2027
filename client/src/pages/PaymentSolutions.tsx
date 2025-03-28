@@ -34,8 +34,8 @@ const PaymentSolutions = () => {
    */
   const handlePaymentSuccess = (paymentIntentId: string) => {
     toast({
-      title: "Subscription Successful",
-      description: `Thank you for subscribing to our ${selectedPlan === 'basic' ? 'Basic' : 'Premium'} plan!`,
+      title: "Payment Successful",
+      description: `Thank you for purchasing our ${selectedPlan === 'basic' ? 'Stripe Setup' : 'Premium'} package!`,
     });
   };
 
