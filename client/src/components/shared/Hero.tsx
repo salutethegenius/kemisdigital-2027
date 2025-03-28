@@ -129,7 +129,7 @@ const OptimizedBackgroundImage = memo(({
         onError={onError}
         loading="eager" // Load immediately as it's above the fold
         decoding="async" // Allow the browser to decode the image asynchronously
-        fetchPriority="high" // Signal high priority for the resource
+        // fetchpriority="high" - removed to avoid React warnings
       />
     </>
   );
@@ -321,7 +321,7 @@ export default function Hero({
                     setBackgroundType('none');
                   }}
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   decoding="async"
                 />
               ) : (
