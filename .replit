@@ -44,7 +44,7 @@ language = "nodejs"
     start = "typescript-language-server --stdio"
 
 [workflows]
-runButton = "Project"
+runButton = "Dev Stack"
 
 [[workflows.workflow]]
 name = "Project"
@@ -145,3 +145,16 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "cd client && npx vite --host 0.0.0.0 --port 5000"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Dev Stack"
+author = 36910130
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd client && VITE_APP_API_URL=http://localhost:3000 npx vite --host 0.0.0.0 --port 5001"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=development tsx watch --clear-screen=false server/index.ts"
