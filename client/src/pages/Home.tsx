@@ -205,7 +205,7 @@ export default function Home() {
               Hear what our clients have to say about their experience working with KemisDigital.
             </p>
           </div>
-          <TestimonialCarousel testimonials={testimonials} autoplay={true} interval={8000} />
+          <TestimonialCarousel testimonials={testimonials} autoplay={false} />
         </div>
       </section>
 

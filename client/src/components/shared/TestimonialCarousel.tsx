@@ -3,15 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
-interface Testimonial {
-  id: number;
-  quote: string;
-  author: string;
-  role: string;
-  company: string;
-  image?: string;
-}
+import { Testimonial } from '@/data/testimonials';
 
 interface TestimonialCarouselProps {
   testimonials: Testimonial[];
@@ -36,29 +28,6 @@ const YouTubeEmbed = memo(({ embedId }: { embedId: string }) => {
 });
 
 YouTubeEmbed.displayName = 'YouTubeEmbed';
-
-// Optimized image component
-const TestimonialImage = memo(({ image, author, className = '' }: { image: string; author: string; className?: string }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-  
-  if (error || !image) return null;
-  
-  return (
-    <div className={`overflow-hidden rounded-full border-2 border-[#00A0E3]/30 dark:border-[#00A0E3]/50 ${className}`}>
-      <img 
-        src={image} 
-        alt={author}
-        className={`w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-        onLoad={() => setLoaded(true)}
-        onError={() => setError(true)}
-        loading="lazy"
-      />
-    </div>
-  );
-});
-
-TestimonialImage.displayName = 'TestimonialImage';
 
 export default function TestimonialCarousel({
   testimonials,
@@ -108,7 +77,7 @@ export default function TestimonialCarousel({
       }
     });
   }, [currentIndex, testimonials]);
-
+  
   const handleNext = useCallback(() => {
     if (!isMounted.current || !testimonials || testimonials.length <= 1) {
       console.log("Next testimonial click ignored - invalid state:", 
@@ -137,6 +106,9 @@ export default function TestimonialCarousel({
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   }, [testimonials, currentIndex]);
 
+  // Disabling auto-advancing to prevent UI confusion
+  // Users can still use the navigation buttons to advance
+  /* Original autoplay code removed:
   useEffect(() => {
     if (!autoplay || isPaused || !isMounted.current || !testimonials || testimonials.length <= 1) return;
 
@@ -146,6 +118,7 @@ export default function TestimonialCarousel({
 
     return () => clearInterval(timer);
   }, [autoplay, interval, handleNext, isPaused, testimonials]);
+  */
 
   if (!testimonials.length) return null;
 
@@ -238,13 +211,16 @@ export default function TestimonialCarousel({
                   </div>
                 )}
                 
-                <div className="flex items-center mt-4 gap-3">
+                <div className="flex items-center mt-4">
                   {currentTestimonial.image && (
-                    <TestimonialImage 
-                      image={currentTestimonial.image} 
-                      author={currentTestimonial.author} 
-                      className="h-12 w-12 sm:h-14 sm:w-14" 
-                    />
+                    <div className="mr-4">
+                      <img 
+                        src={currentTestimonial.image} 
+                        alt={currentTestimonial.author}
+                        className="w-12 h-12 rounded-full object-cover" 
+                        loading="lazy"
+                      />
+                    </div>
                   )}
                   <div>
                     <p className="font-medium">{currentTestimonial.author}</p>
@@ -259,63 +235,46 @@ export default function TestimonialCarousel({
         </AnimatePresence>
       </div>
       
-      <div className="flex items-center justify-between mt-4">
-        <Button 
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (testimonials.length > 1) {
-              console.log("Previous button clicked");
-              handlePrev();
-            }
-          }} 
-          variant="outline" 
-          size="icon" 
-          className={`rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 
-            ${testimonials.length > 1 
-              ? 'hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20 cursor-pointer' 
-              : 'opacity-50 cursor-not-allowed'}`}
+      {/* Carousel navigation */}
+      <div className="flex justify-center mt-4 gap-2">
+        <Button
+          onClick={handlePrev}
+          variant="ghost"
+          size="icon"
+          className={`h-8 w-8 rounded-full ${testimonials.length > 1 
+            ? 'hover:bg-[#00A0E3]/10 hover:text-[#00A0E3] text-foreground dark:text-muted-foreground' 
+            : 'opacity-50 cursor-not-allowed'}`}
           aria-label="Previous testimonial"
           type="button"
           disabled={testimonials.length <= 1}
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          {testimonials.map((testimonial, index) => (
+        
+        {/* Dot indicators */}
+        <div className="flex items-center gap-2">
+          {testimonials.map((_, index) => (
             <button
-              key={testimonial.id}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleDotClick(index);
-              }}
-              type="button"
-              className={`h-2.5 rounded-full transition-all ${
-                index === currentIndex 
-                  ? 'w-5 sm:w-6 bg-[#00A0E3] dark:bg-[#00A0E3]' 
-                  : 'w-2.5 bg-[#00A0E3]/20 dark:bg-[#00A0E3]/40 hover:bg-[#00A0E3]/60'
-              } ${isVideoTestimonial(testimonial.quote) ? 'sm:h-3 sm:w-8' : ''}`}
+              key={index}
+              onClick={() => handleDotClick(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentIndex
+                  ? 'bg-[#00A0E3] w-4'
+                  : 'bg-gray-300 dark:bg-gray-600 hover:bg-[#00A0E3]/50'
+              }`}
               aria-label={`Go to testimonial ${index + 1}`}
-              aria-current={index === currentIndex ? 'true' : 'false'}
+              type="button"
             />
           ))}
         </div>
-        <Button 
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (testimonials.length > 1) {
-              console.log("Next button clicked");
-              handleNext();
-            }
-          }} 
-          variant="outline" 
-          size="icon" 
-          className={`rounded-full h-9 w-9 sm:h-10 sm:w-10 p-0 
-            ${testimonials.length > 1 
-              ? 'hover:bg-[#00A0E3]/10 dark:hover:bg-[#00A0E3]/20 cursor-pointer' 
-              : 'opacity-50 cursor-not-allowed'}`}
+        
+        <Button
+          onClick={handleNext}
+          variant="ghost"
+          size="icon"
+          className={`h-8 w-8 rounded-full ${testimonials.length > 1 
+            ? 'hover:bg-[#00A0E3]/10 hover:text-[#00A0E3] text-foreground dark:text-muted-foreground' 
+            : 'opacity-50 cursor-not-allowed'}`}
           aria-label="Next testimonial"
           type="button"
           disabled={testimonials.length <= 1}
