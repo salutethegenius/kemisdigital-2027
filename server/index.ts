@@ -5,157 +5,113 @@ import { createServer } from "http";
 import cors from 'cors';
 import compression from 'compression';
 import path from 'path';
+import { errorHandler, notFoundHandler } from './middleware/errorHandling';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Improved error handling for uncaught exceptions and unhandled rejections
+// Enhanced error handling for uncaught exceptions and unhandled rejections
 process.on('uncaughtException', (error: Error) => {
-  console.error('[Fatal Error] Uncaught Exception:', error);
-  process.exit(1);
+  console.group('🔴 [FATAL ERROR] Uncaught Exception');
+  console.error('Error Message:', error.message);
+  console.error('Stack Trace:', error.stack);
+  console.error('Date/Time:', new Date().toISOString());
+  console.groupEnd();
+  
+  // In production, we would log to a file or error reporting service here
+  
+  // Exit with error code after a short delay to allow logging to complete
+  setTimeout(() => process.exit(1), 500); 
 });
 
 process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
-  console.error('[Fatal Error] Unhandled Promise Rejection:', reason);
-  process.exit(1);
-});
-
-// Debug logging for environment
-console.log('[Server] Starting with configuration:');
-console.log('[Server] Environment:', process.env.NODE_ENV);
-console.log('[Server] Port:', PORT);
-console.log('[Server] REPL_SLUG:', process.env.REPL_SLUG);
-console.log('[Server] REPL_OWNER:', process.env.REPL_OWNER);
-
-// Enable GZIP compression
-app.use(compression());
-
-// Enhanced cache control and responsive image handling
-app.use((req, res, next) => {
-  // Basic URL parameter parsing for responsive image support
-  if (req.url.includes('images/beachbahamas.jpg') && req.url.includes('?')) {
-    // Extract query parameters for responsive versions
-    // This is a simplified implementation - ideally would use a proper image processing library
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const width = url.searchParams.get('width');
-    const quality = url.searchParams.get('quality');
-    
-    // In a production app, would resize the image based on width parameter
-    // Here we just set appropriate headers for client-side rendering optimization
-    if (width) {
-      res.setHeader('Content-Disposition', `inline; filename="beachbahamas-${width}.jpg"`);
-      res.setHeader('Vary', 'Accept');
-    }
-    
-    // Apply longer cache times for smaller/lower quality versions
-    if (width === '20' || quality === '10') {
-      // Cache placeholders even longer (30 days)
-      res.setHeader('Cache-Control', 'public, max-age=2592000');
-      res.setHeader('Expires', new Date(Date.now() + 2592000000).toUTCString());
-    }
+  console.group('🔴 [FATAL ERROR] Unhandled Promise Rejection');
+  console.error('Reason:', reason instanceof Error ? reason.message : reason);
+  if (reason instanceof Error && reason.stack) {
+    console.error('Stack Trace:', reason.stack);
   }
+  console.error('Promise:', promise);
+  console.error('Date/Time:', new Date().toISOString());
+  console.groupEnd();
   
-  // Set Expires headers for all static assets
-  if (req.url.match(/\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
-    // Cache static assets for 7 days (604800 seconds)
-    res.setHeader('Cache-Control', 'public, max-age=604800');
-    res.setHeader('Expires', new Date(Date.now() + 604800000).toUTCString());
-  }
-  next();
+  // In production, we would log to a file or error reporting service here
+  
+  // Exit with error code after a short delay to allow logging to complete
+  setTimeout(() => process.exit(1), 500);
 });
 
-// Enhanced CORS configuration with better error handling and debugging
-const corsOptions = {
-  origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-    console.log('[CORS] Incoming request from origin:', origin);
-    callback(null, true); // Allow all origins in development
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-  maxAge: 86400 // CORS preflight cache for 24 hours
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-// Health check endpoint with detailed status
+// Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
-    version: process.env.npm_package_version || 'unknown'
-  });
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Graceful shutdown handling
-function gracefulShutdown(server: any) {
-  console.log('\n[Server] Starting graceful shutdown...');
-  server.close(() => {
-    console.log('[Server] Closed remaining connections.');
-    process.exit(0);
-  });
+// Middleware
+app.use(cors({
+  origin: process.env.NODE_ENV === 'development' 
+    ? true // Allow any origin in development
+    : [process.env.FRONTEND_URL || 'https://kemisdigital.com', /\.replit\.app$/], // Restrict in production
+  credentials: true
+}));
+app.use(compression()); // Compress responses
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
 
-  // Force close after 10s
-  setTimeout(() => {
-    console.error('[Server] Could not close connections in time, forcefully shutting down');
-    process.exit(1);
-  }, 10000);
-}
+// Register API routes
+registerRoutes(app);
 
-(async () => {
-  try {
-    console.log('[Server] Starting server initialization...');
+// In development, set up Vite for the React client
+let server: any; // Store server reference for graceful shutdown
 
-    // Set up API routes first
-    registerRoutes(app);
-    const server = createServer(app);
-
-    // Global error handler with improved error response
-    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      const status = err.status || err.statusCode || 500;
-      const message = err.message || "Internal Server Error";
-
-      console.error(`[Error] ${status}: ${message}`);
-      console.error(err.stack);
-
-      res.status(status).json({
-        error: {
-          message: process.env.NODE_ENV === 'development' ? message : 'An error occurred',
-          status,
-          timestamp: new Date().toISOString()
-        }
+if (process.env.NODE_ENV === 'development') {
+  server = createServer(app);
+  
+  setupVite(app, server)
+    .then(() => {
+      server.listen(PORT, '0.0.0.0', () => {
+        console.log(`🚀 Development server running at http://localhost:${PORT}`);
       });
-    });
-
-    if (process.env.NODE_ENV === "development") {
-      console.log('[Server] Setting up Vite in development mode...');
-      await setupVite(app, server);
-    } else {
-      console.log('[Server] Setting up static serving in production mode...');
-      serveStatic(app);
-    }
-
-    server.listen(PORT, "0.0.0.0", () => {
-      console.log(`[Server] 🚀 Server is running at http://0.0.0.0:${PORT}`);
-    });
-
-    // Setup graceful shutdown handlers
-    process.on('SIGTERM', () => gracefulShutdown(server));
-    process.on('SIGINT', () => gracefulShutdown(server));
-
-    server.on('error', (error: any) => {
-      if (error.code === 'EADDRINUSE') {
-        console.error(`[Error] Port ${PORT} is already in use`);
-        process.exit(1);
-      }
-      console.error('[Error] Server error:', error);
+    })
+    .catch((err) => {
+      console.error('Error setting up Vite:', err);
       process.exit(1);
     });
+} else {
+  // In production, serve static files from the build directory
+  serveStatic(app);
+  
+  // Add the 404 handler after static files for any other routes
+  app.use(notFoundHandler);
+  
+  // Start the server
+  server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Production server running on port ${PORT}`);
+  });
+}
 
-  } catch (error) {
-    console.error('[Error] Failed to start server:', error);
-    process.exit(1);
+// Global error handling middleware - must be registered last
+app.use(errorHandler);
+
+// Handle server shutdown gracefully
+function gracefulShutdown() {
+  console.log('Received shutdown signal, closing server...');
+  
+  if (server) {
+    server.close(() => {
+      console.log('Server closed successfully');
+      process.exit(0);
+    });
+    
+    // Force close if it takes too long
+    setTimeout(() => {
+      console.error('Could not close connections in time, forcing shutdown');
+      process.exit(1);
+    }, 10000);
+  } else {
+    console.log('Server not initialized, exiting...');
+    process.exit(0);
   }
-})();
+}
+
+// Register shutdown handlers
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);

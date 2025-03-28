@@ -126,7 +126,7 @@ export default function Header() {
             {/* Contact Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#0085B9] transition-colors flex items-center">
+                <button className="ml-4 px-4 py-2 text-sm font-semibold rounded-md bg-[#00A0E3] text-white hover:bg-[#F7BE00] hover:text-black transition-colors flex items-center">
                   <ChevronDown size={16} className="mr-1.5" />
                   {t('header.contact')}
                 </button>
