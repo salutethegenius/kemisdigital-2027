@@ -2,12 +2,28 @@
 (function() {
   // Check if visitor has seen the popup before
   function hasVisitedBefore() {
-    return localStorage.getItem('kemisDigital_firstVisit') === 'true';
+    try {
+      return localStorage.getItem('kemisDigital_firstVisit') === 'true' || 
+             document.cookie.indexOf('kemisDigital_firstVisit=true') !== -1;
+    } catch (e) {
+      // Fallback if localStorage is not available
+      return document.cookie.indexOf('kemisDigital_firstVisit=true') !== -1;
+    }
   }
 
   // Mark as visited
   function markAsVisited() {
-    localStorage.setItem('kemisDigital_firstVisit', 'true');
+    try {
+      localStorage.setItem('kemisDigital_firstVisit', 'true');
+    } catch (e) {
+      // Fallback to cookies if localStorage fails
+      console.warn('LocalStorage not available, using cookies instead');
+    }
+    
+    // Always set cookie as backup
+    const expiryDate = new Date();
+    expiryDate.setMonth(expiryDate.getMonth() + 1); // Cookie expires in 1 month
+    document.cookie = `kemisDigital_firstVisit=true; expires=${expiryDate.toUTCString()}; path=/`;
   }
 
   // Create popup HTML
