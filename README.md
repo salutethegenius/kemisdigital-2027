@@ -1,6 +1,21 @@
-# KemisDigital Support Files
+# KemisDigital - Digital Marketing & Software Solutions
 
-These files contain important configuration files and environment variables needed to run the KemisDigital project locally that weren't included in the GitHub repository.
+KemisDigital is a comprehensive digital marketing and software development platform designed to empower Startups, NGOs, and Tourism sectors through intelligent technological solutions. The platform delivers dynamic web applications with integrated services and sophisticated user experiences.
+
+## Tech Stack:
+- React with TypeScript
+- Shadcn UI Components
+- OpenAI API Integration
+- Stripe Payment Integration
+- EmailJS for Contact Form
+- Responsive web design
+- Modular component architecture
+- Tailwind CSS for styling and animations
+
+## Recent Updates:
+- Added Payment Solutions page with Stripe integration for businesses in The Bahamas
+- Updated payment processing to use one-time $97 setup fee model
+- Implemented comprehensive pricing information including transaction fees
 
 ## File Contents:
 
@@ -30,3 +45,20 @@ The project uses a PostgreSQL database hosted on Neon. The connection URL is inc
 ## Environment Variables:
 
 Make sure to replace any placeholders in the environment files with your actual API keys and credentials if needed.
+
+## Payment Solutions
+
+The Payment Solutions page provides information about Stripe integration services for businesses in The Bahamas:
+
+- **One-time Setup Fee**: $97 (not a monthly subscription)
+- **Transaction Fees**: 6.5% per transaction
+- **Volume Discounts**: Available for businesses processing larger amounts
+- **Features**:
+  - Stripe Account Creation & Configuration
+  - Dashboard Access & Training
+  - Integration Support
+  - ITIN Assistance for Tax Compliance
+  
+To enable the payment functionality, you'll need to add your Stripe API keys to the environment variables in the client.env file:
+- `VITE_STRIPE_PUBLISHABLE_KEY`: Your Stripe publishable key
+- `VITE_STRIPE_SECRET_KEY`: Your Stripe secret key (server-side only)
