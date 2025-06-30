@@ -18,19 +18,24 @@ const preloadSounds = () => {
     try {
       const audio = new Audio();
       audio.src = `/sounds/${sound}.mp3`;
-      audio.preload = 'auto';
+      audio.preload = 'metadata'; // Changed from 'auto' to reduce initial load
       audio.volume = 0.3;
-      audioCache[sound] = audio;
       
-      // Add debugging logs
-      console.log(`Preloaded sound: ${sound}`);
-      
-      // Log any errors
-      audio.addEventListener('error', (e) => {
-        console.error(`Error loading sound: ${sound}`, e);
+      // Only add to cache after successful load
+      audio.addEventListener('canplaythrough', () => {
+        audioCache[sound] = audio;
+        console.log(`Successfully loaded sound: ${sound}`);
       });
+      
+      // Handle errors gracefully
+      audio.addEventListener('error', (e) => {
+        console.warn(`Could not load sound: ${sound}. Audio effects for this sound will be disabled.`);
+        audioCache[sound] = null;
+      });
+      
     } catch (error) {
-      console.error(`Failed to preload sound: ${sound}`, error);
+      console.warn(`Failed to initialize sound: ${sound}`, error);
+      audioCache[sound] = null;
     }
   });
 };
@@ -44,8 +49,9 @@ export function useSoundEffects() {
   
   // Preload all sounds on first hook initialization
   useEffect(() => {
-    // Make sure this only runs once
-    if (!audioCache.click && !audioCache.hover && !audioCache.success && !audioCache.toggle) {
+    // Make sure this only runs once and only if sounds aren't already loading
+    const hasAnySounds = Object.values(audioCache).some(audio => audio !== null);
+    if (!hasAnySounds) {
       console.log('Initializing sound system...');
       preloadSounds();
     }

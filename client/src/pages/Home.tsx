@@ -46,21 +46,38 @@ export default function Home() {
 
   // First visit popup
   useEffect(() => {
-    // Check if this is the user's first visit
-    const hasVisitedBefore = localStorage.getItem('kemisDigital_firstVisit') === 'true';
-    
-    if (!hasVisitedBefore) {
-      // Show the popup with a slight delay for better UX
-      setTimeout(() => {
-        setShowFirstVisitPopup(true);
-      }, 1500);
+    try {
+      // Check if this is the user's first visit using both localStorage and cookies for reliability
+      const hasVisitedStorage = localStorage.getItem('kemisDigital_firstVisit') === 'true';
+      const hasVisitedCookie = document.cookie.indexOf('kemisDigital_firstVisit=true') !== -1;
+      
+      if (!hasVisitedStorage && !hasVisitedCookie) {
+        // Show the popup with a slight delay for better UX
+        const timer = setTimeout(() => {
+          setShowFirstVisitPopup(true);
+        }, 1500);
+        
+        return () => clearTimeout(timer);
+      }
+    } catch (error) {
+      console.warn('Error checking first visit status:', error);
     }
   }, []);
 
   const handleCloseFirstVisitPopup = () => {
     setShowFirstVisitPopup(false);
-    // Mark as visited in localStorage
-    localStorage.setItem('kemisDigital_firstVisit', 'true');
+    
+    try {
+      // Mark as visited in localStorage
+      localStorage.setItem('kemisDigital_firstVisit', 'true');
+    } catch (error) {
+      console.warn('LocalStorage not available, using cookies instead');
+    }
+    
+    // Always set cookie as backup
+    const expiryDate = new Date();
+    expiryDate.setMonth(expiryDate.getMonth() + 1);
+    document.cookie = `kemisDigital_firstVisit=true; expires=${expiryDate.toUTCString()}; path=/`;
   };
 
   useEffect(() => {

@@ -8,14 +8,27 @@ interface FirstVisitPopupProps {
 }
 
 export default function FirstVisitPopup({ onClose }: FirstVisitPopupProps) {
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
+    <motion.div 
+      className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={handleBackdropClick}
+    >
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-md w-full relative"
+        onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
@@ -29,6 +42,10 @@ export default function FirstVisitPopup({ onClose }: FirstVisitPopupProps) {
             src="/images/logo.png"
             alt="KemisDigital Logo"
             className="w-24 h-auto mb-4"
+            onError={(e) => {
+              console.warn('Logo failed to load');
+              e.currentTarget.style.display = 'none';
+            }}
           />
           <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Welcome to KemisDigital!</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -43,7 +60,7 @@ export default function FirstVisitPopup({ onClose }: FirstVisitPopupProps) {
           <div className="flex gap-3">
             <Link href="/services">
               <button
-                className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white px-4 py-2 rounded-md"
+                className="bg-[#00A0E3] hover:bg-[#00A0E3]/90 text-white px-4 py-2 rounded-md transition-colors"
                 onClick={onClose}
               >
                 Explore Now
@@ -51,13 +68,13 @@ export default function FirstVisitPopup({ onClose }: FirstVisitPopupProps) {
             </Link>
             <button
               onClick={onClose}
-              className="border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 rounded-md"
+              className="border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 rounded-md transition-colors"
             >
               Maybe Later
             </button>
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
