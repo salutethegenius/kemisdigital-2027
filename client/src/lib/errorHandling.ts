@@ -172,7 +172,42 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
   logError(appError);
 }
 
-// Disabled error handling to prevent console spam
 export function setupGlobalErrorHandling() {
-  // Global error handling disabled to prevent console spam
+  // Handle unhandled promise rejections to prevent console spam
+  window.addEventListener('unhandledrejection', (event) => {
+    // Prevent the default behavior (logging to console)
+    event.preventDefault();
+    
+    // Only log critical errors, ignore fetch/network failures
+    const reason = event.reason;
+    const reasonStr = String(reason);
+    
+    if (reasonStr.includes('fetch') || 
+        reasonStr.includes('NetworkError') ||
+        reasonStr.includes('Failed to fetch') ||
+        reasonStr.includes('ERR_NETWORK') ||
+        (reason instanceof TypeError && reasonStr.includes('fetch'))) {
+      // Silently ignore all fetch-related errors
+      return;
+    }
+    
+    // Log only genuine application errors
+    console.warn('Application error:', reason);
+  });
+
+  // Handle global JavaScript errors
+  window.addEventListener('error', (event) => {
+    // Ignore network-related errors
+    if (event.message && (
+        event.message.includes('fetch') ||
+        event.message.includes('NetworkError') ||
+        event.message.includes('Failed to fetch') ||
+        event.message.includes('ERR_NETWORK')
+    )) {
+      event.preventDefault();
+      return;
+    }
+    
+    console.warn('JavaScript error:', event.error);
+  });
 }

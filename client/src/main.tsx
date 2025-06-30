@@ -6,6 +6,7 @@ import "./i18n";
 import "./index.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./hooks/use-theme";
+import { setupGlobalErrorHandling } from "./lib/errorHandling";
 
 // Eager load only the Home component
 import Home from "./pages/Home";
@@ -57,6 +58,9 @@ function App() {
     </StrictMode>
   );
 }
+
+// Setup global error handling to suppress fetch errors
+setupGlobalErrorHandling();
 
 // Mount the app
 const container = document.getElementById("root");
