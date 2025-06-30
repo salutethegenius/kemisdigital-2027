@@ -80,11 +80,11 @@ No text before or after. Format must be exactly:
 Ensure response contains only a valid JSON array.`;
 
         const response = await getChatbotResponse(prompt);
-        
+
         if (!response) {
           throw new Error("Empty response received from AI service");
         }
-        
+
         try {
           // Remove any potential text before or after the JSON array
           const jsonMatch = response.match(/^\[[\s\S]*\]$/);
