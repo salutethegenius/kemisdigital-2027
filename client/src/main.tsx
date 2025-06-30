@@ -7,7 +7,7 @@ import "./i18n";
 import "./index.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./hooks/use-theme";
-import { SoundProvider } from "./hooks/use-sound-effects";
+import { SoundProvider } from "./hooks/use-sound-effects-new";
 
 // Eager load only the Home component
 import Home from "./pages/Home";
