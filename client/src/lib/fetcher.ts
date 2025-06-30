@@ -1,31 +1,38 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+/**
+ * Simple fetcher for external APIs (like Stripe)
+ */
+export async function fetcher<T>(
+  url: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const config: RequestInit = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    ...options,
+  };
 
-export function getApiUrl(): string {
-  return API_BASE_URL;
-}
-
-export async function fetcher(url: string): Promise<any> {
   try {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      timeout: 10000, // 10 second timeout
-    });
+    const response = await fetch(url, config);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      let errorMessage: string;
+
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.error || errorJson.message || `HTTP ${response.status}`;
+      } catch {
+        errorMessage = errorText || `HTTP ${response.status}: ${response.statusText}`;
+      }
+
+      throw new Error(errorMessage);
     }
 
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
-    // Don't log network errors to avoid console spam
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      // Silently fail for fetch errors - return empty data instead
-      return null;
-    }
-    throw error;
+    throw error as Error;
   }
 }
-
-export default fetcher;
