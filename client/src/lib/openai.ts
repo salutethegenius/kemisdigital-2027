@@ -41,8 +41,18 @@ export async function getChatbotResponse(message: string): Promise<string> {
       response_format: { type: "json_object" },
     });
 
-    const content = JSON.parse(response.choices[0].message.content) as ChatResponse;
-    return content.message;
+    const rawContent = response.choices[0]?.message?.content;
+    if (!rawContent) {
+      throw new Error("No content received from API");
+    }
+    
+    try {
+      const content = JSON.parse(rawContent) as ChatResponse;
+      return content.message || "I apologize, but I couldn't generate a proper response.";
+    } catch (parseError) {
+      console.warn("Failed to parse JSON response, returning raw content:", parseError);
+      return rawContent;
+    }
   } catch (error) {
     console.error("Error getting chatbot response:", error);
     if (error instanceof Error && error.message.includes("API key")) {

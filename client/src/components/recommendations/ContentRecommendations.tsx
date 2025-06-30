@@ -60,6 +60,14 @@ export default function ContentRecommendations() {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
+        // Check if OPENAI_API_KEY is available
+        if (!import.meta.env.VITE_OPENAI_API_KEY) {
+          console.warn("OpenAI API key not available, using fallback recommendations");
+          setRecommendations(fallbackRecommendations);
+          setIsLoading(false);
+          return;
+        }
+
         const prompt = `Return ONLY a raw JSON array of 3 AI marketing recommendations for a user interested in ${userInterests.join(", ")}.
 No text before or after. Format must be exactly:
 [
