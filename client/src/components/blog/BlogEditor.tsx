@@ -172,4 +172,3 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
     </form>
   );
 }
-```This code fixes a potential React hook error by removing an unused import and ensures the onSuccess callback is called correctly.
