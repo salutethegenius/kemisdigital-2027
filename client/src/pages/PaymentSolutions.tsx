@@ -57,12 +57,14 @@ const PaymentSolutions = () => {
         />
         
         {/* Payment Modal */}
-        <PaymentModal 
-          isOpen={isPaymentModalOpen}
-          onClose={() => setIsPaymentModalOpen(false)}
-          onSuccess={handlePaymentSuccess}
-          planType={selectedPlan}
-        />
+        <StripeProvider>
+          <PaymentModal 
+            isOpen={isPaymentModalOpen}
+            onClose={() => setIsPaymentModalOpen(false)}
+            onSuccess={handlePaymentSuccess}
+            planType={selectedPlan}
+          />
+        </StripeProvider>
         
         <div className="container mx-auto px-4 py-12">
           <motion.div
