@@ -19,6 +19,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const WebAppDev = lazy(() => import("./pages/WebAppDev"));
 const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
 const Resources = lazy(() => import("./pages/Resources"));
+const Meet = lazy(() => import("./pages/Meet"));
 
 // Loading component
 const LoadingSpinner = () => (

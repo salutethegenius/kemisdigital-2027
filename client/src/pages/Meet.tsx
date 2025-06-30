@@ -89,6 +89,8 @@ export default function Meet() {
           <p>For the best experience, use Chrome or Firefox browsers.</p>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }
