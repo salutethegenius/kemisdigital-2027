@@ -21,14 +21,11 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       strictPort: true,
       // Allow all hosts in Replit environment and specific domain
-      allowedHosts: isReplEnv ? 'all' : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev'],
-      hmr: {
-        // In Replit, we need to use SSL for the WebSocket connection
-        clientPort: isReplEnv ? 443 : 5000,
-        // Use the current Replit domain format
-        host: isReplEnv ? (process.env.REPLIT_DEV_DOMAIN || 'localhost') : '0.0.0.0',
-        // Use secure WebSockets in Replit, regular WebSockets locally
-        protocol: isReplEnv ? 'wss' : 'ws'
+      allowedHosts: (isReplEnv ? true : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev']) as true | string[],
+      hmr: isReplEnv ? false : {
+        clientPort: 5000,
+        host: '0.0.0.0',
+        protocol: 'ws'
       },
       watch: {
         // Explicitly excluded the node_modules folder for better performance
