@@ -12,6 +12,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import "./i18n";
 import ErrorBoundary from "./components/ErrorBoundary";
 
+// Global unhandled rejection handler to prevent console spam
+window.addEventListener('unhandledrejection', (event) => {
+  event.preventDefault(); // Prevent default browser behavior
+  // Silently handle unhandled rejections
+});
+
 // Eager load only the Home component
 import Home from "./pages/Home";
 
@@ -41,9 +47,7 @@ function App() {
             revalidateOnFocus: false,
             dedupingInterval: 10000,
             shouldRetryOnError: false,
-            onError: () => {
-              // Silent error handling - no console logs to prevent loops
-            }
+            errorRetryCount: 0
           }}
         >
           <Router>
