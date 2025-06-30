@@ -32,7 +32,7 @@ language = "nodejs"
     start = "typescript-language-server --stdio"
 
 [workflows]
-runButton = "Stable Dev"
+runButton = "Clean Deploy Prep"
 
 [[workflows.workflow]]
 name = "Project"
@@ -114,13 +114,25 @@ task = "shell.exec"
 args = "cd client && VITE_API_URL=http://localhost:5000 npx vite --host 0.0.0.0 --port 3000"
 
 [[workflows.workflow]]
-name = "Stable Dev"
+name = "Clean Deploy Prep"
 author = 36910130
-mode = "parallel"
+mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "NODE_ENV=development node --loader tsx server/index.ts"
+args = 'pkill -f "tsx\|vite\|node" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=development node --loader tsx server/index.ts &"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
