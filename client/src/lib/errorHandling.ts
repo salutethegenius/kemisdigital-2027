@@ -172,10 +172,7 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
   logError(appError);
 }
 
-// Minimal error handling setup
+// Disabled error handling to prevent console spam
 export function setupGlobalErrorHandling() {
-  // Only log unhandled promise rejections
-  window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled promise rejection:', event.reason);
-  });
+  // Global error handling disabled to prevent console spam
 }
