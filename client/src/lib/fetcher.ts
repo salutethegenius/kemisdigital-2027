@@ -228,21 +228,6 @@ export const fetcher = async (url: string, options: RequestInit = {}) => {
     });
 
     throw appError;
-  } catch (unexpectedError) {
-    // Catch any unexpected errors that might cause unhandled rejections
-    const fallbackError = createError('Unexpected fetcher error', {
-      code: 'CLIENT_NETWORK_ERROR',
-      context: {
-        url: fullUrl,
-        requestId,
-        unexpectedError: unexpectedError instanceof Error ? unexpectedError.message : String(unexpectedError)
-      },
-      cause: unexpectedError instanceof Error ? unexpectedError : undefined
-    });
-
-    logError(fallbackError, 'error');
-    throw fallbackError;
-  }
 }
 
 // Map HTTP status codes to our error codes

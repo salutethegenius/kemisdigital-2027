@@ -15,6 +15,43 @@ import Preloader from "./components/shared/Preloader";
 import { logError, createError } from "./lib/errorHandling";
 import ErrorBoundary from "./components/ErrorBoundary";
 
+// Global error handlers to prevent unhandled promise rejections
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('🔴 Unhandled Promise Rejection:', event.reason);
+  
+  // Convert to our standardized error format
+  const appError = createError('Unhandled Promise Rejection', {
+    code: 'CLIENT_UNHANDLED_REJECTION',
+    context: {
+      reason: event.reason instanceof Error ? event.reason.message : String(event.reason),
+      stack: event.reason instanceof Error ? event.reason.stack : undefined
+    },
+    cause: event.reason instanceof Error ? event.reason : undefined
+  });
+  
+  logError(appError, 'error');
+  
+  // Prevent the default unhandled rejection behavior
+  event.preventDefault();
+});
+
+window.addEventListener('error', (event) => {
+  console.error('🔴 Global Error:', event.error);
+  
+  const appError = createError('Global JavaScript Error', {
+    code: 'CLIENT_GLOBAL_ERROR',
+    context: {
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+      message: event.message
+    },
+    cause: event.error
+  });
+  
+  logError(appError, 'error');
+});
+
 // Eager load only the Home component for fast initial load
 import Home from "./pages/Home";
 
