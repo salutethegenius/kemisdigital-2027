@@ -15,9 +15,7 @@ import Preloader from "./components/shared/Preloader";
 import { logError, createError } from "./lib/errorHandling";
 import ErrorBoundary from "./components/ErrorBoundary";
 
-// Setup global error handling
-import { setupGlobalErrorHandling } from "./lib/errorHandling";
-setupGlobalErrorHandling();
+// Global error handling setup will be done after React renders
 
 // Eager load only the Home component for fast initial load
 import Home from "./pages/Home";
@@ -107,17 +105,8 @@ createRoot(document.getElementById("root")!).render(
             revalidateOnFocus: false, // Disable revalidation on window focus
             revalidateIfStale: true,
             dedupingInterval: 10000, // Dedupe requests within 10 seconds
-            onError: (error, key) => {
-              // Handle SWR errors globally
-              const appError = createError('SWR Request Failed', {
-                code: 'CLIENT_SWR_ERROR',
-                context: {
-                  key,
-                  error: error instanceof Error ? error.message : String(error)
-                },
-                cause: error instanceof Error ? error : undefined
-              });
-              logError(appError, 'error');
+            onError: (error) => {
+              console.warn('SWR Error:', error instanceof Error ? error.message : String(error));
             }
           }}
         >
