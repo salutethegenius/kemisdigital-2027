@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useSound } from '../../hooks/use-sound-effects';
+// Removed sound effects import - sounds removed per user request
 
 interface AnimatedTitleProps {
   className?: string;
@@ -54,7 +54,7 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
   const containerRef = useRef<HTMLDivElement>(null);
   const containerControls = useAnimationControls();
   const [letterHovering, setLetterHovering] = useState<number | null>(null);
-  const { play } = useSound(); // Using our sound hook
+  // Sound effects removed per user request
   
   // Calculate responsive scale based on container width
   useEffect(() => {
@@ -78,17 +78,15 @@ export default function EnhancedAnimatedTitle({ className = "" }: AnimatedTitleP
   useEffect(() => {
     const timeout = setTimeout(() => {
       containerControls.start("pulse");
-      // Play a subtle sound when the animation starts
-      play("click");
     }, 2000);
     
     return () => clearTimeout(timeout);
-  }, [containerControls, play]);
+  }, [containerControls]);
 
   // Function to handle hover start
   const handleHoverStart = (index: number) => {
     setLetterHovering(index);
-    play("hover"); // Play hover sound effect
+    // Sound effects removed per user request
   };
 
   // Function to handle hover end

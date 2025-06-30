@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { getApiUrl } from "@/lib/fetcher";
+// Removed getApiUrl import - not needed in static site
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -56,7 +56,7 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
     try {
       setIsSubmitting(true);
       const endpoint = postId ? `/api/blog/posts/${postId}` : "/api/blog/posts";
-      const url = getApiUrl() + endpoint;
+      const url = endpoint; // Static site - no API server needed
       const method = postId ? "PUT" : "POST";
 
       console.log(`Submitting to: ${url}`);
