@@ -1,3 +1,4 @@
+
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
@@ -22,7 +23,6 @@ window.addEventListener('error', (event) => {
   event.preventDefault();
 });
 
-// Handle React errors gracefully
 window.addEventListener('rejectionhandled', (event) => {
   console.log('[HANDLED] Promise rejection handled:', event.reason);
 });
