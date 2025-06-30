@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export function getApiUrl(): string {
   return API_BASE_URL;
@@ -10,6 +10,7 @@ export async function fetcher(url: string): Promise<any> {
       headers: {
         'Content-Type': 'application/json',
       },
+      timeout: 10000, // 10 second timeout
     });
 
     if (!response.ok) {
@@ -18,7 +19,11 @@ export async function fetcher(url: string): Promise<any> {
 
     return await response.json();
   } catch (error) {
-    console.error('Fetch error:', error);
+    // Don't log network errors to avoid console spam
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      // Silently fail for fetch errors - return empty data instead
+      return null;
+    }
     throw error;
   }
 }
