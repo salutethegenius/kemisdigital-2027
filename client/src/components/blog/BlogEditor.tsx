@@ -1,51 +1,33 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-// Removed getApiUrl import - not needed in static site
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
   content: z.string().min(1, "Content is required"),
   excerpt: z.string().optional(),
-  category_id: z.string().optional(),
-  status: z.enum(["draft", "published"]),
-  featured_image: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  status: z.enum(["draft", "published"]).default("draft"),
 });
 
 type BlogPostForm = z.infer<typeof blogPostSchema>;
 
 interface BlogEditorProps {
+  post?: BlogPostForm;
   postId?: number;
   onSuccess?: () => void;
 }
 
-export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
-  const { toast } = useToast();
-  const [categories, setCategories] = useState<string[]>([]);
+export default function BlogEditor({ post, postId, onSuccess }: BlogEditorProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Mock data to prevent API calls during development
-  const tags = [];
-  const post = null;
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<BlogPostForm>({
+  const { toast } = useToast();
+  
+  const form = useForm<BlogPostForm>({
     resolver: zodResolver(blogPostSchema),
     defaultValues: post || {
       status: "draft",
@@ -55,36 +37,24 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   const onSubmit = async (data: BlogPostForm) => {
     try {
       setIsSubmitting(true);
-      const endpoint = postId ? `/api/blog/posts/${postId}` : "/api/blog/posts";
-      const url = endpoint; // Static site - no API server needed
-      const method = postId ? "PUT" : "POST";
-
-      console.log(`Submitting to: ${url}`);
-      const response = await fetch(url, {
-        method,
-        headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error("Failed to save post");
-
+      
+      // Static site mode - blog functionality disabled
+      console.log("Blog post data:", data);
+      
       toast({
-        title: "Success",
-        description: `Post ${postId ? "updated" : "created"} successfully`,
+        title: "Blog Feature Coming Soon",
+        description: "Blog functionality will be available in a future update.",
       });
 
       if (onSuccess) {
         onSuccess();
       }
     } catch (error) {
+      console.error("Error:", error);
       toast({
-        title: "Error",
-        description: "Failed to save post",
         variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -92,83 +62,54 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div>
-        <Input
-          placeholder="Post Title"
-          {...register("title")}
-          className={errors.title ? "border-destructive" : ""}
-        />
-        {errors.title && (
-          <p className="text-sm text-destructive mt-1">{errors.title.message}</p>
-        )}
-      </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>{postId ? "Edit Post" : "Create New Post"}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <Input 
+              placeholder="Post title"
+              {...form.register("title")}
+            />
+            {form.formState.errors.title && (
+              <p className="text-red-500 text-sm mt-1">
+                {form.formState.errors.title.message}
+              </p>
+            )}
+          </div>
 
-      <div>
-        <Textarea
-          placeholder="Post Content"
-          {...register("content")}
-          className={`min-h-[200px] ${errors.content ? "border-destructive" : ""}`}
-        />
-        {errors.content && (
-          <p className="text-sm text-destructive mt-1">
-            {errors.content.message}
-          </p>
-        )}
-      </div>
+          <div>
+            <Textarea 
+              placeholder="Post excerpt (optional)"
+              {...form.register("excerpt")}
+            />
+          </div>
 
-      <div>
-        <Textarea
-          placeholder="Excerpt (optional)"
-          {...register("excerpt")}
-          className="min-h-[100px]"
-        />
-      </div>
+          <div>
+            <Textarea 
+              placeholder="Post content"
+              rows={10}
+              {...form.register("content")}
+            />
+            {form.formState.errors.content && (
+              <p className="text-red-500 text-sm mt-1">
+                {form.formState.errors.content.message}
+              </p>
+            )}
+          </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Select {...register("category_id")}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories?.map((category: any) => (
-                <SelectItem key={category.id} value={category.id.toString()}>
-                  {category.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Select {...register("status")}>
-            <SelectTrigger>
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="draft">Draft</SelectItem>
-              <SelectItem value="published">Published</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      <div>
-        <Input
-          placeholder="Featured Image URL (optional)"
-          {...register("featured_image")}
-        />
-      </div>
-
-      <div className="flex justify-end space-x-4">
-        <Button type="button" variant="outline">
-          Cancel
-        </Button>
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Saving..." : "Save Post"}
-        </Button>
-      </div>
-    </form>
+          <div className="flex gap-4">
+            <Button 
+              type="submit" 
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Saving..." : postId ? "Update Post" : "Create Post"}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
