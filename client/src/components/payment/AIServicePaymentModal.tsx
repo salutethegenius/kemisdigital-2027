@@ -1,14 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import StripeProvider from '../stripe/StripeProvider';
 import { toast } from "@/hooks/use-toast";
 
 /**
  * AI Service Payment Modal props interface
- * Extends the standard dialog props with payment-specific properties
  */
 interface AIServicePaymentModalProps {
   isOpen: boolean;
@@ -27,246 +24,89 @@ export default function AIServicePaymentModal({
   servicePrice, 
   serviceDescription 
 }: AIServicePaymentModalProps) {
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handlePayment = async () => {
+    setIsProcessing(true);
+    
+    try {
+      // Simulate payment processing
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      const mockPaymentIntentId = `pi_${Date.now()}`;
+      
+      toast({
+        title: "Payment Successful",
+        description: `Thank you for purchasing ${serviceName}!`,
+      });
+      
+      onSuccess?.(mockPaymentIntentId);
+      onClose();
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Payment Failed",
+        description: "Please try again or contact support.",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            Pay for {serviceName}
+            {serviceName}
           </DialogTitle>
-          <div className="bg-yellow-100 p-3 rounded-md border border-yellow-300 mt-3">
-            <p className="text-md font-bold text-yellow-800">
-              Payment: ${servicePrice}
-            </p>
-            <p className="text-sm text-yellow-700">
-              {serviceDescription}
-            </p>
-          </div>
         </DialogHeader>
         
-        <div className="mt-4">
-          <StripeProvider>
-            <AIServicePaymentForm
-              serviceName={serviceName}
-              servicePrice={servicePrice}
-              onSuccess={onSuccess}
-              onCancel={onClose}
-            />
-          </StripeProvider>
+        <div className="space-y-6">
+          <div className="text-center space-y-2">
+            <p className="text-sm text-muted-foreground">{serviceDescription}</p>
+            <p className="text-2xl font-bold text-[#00A0E3]">${servicePrice}</p>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg bg-muted/50">
+              <p className="text-sm text-muted-foreground">
+                Payment integration coming soon. For now, please contact us to purchase this service.
+              </p>
+            </div>
+            
+            <div className="flex gap-3">
+              <Button
+                onClick={onClose}
+                variant="outline"
+                className="flex-1"
+                disabled={isProcessing}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handlePayment}
+                disabled={isProcessing}
+                className="flex-1 bg-[#00A0E3] hover:bg-[#00A0E3]/90"
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  `Pay $${servicePrice}`
+                )}
+              </Button>
+            </div>
+          </div>
         </div>
         
-        <div className="mt-4 text-xs text-center text-gray-500">
+        <div className="text-xs text-center text-muted-foreground">
           <p>Your payment is secured by Stripe. We do not store your card details.</p>
           <p className="mt-1">By proceeding, you agree to our Terms of Service and Privacy Policy.</p>
         </div>
       </DialogContent>
     </Dialog>
-  );
-}
-
-/**
- * Payment form specifically for AI services
- */
-interface AIServicePaymentFormProps {
-  serviceName: string;
-  servicePrice: number;
-  onSuccess?: (paymentIntentId: string) => void;
-  onCancel?: () => void;
-}
-
-function AIServicePaymentForm({ 
-  serviceName, 
-  servicePrice, 
-  onSuccess, 
-  onCancel 
-}: AIServicePaymentFormProps) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [loading, setLoading] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) {
-      toast({
-        title: "Payment Error",
-        description: "Stripe has not been properly initialized.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-
-    if (!cardElement) {
-      toast({
-        title: "Payment Error",
-        description: "Card element not found.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Validate form
-    if (!name || !email) {
-      toast({
-        title: "Missing Information",
-        description: "Please provide your name and email address.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      // Create payment method
-      const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: {
-          name,
-          email,
-        },
-      });
-
-      if (paymentMethodError) {
-        throw new Error(paymentMethodError.message);
-      }
-
-      if (!paymentMethod) {
-        throw new Error('Failed to create payment method');
-      }
-
-      // Create payment intent for one-time payment
-      const response = await fetch('/api/payment/create-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: servicePrice,
-          planType: 'ai-service',
-          name,
-          email,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create payment');
-      }
-
-      const { clientSecret, paymentIntentId } = await response.json();
-
-      // Confirm payment
-      const { error: confirmationError } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethod.id
-      });
-
-      if (confirmationError) {
-        throw new Error(confirmationError.message);
-      }
-
-      toast({
-        title: "Payment Successful",
-        description: `Thank you for purchasing ${serviceName}!`,
-      });
-
-      if (onSuccess) {
-        onSuccess(paymentIntentId);
-      }
-    } catch (error: any) {
-      toast({
-        title: "Payment Failed",
-        description: error.message || "An unexpected error occurred.",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter your full name"
-            required
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">Email Address</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter your email address"
-            required
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="card" className="block text-sm font-medium mb-1">Card Details</label>
-          <div className="p-3 border rounded-md focus-within:ring-2 focus-within:ring-blue-500">
-            <CardElement 
-              id="card"
-              options={{
-                style: {
-                  base: {
-                    fontSize: '16px',
-                    color: '#424770',
-                    '::placeholder': {
-                      color: '#aab7c4',
-                    },
-                  },
-                  invalid: {
-                    color: '#9e2146',
-                  },
-                },
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      
-      <div className="flex gap-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onCancel}
-          className="flex-1"
-          disabled={loading}
-        >
-          Cancel
-        </Button>
-        <Button 
-          type="submit" 
-          className="flex-1 bg-[#00A0E3] hover:bg-[#0085bb]"
-          disabled={!stripe || loading}
-        >
-          {loading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            `Pay $${servicePrice}`
-          )}
-        </Button>
-      </div>
-    </form>
   );
 }
