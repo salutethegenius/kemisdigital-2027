@@ -33,7 +33,7 @@ const contextImages = {
     large: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=75&w=1920&auto=format&fit=crop',
     blur: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=10&w=20&auto=format&fit=crop&blur=10'
   },
-  
+
   // Professional business setting with tropical Bahamian aesthetic
   professional: {
     small: 'https://images.unsplash.com/photo-1617170788899-45af79abc4f7?q=75&w=800&auto=format&fit=crop',
@@ -41,7 +41,7 @@ const contextImages = {
     large: 'https://images.unsplash.com/photo-1617170788899-45af79abc4f7?q=75&w=1920&auto=format&fit=crop',
     blur: 'https://images.unsplash.com/photo-1617170788899-45af79abc4f7?q=10&w=20&auto=format&fit=crop&blur=10'
   },
-  
+
   // Tourism image - KemisDigital Beach Bahamas brand image
   // Using pre-optimized images with proper sizes for different devices
   tourism: {
@@ -50,7 +50,7 @@ const contextImages = {
     large: '/images/optimized/beachbahamas-large.jpg', // Full size for desktops
     blur: '/images/optimized/beachbahamas-blur.jpg' // Tiny blurred image for immediate display
   },
-  
+
   // Default image showing Paradise Island with vibrant colors matching brand
   default: {
     small: 'https://images.unsplash.com/photo-1575526164828-c31bcd857cf4?q=75&w=800&auto=format&fit=crop',
@@ -72,7 +72,7 @@ const OptimizedBackgroundImage = memo(({
 }) => {
   const [loaded, setLoaded] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
-  
+
   // Prefetch higher resolution images once component mounts
   useEffect(() => {
     // Only prefetch if this is a local image (tourism context with beachbahamas.jpg)
@@ -82,18 +82,18 @@ const OptimizedBackgroundImage = memo(({
       const prefetchTimeout = setTimeout(() => {
         const prefetchMedium = new Image();
         prefetchMedium.src = contextImages[imageKey].medium;
-        
+
         // Wait until medium resolution is loaded before loading the large one
         prefetchMedium.onload = () => {
           const prefetchLarge = new Image();
           prefetchLarge.src = contextImages[imageKey].large;
         };
       }, 1000); // 1 second delay to prioritize visible content
-      
+
       return () => clearTimeout(prefetchTimeout);
     }
   }, [imageKey]);
-  
+
   return (
     <>
       {/* Enhanced low quality blur-up placeholder with early loading */}
@@ -107,7 +107,7 @@ const OptimizedBackgroundImage = memo(({
         }}
         aria-hidden="true"
       />
-      
+
       {/* Main responsive image with improved srcset and fetchpriority */}
       <img
         ref={imageRef}
@@ -180,17 +180,17 @@ export default function Hero({
   const [imageError, setImageError] = useState(false);
   const [backgroundType, setBackgroundType] = useState<'image' | 'video' | 'none'>('none');
   const imagesPreloaded = useRef(false);
-  
+
   // Get the appropriate hero image based on context
   const getContextImageKey = (): keyof typeof contextImages => {
     return pageContext as keyof typeof contextImages;
   };
-  
+
   // First effect to handle the loading screen and set visited state
   useEffect(() => {
     // Check if this is the first visit to the homepage
     const hasVisitedBefore = sessionStorage.getItem('hasVisitedHomepage');
-    
+
     if (!hasVisitedBefore && window.location.pathname === '/') {
       setIsLoading(true);
       // Reduced loading time for better UX
@@ -203,7 +203,7 @@ export default function Hero({
       return () => clearTimeout(timer);
     }
   }, []);
-  
+
   // Second effect to determine background type and preload images
   useEffect(() => {
     // Immediately determine what type of background to show with priority order
@@ -214,17 +214,17 @@ export default function Hero({
     } else {
       setBackgroundType('none');
     }
-    
+
     // Preload images but make sure we only do it once
     if (!imagesPreloaded.current) {
       imagesPreloaded.current = true;
-      
+
       // Preload direct hero image if provided
       if (heroImage) {
         const img = new Image();
         img.src = heroImage;
       }
-      
+
       // Performance optimization - always preload contextual images when applicable
       if (pageContext && !heroImage) {
         // Create and configure link rel=preload for the blur image
@@ -234,18 +234,18 @@ export default function Hero({
         preloadLink.href = contextImages[getContextImageKey()].blur;
         preloadLink.importance = 'high';
         document.head.appendChild(preloadLink);
-        
+
         // Immediately preload small and medium versions
         const preloadSmall = new Image();
         preloadSmall.src = contextImages[getContextImageKey()].small;
-        
+
         const preloadMedium = new Image();
         preloadMedium.src = contextImages[getContextImageKey()].medium;
-        
+
         // Preload the large version immediately as well
         const preloadLarge = new Image();
         preloadLarge.src = contextImages[getContextImageKey()].large;
-        
+
         // Return cleanup function to remove preload link on unmount
         return () => {
           if (document.head.contains(preloadLink)) {
@@ -295,7 +295,7 @@ export default function Hero({
       {backgroundType !== 'none' && (
         <div className="absolute inset-0 w-full h-full">
           <div className={`absolute inset-0 ${getOverlayTint()} z-10`} />
-          
+
           {/* Video background */}
           {backgroundType === 'video' && videoBackground && (
             <BackgroundVideo 
@@ -306,7 +306,7 @@ export default function Hero({
               }} 
             />
           )}
-          
+
           {/* Hero image background - shown when video not available or errored */}
           {backgroundType === 'image' && (
             <>
@@ -339,7 +339,7 @@ export default function Hero({
           )}
         </div>
       )}
-      
+
       {/* Hero content */}
       <div className={`relative z-20 py-12 md:py-24 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto ${backgroundType !== 'none' ? 'text-white' : ''}`}>
         <motion.h1
@@ -377,7 +377,7 @@ export default function Hero({
           </motion.div>
         )}
       </div>
-      
+
       {/* Animated Scroll Icon - Hidden on Mobile */}
       <motion.div 
         className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer hidden sm:flex flex-col items-center"
