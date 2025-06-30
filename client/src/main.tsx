@@ -12,6 +12,8 @@ import { HelmetProvider } from 'react-helmet-async';
 // Import i18n configuration
 import "./i18n";
 import Preloader from "./components/shared/Preloader";
+import { logError, createError } from "./lib/errorHandling";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Eager load only the Home component for fast initial load
 import Home from "./pages/Home";
@@ -86,6 +88,38 @@ if (typeof window !== 'undefined') {
   }
 }
 
+// Global error handlers for unhandled promise rejections and errors
+window.addEventListener('unhandledrejection', (event) => {
+  event.preventDefault(); // Prevent the default console error
+  
+  const error = createError('Unhandled Promise Rejection', {
+    code: 'CLIENT_UNHANDLED_REJECTION',
+    context: {
+      reason: event.reason instanceof Error ? event.reason.message : String(event.reason),
+      stack: event.reason instanceof Error ? event.reason.stack : undefined,
+      timestamp: new Date().toISOString()
+    }
+  });
+  
+  logError(error, 'error');
+});
+
+window.addEventListener('error', (event) => {
+  const error = createError('Unhandled Error', {
+    code: 'CLIENT_UNHANDLED_ERROR',
+    context: {
+      message: event.message,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+      timestamp: new Date().toISOString()
+    },
+    cause: event.error
+  });
+  
+  logError(error, 'error');
+});
+
 // Simple loading component for page transitions - no preloader for internal navigation
 const PageLoader = () => (
   <div className="h-screen w-full flex items-center justify-center">
@@ -102,13 +136,26 @@ createRoot(document.getElementById("root")!).render(
             fetcher,
             revalidateOnFocus: false, // Disable revalidation on window focus
             revalidateIfStale: true,
-            dedupingInterval: 10000 // Dedupe requests within 10 seconds
+            dedupingInterval: 10000, // Dedupe requests within 10 seconds
+            onError: (error, key) => {
+              // Handle SWR errors globally
+              const appError = createError('SWR Request Failed', {
+                code: 'CLIENT_SWR_ERROR',
+                context: {
+                  key,
+                  error: error instanceof Error ? error.message : String(error)
+                },
+                cause: error instanceof Error ? error : undefined
+              });
+              logError(appError, 'error');
+            }
           }}
         >
-          <Router>
-            <Layout>
-              <Suspense fallback={<PageLoader />}>
-                <Switch>
+          <ErrorBoundary componentName="App">
+            <Router>
+              <Layout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
                   <Route path="/" component={Home} />
                   <Route path="/privacy" component={Privacy} />
                   <Route path="/data-deletion" component={DataDeletion} />
@@ -132,9 +179,10 @@ createRoot(document.getElementById("root")!).render(
                     <Route path="/us-company-formation" component={USCompanyFormation} />
                   <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
                 </Switch>
-              </Suspense>
-            </Layout>
-          </Router>
+                </Suspense>
+              </Layout>
+            </Router>
+          </ErrorBoundary>
           <Toaster />
         </SWRConfig>
       </ThemeProvider>
