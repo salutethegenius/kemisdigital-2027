@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SoundLink from "@/components/shared/SoundLink";
 import LanguageSelector from "../shared/LanguageSelector";
-import { SoundToggle } from "../ui/sound-toggle";
+// Sound system removed per user request
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -142,11 +142,6 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            {/* Sound Toggle */}
-            <div className="ml-2">
-              <SoundToggle />
-            </div>
-
             {/* Language Selector */}
             <div className="ml-2">
               <LanguageSelector />

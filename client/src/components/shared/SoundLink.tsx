@@ -5,7 +5,6 @@ interface SoundLinkProps {
   href: string;
   children: ReactNode;
   className?: string;
-  soundEffect?: "click" | "hover"; // Kept for backward compatibility
   onClick?: () => void;
 }
 
@@ -13,7 +12,6 @@ const SoundLink = forwardRef<HTMLAnchorElement, SoundLinkProps>(({
   href,
   children,
   className = "",
-  soundEffect = "click", // Not used, but kept for backward compatibility
   onClick,
   ...props
 }, ref) => {
