@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import Hero from "@/components/shared/Hero";
 import { Card } from "@/components/ui/card";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 declare global {
   interface Window {

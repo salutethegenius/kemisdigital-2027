@@ -77,6 +77,7 @@ export default function Header() {
 
   const contactOptions = [
     { name: t('header.contact'), href: "/contact", icon: Phone, description: "Get in touch with us" },
+    { name: t('header.meet'), href: "/meet", icon: Video, description: "Schedule a virtual meeting" },
   ];
 
   return (

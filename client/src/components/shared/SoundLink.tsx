@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 import { Link, useLocation } from "wouter";
 
 interface SoundLinkProps {
@@ -9,14 +9,14 @@ interface SoundLinkProps {
   onClick?: () => void;
 }
 
-export default function SoundLink({
+const SoundLink = forwardRef<HTMLAnchorElement, SoundLinkProps>(({
   href,
   children,
   className = "",
   soundEffect = "click", // Not used, but kept for backward compatibility
   onClick,
   ...props
-}: SoundLinkProps) {
+}, ref) => {
   const [location] = useLocation();
   const isActive = location === href;
 
@@ -31,9 +31,14 @@ export default function SoundLink({
       href={href}
       onClick={handleClick}
       className={`${className} ${isActive ? "active" : ""}`}
+      ref={ref}
       {...props}
     >
       {children}
     </Link>
   );
-}
+});
+
+SoundLink.displayName = 'SoundLink';
+
+export default SoundLink;
