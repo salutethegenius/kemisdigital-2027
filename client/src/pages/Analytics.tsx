@@ -6,7 +6,7 @@ import Hero from "@/components/shared/Hero";
 export default function Analytics() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  
+
   const plotLayout = {
     paper_bgcolor: isDark ? '#1a1b1e' : '#ffffff',
     plot_bgcolor: isDark ? '#1a1b1e' : '#ffffff',
@@ -21,8 +21,8 @@ export default function Analytics() {
       showarrow: false,
       x: 0.5,
       y: 1.1,
-      xref: 'paper',
-      yref: 'paper',
+      xref: 'paper' as const,
+      yref: 'paper' as const,
       font: {
         size: 14,
         color: isDark ? '#ffffff' : '#000000'
@@ -70,7 +70,7 @@ export default function Analytics() {
         description="Comprehensive insights into Bahamas digital marketing performance metrics and Caribbean region benchmarks"
         showCTA={false}
       />
-      
+
       <div className="container mx-auto space-y-6 py-8">
         {/* Website Performance */}
         <Card>

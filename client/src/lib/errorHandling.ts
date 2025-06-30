@@ -10,7 +10,7 @@ export type ErrorCode =
   | 'CLIENT_STORAGE_ERROR'
   | 'CLIENT_UNHANDLED_REJECTION'
   | 'CLIENT_GLOBAL_ERROR'
-  
+
   // API errors
   | 'API_REQUEST_FAILED'
   | 'API_RESPONSE_INVALID'
@@ -19,17 +19,17 @@ export type ErrorCode =
   | 'API_NOT_FOUND'
   | 'API_SERVER_ERROR'
   | 'API_TIMEOUT'
-  
+
   // Auth errors
   | 'AUTH_LOGIN_FAILED'
   | 'AUTH_SESSION_EXPIRED'
   | 'AUTH_INSUFFICIENT_PERMISSIONS'
-  
+
   // Data errors
   | 'DATA_VALIDATION_ERROR'
   | 'DATA_NOT_FOUND'
   | 'DATA_CONFLICT'
-  
+
   // Generic errors
   | 'UNKNOWN_ERROR';
 
@@ -90,16 +90,22 @@ export function handleFetchError(error: any): AppError {
       requestId: error.requestId,
       responseBody: error.info
     }, cause: error});
-    
+
     logError(appError);
-    return appError;
+    return {
+      ...appError,
+      cause: error.cause instanceof Error ? error.cause : undefined
+    } as AppError;
   } else {
     const appError = createError('Network request failed', { code: 'CLIENT_NETWORK_ERROR', context: {
       originalError: error instanceof Error ? error.message : String(error)
     }, cause: error instanceof Error ? error : undefined});
-    
+
     logError(appError);
-    return appError;
+    return {
+      ...appError,
+      cause: error.cause instanceof Error ? error.cause : undefined
+    } as AppError;
   }
 }
 
@@ -142,9 +148,12 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
         originalError: error instanceof Error ? error.message : String(error)
       }, cause: error instanceof Error ? error : undefined}
       ) as AppError;
-      
+
       logError(appError);
-      throw appError;
+      throw {
+      ...appError,
+      cause: error.cause instanceof Error ? error.cause : undefined
+    } as AppError;
     }
   }) as T;
 }
@@ -159,7 +168,7 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
     errorInfo,
     componentStack: errorInfo?.componentStack
   }, cause: error});
-  
+
   logError(appError);
 }
 

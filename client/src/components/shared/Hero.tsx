@@ -232,7 +232,6 @@ export default function Hero({
         preloadLink.rel = 'preload';
         preloadLink.as = 'image';
         preloadLink.href = contextImages[getContextImageKey()].blur;
-        preloadLink.importance = 'high';
         document.head.appendChild(preloadLink);
 
         // Immediately preload small and medium versions
@@ -358,7 +357,7 @@ export default function Hero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className={`text-base sm:text-lg md:text-xl max-w-md sm:max-w-xl md:max-w-2xl mx-auto mb-6 md:mb-8 ${
-            backgroundType !== 'none'
+            backgroundType === 'none'
               ? 'text-gray-100 drop-shadow-md' 
               : 'text-muted-foreground'
           }`}

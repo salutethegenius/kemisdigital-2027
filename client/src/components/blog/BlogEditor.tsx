@@ -34,7 +34,7 @@ interface BlogEditorProps {
 
 export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   const { toast } = useToast();
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Mock data to prevent API calls during development

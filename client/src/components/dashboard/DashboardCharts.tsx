@@ -2,7 +2,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Plot from 'react-plotly.js';
 import { useState, useEffect } from "react";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Preloader from "@/components/shared/Preloader";
 
 export default function DashboardCharts() {
