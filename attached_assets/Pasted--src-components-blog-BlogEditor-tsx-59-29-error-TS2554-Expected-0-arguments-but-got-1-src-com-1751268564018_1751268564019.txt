@@ -1,0 +1,89 @@
+
+
+src/components/blog/BlogEditor.tsx(59,29): error TS2554: Expected 0 arguments, but got 1.
+
+src/components/dashboard/DashboardCharts.tsx(5,10): error TS2614: Module '"@/components/ErrorBoundary"' has no exported member 'ErrorBoundary'. Did you mean to use 'import ErrorBoundary from "@/components/ErrorBoundary"' instead?
+
+src/components/payment/StripePaymentForm.tsx(94,21): error TS2304: Cannot find name 'setupFee'.
+
+src/components/shared/Hero.tsx(235,21): error TS2339: Property 'importance' does not exist on type 'HTMLLinkElement'.
+
+src/components/shared/Hero.tsx(324,19): error TS2322: Type '{ src: string; alt: string; className: string; onError: () => void; loading: "eager"; fetchpriority: string; decoding: "async"; }' is not assignable to type 'DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>'.
+  Property 'fetchpriority' does not exist on type 'DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>'. Did you mean 'fetchPriority'?
+src/components/shared/TitleEnhancementStyles.tsx(5,12): error TS2322: Type '{ children: string; jsx: true; global: true; }' is not assignable to type 'DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>'.
+  Property 'jsx' does not exist on type 'DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>'.
+
+src/components/ui/context-menu.tsx(2,39): error TS2307: Cannot find module '@radix-ui/react-context-menu' or its corresponding type declarations.
+
+src/lib/errorHandling.ts(95,5): error TS2322: Type 'Error' is not assignable to type 'AppError'.
+  Types of property 'cause' are incompatible.
+    Type 'unknown' is not assignable to type 'Error | undefined'.
+
+src/lib/errorHandling.ts(102,5): error TS2322: Type 'Error' is not assignable to type 'AppError'.
+  Types of property 'cause' are incompatible.
+    Type 'unknown' is not assignable to type 'Error | undefined'.
+
+src/pages/Analytics.tsx(107,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: PlotParams): Plot', gave the following error.
+    Type '{ yaxis: { title: string; }; yaxis2: { title: string; overlaying: "y"; side: "right"; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { ...; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+  Overload 2 of 2, '(props: PlotParams, context: any): Plot', gave the following error.
+    Type '{ yaxis: { title: string; }; yaxis2: { title: string; overlaying: "y"; side: "right"; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { ...; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+
+src/pages/Analytics.tsx(145,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: PlotParams): Plot', gave the following error.
+    Type '{ barmode: "group"; yaxis: { title: string; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { bgcolor: string; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+  Overload 2 of 2, '(props: PlotParams, context: any): Plot', gave the following error.
+    Type '{ barmode: "group"; yaxis: { title: string; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { bgcolor: string; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+
+src/pages/Analytics.tsx(179,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: PlotParams): Plot', gave the following error.
+    Type '{ barmode: "group"; yaxis: { title: string; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { bgcolor: string; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+  Overload 2 of 2, '(props: PlotParams, context: any): Plot', gave the following error.
+    Type '{ barmode: "group"; yaxis: { title: string; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { bgcolor: string; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+
+src/pages/Analytics.tsx(214,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: PlotParams): Plot', gave the following error.
+    Type '{ yaxis: { title: string; }; yaxis2: { title: string; overlaying: "y"; side: "right"; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { ...; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+  Overload 2 of 2, '(props: PlotParams, context: any): Plot', gave the following error.
+    Type '{ yaxis: { title: string; }; yaxis2: { title: string; overlaying: "y"; side: "right"; }; paper_bgcolor: string; plot_bgcolor: string; font: { color: string; }; margin: { t: number; r: number; l: number; b: number; }; showlegend: boolean; legend: { ...; }; annotations: { ...; }[]; }' is not assignable to type 'Partial<Layout>'.
+      Types of property 'annotations' are incompatible.
+        Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }[]' is not assignable to type 'Partial<Annotations>[]'.
+          Type '{ text: string; showarrow: boolean; x: number; y: number; xref: string; yref: string; font: { size: number; color: string; }; }' is not assignable to type 'Partial<Annotations>'.
+            Types of property 'xref' are incompatible.
+              Type 'string' is not assignable to type '"x2" | "x" | "x3" | "x4" | "x16" | "x20" | "x5" | "x9" | "x8" | "x6" | "x7" | "x10" | "x11" | "x12" | "x13" | "x14" | "x15" | "x19" | "x18" | "x17" | "x21" | "x22" | "x23" | "x24" | "x25" | ... 174 more ... | undefined'.
+
