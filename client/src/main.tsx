@@ -7,7 +7,7 @@ import "./i18n";
 import "./index.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./hooks/use-theme";
-import { SoundProvider } from "./hooks/use-sound-effects-new";
+// Sound system removed per user request
 
 // Eager load only the Home component
 import Home from "./pages/Home";
@@ -33,8 +33,7 @@ function App() {
     <StrictMode>
       <HelmetProvider>
         <ThemeProvider>
-          <SoundProvider>
-            <ErrorBoundary>
+          <ErrorBoundary>
               <SWRConfig
                 value={{
                   fetcher: (url: string) => fetch(url).then(res => res.json()),
@@ -65,7 +64,6 @@ function App() {
                 </Router>
               </SWRConfig>
             </ErrorBoundary>
-          </SoundProvider>
         </ThemeProvider>
       </HelmetProvider>
     </StrictMode>

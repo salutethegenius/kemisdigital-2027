@@ -22,13 +22,9 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       // Allow all hosts in Replit environment and specific domain
       allowedHosts: (isReplEnv ? true : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev']) as true | string[],
-      hmr: isReplEnv ? {
+      hmr: {
         port: 3000,
         host: '0.0.0.0'
-      } : {
-        clientPort: 3000,
-        host: '0.0.0.0',
-        protocol: 'ws'
       },
       watch: {
         // Explicitly excluded the node_modules folder for better performance
