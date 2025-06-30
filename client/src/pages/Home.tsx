@@ -28,7 +28,7 @@ export default function Home() {
       // Preload the hero background image with high priority
       const heroImage = new Image();
       heroImage.src = '/images/optimized/beachbahamas-large.jpg';
-      heroImage.fetchPriority = 'high';
+      heroImage.fetchpriority = 'high';
       
       // Preload other sizes for responsive display
       const preloadImageSizes = [
