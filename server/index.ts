@@ -67,7 +67,16 @@ if (process.env.NODE_ENV === 'development') {
   
   setupVite(app, server)
     .then(() => {
-      server.listen(PORT, '0.0.0.0', () => {
+      server.listen(PORT, '0.0.0.0', (err?: Error) => {
+        if (err) {
+          if (err.message.includes('EADDRINUSE')) {
+            console.error(`❌ Port ${PORT} is already in use. Please stop other processes or use a different port.`);
+            process.exit(1);
+          } else {
+            console.error('Server error:', err);
+            process.exit(1);
+          }
+        }
         console.log(`🚀 Development server running at http://localhost:${PORT}`);
       });
     })
@@ -83,7 +92,16 @@ if (process.env.NODE_ENV === 'development') {
   app.use(notFoundHandler);
   
   // Start the server
-  server = app.listen(PORT, '0.0.0.0', () => {
+  server = app.listen(PORT, '0.0.0.0', (err?: Error) => {
+    if (err) {
+      if (err.message.includes('EADDRINUSE')) {
+        console.error(`❌ Port ${PORT} is already in use. Please stop other processes or use a different port.`);
+        process.exit(1);
+      } else {
+        console.error('Server error:', err);
+        process.exit(1);
+      }
+    }
     console.log(`🚀 Production server running on port ${PORT}`);
   });
 }
