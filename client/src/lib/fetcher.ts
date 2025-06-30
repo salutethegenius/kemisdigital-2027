@@ -1,36 +1,22 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:3000';
 
-export const fetcher = async (url: string): Promise<any> => {
+export async function fetcher(url: string): Promise<any> {
   try {
-    const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
-    console.log(`[FETCHER] Making request to: ${fullUrl}`);
-
-    const response = await fetch(fullUrl).catch((fetchError) => {
-      console.warn(`[FETCHER] Network error for ${url}:`, fetchError);
-      return null;
+    const response = await fetch(`${API_BASE_URL}${url}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-
-    if (!response) {
-      console.warn(`[FETCHER] No response for: ${url}`);
-      return null;
-    }
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unknown error');
-      console.warn(`[FETCHER] Request failed: ${response.status} - ${errorText}`);
-      return null;
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json().catch((jsonError) => {
-      console.warn(`[FETCHER] JSON parse error for ${url}:`, jsonError);
-      return null;
-    });
-
-    console.log(`[FETCHER] Request successful for: ${url}`);
-    return data;
+    return await response.json();
   } catch (error) {
-    handleError(error, 'API request failed');
-    // Return null instead of throwing to prevent unhandled rejections
-    return null;
+    console.error('Fetch error:', error);
+    throw error;
   }
-};
+}
+
+export default fetcher;

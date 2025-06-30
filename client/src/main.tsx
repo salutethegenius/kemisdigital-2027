@@ -1,12 +1,8 @@
+
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
-import "./index.css";
-import "./styles/animated-title.css";
 import { SWRConfig } from "swr";
-import { fetcher } from "./lib/fetcher";
-import { Toaster } from "@/components/ui/toaster";
-import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
 import "./i18n";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -18,60 +14,59 @@ import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
-const Privacy = lazy(() => import("./pages/Privacy"));
+const WebAppDev = lazy(() => import("./pages/WebAppDev"));
+const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
+const Resources = lazy(() => import("./pages/Resources"));
 
-// Layout
-import Layout from "./components/layout/Layout";
-
-// Simple loading component
-const PageLoader = () => (
-  <div className="h-screen w-full flex items-center justify-center">
-    <div className="w-16 h-16 border-4 border-[#00A0E3]/20 rounded-full border-t-[#00A0E3] animate-spin"></div>
+// Loading component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#00A0E3]"></div>
   </div>
 );
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider>
-        <SWRConfig 
-          value={{ 
-            fetcher,
-            revalidateOnFocus: false,
-            dedupingInterval: 10000,
-            shouldRetryOnError: false,
-            errorRetryCount: 0,
-            onError: (error) => {
-              console.warn('[SWR] API Error handled:', error);
-            }
-          }}
-        >
-          <Router>
-            <Layout>
-              <ErrorBoundary>
-                <Suspense fallback={<PageLoader />}>
-                  <Switch>
-                    <Route path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route path="/services" component={Services} />
-                    <Route path="/contact" component={Contact} />
-                    <Route path="/privacy" component={Privacy} />
-                  </Switch>
-                </Suspense>
-              </ErrorBoundary>
-            </Layout>
-          </Router>
-          <Toaster />
-        </SWRConfig>
-      </ThemeProvider>
-    </HelmetProvider>
+    <StrictMode>
+      <HelmetProvider>
+        <ErrorBoundary>
+          <SWRConfig
+            value={{
+              fetcher: (url: string) => fetch(url).then(res => res.json()),
+              errorRetryCount: 0,
+              onError: (error) => {
+                console.warn('[SWR] API Error handled:', error);
+              }
+            }}
+          >
+            <Router>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Switch>
+                  <Route path="/" component={Home} />
+                  <Route path="/about" component={About} />
+                  <Route path="/services" component={Services} />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/web-app-development" component={WebAppDev} />
+                  <Route path="/payment-solutions" component={PaymentSolutions} />
+                  <Route path="/resources" component={Resources} />
+                  <Route>
+                    <div className="flex items-center justify-center min-h-screen">
+                      <h1 className="text-2xl font-bold">404 - Page Not Found</h1>
+                    </div>
+                  </Route>
+                </Switch>
+              </Suspense>
+            </Router>
+          </SWRConfig>
+        </ErrorBoundary>
+      </HelmetProvider>
+    </StrictMode>
   );
 }
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </StrictMode>
-);
+// Mount the app
+const container = document.getElementById("root");
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}

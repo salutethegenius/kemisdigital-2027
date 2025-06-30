@@ -1,5 +1,5 @@
 
-import { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -20,26 +20,26 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Simple console logging only
-    console.error('ErrorBoundary caught an error:', error);
-    console.error('Component stack:', errorInfo.componentStack);
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-background">
-          <div className="text-center p-8 max-w-md">
-            <h2 className="text-2xl font-bold text-destructive mb-4">Something went wrong</h2>
+        <div className="flex items-center justify-center min-h-screen bg-background">
+          <div className="text-center p-8">
+            <h1 className="text-2xl font-bold text-destructive mb-4">
+              Something went wrong
+            </h1>
             <p className="text-muted-foreground mb-4">
-              We apologize for the inconvenience. Please refresh the page to continue.
+              We apologize for the inconvenience. Please refresh the page.
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90"
+              className="px-4 py-2 bg-[#00A0E3] text-white rounded hover:bg-[#0078A8]"
             >
-              Refresh Page
+              Reload Page
             </button>
           </div>
         </div>
