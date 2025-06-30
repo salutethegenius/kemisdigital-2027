@@ -75,20 +75,21 @@ export default function Meet() {
       <Header />
       <div className="pt-16">
         <Hero
-        title="Virtual Meeting Room"
-        description="Connect with our team through secure video conferencing"
-        showCTA={false}
-      />
-      <div className="container mx-auto px-4 py-8">
-        <Card className="overflow-hidden">
-          <div 
-            ref={containerRef}
-            className="w-full aspect-video bg-black"
-          />
-        </Card>
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          <p>Having trouble connecting? Make sure your camera and microphone are enabled.</p>
-          <p>For the best experience, use Chrome or Firefox browsers.</p>
+          title="Virtual Meeting Room"
+          description="Connect with our team through secure video conferencing"
+          showCTA={false}
+        />
+        <div className="container mx-auto px-4 py-8">
+          <Card className="overflow-hidden">
+            <div 
+              ref={containerRef}
+              className="w-full aspect-video bg-black"
+            />
+          </Card>
+          <div className="mt-8 text-center text-sm text-muted-foreground">
+            <p>Having trouble connecting? Make sure your camera and microphone are enabled.</p>
+            <p>For the best experience, use Chrome or Firefox browsers.</p>
+          </div>
         </div>
       </div>
       
