@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -59,7 +59,7 @@ export default function Contact() {
 
   async function onSubmit(values: FormData) {
     setIsLoading(true);
-    
+
     try {
       const response = await fetch('/api/email/send', {
         method: 'POST',
@@ -73,12 +73,12 @@ export default function Contact() {
         const error = await response.json();
         throw new Error(error.details || 'Failed to send message');
       }
-      
+
       toast({
         title: "Success",
         description: "Message sent successfully!",
       });
-      
+
       form.reset();
     } catch (error) {
       console.error("Error sending message:", error);
@@ -114,7 +114,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              
+
               <motion.div 
                 variants={staggerChildren}
                 initial="hidden"
@@ -133,7 +133,7 @@ export default function Contact() {
                     <p className="text-muted-foreground">info@kemisdigital.com</p>
                   </div>
                 </motion.div>
-                
+
                 <motion.div 
                   className="flex items-start space-x-4"
                   initial={{ opacity: 0, y: 20 }}
@@ -146,7 +146,7 @@ export default function Contact() {
                     <p className="text-muted-foreground">+1 (242) 447-9692</p>
                   </div>
                 </motion.div>
-                
+
                 <motion.div 
                   className="flex items-start space-x-4"
                   initial={{ opacity: 0, y: 20 }}
@@ -160,7 +160,7 @@ export default function Contact() {
                   </div>
                 </motion.div>
               </motion.div>
-              
+
               <div className="mt-12">
                 <h3 className="text-2xl font-bold mb-6">Our Services</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -187,7 +187,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <Card className="overflow-hidden dark:bg-[#002333]">
                 <CardContent className="p-6">
@@ -295,7 +295,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );
