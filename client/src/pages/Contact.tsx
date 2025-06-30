@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, Brain, Target, LineChart, Sparkles } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -6,12 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useTranslation } from "react-i18next";
 
-import Hero from "@/components/shared/Hero";
-import CalendarWidget from "@/components/shared/CalendarWidget";
-import { useToast } from "@/hooks/use-toast";
-import { staggerChildren } from "@/lib/animations";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Hero from "../components/shared/Hero";
+import CalendarWidget from "../components/shared/CalendarWidget";
+import { useToast } from "../hooks/use-toast";
+import { staggerChildren } from "../lib/animations";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import {
   Form,
   FormControl,
@@ -19,18 +19,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+} from "../components/ui/form";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "../components/ui/select";
+import { Card, CardContent } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 
 // Form schema
 const formSchema = z.object({
