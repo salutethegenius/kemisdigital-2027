@@ -30,7 +30,7 @@ export default function Home() {
       heroImage.onload = () => console.log('Hero image loaded successfully');
       heroImage.onerror = () => console.log('Hero image not found, will use fallback');
       heroImage.src = '/images/optimized/beachbahamas-large.jpg';
-      heroImage.setAttribute('fetchpriority', 'high');
+      heroImage.setAttribute('fetchPriority', 'high');
       
       // Preload other sizes for responsive display with error handling
       const preloadImageSizes = [
