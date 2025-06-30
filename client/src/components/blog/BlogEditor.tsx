@@ -77,7 +77,9 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
         description: `Post ${postId ? "updated" : "created"} successfully`,
       });
 
-      onSuccess?.();
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -170,3 +172,4 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
     </form>
   );
 }
+```This code fixes a potential React hook error by removing an unused import and ensures the onSuccess callback is called correctly.

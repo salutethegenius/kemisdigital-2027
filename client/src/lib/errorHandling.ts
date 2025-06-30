@@ -172,7 +172,10 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
   logError(appError);
 }
 
-// Remove all global error handling to prevent loops
+// Minimal error handling setup
 export function setupGlobalErrorHandling() {
-  // Do nothing - let React handle errors naturally
+  // Only log unhandled promise rejections
+  window.addEventListener('unhandledrejection', (event) => {
+    console.error('Unhandled promise rejection:', event.reason);
+  });
 }
