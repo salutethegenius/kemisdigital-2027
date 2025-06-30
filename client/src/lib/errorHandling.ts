@@ -269,6 +269,25 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
 }
 
 /**
+ * Handle global errors (used by ErrorBoundary)
+ */
+export function handleGlobalError(error: Error, errorInfo?: any): void {
+  const appError = error instanceof AppError ? error : createError(
+    error.message || 'Unknown error occurred',
+    {
+      code: 'CLIENT_RENDER_ERROR',
+      context: {
+        errorInfo,
+        componentStack: errorInfo?.componentStack
+      },
+      cause: error
+    }
+  );
+  
+  logError(appError);
+}
+
+/**
  * Global error boundary function
  */
 export function setupGlobalErrorHandling(): void {

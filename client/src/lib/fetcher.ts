@@ -1,4 +1,3 @@
-
 import { AppError, logError, createError } from './errorHandling';
 
 /**
