@@ -173,26 +173,43 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
 }
 
 export function setupGlobalErrorHandling() {
-  // Simple error handling - just log genuine errors
+  // Handle unhandled promise rejections
   window.addEventListener('unhandledrejection', (event) => {
     const reason = event.reason;
     const reasonStr = String(reason);
     
-    // Silently ignore network/fetch errors
+    // Prevent the default browser behavior (console logging)
+    event.preventDefault();
+    
+    // Silently ignore common network/fetch errors and Vite HMR connection issues
     if (reasonStr.includes('fetch') || 
         reasonStr.includes('NetworkError') ||
         reasonStr.includes('Failed to fetch') ||
-        reasonStr.includes('ERR_NETWORK')) {
-      event.preventDefault();
+        reasonStr.includes('ERR_NETWORK') ||
+        reasonStr.includes('vite') ||
+        reasonStr.includes('connection') ||
+        reasonStr.includes('WebSocket') ||
+        reasonStr.includes('HMR') ||
+        reasonStr.toLowerCase().includes('server connection')) {
       return;
     }
     
-    // Log other errors normally
-    console.warn('Unhandled promise rejection:', reason);
+    // Only log genuine application errors
+    if (reason instanceof Error && reason.name !== 'AbortError') {
+      console.warn('Application error:', reason.message);
+    }
   });
 
   // Handle global JavaScript errors
   window.addEventListener('error', (event) => {
+    // Prevent default browser behavior for non-critical errors
+    if (event.error && event.error.message && 
+        (event.error.message.includes('vite') || 
+         event.error.message.includes('connection'))) {
+      event.preventDefault();
+      return;
+    }
+    
     console.warn('JavaScript error:', event.error);
   });
 }
