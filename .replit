@@ -24,7 +24,7 @@ language = "nodejs"
     start = "typescript-language-server --stdio"
 
 [workflows]
-runButton = "Simple Frontend"
+runButton = "Frontend Only"
 
 [[workflows.workflow]]
 name = "Project"
@@ -106,13 +106,13 @@ task = "shell.exec"
 args = "cd client && VITE_API_URL=http://localhost:5000 npx vite --host 0.0.0.0 --port 3000"
 
 [[workflows.workflow]]
-name = "Simple Frontend"
+name = "Frontend Only"
 author = 36910130
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd client && npx vite --host 0.0.0.0 --port 5000"
+args = "cd client && npm run dev -- --port 3000"
 
 [[ports]]
 localPort = 3000
