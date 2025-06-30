@@ -228,6 +228,16 @@ export const fetcher = async (url: string, options: RequestInit = {}) => {
     });
 
     throw appError;
+  } catch (unexpectedError) {
+    // Catch any unexpected errors that might cause unhandled rejections
+    const fallbackError = createError('Unexpected fetcher error', {
+      code: 'CLIENT_FETCHER_FALLBACK',
+      context: { originalError: unexpectedError },
+      cause: unexpectedError instanceof Error ? unexpectedError : undefined
+    });
+
+    logError(fallbackError);
+    throw fallbackError;
   }
 }
 
@@ -250,5 +260,24 @@ function mapStatusToErrorCode(status: number): any {
       return 'API_SERVER_ERROR';
     default:
       return 'UNKNOWN_ERROR';
+  }
+}
+
+/**
+ * Get error code from response
+ */
+function getErrorCode(response: Response): string {
+  if (response.status >= 500) {
+    return 'SERVER_ERROR';
+  } else if (response.status === 404) {
+    return 'NOT_FOUND';
+  } else if (response.status === 401) {
+    return 'UNAUTHORIZED';
+  } else if (response.status === 403) {
+    return 'FORBIDDEN';
+  } else if (response.status >= 400) {
+    return 'CLIENT_ERROR';
+  } else {
+    return 'UNKNOWN_ERROR';
   }
 }

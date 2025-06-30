@@ -44,7 +44,7 @@ language = "nodejs"
     start = "typescript-language-server --stdio"
 
 [workflows]
-runButton = "Development Server"
+runButton = "Development"
 
 [[workflows.workflow]]
 name = "Project"
@@ -161,3 +161,16 @@ args = "NODE_ENV=development tsx watch server/index.ts"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd client && VITE_APP_API_URL=http://localhost:3000 npx vite --host 0.0.0.0 --port 5000"
+
+[[workflows.workflow]]
+name = "Development"
+author = 36910130
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=development tsx watch server/index.ts"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd client && npm run dev"
