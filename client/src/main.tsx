@@ -14,10 +14,20 @@ import { HelmetProvider } from 'react-helmet-async';
 import "./i18n";
 import ErrorBoundary from "./components/ErrorBoundary";
 
-// Global unhandled rejection handler to prevent console spam
+// Comprehensive error handling to prevent UI breakage
 window.addEventListener('unhandledrejection', (event) => {
+  console.warn('[HANDLED] Unhandled promise rejection:', event.reason);
   event.preventDefault(); // Prevent default browser behavior
-  // Silently handle unhandled rejections
+});
+
+window.addEventListener('error', (event) => {
+  console.warn('[HANDLED] Global error:', event.error);
+  event.preventDefault();
+});
+
+// Handle React errors gracefully
+window.addEventListener('rejectionhandled', (event) => {
+  console.log('[HANDLED] Promise rejection handled:', event.reason);
 });
 
 // Eager load only the Home component
@@ -49,20 +59,29 @@ function App() {
             revalidateOnFocus: false,
             dedupingInterval: 10000,
             shouldRetryOnError: false,
-            errorRetryCount: 0
+            errorRetryCount: 0,
+            onError: (error) => {
+              console.warn('[SWR] API Error handled:', error);
+            },
+            onErrorRetry: () => {
+              // Disable retries to prevent promise rejection loops
+              return;
+            }
           }}
         >
           <Router>
             <Layout>
-              <Suspense fallback={<PageLoader />}>
-                <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/about" component={About} />
-                  <Route path="/services" component={Services} />
-                  <Route path="/contact" component={Contact} />
-                  <Route path="/privacy" component={Privacy} />
-                </Switch>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/services" component={Services} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/privacy" component={Privacy} />
+                  </Switch>
+                </Suspense>
+              </ErrorBoundary>
             </Layout>
           </Router>
           <Toaster />

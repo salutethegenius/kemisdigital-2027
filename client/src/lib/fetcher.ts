@@ -29,7 +29,8 @@ export const fetcher = async (url: string): Promise<any> => {
     console.log(`[FETCHER] Request successful for: ${url}`);
     return data;
   } catch (error) {
-    console.warn(`[FETCHER] Unexpected error for ${url}:`, error);
+    handleError(error, 'API request failed');
+    // Return null instead of throwing to prevent unhandled rejections
     return null;
   }
 };
