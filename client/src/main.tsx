@@ -1,6 +1,3 @@
-Adding comprehensive error handling and preventing unhandled rejections by modifying the main entry point.
-```
-```replit_final_file
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
@@ -90,18 +87,6 @@ function App() {
     </HelmetProvider>
   );
 }
-
-// Prevent all unhandled promise rejections during development
-window.addEventListener('unhandledrejection', (event) => {
-  console.warn('[HANDLED] Unhandled promise rejection prevented:', event.reason);
-  event.preventDefault(); // Prevent the default behavior
-});
-
-// Prevent uncaught errors
-window.addEventListener('error', (event) => {
-  console.warn('[HANDLED] Global error prevented:', event.error);
-  event.preventDefault();
-});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
