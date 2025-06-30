@@ -107,8 +107,8 @@ args = "cd client && VITE_APP_API_URL=http://localhost:5000 npx vite --host 0.0.
 
 [[ports]]
 localPort = 3000
-externalPort = 3000
+externalPort = 80
 
 [[ports]]
 localPort = 5000
-externalPort = 80
+externalPort = 5000
