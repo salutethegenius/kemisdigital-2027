@@ -29,16 +29,7 @@ const PaymentSolutions = () => {
     setIsPaymentModalOpen(true);
   };
 
-  /**
-   * Handle successful payment completion
-   * @param paymentIntentId - The Stripe payment intent ID
-   */
-  const handlePaymentSuccess = (paymentIntentId: string) => {
-    toast({
-      title: "Payment Successful",
-      description: `Thank you for purchasing our ${selectedPlan === 'basic' ? 'Stripe Setup' : 'Premium'} package!`,
-    });
-  };
+
 
   return (
     <div className="pt-16">
@@ -55,13 +46,7 @@ const PaymentSolutions = () => {
           pageContext="tourism"
         />
         
-        {/* Payment Modal */}
-        <PaymentModal 
-          isOpen={isPaymentModalOpen}
-          onClose={() => setIsPaymentModalOpen(false)}
-          onSuccess={handlePaymentSuccess}
-          planType={selectedPlan}
-        />
+
         
         <div className="container mx-auto px-4 py-12">
           <motion.div
@@ -306,6 +291,13 @@ const PaymentSolutions = () => {
         </div>
         
         <Footer />
+        
+        {/* Payment Modal */}
+        <StaticPaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          selectedPlan={selectedPlan}
+        />
     </div>
   );
 };

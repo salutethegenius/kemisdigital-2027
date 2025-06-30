@@ -6,28 +6,28 @@ KemisDigital is a comprehensive digital marketing and software development platf
 
 ## System Architecture
 
-### Frontend Architecture
+### Static Frontend Architecture
 - **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite for fast development and optimized builds
+- **Build Tool**: Vite for fast development and optimized static builds
 - **Styling**: Tailwind CSS with custom KemisDigital brand colors
 - **UI Components**: Shadcn/ui component library with Radix UI primitives
 - **Routing**: Wouter for lightweight client-side routing
-- **State Management**: SWR for data fetching and caching
+- **State Management**: React hooks and local state (no external APIs)
 - **Animations**: Framer Motion for smooth animations and transitions
 - **Internationalization**: react-i18next (currently English-only)
 
-### Backend Architecture
-- **Runtime**: Node.js with Express server
-- **Language**: TypeScript with ESM modules
-- **Database**: PostgreSQL via Neon hosting with Drizzle ORM
-- **API Structure**: RESTful endpoints organized by feature domains
-- **Error Handling**: Centralized error handling with custom ApiError class
+### Client-Side Integrations
+- **Payments**: Stripe Checkout for hosted payment processing
+- **Email**: EmailJS for client-side contact form submissions
+- **AI Features**: OpenAI API for chatbot (optional)
+- **Analytics**: Can integrate with Google Analytics or similar
 
 ### Key Design Decisions
-- **Monorepo Structure**: Client and server code in single repository for easier development
+- **Static Site Architecture**: No backend server required - pure frontend application
 - **TypeScript First**: Full TypeScript implementation for type safety
 - **Component-First**: Modular component architecture for reusability
 - **Mobile-First**: Responsive design optimized for Caribbean mobile usage
+- **JAMstack Approach**: JavaScript, APIs, and Markup for modern web development
 
 ## Key Components
 
@@ -38,19 +38,19 @@ KemisDigital is a comprehensive digital marketing and software development platf
    - AI-enhanced marketing strategies
 
 2. **Payment Processing**
-   - Stripe integration for online payments
-   - One-time setup fee model ($97) with transparent pricing
-   - Support for Bahamian businesses without SSN through ITIN assistance
+   - Stripe Checkout integration for secure online payments
+   - One-time setup fee model ($97 Basic, $197 Premium) with transparent pricing
+   - Client-side payment processing with hosted payment pages
 
 3. **Content Management**
-   - Blog system with categories and tags
-   - Press release management
+   - Static content pages with dynamic components
    - Resource library with downloadable content
+   - SEO-optimized page structure
 
 4. **Communication Systems**
-   - EmailJS integration for contact forms
-   - Nodemailer for server-side email handling
-   - Calendar integration for appointment booking
+   - EmailJS integration for client-side contact forms
+   - Direct email integration without server requirements
+   - WhatsApp and email contact options
 
 ### UI/UX Features
 - **Brand Identity**: KemisDigital colors (Blue #00A0E3, Yellow #F7BE00)
@@ -61,21 +61,20 @@ KemisDigital is a comprehensive digital marketing and software development platf
 
 ## Data Flow
 
-### Frontend Data Flow
-1. **Component → SWR → API Endpoint → Database**
-2. **Form Submission → Validation → API Call → Email/Database**
-3. **Payment Flow → Stripe SDK → Payment Intent → Confirmation**
+### Static Site Data Flow
+1. **Component → Local State → UI Update**
+2. **Form Submission → Client Validation → EmailJS → Email Delivery**
+3. **Payment Flow → Stripe Checkout → Hosted Payment → Success/Cancel Redirect**
 
-### Backend Data Flow
-1. **Route Handler → Middleware → Business Logic → Database Query**
-2. **Error Handling → Centralized Logger → Client Response**
-3. **Email Processing → Nodemailer → External SMTP → Delivery**
+### External Service Integration
+1. **Contact Forms → EmailJS → Email Service → Notification**
+2. **Payments → Stripe Checkout → Payment Processing → Success Page**
+3. **AI Features → OpenAI API → Response → Component Update**
 
-### Database Schema
-- **Users**: Authentication and profile management
-- **Blog Posts**: Content management with categories/tags
-- **Categories/Tags**: Content organization
-- **Contact Forms**: Lead capture and communication
+### Content Management
+- **Static Pages**: Pre-built HTML/CSS/JS served from CDN
+- **Dynamic Content**: Client-side rendering with React components
+- **Assets**: Optimized images and resources served statically
 
 ## External Dependencies
 
@@ -84,18 +83,17 @@ KemisDigital is a comprehensive digital marketing and software development platf
 - **ITIN Services**: Tax identification support for Bahamian businesses
 
 ### Communication
-- **EmailJS**: Client-side email sending
-- **Nodemailer**: Server-side email automation
-- **Gmail SMTP**: Email delivery service
+- **EmailJS**: Client-side email sending for contact forms
+- **Stripe**: Payment processing and checkout hosting
 
 ### AI & Analytics
-- **OpenAI API**: GPT-4o for AI-powered features
-- **Plotly.js**: Data visualization and analytics
+- **OpenAI API**: GPT-4o for AI-powered chatbot features
+- **Web Analytics**: Google Analytics or similar (configurable)
 
 ### Infrastructure
-- **Neon**: PostgreSQL database hosting
-- **Replit**: Development and deployment platform
 - **Vite**: Build tool and development server
+- **Static Hosting**: Netlify, Vercel, or any CDN
+- **Domain Management**: Custom domain configuration
 
 ### UI/UX Libraries
 - **Framer Motion**: Animation library
@@ -111,22 +109,25 @@ KemisDigital is a comprehensive digital marketing and software development platf
 - **Environment Variables**: Separate configs for client and server
 
 ### Production Build
-- **SSR Support**: Vite-powered server-side rendering capability
-- **Static Asset Optimization**: Image optimization and caching
-- **Code Splitting**: Lazy loading for optimal performance
+- **Static Site Generation**: Optimized HTML, CSS, and JavaScript bundles
+- **Asset Optimization**: Image optimization and lazy loading
+- **Code Splitting**: Automatic chunking for optimal performance
+- **CDN Ready**: All assets optimized for global CDN delivery
 
-### Database Strategy
-- **PostgreSQL**: Hosted on Neon for reliability and scalability
-- **Drizzle ORM**: Type-safe database queries and migrations
-- **Connection Pooling**: Optimized database connections
+### Deployment Strategy
+- **Static Hosting**: No server required - deploy to any static host
+- **Build Output**: Single `dist` folder contains everything needed
+- **Environment Variables**: Client-side environment configuration
+- **Version Control**: Git-based deployment with automatic builds
 
 ### Security Considerations
-- **CORS**: Configured for development and production environments
-- **Error Handling**: Sanitized error responses for production
-- **Environment Isolation**: Separate configurations for different environments
+- **Client-Side Security**: API keys properly scoped for frontend use
+- **Payment Security**: Stripe handles all sensitive payment data
+- **Form Security**: EmailJS provides secure form submission
+- **HTTPS**: SSL/TLS encryption for all communications
 
 ## Changelog
-- June 30, 2025: Initial setup
+- June 30, 2025: Initial setup with full-stack architecture
 - June 30, 2025: Fixed port configuration - Client on port 3000, Server on port 5000
 - June 30, 2025: Resolved navigation menu issues and component overlapping
 - June 30, 2025: Added Header/Footer to all pages with proper spacing
@@ -135,6 +136,11 @@ KemisDigital is a comprehensive digital marketing and software development platf
 - June 30, 2025: Resolved SoundLink component ref errors using forwardRef
 - June 30, 2025: Verified contact form email functionality working correctly
 - June 30, 2025: Removed sound effects system completely per user request
+- June 30, 2025: **Major Architecture Change**: Converted to static frontend-only application
+- June 30, 2025: Removed backend server dependencies entirely
+- June 30, 2025: Implemented client-side Stripe Checkout integration
+- June 30, 2025: Added static payment success page and improved error handling
+- June 30, 2025: Created deployment-ready static site configuration
 
 ## User Preferences
 

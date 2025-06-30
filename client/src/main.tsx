@@ -17,6 +17,7 @@ const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const WebAppDev = lazy(() => import("./pages/WebAppDev"));
 const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Meet = lazy(() => import("./pages/Meet"));
 
@@ -42,6 +43,7 @@ function App() {
                   <Route path="/contact" component={Contact} />
                   <Route path="/web-app-development" component={WebAppDev} />
                   <Route path="/payment-solutions" component={PaymentSolutions} />
+                  <Route path="/payment-success" component={PaymentSuccess} />
                   <Route path="/resources" component={Resources} />
                   <Route path="/meet" component={Meet} />
                   <Route>
