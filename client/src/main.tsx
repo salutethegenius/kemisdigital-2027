@@ -1,4 +1,3 @@
-
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
@@ -11,21 +10,6 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
 import "./i18n";
 import ErrorBoundary from "./components/ErrorBoundary";
-
-// Comprehensive error handling to prevent UI breakage
-window.addEventListener('unhandledrejection', (event) => {
-  console.warn('[HANDLED] Unhandled promise rejection:', event.reason);
-  event.preventDefault(); // Prevent default browser behavior
-});
-
-window.addEventListener('error', (event) => {
-  console.warn('[HANDLED] Global error:', event.error);
-  event.preventDefault();
-});
-
-window.addEventListener('rejectionhandled', (event) => {
-  console.log('[HANDLED] Promise rejection handled:', event.reason);
-});
 
 // Eager load only the Home component
 import Home from "./pages/Home";
@@ -59,10 +43,6 @@ function App() {
             errorRetryCount: 0,
             onError: (error) => {
               console.warn('[SWR] API Error handled:', error);
-            },
-            onErrorRetry: () => {
-              // Disable retries to prevent promise rejection loops
-              return;
             }
           }}
         >
