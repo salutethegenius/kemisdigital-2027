@@ -42,10 +42,9 @@ const PaymentSolutions = () => {
   };
 
   return (
-    <StripeProvider>
-      <div className="pt-16">
-        <Header />
-        <SEOHelmet
+    <div className="pt-16">
+      <Header />
+      <SEOHelmet
           title="Payment Solutions | KemisDigital"
           description="Start accepting online payments in The Bahamas with Kemis Digital and Stripe. Simplify transactions with our Stripe integration."
           keywords="payment processing, Bahamas, Stripe, financial services, transaction processing, online payments"
@@ -308,8 +307,7 @@ const PaymentSolutions = () => {
         </div>
         
         <Footer />
-      </div>
-    </StripeProvider>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
 /**
  * StripeProvider component props
@@ -9,9 +9,6 @@ import { loadStripe } from '@stripe/stripe-js';
 interface StripeProviderProps {
   children: ReactNode;
 }
-
-// Initialize Stripe outside of the component to prevent multiple instances
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 /**
  * StripeProvider Component
@@ -23,6 +20,24 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
  * @returns {JSX.Element} The wrapped children with Stripe context
  */
 export default function StripeProvider({ children }: StripeProviderProps) {
+  // Memoize Stripe instance to prevent recreation on every render
+  const stripePromise = useMemo(() => {
+    const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    
+    if (!publishableKey) {
+      console.warn('VITE_STRIPE_PUBLISHABLE_KEY is not set');
+      return null;
+    }
+    
+    return loadStripe(publishableKey);
+  }, []);
+
+  // If no publishable key, render children without Stripe context
+  if (!stripePromise) {
+    console.warn('Stripe not initialized - missing publishable key');
+    return <>{children}</>;
+  }
+
   return (
     <Elements stripe={stripePromise}>
       {children}
