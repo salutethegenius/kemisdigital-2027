@@ -10,14 +10,6 @@ deploymentTarget = "cloudrun"
 build = ["sh", "-c", "npm run build"]
 run = ["sh", "-c", "npm start"]
 
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[[ports]]
-localPort = 5000
-externalPort = 5000
-
 [packager]
 language = "nodejs"
   [packager.features]
@@ -137,3 +129,11 @@ args = "sleep 5"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd client && VITE_API_URL=http://localhost:5000 npm run dev"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
