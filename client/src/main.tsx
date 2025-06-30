@@ -1,21 +1,16 @@
-import { StrictMode, lazy, Suspense } from "react";
+import { StrictMode, lazy, Suspense, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
 import "./index.css";
-import "./styles/animated-title.css";
 import "./styles/animated-title.css";
 import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
-// Import i18n configuration
 import "./i18n";
-import Preloader from "./components/shared/Preloader";
-import { logError, createError } from "./lib/errorHandling";
+import { setupGlobalErrorHandling } from "./lib/errorHandling";
 import ErrorBoundary from "./components/ErrorBoundary";
-
-// Global error handling setup will be done after React renders
 
 // Eager load only the Home component for fast initial load
 import Home from "./pages/Home";
@@ -46,65 +41,29 @@ const WebAppDev = lazy(() => import("@/pages/WebAppDev"));
 // Layout
 import Layout from "./components/layout/Layout";
 
-// Add Link Preloading (prefetch when hovering links)
-if (typeof window !== 'undefined') {
-  if ('IntersectionObserver' in window && 'requestIdleCallback' in window) {
-    // Preload pages when links are in viewport
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const link = entry.target as HTMLAnchorElement;
-          const href = link.getAttribute('href');
-          if (href && href.startsWith('/') && !link.dataset.prefetched) {
-            // Mark as prefetched to avoid duplicate prefetching
-            link.dataset.prefetched = 'true';
-            
-            // Use requestIdleCallback to preload during browser idle time
-            window.requestIdleCallback(() => {
-              switch (href) {
-                case '/about':
-                  import("./pages/About");
-                  break;
-                case '/services':
-                  import("./pages/Services");
-                  break;
-                case '/contact':
-                  import("./pages/Contact");
-                  break;
-                // Add more cases as needed
-              }
-            });
-          }
-        }
-      });
-    }, { rootMargin: '200px' });
-
-    // Add event listeners after a short delay to avoid initial load impact
-    setTimeout(() => {
-      document.querySelectorAll('a[href^="/"]').forEach(link => {
-        observer.observe(link);
-      });
-    }, 1000);
-  }
-}
-
-// Simple loading component for page transitions - no preloader for internal navigation
+// Simple loading component for page transitions
 const PageLoader = () => (
   <div className="h-screen w-full flex items-center justify-center">
     <div className="w-16 h-16 border-4 border-[#00A0E3]/20 rounded-full border-t-[#00A0E3] animate-spin"></div>
   </div>
 );
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+// Main App Component with error handling setup
+function App() {
+  useEffect(() => {
+    // Setup global error handling after React renders
+    setupGlobalErrorHandling();
+  }, []);
+
+  return (
     <HelmetProvider>
       <ThemeProvider>
         <SWRConfig 
           value={{ 
             fetcher,
-            revalidateOnFocus: false, // Disable revalidation on window focus
+            revalidateOnFocus: false,
             revalidateIfStale: true,
-            dedupingInterval: 10000, // Dedupe requests within 10 seconds
+            dedupingInterval: 10000,
             onError: (error) => {
               console.warn('SWR Error:', error instanceof Error ? error.message : String(error));
             }
@@ -115,27 +74,27 @@ createRoot(document.getElementById("root")!).render(
               <Layout>
                 <Suspense fallback={<PageLoader />}>
                   <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/privacy" component={Privacy} />
-                  <Route path="/data-deletion" component={DataDeletion} />
-                  <Route path="/services" component={Services} />
-                  <Route path="/services/web-development" component={WebDevelopment} />
-                  <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
-                  <Route path="/services/digital-marketing" component={DigitalMarketing} />
-                  <Route path="/services/training-support" component={TrainingSupport} />
-                  <Route path="/services/web-app-dev" component={WebAppDev} />
-                  <Route path="/about" component={About} />
-                  <Route path="/resources" component={Resources} />
-                  <Route path="/events" component={Events} />
-                  <Route path="/contact" component={Contact} />
-                  <Route path="/meet" component={Meet} />
-                  <Route path="/latest-news" component={LatestNews} />
-                  <Route path="/payment-solutions" component={PaymentSolutions} />
-                  <Route path="/membership" component={Membership} />
-                  <Route path="/ai-labs" component={AILabs} />
+                    <Route path="/" component={Home} />
+                    <Route path="/privacy" component={Privacy} />
+                    <Route path="/data-deletion" component={DataDeletion} />
+                    <Route path="/services" component={Services} />
+                    <Route path="/services/web-development" component={WebDevelopment} />
+                    <Route path="/services/analytics-dashboards" component={AnalyticsDashboards} />
+                    <Route path="/services/digital-marketing" component={DigitalMarketing} />
+                    <Route path="/services/training-support" component={TrainingSupport} />
+                    <Route path="/services/web-app-dev" component={WebAppDev} />
+                    <Route path="/about" component={About} />
+                    <Route path="/resources" component={Resources} />
+                    <Route path="/events" component={Events} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/meet" component={Meet} />
+                    <Route path="/latest-news" component={LatestNews} />
+                    <Route path="/payment-solutions" component={PaymentSolutions} />
+                    <Route path="/membership" component={Membership} />
+                    <Route path="/ai-labs" component={AILabs} />
                     <Route path="/us-company-formation" component={USCompanyFormation} />
-                  <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
-                </Switch>
+                    <Route path="/news/kemisdigital-revolutionizes-digital-marketing" component={PressReleaseKemisDigital} />
+                  </Switch>
                 </Suspense>
               </Layout>
             </Router>
@@ -144,5 +103,11 @@ createRoot(document.getElementById("root")!).render(
         </SWRConfig>
       </ThemeProvider>
     </HelmetProvider>
+  );
+}
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
   </StrictMode>
 );

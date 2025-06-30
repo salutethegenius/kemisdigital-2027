@@ -1,4 +1,3 @@
-
 type ErrorLevel = 'info' | 'warn' | 'error' | 'debug';
 
 // Common error code types for better categorization
@@ -44,145 +43,48 @@ export interface ErrorContext {
   action?: string;
 }
 
-// Main AppError class
-export class AppError extends Error {
-  code: ErrorCode;
-  context: ErrorContext;
-  timestamp: string;
-  level: ErrorLevel;
+export interface AppError extends Error {
+  code?: string;
+  context?: Record<string, any>;
   cause?: Error;
-
-  constructor(message: string, options: {
-    code?: ErrorCode;
-    context?: ErrorContext;
-    level?: ErrorLevel;
-    cause?: Error;
-  } = {}) {
-    super(message);
-    this.name = 'AppError';
-    this.code = options.code || 'UNKNOWN_ERROR';
-    this.context = {
-      timestamp: new Date().toISOString(),
-      ...options.context
-    };
-    this.level = options.level || 'error';
-    this.cause = options.cause;
-    this.timestamp = this.context.timestamp;
-
-    // Capture stack trace
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, AppError);
-    }
-  }
-
-  /**
-   * Convert error to a plain object for logging
-   */
-  toJSON() {
-    return {
-      name: this.name,
-      message: this.message,
-      code: this.code,
-      context: this.context,
-      level: this.level,
-      stack: this.stack,
-      timestamp: this.timestamp,
-      cause: this.cause ? {
-        name: this.cause.name,
-        message: this.cause.message,
-        stack: this.cause.stack
-      } : undefined
-    };
-  }
-
-  /**
-   * Get a user-friendly message
-   */
-  getUserMessage(): string {
-    switch (this.code) {
-      case 'CLIENT_NETWORK_ERROR':
-        return 'Network connection failed. Please check your internet connection and try again.';
-      case 'API_UNAUTHORIZED':
-        return 'You are not authorized to perform this action. Please log in and try again.';
-      case 'API_NOT_FOUND':
-        return 'The requested resource was not found.';
-      case 'API_SERVER_ERROR':
-        return 'Server error occurred. Please try again later.';
-      case 'DATA_VALIDATION_ERROR':
-        return 'Please check your input and try again.';
-      default:
-        return 'An unexpected error occurred. Please try again.';
-    }
-  }
 }
 
-/**
- * Create a standardized AppError
- */
-export function createError(message: string, options: {
-  code?: ErrorCode;
-  context?: ErrorContext;
-  level?: ErrorLevel;
-  cause?: Error;
-} = {}): AppError {
-  return new AppError(message, options);
+export function createError(
+  message: string, 
+  options?: { 
+    code?: string; 
+    context?: Record<string, any>; 
+    cause?: Error; 
+  }
+): AppError {
+  const error = new Error(message) as AppError;
+  if (options?.code) error.code = options.code;
+  if (options?.context) error.context = options.context;
+  if (options?.cause) error.cause = options.cause;
+  return error;
 }
 
-/**
- * Enhanced logging function
- */
-export function logError(error: AppError | Error, level: ErrorLevel = 'error'): void {
-  const timestamp = new Date().toISOString();
-  
-  if (error instanceof AppError) {
-    const logData = {
-      timestamp,
-      level,
+export function logError(error: AppError | Error, level: 'warn' | 'error' = 'error') {
+  // Prevent logging loops by checking if we're already in an error handler
+  if ((globalThis as any).__errorHandling) return;
+
+  try {
+    (globalThis as any).__errorHandling = true;
+
+    const errorInfo = {
       message: error.message,
-      code: error.code,
-      context: error.context,
       stack: error.stack,
-      cause: error.cause
+      ...(error as AppError).context,
+      timestamp: new Date().toISOString()
     };
 
-    switch (level) {
-      case 'error':
-        console.error('🔴 [APP ERROR]', logData);
-        break;
-      case 'warn':
-        console.warn('🟡 [APP WARNING]', logData);
-        break;
-      case 'info':
-        console.info('🔵 [APP INFO]', logData);
-        break;
-      case 'debug':
-        console.debug('🟢 [APP DEBUG]', logData);
-        break;
+    if (level === 'error') {
+      console.error('App Error:', errorInfo);
+    } else {
+      console.warn('App Warning:', errorInfo);
     }
-  } else {
-    // Handle regular errors
-    const logData = {
-      timestamp,
-      level,
-      message: error.message,
-      name: error.name,
-      stack: error.stack
-    };
-
-    switch (level) {
-      case 'error':
-        console.error('🔴 [ERROR]', logData);
-        break;
-      case 'warn':
-        console.warn('🟡 [WARNING]', logData);
-        break;
-      case 'info':
-        console.info('🔵 [INFO]', logData);
-        break;
-      case 'debug':
-        console.debug('🟢 [DEBUG]', logData);
-        break;
-    }
+  } finally {
+    (globalThis as any).__errorHandling = false;
   }
 }
 
@@ -190,7 +92,7 @@ export function logError(error: AppError | Error, level: ErrorLevel = 'error'): 
 export function handleFetchError(error: any): AppError {
   if (error.name === 'FetchError') {
     const code = mapStatusToErrorCode(error.status);
-    const appError = new AppError(error.message, {
+    const appError = createError(error.message, {
       code,
       context: {
         status: error.status,
@@ -204,7 +106,7 @@ export function handleFetchError(error: any): AppError {
     logError(appError);
     return appError;
   } else {
-    const appError = new AppError('Network request failed', {
+    const appError = createError('Network request failed', {
       code: 'CLIENT_NETWORK_ERROR',
       context: {
         originalError: error instanceof Error ? error.message : String(error)
@@ -287,38 +189,13 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
   logError(appError);
 }
 
-/**
- * Global error boundary function
- */
-export function setupGlobalErrorHandling(): void {
-  // Handle unhandled promise rejections
-  window.addEventListener('unhandledrejection', (event) => {
-    const error = createError('Unhandled Promise Rejection', {
-      code: 'CLIENT_UNHANDLED_REJECTION',
-      context: {
-        reason: event.reason instanceof Error ? event.reason.message : String(event.reason),
-        stack: event.reason instanceof Error ? event.reason.stack : undefined
-      },
-      cause: event.reason instanceof Error ? event.reason : undefined
+// Remove global error handling to prevent loops
+export function setupGlobalErrorHandling() {
+  // Minimal global error handling - no loops
+  if (typeof window !== 'undefined') {
+    window.addEventListener('unhandledrejection', (event) => {
+      console.warn('Unhandled promise rejection:', event.reason);
+      event.preventDefault(); // Prevent default browser handling
     });
-    
-    logError(error);
-    event.preventDefault();
-  });
-
-  // Handle global JavaScript errors
-  window.addEventListener('error', (event) => {
-    const error = createError('Global JavaScript Error', {
-      code: 'CLIENT_GLOBAL_ERROR',
-      context: {
-        filename: event.filename,
-        lineno: event.lineno,
-        colno: event.colno,
-        message: event.message
-      },
-      cause: event.error
-    });
-    
-    logError(error);
-  });
+  }
 }
