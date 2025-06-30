@@ -49,70 +49,42 @@ export interface AppError extends Error {
   cause?: Error;
 }
 
-export function createError(
-  message: string, 
-  options?: { 
-    code?: string; 
-    context?: Record<string, any>; 
-    cause?: Error; 
+// Simplified error handling without loops
+export function logError(error: Error, level: 'warn' | 'error' = 'error') {
+  if (level === 'error') {
+    console.error('Error:', error.message);
+  } else {
+    console.warn('Warning:', error.message);
   }
-): AppError {
-  const error = new Error(message) as AppError;
-  if (options?.code) error.code = options.code;
-  if (options?.context) error.context = options.context;
-  if (options?.cause) error.cause = options.cause;
-  return error;
 }
 
-export function logError(error: AppError | Error, level: 'warn' | 'error' = 'error') {
-  // Prevent logging loops by checking if we're already in an error handler
-  if ((globalThis as any).__errorHandling) return;
-
-  try {
-    (globalThis as any).__errorHandling = true;
-
-    const errorInfo = {
-      message: error.message,
-      stack: error.stack,
-      ...(error as AppError).context,
-      timestamp: new Date().toISOString()
-    };
-
-    if (level === 'error') {
-      console.error('App Error:', errorInfo);
-    } else {
-      console.warn('App Warning:', errorInfo);
-    }
-  } finally {
-    (globalThis as any).__errorHandling = false;
-  }
+export function createError(message: string): Error {
+  return new Error(message);
 }
 
 // HTTP request error handler with specific status code handling
 export function handleFetchError(error: any): AppError {
   if (error.name === 'FetchError') {
     const code = mapStatusToErrorCode(error.status);
-    const appError = createError(error.message, {
-      code,
-      context: {
-        status: error.status,
-        url: error.url,
-        requestId: error.requestId,
-        responseBody: error.info
-      },
-      cause: error
-    });
+    const appError = createError(error.message) as AppError;
+    appError.code = code;
+    appError.context = {
+      status: error.status,
+      url: error.url,
+      requestId: error.requestId,
+      responseBody: error.info
+    };
+    appError.cause = error;
     
     logError(appError);
     return appError;
   } else {
-    const appError = createError('Network request failed', {
-      code: 'CLIENT_NETWORK_ERROR',
-      context: {
-        originalError: error instanceof Error ? error.message : String(error)
-      },
-      cause: error instanceof Error ? error : undefined
-    });
+    const appError = createError('Network request failed') as AppError;
+    appError.code = 'CLIENT_NETWORK_ERROR';
+    appError.context = {
+      originalError: error instanceof Error ? error.message : String(error)
+    };
+    appError.cause = error instanceof Error ? error : undefined;
     
     logError(appError);
     return appError;
@@ -152,17 +124,15 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
     try {
       return await fn(...args);
     } catch (error) {
-      const appError = error instanceof AppError ? error : createError(
-        error instanceof Error ? error.message : 'Unknown error occurred',
-        {
-          code: 'UNKNOWN_ERROR',
-          context: {
-            ...context,
-            originalError: error instanceof Error ? error.message : String(error)
-          },
-          cause: error instanceof Error ? error : undefined
-        }
-      );
+      const appError = createError(
+        error instanceof Error ? error.message : 'Unknown error occurred'
+      ) as AppError;
+      appError.code = 'UNKNOWN_ERROR';
+      appError.context = {
+        ...context,
+        originalError: error instanceof Error ? error.message : String(error)
+      };
+      appError.cause = error instanceof Error ? error : undefined;
       
       logError(appError);
       throw appError;
@@ -174,28 +144,20 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
  * Handle global errors (used by ErrorBoundary)
  */
 export function handleGlobalError(error: Error, errorInfo?: any): void {
-  const appError = error instanceof AppError ? error : createError(
-    error.message || 'Unknown error occurred',
-    {
-      code: 'CLIENT_RENDER_ERROR',
-      context: {
-        errorInfo,
-        componentStack: errorInfo?.componentStack
-      },
-      cause: error
-    }
-  );
+  const appError = createError(
+    error.message || 'Unknown error occurred'
+  ) as AppError;
+  appError.code = 'CLIENT_RENDER_ERROR';
+  appError.context = {
+    errorInfo,
+    componentStack: errorInfo?.componentStack
+  };
+  appError.cause = error;
   
   logError(appError);
 }
 
-// Remove global error handling to prevent loops
+// Remove all global error handling to prevent loops
 export function setupGlobalErrorHandling() {
-  // Minimal global error handling - no loops
-  if (typeof window !== 'undefined') {
-    window.addEventListener('unhandledrejection', (event) => {
-      console.warn('Unhandled promise rejection:', event.reason);
-      event.preventDefault(); // Prevent default browser handling
-    });
-  }
+  // Do nothing - let React handle errors naturally
 }

@@ -1,3 +1,4 @@
+
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
@@ -7,7 +8,6 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  error?: Error;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -16,16 +16,13 @@ class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Simple logging without loops
-    console.error(`Error in ${this.props.componentName || 'Component'}:`, {
-      error: error.message,
-      componentStack: errorInfo.componentStack
-    });
+    // Simple console log only
+    console.error('Component Error:', error.message);
   }
 
   render() {
@@ -34,9 +31,6 @@ class ErrorBoundary extends Component<Props, State> {
         <div className="min-h-[200px] flex items-center justify-center p-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-red-600 mb-4">Something went wrong</h2>
-            <p className="text-gray-600 mb-4">
-              {this.props.componentName || 'This component'} encountered an error.
-            </p>
             <button
               onClick={() => this.setState({ hasError: false })}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
