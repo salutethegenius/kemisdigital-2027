@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Brain, Target, Sparkles, Code, MessageSquare, LineChart } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function About() {
   const leadershipTeam = [
@@ -57,6 +59,7 @@ export default function About() {
 
   return (
     <div>
+      <Header />
       <Hero
         title="About KemisDigital"
         description="Pioneering the future of marketing with artificial intelligence and data-driven strategies that deliver exceptional results."
@@ -174,6 +177,8 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

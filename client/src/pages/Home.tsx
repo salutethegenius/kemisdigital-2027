@@ -10,6 +10,8 @@ import TestimonialCarousel from '../components/shared/TestimonialCarousel';
 import { testimonials } from '../data/testimonials';
 import EmailMarketingPopup from '../components/shared/EmailMarketingPopup';
 import FirstVisitPopup from '../components/shared/FirstVisitPopup';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -101,6 +103,7 @@ export default function Home() {
 
   return (
     <div>
+      <Header />
       {/* Email Marketing Popup */}
       {showPopup && <EmailMarketingPopup onClose={handleClosePopup} />}
       
@@ -333,6 +336,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

@@ -13,6 +13,8 @@ import {
 import { staggerChildren } from "@/lib/animations";
 import { toast } from "@/hooks/use-toast";
 import AIServicePaymentModal from "@/components/payment/AIServicePaymentModal";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const services = {
   digitalSales: {
@@ -150,6 +152,7 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       <Hero
         title="AI-Powered Solutions & Services"
         description="Comprehensive digital transformation packages tailored for Caribbean businesses."
