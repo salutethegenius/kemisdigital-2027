@@ -17,13 +17,13 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
-      port: 5000, // Use port 5000 for the client
+      port: 3000, // Use port 3000 for the client
       host: '0.0.0.0',
       strictPort: true,
       // Allow all hosts in Replit environment and specific domain
       allowedHosts: (isReplEnv ? true : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev']) as true | string[],
       hmr: isReplEnv ? false : {
-        clientPort: 5000,
+        clientPort: 3000,
         host: '0.0.0.0',
         protocol: 'ws'
       },

@@ -126,7 +126,10 @@ KemisDigital is a comprehensive digital marketing and software development platf
 - **Environment Isolation**: Separate configurations for different environments
 
 ## Changelog
-- June 30, 2025. Initial setup
+- June 30, 2025: Initial setup
+- June 30, 2025: Fixed port configuration - Client on port 3000, Server on port 5000
+- June 30, 2025: Resolved navigation menu issues and component overlapping
+- June 30, 2025: Added Header/Footer to all pages with proper spacing
 
 ## User Preferences
 

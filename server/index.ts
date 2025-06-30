@@ -8,7 +8,7 @@ import path from 'path';
 import { errorHandler, notFoundHandler } from './middleware/errorHandling';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Enhanced error handling for uncaught exceptions and unhandled rejections
 process.on('uncaughtException', (error: Error) => {
