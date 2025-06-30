@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animations";
 import Hero from "@/components/shared/Hero";
 import SEOHelmet from "@/components/shared/SEOHelmet";
-import PaymentModal from "@/components/payment/PaymentModal";
+import StaticPaymentModal from "@/components/payment/StaticPaymentModal";
 import { toast } from "@/hooks/use-toast";
-import StripeProvider from "@/components/stripe/StripeProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
