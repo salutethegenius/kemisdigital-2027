@@ -173,57 +173,26 @@ export function handleGlobalError(error: Error, errorInfo?: any): void {
 }
 
 export function setupGlobalErrorHandling() {
-  // Handle unhandled promise rejections to prevent console spam
+  // Simple error handling - just log genuine errors
   window.addEventListener('unhandledrejection', (event) => {
-    // Prevent the default behavior (logging to console)
-    event.preventDefault();
-    
-    // Only log critical errors, ignore fetch/network failures
     const reason = event.reason;
     const reasonStr = String(reason);
     
+    // Silently ignore network/fetch errors
     if (reasonStr.includes('fetch') || 
         reasonStr.includes('NetworkError') ||
         reasonStr.includes('Failed to fetch') ||
-        reasonStr.includes('ERR_NETWORK') ||
-        reasonStr.includes('TypeError: fetch') ||
-        (reason instanceof TypeError && reasonStr.includes('fetch'))) {
-      // Silently ignore all fetch-related errors
-      return;
-    }
-    
-    // Ignore timeout errors too
-    if (reasonStr.includes('timeout') || reasonStr.includes('AbortError')) {
-      return;
-    }
-    
-    // Log only genuine application errors
-    console.warn('Application error:', reason);
-  });
-
-  // Handle regular errors
-  window.addEventListener('error', (event) => {
-    if (event.error && event.error.message && 
-        (event.error.message.includes('fetch') || 
-         event.error.message.includes('NetworkError'))) {
+        reasonStr.includes('ERR_NETWORK')) {
       event.preventDefault();
       return;
     }
+    
+    // Log other errors normally
+    console.warn('Unhandled promise rejection:', reason);
   });
 
   // Handle global JavaScript errors
   window.addEventListener('error', (event) => {
-    // Ignore network-related errors
-    if (event.message && (
-        event.message.includes('fetch') ||
-        event.message.includes('NetworkError') ||
-        event.message.includes('Failed to fetch') ||
-        event.message.includes('ERR_NETWORK')
-    )) {
-      event.preventDefault();
-      return;
-    }
-    
     console.warn('JavaScript error:', event.error);
   });
 }
