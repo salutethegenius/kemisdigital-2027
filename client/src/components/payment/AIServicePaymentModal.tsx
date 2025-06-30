@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 /**
@@ -53,16 +52,33 @@ export default function AIServicePaymentModal({
     }
   };
 
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle>
-            {serviceName}
-          </DialogTitle>
-        </DialogHeader>
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className="relative z-50 w-full max-w-md mx-4 bg-background rounded-lg shadow-lg border">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b">
+          <h2 className="text-lg font-semibold">{serviceName}</h2>
+          <Button
+            onClick={onClose}
+            variant="ghost"
+            size="sm"
+            className="h-6 w-6 p-0"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
         
-        <div className="space-y-6">
+        {/* Content */}
+        <div className="p-6 space-y-6">
           <div className="text-center space-y-2">
             <p className="text-sm text-muted-foreground">{serviceDescription}</p>
             <p className="text-2xl font-bold text-[#00A0E3]">${servicePrice}</p>
@@ -100,13 +116,13 @@ export default function AIServicePaymentModal({
               </Button>
             </div>
           </div>
+          
+          <div className="text-xs text-center text-muted-foreground">
+            <p>Your payment is secured by Stripe. We do not store your card details.</p>
+            <p className="mt-1">By proceeding, you agree to our Terms of Service and Privacy Policy.</p>
+          </div>
         </div>
-        
-        <div className="text-xs text-center text-muted-foreground">
-          <p>Your payment is secured by Stripe. We do not store your card details.</p>
-          <p className="mt-1">By proceeding, you agree to our Terms of Service and Privacy Policy.</p>
-        </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
