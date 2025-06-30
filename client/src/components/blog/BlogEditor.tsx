@@ -56,7 +56,7 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
     try {
       setIsSubmitting(true);
       const endpoint = postId ? `/api/blog/posts/${postId}` : "/api/blog/posts";
-      const url = getApiUrl(endpoint);
+      const url = getApiUrl() + endpoint;
       const method = postId ? "PUT" : "POST";
 
       console.log(`Submitting to: ${url}`);
