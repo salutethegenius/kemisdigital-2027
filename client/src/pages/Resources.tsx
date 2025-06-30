@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download, ExternalLink, ChevronRight } from "lucide-react";
 import { staggerChildren } from "@/lib/animations";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function Resources() {
   // Sample resources
@@ -105,7 +107,8 @@ export default function Resources() {
   }
 
   return (
-    <div>
+    <div className="pt-16">
+      <Header />
       <Hero
         title="Resources"
         description="Access our library of digital marketing guides, templates, and reports to help you grow your business."
@@ -252,6 +255,8 @@ export default function Resources() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

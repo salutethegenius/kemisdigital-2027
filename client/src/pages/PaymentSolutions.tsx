@@ -306,6 +306,8 @@ const PaymentSolutions = () => {
             </Card>
           </motion.div>
         </div>
+        
+        <Footer />
       </div>
     </StripeProvider>
   );
