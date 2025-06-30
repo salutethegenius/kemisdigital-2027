@@ -320,7 +320,7 @@ export default function Hero({
                     setBackgroundType('none');
                   }}
                   loading="eager"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   decoding="async"
                 />
               ) : (

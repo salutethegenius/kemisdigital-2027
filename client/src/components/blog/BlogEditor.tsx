@@ -77,7 +77,7 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
         description: `Post ${postId ? "updated" : "created"} successfully`,
       });
 
-      onSuccess?.();
+      if (onSuccess) onSuccess();
     } catch (error) {
       toast({
         title: "Error",

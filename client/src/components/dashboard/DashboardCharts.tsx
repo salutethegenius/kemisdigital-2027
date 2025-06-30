@@ -20,7 +20,9 @@ export default function DashboardCharts() {
   if (error) {
     return (
       <div className="p-4">
-        <ErrorBoundary />
+        <ErrorBoundary>
+          <div>An error occurred while loading charts.</div>
+        </ErrorBoundary>
       </div>
     );
   }

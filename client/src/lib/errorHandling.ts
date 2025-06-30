@@ -152,7 +152,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
       logError(appError);
       throw {
       ...appError,
-      cause: error.cause instanceof Error ? error.cause : undefined
+      cause: (error instanceof Error && error.cause instanceof Error) ? error.cause : undefined
     } as AppError;
     }
   }) as T;
