@@ -91,7 +91,7 @@ const StripePaymentForm = ({ planType, amount, interval, onSuccess, onCancel }: 
           email,
           planId: planType === 'basic' ? 'price_basic' : 'price_premium', // These will be actual price IDs from Stripe
           paymentMethod: paymentMethod.id,
-          setupFee: setupFee, // Include the setup fee
+          setupFee: amount, // Include the setup fee (using amount prop)
         }),
       });
 

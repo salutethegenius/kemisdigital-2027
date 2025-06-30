@@ -2,7 +2,7 @@ import React from 'react';
 
 export const TitleEnhancementStyles = () => {
   return (
-    <style jsx global>{`
+    <style>{`
       /* Glow effect for characters on hover */
       .animated-title-char:hover {
         filter: drop-shadow(0 0 8px rgba(0, 160, 227, 0.7));
