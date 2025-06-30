@@ -72,7 +72,9 @@ export default function Meet() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Hero
+      <Header />
+      <div className="pt-16">
+        <Hero
         title="Virtual Meeting Room"
         description="Connect with our team through secure video conferencing"
         showCTA={false}
