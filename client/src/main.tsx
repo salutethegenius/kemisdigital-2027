@@ -1,3 +1,4 @@
+
 import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Switch, Route, Router } from "wouter";
@@ -9,6 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { HelmetProvider } from 'react-helmet-async';
 import "./i18n";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Eager load only the Home component
 import Home from "./pages/Home";
@@ -37,7 +39,11 @@ function App() {
           value={{ 
             fetcher,
             revalidateOnFocus: false,
-            dedupingInterval: 10000
+            dedupingInterval: 10000,
+            shouldRetryOnError: false,
+            onError: () => {
+              // Silent error handling - no console logs to prevent loops
+            }
           }}
         >
           <Router>
@@ -62,6 +68,8 @@ function App() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 );

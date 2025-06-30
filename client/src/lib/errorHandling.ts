@@ -49,42 +49,54 @@ export interface AppError extends Error {
   cause?: Error;
 }
 
-// Simplified error handling without loops
-export function logError(error: Error, level: 'warn' | 'error' = 'error') {
+// Simple error logging without recursive handling
+export function logError(error: Error | unknown, level: 'warn' | 'error' = 'error') {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  const errorStack = error instanceof Error ? error.stack : undefined;
+
   if (level === 'error') {
-    console.error('Error:', error.message);
+    console.error('[ERROR]', errorMessage);
+    if (errorStack) console.error('Stack:', errorStack);
   } else {
-    console.warn('Warning:', error.message);
+    console.warn('[WARN]', errorMessage);
   }
 }
 
-export function createError(message: string): Error {
-  return new Error(message);
+export function createError(message: string, options?: {
+  code?: string;
+  context?: Record<string, any>;
+  cause?: Error;
+}): Error {
+  const error = new Error(message);
+  if (options?.code) {
+    (error as any).code = options.code;
+  }
+  if (options?.context) {
+    (error as any).context = options.context;
+  }
+  if (options?.cause) {
+    error.cause = options.cause;
+  }
+  return error;
 }
 
 // HTTP request error handler with specific status code handling
 export function handleFetchError(error: any): AppError {
   if (error.name === 'FetchError') {
     const code = mapStatusToErrorCode(error.status);
-    const appError = createError(error.message) as AppError;
-    appError.code = code;
-    appError.context = {
+    const appError = createError(error.message, { code: code, context: {
       status: error.status,
       url: error.url,
       requestId: error.requestId,
       responseBody: error.info
-    };
-    appError.cause = error;
+    }, cause: error});
     
     logError(appError);
     return appError;
   } else {
-    const appError = createError('Network request failed') as AppError;
-    appError.code = 'CLIENT_NETWORK_ERROR';
-    appError.context = {
+    const appError = createError('Network request failed', { code: 'CLIENT_NETWORK_ERROR', context: {
       originalError: error instanceof Error ? error.message : String(error)
-    };
-    appError.cause = error instanceof Error ? error : undefined;
+    }, cause: error instanceof Error ? error : undefined});
     
     logError(appError);
     return appError;
@@ -125,14 +137,11 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
       return await fn(...args);
     } catch (error) {
       const appError = createError(
-        error instanceof Error ? error.message : 'Unknown error occurred'
-      ) as AppError;
-      appError.code = 'UNKNOWN_ERROR';
-      appError.context = {
+        error instanceof Error ? error.message : 'Unknown error occurred', {code: 'UNKNOWN_ERROR', context: {
         ...context,
         originalError: error instanceof Error ? error.message : String(error)
-      };
-      appError.cause = error instanceof Error ? error : undefined;
+      }, cause: error instanceof Error ? error : undefined}
+      ) as AppError;
       
       logError(appError);
       throw appError;
@@ -146,13 +155,10 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
 export function handleGlobalError(error: Error, errorInfo?: any): void {
   const appError = createError(
     error.message || 'Unknown error occurred'
-  ) as AppError;
-  appError.code = 'CLIENT_RENDER_ERROR';
-  appError.context = {
+  , {code: 'CLIENT_RENDER_ERROR', context: {
     errorInfo,
     componentStack: errorInfo?.componentStack
-  };
-  appError.cause = error;
+  }, cause: error});
   
   logError(appError);
 }

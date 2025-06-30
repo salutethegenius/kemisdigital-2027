@@ -1,13 +1,13 @@
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
-  componentName?: string;
 }
 
 interface State {
   hasError: boolean;
+  error?: Error;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -16,26 +16,30 @@ class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(): State {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Simple console log only
-    console.error('Component Error:', error.message);
+    // Simple console logging only
+    console.error('ErrorBoundary caught an error:', error);
+    console.error('Component stack:', errorInfo.componentStack);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-[200px] flex items-center justify-center p-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Something went wrong</h2>
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <div className="text-center p-8 max-w-md">
+            <h2 className="text-2xl font-bold text-destructive mb-4">Something went wrong</h2>
+            <p className="text-muted-foreground mb-4">
+              We apologize for the inconvenience. Please refresh the page to continue.
+            </p>
             <button
-              onClick={() => this.setState({ hasError: false })}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              onClick={() => window.location.reload()}
+              className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90"
             >
-              Try Again
+              Refresh Page
             </button>
           </div>
         </div>
