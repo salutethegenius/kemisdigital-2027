@@ -99,6 +99,7 @@ export default function Contact() {
         title="Contact KemisDigital"
         description="Get in touch with our AI marketing experts to transform your digital presence and achieve exceptional results."
         showCTA={false}
+        pageContext="tourism"
       />
 
       <section className="py-16 px-4">
