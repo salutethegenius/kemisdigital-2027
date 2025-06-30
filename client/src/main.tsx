@@ -7,7 +7,7 @@ import "./i18n";
 import "./index.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./hooks/use-theme";
-import { SoundProvider } from "./hooks/use-sound-effects-clean";
+import { SoundProvider } from "./hooks/use-sound-effects";
 
 // Eager load only the Home component
 import Home from "./pages/Home";
@@ -30,19 +30,20 @@ const LoadingSpinner = () => (
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider>
-        <SoundProvider>
-          <ErrorBoundary>
-            <SWRConfig
-              value={{
-                fetcher: (url: string) => fetch(url).then(res => res.json()),
-                errorRetryCount: 0,
-                onError: (error) => {
-                  console.warn('[SWR] API Error handled:', error);
-                }
-              }}
-            >
+    <StrictMode>
+      <HelmetProvider>
+        <ThemeProvider>
+          <SoundProvider>
+            <ErrorBoundary>
+              <SWRConfig
+                value={{
+                  fetcher: (url: string) => fetch(url).then(res => res.json()),
+                  errorRetryCount: 0,
+                  onError: (error) => {
+                    console.warn('[SWR] API Error handled:', error);
+                  }
+                }}
+              >
                 <Router>
                   <Suspense fallback={<LoadingSpinner />}>
                     <Switch>
@@ -67,8 +68,9 @@ function App() {
           </SoundProvider>
         </ThemeProvider>
       </HelmetProvider>
-    );
-  }
+    </StrictMode>
+  );
+}
 
 // Mount the app
 const container = document.getElementById("root");
