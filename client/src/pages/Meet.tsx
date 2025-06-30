@@ -78,6 +78,7 @@ export default function Meet() {
           title="Virtual Meeting Room"
           description="Connect with our team through secure video conferencing"
           showCTA={false}
+          pageContext="tourism"
         />
         <div className="container mx-auto px-4 py-8">
           <Card className="overflow-hidden">
