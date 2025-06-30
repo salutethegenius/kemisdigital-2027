@@ -25,12 +25,14 @@ export default function Home() {
     if (!imagesPreloaded.current) {
       imagesPreloaded.current = true;
       
-      // Preload the hero background image with high priority
+      // Preload the hero background image with high priority and error handling
       const heroImage = new Image();
+      heroImage.onload = () => console.log('Hero image loaded successfully');
+      heroImage.onerror = () => console.log('Hero image not found, will use fallback');
       heroImage.src = '/images/optimized/beachbahamas-large.jpg';
       heroImage.setAttribute('fetchpriority', 'high');
       
-      // Preload other sizes for responsive display
+      // Preload other sizes for responsive display with error handling
       const preloadImageSizes = [
         '/images/optimized/beachbahamas-medium.jpg',
         '/images/optimized/beachbahamas-small.jpg',
@@ -39,6 +41,8 @@ export default function Home() {
       
       preloadImageSizes.forEach(src => {
         const img = new Image();
+        img.onload = () => console.log(`Image loaded: ${src}`);
+        img.onerror = () => console.log(`Image not found: ${src}`);
         img.src = src;
       });
     }
