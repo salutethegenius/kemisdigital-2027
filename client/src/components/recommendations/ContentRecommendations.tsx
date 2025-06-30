@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, Sparkles, AlertCircle } from "lucide-react";
 import { getChatbotResponse } from "@/lib/openai";
-
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface Recommendation {
@@ -85,18 +84,16 @@ Ensure response contains only a valid JSON array.`;
         if (!response) {
           throw new Error("Empty response received from AI service");
         }
-        let parsedResponse: unknown;
         
         try {
           // Remove any potential text before or after the JSON array
-          // Attempt to extract only the JSON array using stricter regex
           const jsonMatch = response.match(/^\[[\s\S]*\]$/);
           if (!jsonMatch) {
             throw new Error("No valid JSON array found in response");
           }
 
           // Parse the JSON with additional validation
-          parsedResponse = JSON.parse(jsonMatch[0]);
+          const parsedResponse = JSON.parse(jsonMatch[0]);
 
           // Validate array structure
           if (!Array.isArray(parsedResponse)) {
@@ -127,108 +124,112 @@ Ensure response contains only a valid JSON array.`;
 
           // Sanitize and validate data
           const sanitizedRecommendations = parsedResponse.map(rec => ({
-            ...rec,
             title: rec.title.slice(0, 100),
             description: rec.description.slice(0, 200),
+            type: rec.type as "article" | "video" | "webinar" | "tool",
             relevanceScore: Math.max(0, Math.min(1, rec.relevanceScore))
           }));
 
           setRecommendations(sanitizedRecommendations);
-          setError(null);
-        } catch (error) {
-          console.error("Failed to process recommendations:", error);
+        } catch (parseError) {
+          console.warn("Failed to parse AI response, using fallback recommendations:", parseError);
           setRecommendations(fallbackRecommendations);
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-          const userFriendlyError = errorMessage.includes('JSON')
-            ? 'Unable to process recommendations. The AI response was not in the correct format.'
-            : 'Unable to process recommendations. Please try again later.';
-          setError(userFriendlyError);
-          
-          // Log detailed error information for debugging
-          console.debug("Original response:", response);
-          console.debug("Parsed data:", parsedResponse);
         }
       } catch (error) {
         console.error("Error fetching recommendations:", error);
+        setError("Failed to load personalized recommendations");
         setRecommendations(fallbackRecommendations);
-        setError("Failed to fetch recommendations");
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchRecommendations();
+    // Use a timeout to prevent infinite loading states
+    const timeoutId = setTimeout(() => {
+      if (isLoading) {
+        console.warn("Recommendation fetch timed out, using fallback");
+        setRecommendations(fallbackRecommendations);
+        setIsLoading(false);
+      }
+    }, 10000);
+
+    fetchRecommendations().catch(error => {
+      console.error("Unhandled error in fetchRecommendations:", error);
+      setRecommendations(fallbackRecommendations);
+      setIsLoading(false);
+    });
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const renderContent = () => {
     if (isLoading) {
       return (
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse" />
-              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse delay-75" />
-              <div className="w-4 h-4 rounded-full bg-[#00A0E3] animate-pulse delay-150" />
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="animate-pulse">
+              <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+              <div className="h-3 bg-gray-300 rounded w-full mb-1"></div>
+              <div className="h-3 bg-gray-300 rounded w-2/3"></div>
             </div>
-          </CardContent>
-        </Card>
+          ))}
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <Alert>
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       );
     }
 
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Brain className="w-5 h-5 text-[#00A0E3]" />
-            Recommended for You
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {error && (
-            <Alert variant="destructive" className="mb-4">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          <div className="space-y-4">
-            {recommendations.map((recommendation, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-semibold flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-[#00A0E3]" />
-                        {recommendation.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {recommendation.description}
-                      </p>
-                    </div>
-                    <Button variant="outline" size="sm">
-                      View
-                    </Button>
-                  </div>
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-[#00A0E3]/10 text-[#00A0E3] dark:bg-[#00A0E3]/20">
-                      {recommendation.type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {Math.round(recommendation.relevanceScore * 100)}% relevant
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-4">
+        {recommendations.map((recommendation, index) => (
+          <Card key={index} className="border-[#00A0E3]/20 hover:border-[#00A0E3]/40 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-start justify-between mb-2">
+                <h4 className="font-semibold text-sm">{recommendation.title}</h4>
+                <span className="text-xs text-[#F7BE00] font-medium">
+                  {Math.round(recommendation.relevanceScore * 100)}% match
+                </span>
+              </div>
+              <p className="text-xs text-muted-foreground mb-3">
+                {recommendation.description}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs bg-[#00A0E3]/10 text-[#00A0E3] px-2 py-1 rounded">
+                  {recommendation.type}
+                </span>
+                <Button size="sm" variant="outline" className="h-7 text-xs">
+                  Learn More
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     );
   };
 
   return (
     <ErrorBoundary>
-      {renderContent()}
+      <Card className="w-full max-w-md">
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-base">
+            <Brain className="h-5 w-5 text-[#00A0E3]" />
+            AI-Powered Recommendations
+            <Sparkles className="h-4 w-4 text-[#F7BE00]" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {renderContent()}
+        </CardContent>
+      </Card>
     </ErrorBoundary>
   );
 }

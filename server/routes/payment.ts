@@ -116,8 +116,9 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
       expand: ['latest_invoice.payment_intent'],
     });
 
-    // @ts-ignore - We know this will exist based on the expand parameter
-    const clientSecret = subscription.latest_invoice.payment_intent.client_secret;
+    // Type assertion for expanded invoice with payment intent
+    const invoice = subscription.latest_invoice as any;
+    const clientSecret = invoice?.payment_intent?.client_secret;
 
     res.json({
       subscriptionId: subscription.id,

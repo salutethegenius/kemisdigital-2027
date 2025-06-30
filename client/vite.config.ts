@@ -20,13 +20,13 @@ export default defineConfig(({ mode }) => {
       port: 5000, // Use port 5000 for the client
       host: '0.0.0.0',
       strictPort: true,
-      // Allow all hosts in Replit environment
-      allowedHosts: isReplEnv ? 'all' : ['localhost'],
+      // Allow all hosts in Replit environment and specific domain
+      allowedHosts: isReplEnv ? 'all' : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev'],
       hmr: {
         // In Replit, we need to use SSL for the WebSocket connection
         clientPort: isReplEnv ? 443 : 5000,
-        // Use the Replit domain if available, otherwise use default host
-        host: isReplEnv ? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co` : '0.0.0.0',
+        // Use the current Replit domain format
+        host: isReplEnv ? (process.env.REPLIT_DEV_DOMAIN || 'localhost') : '0.0.0.0',
         // Use secure WebSockets in Replit, regular WebSockets locally
         protocol: isReplEnv ? 'wss' : 'ws'
       },
