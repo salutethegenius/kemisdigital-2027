@@ -8,6 +8,8 @@ import SEOHelmet from "@/components/shared/SEOHelmet";
 import PaymentModal from "@/components/payment/PaymentModal";
 import { toast } from "@/hooks/use-toast";
 import StripeProvider from "@/components/stripe/StripeProvider";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 /**
  * PaymentSolutions Component
@@ -41,7 +43,8 @@ const PaymentSolutions = () => {
 
   return (
     <StripeProvider>
-      <div>
+      <div className="pt-16">
+        <Header />
         <SEOHelmet
           title="Payment Solutions | KemisDigital"
           description="Start accepting online payments in The Bahamas with Kemis Digital and Stripe. Simplify transactions with our Stripe integration."

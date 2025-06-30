@@ -1,5 +1,7 @@
 import ServiceLayout from "@/components/services/ServiceLayout";
 import PortfolioGrid from "@/components/shared/PortfolioGrid";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const webApplications = [
   {
@@ -153,7 +155,8 @@ const websites = [
 
 export default function WebAppDev() {
   return (
-    <div>
+    <div className="pt-16">
+      <Header />
       <ServiceLayout
         title="Web & Software Development"
         description="Custom web applications and software solutions designed for modern businesses in the Caribbean"
@@ -246,6 +249,8 @@ export default function WebAppDev() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }
