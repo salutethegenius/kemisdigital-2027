@@ -1,3 +1,4 @@
+
 import { AppError, logError, createError } from './errorHandling';
 
 /**
@@ -228,6 +229,7 @@ export const fetcher = async (url: string, options: RequestInit = {}) => {
     });
 
     throw appError;
+  }
 }
 
 // Map HTTP status codes to our error codes

@@ -125,37 +125,7 @@ if (typeof window !== 'undefined') {
   }
 }
 
-// Global error handlers for unhandled promise rejections and errors
-window.addEventListener('unhandledrejection', (event) => {
-  event.preventDefault(); // Prevent the default console error
-  
-  const error = createError('Unhandled Promise Rejection', {
-    code: 'CLIENT_UNHANDLED_REJECTION',
-    context: {
-      reason: event.reason instanceof Error ? event.reason.message : String(event.reason),
-      stack: event.reason instanceof Error ? event.reason.stack : undefined,
-      timestamp: new Date().toISOString()
-    }
-  });
-  
-  logError(error, 'error');
-});
-
-window.addEventListener('error', (event) => {
-  const error = createError('Unhandled Error', {
-    code: 'CLIENT_UNHANDLED_ERROR',
-    context: {
-      message: event.message,
-      filename: event.filename,
-      lineno: event.lineno,
-      colno: event.colno,
-      timestamp: new Date().toISOString()
-    },
-    cause: event.error
-  });
-  
-  logError(error, 'error');
-});
+// Duplicate error handlers removed - using the ones above
 
 // Simple loading component for page transitions - no preloader for internal navigation
 const PageLoader = () => (
