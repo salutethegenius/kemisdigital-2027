@@ -13,8 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import useSWR, { mutate } from "swr";
-import { getApiUrl, fetcher } from "@/lib/fetcher";
+import { getApiUrl } from "@/lib/fetcher";
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -37,9 +36,10 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: categories } = useSWR("/api/blog/categories", fetcher);
-  const { data: tags } = useSWR("/api/blog/tags", fetcher);
-  const { data: post } = useSWR(postId ? `/api/blog/posts/${postId}` : null, fetcher);
+  // Mock data to prevent API calls during development
+  const categories = [];
+  const tags = [];
+  const post = null;
 
   const {
     register,
@@ -77,7 +77,6 @@ export default function BlogEditor({ postId, onSuccess }: BlogEditorProps) {
         description: `Post ${postId ? "updated" : "created"} successfully`,
       });
 
-      mutate(getApiUrl("/api/blog/posts"));
       onSuccess?.();
     } catch (error) {
       toast({
