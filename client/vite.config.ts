@@ -19,6 +19,8 @@ export default defineConfig(({ mode }) => {
       port: 5000, // Use port 5000 for the client
       host: '0.0.0.0',
       strictPort: true,
+      // Allow all hosts in Replit environment
+      allowedHosts: isReplEnv ? 'all' : ['localhost'],
       hmr: {
         // In Replit, we need to use SSL for the WebSocket connection
         clientPort: isReplEnv ? 443 : 5000,
