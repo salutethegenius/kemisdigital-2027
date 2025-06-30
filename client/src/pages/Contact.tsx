@@ -10,6 +10,8 @@ import Hero from "@/components/shared/Hero";
 import CalendarWidget from "@/components/shared/CalendarWidget";
 import { useToast } from "@/hooks/use-toast";
 import { staggerChildren } from "@/lib/animations";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import {
   Form,
   FormControl,
@@ -92,6 +94,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
+      <Header />
       <Hero
         title="Contact KemisDigital"
         description="Get in touch with our AI marketing experts to transform your digital presence and achieve exceptional results."
@@ -291,6 +294,8 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }
