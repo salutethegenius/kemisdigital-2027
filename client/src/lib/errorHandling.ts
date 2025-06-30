@@ -186,13 +186,29 @@ export function setupGlobalErrorHandling() {
         reasonStr.includes('NetworkError') ||
         reasonStr.includes('Failed to fetch') ||
         reasonStr.includes('ERR_NETWORK') ||
+        reasonStr.includes('TypeError: fetch') ||
         (reason instanceof TypeError && reasonStr.includes('fetch'))) {
       // Silently ignore all fetch-related errors
       return;
     }
     
+    // Ignore timeout errors too
+    if (reasonStr.includes('timeout') || reasonStr.includes('AbortError')) {
+      return;
+    }
+    
     // Log only genuine application errors
     console.warn('Application error:', reason);
+  });
+
+  // Handle regular errors
+  window.addEventListener('error', (event) => {
+    if (event.error && event.error.message && 
+        (event.error.message.includes('fetch') || 
+         event.error.message.includes('NetworkError'))) {
+      event.preventDefault();
+      return;
+    }
   });
 
   // Handle global JavaScript errors
