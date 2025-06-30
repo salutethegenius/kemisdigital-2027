@@ -151,7 +151,7 @@ export default function Services() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-16">
       <Header />
       <Hero
         title="AI-Powered Solutions & Services"

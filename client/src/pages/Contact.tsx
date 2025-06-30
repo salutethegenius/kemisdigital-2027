@@ -93,7 +93,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-16">
       <Header />
       <Hero
         title="Contact KemisDigital"

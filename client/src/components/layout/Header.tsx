@@ -69,17 +69,15 @@ export default function Header() {
   const navigation = [
     { name: t('header.home'), href: "/", icon: Home, description: "Return to our homepage" },
     { name: t('header.about'), href: "/about", icon: Info, description: "Learn about our company" },
-    { name: "AI Labs", href: "/ai-labs", icon: Sparkles, description: "Explore our AI-powered solutions" },
-    { name: "Web Development", href: "/services/web-app-dev", icon: Code, description: "Custom web and mobile app development" },
+    { name: "Services", href: "/services", icon: Sparkles, description: "Our AI-powered solutions and services" },
+    { name: "Web Development", href: "/web-app-development", icon: Code, description: "Custom web and mobile app development" },
     { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard, description: "Secure payment processing and financial solutions" },
-    { name: "US Company Formation", href: "/us-company-formation", icon: Award, description: "Form your US company with our expert assistance" },
-    { name: t('header.events'), href: "/events", icon: Calendar, description: "Our events and workshops" },
-    { name: t('header.latest_news'), href: "/latest-news", icon: Newspaper, description: "Stay updated with our latest news" },
+    { name: "Resources", href: "/resources", icon: Award, description: "Helpful resources and guides" },
+    { name: "Contact", href: "/contact", icon: Phone, description: "Get in touch with us" },
   ];
 
   const contactOptions = [
     { name: t('header.contact'), href: "/contact", icon: Phone, description: "Get in touch with us" },
-    { name: t('header.meet'), href: "/meet", icon: Video, description: "Schedule a virtual meeting" },
   ];
 
   return (

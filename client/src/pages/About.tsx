@@ -58,7 +58,7 @@ export default function About() {
   
 
   return (
-    <div>
+    <div className="pt-16">
       <Header />
       <Hero
         title="About KemisDigital"
