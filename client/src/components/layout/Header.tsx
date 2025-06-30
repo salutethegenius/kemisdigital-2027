@@ -73,7 +73,6 @@ export default function Header() {
     { name: "Web Development", href: "/web-app-development", icon: Code, description: "Custom web and mobile app development" },
     { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard, description: "Secure payment processing and financial solutions" },
     { name: "Resources", href: "/resources", icon: Award, description: "Helpful resources and guides" },
-    { name: "Contact", href: "/contact", icon: Phone, description: "Get in touch with us" },
   ];
 
   const contactOptions = [
