@@ -83,7 +83,7 @@ export default function DrewberCongratulations() {
                 {/* Free Resource Offer */}
                 <motion.div
                   variants={fadeIn}
-                  className="bg-gradient-to-r from-[#00A0E3]/10 to-[#F7BE00]/10 rounded-lg p-8 mb-8"
+                  className="rounded-lg p-8 mb-8"
                 >
                   <h3 className="text-2xl font-bold mb-4">🎁 Exclusive Free Access</h3>
                   <h4 className="text-xl font-semibold text-[#00A0E3] mb-4">
