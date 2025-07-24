@@ -68,7 +68,7 @@ export default function DrewberCongratulations() {
             animate="visible"
             className="mb-12"
           >
-            <Card className="border-2 border-[#00A0E3]/20 shadow-2xl bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-[#00A0E3]/20 shadow-2xl bg-white">
               <CardContent className="p-8 md:p-12">
                 <motion.div
                   variants={fadeIn}
