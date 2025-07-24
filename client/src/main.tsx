@@ -20,6 +20,7 @@ const PaymentSolutions = lazy(() => import("./pages/PaymentSolutions"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Meet = lazy(() => import("./pages/Meet"));
+const DrewberCongratulations = lazy(() => import("./pages/DrewberCongratulations"));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/payment-success" component={PaymentSuccess} />
                   <Route path="/resources" component={Resources} />
                   <Route path="/meet" component={Meet} />
+                  <Route path="/drewber-congratulations" component={DrewberCongratulations} />
                   <Route>
                     <div className="flex items-center justify-center min-h-screen">
                       <h1 className="text-2xl font-bold">404 - Page Not Found</h1>
