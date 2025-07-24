@@ -82,7 +82,7 @@ export default function DrewberCongratulations() {
                   variants={fadeIn}
                   className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
                 >
-                  Thank you for attending Cortney McDonald's presentation on "Taking Your Digital Media Footprint to the Next Level" at Margaritaville Beach Resort. As promised, here's your exclusive access to valuable digital marketing resources.
+                  Thank you for attending the presentation on "Taking Your Digital Media Footprint to the Next Level" at Margaritaville Beach Resort. As promised, here's your exclusive access to valuable digital marketing resources.
                 </motion.p>
 
                 {/* Free Resource Offer */}
@@ -92,7 +92,7 @@ export default function DrewberCongratulations() {
                 >
                   <h3 className="text-2xl font-bold mb-4">🎁 Exclusive Free Access</h3>
                   <h4 className="text-xl font-semibold text-[#00A0E3] mb-4">
-                    The Smart Black Book Of Digital Marketing
+                    The Smart Black Book Of Digital Marketing by Kenneth C. Moncur
                   </h4>
                   <p className="text-muted-foreground mb-6">
                     A comprehensive guide packed with proven strategies, insider tips, and actionable insights to transform your digital presence and accelerate your business growth.
