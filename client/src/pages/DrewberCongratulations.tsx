@@ -7,11 +7,16 @@ import { Download, CheckCircle, Trophy, Sparkles } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { fadeIn, staggerChildren } from "@/lib/animations";
+import smartBlackBookPDF from "@/assets/The Smart Black Book Of Digital Marketing_ Breaking It Down For Small Business Owners (1).pdf";
 
 export default function DrewberCongratulations() {
   const handleDownload = () => {
-    // This will be replaced with actual PDF download link when provided
-    window.open('#', '_blank');
+    const link = document.createElement('a');
+    link.href = smartBlackBookPDF;
+    link.download = 'The Smart Black Book Of Digital Marketing.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -143,7 +148,7 @@ export default function DrewberCongratulations() {
                 {/* Contact Section */}
                 <motion.div
                   variants={fadeIn}
-                  className="mt-8 p-6 bg-muted/50 rounded-lg"
+                  className="mt-8 p-6 rounded-lg"
                 >
                   <p className="text-sm text-muted-foreground mb-4">
                     Questions about the content or need personalized digital marketing support?
