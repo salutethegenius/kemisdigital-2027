@@ -170,6 +170,7 @@ export default function Enterprise() {
         title="LawBey Enterprise"
         description="Bring the Power of AI Legal Research Into Your Firm. Cut research time, access past rulings instantly, and keep your case files secure — all within your own private server environment."
         showCTA={false}
+        heroImage="/images/lawbey-ss.png"
         pageContext="professional"
       />
 
