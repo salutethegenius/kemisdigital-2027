@@ -7,18 +7,18 @@ export class ApiError extends Error {
   statusCode: number;
   code: string;
   details?: any;
-
+  
   constructor(message: string, statusCode: number = 500, code: string = 'INTERNAL_SERVER_ERROR', details?: any) {
     super(message);
     this.name = 'ApiError';
     this.statusCode = statusCode;
     this.code = code;
     this.details = details;
-
+    
     // This is needed because we're extending a built-in class
     Object.setPrototypeOf(this, ApiError.prototype);
   }
-
+  
   /**
    * Format error for API response
    */
@@ -39,22 +39,22 @@ export class ApiError extends Error {
  * Creates specific error types with standard formats
  */
 export const httpErrors = {
-  badRequest: (message: string, code = 'BAD_REQUEST', details?: any) =>
+  badRequest: (message: string, code = 'BAD_REQUEST', details?: any) => 
     new ApiError(message, 400, code, details),
-
-  unauthorized: (message: string, code = 'UNAUTHORIZED', details?: any) =>
+    
+  unauthorized: (message: string, code = 'UNAUTHORIZED', details?: any) => 
     new ApiError(message, 401, code, details),
-
-  forbidden: (message: string, code = 'FORBIDDEN', details?: any) =>
+    
+  forbidden: (message: string, code = 'FORBIDDEN', details?: any) => 
     new ApiError(message, 403, code, details),
-
-  notFound: (message: string, code = 'NOT_FOUND', details?: any) =>
+    
+  notFound: (message: string, code = 'NOT_FOUND', details?: any) => 
     new ApiError(message, 404, code, details),
-
-  conflict: (message: string, code = 'CONFLICT', details?: any) =>
+    
+  conflict: (message: string, code = 'CONFLICT', details?: any) => 
     new ApiError(message, 409, code, details),
-
-  internal: (message: string, code = 'INTERNAL_SERVER_ERROR', details?: any) =>
+    
+  internal: (message: string, code = 'INTERNAL_SERVER_ERROR', details?: any) => 
     new ApiError(message, 500, code, details),
 };
 
@@ -68,42 +68,42 @@ export function errorHandler(err: any, _req: Request, res: Response, _next: Next
     logApiError(err);
     return res.status(err.statusCode).json(err.toResponse());
   }
-
+  
   // Handle specific known errors
   if (err.name === 'ValidationError') {
     const apiError = httpErrors.badRequest(
-      'Validation error',
-      'VALIDATION_ERROR',
+      'Validation error', 
+      'VALIDATION_ERROR', 
       { details: err.details || err.message }
     );
     logApiError(apiError);
     return res.status(apiError.statusCode).json(apiError.toResponse());
   }
-
+  
   if (err.name === 'SyntaxError' && err.message.includes('JSON')) {
     const apiError = httpErrors.badRequest(
-      'Invalid JSON',
+      'Invalid JSON', 
       'INVALID_JSON'
     );
     logApiError(apiError);
     return res.status(apiError.statusCode).json(apiError.toResponse());
   }
-
+  
   if (err.code === 'ECONNREFUSED') {
     const apiError = httpErrors.internal(
-      'Database connection failed',
+      'Database connection failed', 
       'DATABASE_ERROR'
     );
     logApiError(apiError, err);
     return res.status(apiError.statusCode).json(apiError.toResponse());
   }
-
+  
   // Default handling for unknown errors
   const statusCode = err.status || err.statusCode || 500;
-  const message = process.env.NODE_ENV === 'development'
+  const message = process.env.NODE_ENV === 'development' 
     ? err.message || 'Internal Server Error'
     : 'An unexpected error occurred';
-
+  
   // Create a generic error response
   const apiError = new ApiError(
     message,
@@ -111,10 +111,10 @@ export function errorHandler(err: any, _req: Request, res: Response, _next: Next
     'INTERNAL_SERVER_ERROR',
     process.env.NODE_ENV === 'development' ? { originalError: err.message } : undefined
   );
-
+  
   // Log the error with stack trace
   logApiError(apiError, err);
-
+  
   res.status(statusCode).json(apiError.toResponse());
 }
 
@@ -133,11 +133,11 @@ export function notFoundHandler(_req: Request, res: Response) {
 function logApiError(apiError: ApiError, originalError?: any) {
   console.group(`🔴 API Error [${apiError.code}] - ${new Date().toISOString()}`);
   console.error(`Status ${apiError.statusCode}: ${apiError.message}`);
-
+  
   if (apiError.details) {
     console.error('Error Details:', apiError.details);
   }
-
+  
   if (originalError) {
     console.error('Original Error:', originalError);
     if (originalError.stack) {
@@ -146,87 +146,7 @@ function logApiError(apiError: ApiError, originalError?: any) {
   } else if (apiError.stack) {
     console.error('Stack Trace:', apiError.stack);
   }
-
-  console.groupEnd();
-}
-
-/**
- * Wrap async functions to catch and handle errors
- */
-export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
-  fn: T,
-  context?: ErrorContext
-): T {
-  return (async (...args: any[]) => {
-    try {
-      return await fn(...args);
-    } catch (error) {
-      const appError = createError(
-        error instanceof Error ? error.message : 'Unknown error occurred', {
-          code: 'UNKNOWN_ERROR',
-          context: {
-            ...context,
-            originalError: error instanceof Error ? error.message : String(error)
-          },
-          cause: error instanceof Error ? error : undefined
-        }
-      );
-
-      logError(appError);
-      const thrownError: AppError = {
-        ...appError,
-        code: 'UNKNOWN_ERROR',
-        context: appError.context,
-        cause: (error instanceof Error && error.cause instanceof Error) ? error.cause : undefined
-      } as AppError;
-
-      throw thrownError;
-    }
-  }) as T;
-}
-
-/**
- * Error context interface for additional error information
- */
-export interface ErrorContext {
-  [key: string]: any;
-  timestamp?: string;
-  userId?: string;
-  sessionId?: string;
-  component?: string;
-  action?: string;
-}
-
-// Mock implementations for dependencies used in withErrorHandling
-// In a real scenario, these would be imported from their respective modules.
-interface AppError {
-  message: string;
-  code: string;
-  context?: ErrorContext;
-  cause?: Error;
-}
-
-function createError(message: string, options: { code: string; context?: ErrorContext; cause?: Error }): AppError {
-  return {
-    message,
-    code: options.code,
-    context: options.context,
-    cause: options.cause
-  };
-}
-
-function logError(error: AppError) {
-  console.group(`🔴 Error - ${error.code} - ${new Date().toISOString()}`);
-  console.error(`Message: ${error.message}`);
-  if (error.context) {
-    console.error('Context:', error.context);
-  }
-  if (error.cause) {
-    console.error('Cause:', error.cause);
-    if (error.cause.stack) {
-      console.error('Stack Trace:', error.cause.stack);
-    }
-  }
+  
   console.groupEnd();
 }
 

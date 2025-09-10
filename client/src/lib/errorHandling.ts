@@ -66,13 +66,13 @@ export function createError(message: string, options?: {
   code?: string;
   context?: Record<string, any>;
   cause?: Error;
-}): AppError {
-  const error = new Error(message) as AppError;
+}): Error {
+  const error = new Error(message);
   if (options?.code) {
-    error.code = options.code;
+    (error as any).code = options.code;
   }
   if (options?.context) {
-    error.context = options.context;
+    (error as any).context = options.context;
   }
   if (options?.cause) {
     error.cause = options.cause;
