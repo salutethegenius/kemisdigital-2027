@@ -1,0 +1,91 @@
+
+🖼️ [Hero Image Placeholder]
+
+(I will provide gif)
+
+LawBey Enterprise
+
+Bring the Power of AI Legal Research Into Your Firm
+
+Cut research time, access past rulings instantly, and keep your case files secure — all within your own private server environment.
+
+Created by KemisDigital. Trusted by Bahamian innovators.
+
+⸻
+
+💡 The Problem
+
+Law firms spend countless hours digging through court records, case law, and internal files.
+Traditional research is slow, expensive, and difficult to scale.
+	•	Junior associates buried in case files
+	•	Missed precedents slowing down litigation prep
+	•	High billable hours lost to admin work
+
+⸻
+
+✅ The Solution: Your Own Private AI Legal Assistant
+
+We install LawBuddy Enterprise directly on your firm’s servers, pre-loaded with over 3Gigs of court records and your private case files.
+	•	Search & Chat with Court Cases – Instantly query rulings from Bahamian courts and beyond
+	•	Secure In-House Deployment – No third-party SaaS risk, data never leaves your control
+	•	Expandable – Easily add new case files and client documents as you go
+	•	Tailored Training – We teach your team how to maximize AI-assisted research
+
+⸻
+
+📦 What’s Included
+	•	Installation & Setup on your firm’s server (on-prem or private cloud)
+	•	Initial Data Load (we’ll upload up to 3GB of cases to get you started)
+	•	Training Session for your attorneys and staff
+	•	Ongoing Support & Updates with monthly service plan
+
+⸻
+
+💰 Pricing
+
+One-Time Setup & Installation
+
+(Based on firm size)
+	•	Small Firms (2–5 lawyers) → $7,500
+	•	Mid-Sized Firms (6–20 lawyers) → $12,500
+	•	Large Firms (21+ lawyers) → $20,000+
+
+Includes setup, first data ingestion, and staff training.
+
+Monthly Support & Service
+	•	Small Firms → $500/month
+	•	Mid-Sized Firms → $1,500/month
+	•	Large Firms → $3,000+/month
+
+Includes software updates, troubleshooting, and ongoing ingestion support.
+
+Optional Add-Ons
+	•	Extra Data Ingestion → $250 per GB
+	•	Custom Integrations (e.g. with case management tools) → Priced per project
+	•	Advanced Staff Training → $1,500 per session
+
+⸻
+
+🖼️ [Visual Placeholder: Diagram]
+
+(Flowchart of “Court Records → LawBuddy AI → Lawyers”)
+
+⸻
+
+📣 Call to Action
+
+Ready to modernize your legal research?
+
+We’ll help you cut hours of manual work, increase efficiency, and keep your firm ahead.
+
+👉 Fill out the form below to get a custom quote for your firm.
+
+Inquiry Form Fields:
+	•	Name
+	•	Email
+	•	Phone Number
+	•	Law Firm Name
+	•	Size of Firm (2–5, 6–20, 21+)
+	•	Notes / Special Requirements
+
+[ Submit Inquiry ]
