@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,13 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Scale, 
-  Shield, 
-  Clock, 
-  Database, 
-  Users, 
-  CheckCircle, 
+import {
+  Scale,
+  Shield,
+  Clock,
+  Database,
+  Users,
+  CheckCircle,
   AlertTriangle,
   ArrowRight,
   FileText,
@@ -134,7 +133,7 @@ export default function Enterprise() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.firmName || !formData.firmSize) {
       toast({
@@ -146,7 +145,7 @@ export default function Enterprise() {
 
     // Here you would typically send the form data to your backend
     console.log("Form submitted:", formData);
-    
+
     toast({
       title: "Inquiry Submitted Successfully",
       description: "We'll contact you within 24 hours with a custom quote for your firm."
@@ -166,7 +165,7 @@ export default function Enterprise() {
   return (
     <div className="min-h-screen bg-background pt-16">
       <Header />
-      
+
       <Hero
         title="LawBey Enterprise"
         description="Bring the Power of AI Legal Research Into Your Firm. Cut research time, access past rulings instantly, and keep your case files secure — all within your own private server environment."
@@ -178,7 +177,7 @@ export default function Enterprise() {
       <section className="py-8 border-b">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            Created by <span className="text-[#00A0E3] font-semibold">KemisDigital</span>. 
+            Created by <span className="text-[#00A0E3] font-semibold">KemisDigital</span>.
             Trusted by Bahamian innovators.
           </p>
         </div>
@@ -199,7 +198,7 @@ export default function Enterprise() {
               <h2 className="text-3xl md:text-4xl font-bold">The Problem</h2>
             </motion.div>
             <motion.p variants={fadeIn} className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-              Law firms spend countless hours digging through court records, case law, and internal files. 
+              Law firms spend countless hours digging through court records, case law, and internal files.
               Traditional research is slow, expensive, and difficult to scale.
             </motion.p>
           </motion.div>
@@ -405,9 +404,9 @@ export default function Enterprise() {
                 <h4 className="font-semibold mb-2">Court Records</h4>
                 <p className="text-sm text-muted-foreground text-center">3GB+ of legal precedents</p>
               </div>
-              
+
               <ArrowRight className="w-8 h-8 text-[#00A0E3] transform md:transform-none rotate-90 md:rotate-0" />
-              
+
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 bg-[#F7BE00] rounded-full flex items-center justify-center mb-4">
                   <Server className="w-8 h-8 text-black" />
@@ -415,9 +414,9 @@ export default function Enterprise() {
                 <h4 className="font-semibold mb-2">LawBey AI</h4>
                 <p className="text-sm text-muted-foreground text-center">Your private AI assistant</p>
               </div>
-              
+
               <ArrowRight className="w-8 h-8 text-[#00A0E3] transform md:transform-none rotate-90 md:rotate-0" />
-              
+
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 bg-[#00A0E3] rounded-full flex items-center justify-center mb-4">
                   <Scale className="w-8 h-8 text-white" />
@@ -442,7 +441,7 @@ export default function Enterprise() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to modernize your legal research?</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We'll help you cut hours of manual work, increase efficiency, and keep your firm ahead. 
+              We'll help you cut hours of manual work, increase efficiency, and keep your firm ahead.
               Fill out the form below to get a custom quote for your firm.
             </p>
           </motion.div>
@@ -521,8 +520,8 @@ export default function Enterprise() {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full bg-[#00A0E3] hover:bg-[#0078A8] text-white font-semibold py-3"
                 >
                   Submit Inquiry

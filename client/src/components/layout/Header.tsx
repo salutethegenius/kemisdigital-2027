@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
-import { Menu, X, ArrowRight, ChevronDown, Home, Info, Calendar, Newspaper, Code, CreditCard, Award, Sparkles, Phone, Video } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown, Home, Info, Calendar, Newspaper, Code, CreditCard, Award, Sparkles, Phone, Video, Building2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SoundLink from "@/components/shared/SoundLink";
@@ -71,6 +71,7 @@ export default function Header() {
     { name: t('header.home'), href: "/", icon: Home, description: "Return to our homepage" },
     { name: t('header.about'), href: "/about", icon: Info, description: "Learn about our company" },
     { name: "Services", href: "/services", icon: Sparkles, description: "Our AI-powered solutions and services" },
+    { name: "Enterprise", href: "/enterprise", icon: Building2, description: "AI Legal Research for Law Firms" },
     { name: "Web Development", href: "/web-app-development", icon: Code, description: "Custom web and mobile app development" },
     { name: "Payment Solutions", href: "/payment-solutions", icon: CreditCard, description: "Secure payment processing and financial solutions" },
     { name: "Resources", href: "/resources", icon: Award, description: "Helpful resources and guides" },
