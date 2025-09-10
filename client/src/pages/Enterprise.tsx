@@ -126,12 +126,13 @@ export default function Enterprise() {
     firmSize: "",
     notes: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Basic validation
@@ -143,23 +144,63 @@ export default function Enterprise() {
       return;
     }
 
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
+    setIsLoading(true);
 
-    toast({
-      title: "Inquiry Submitted Successfully",
-      description: "We'll contact you within 24 hours with a custom quote for your firm."
-    });
+    try {
+      // Create message for enterprise inquiry
+      const message = `Enterprise Inquiry - LawBey
+      
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Law Firm: ${formData.firmName}
+Firm Size: ${formData.firmSize}
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      firmName: "",
-      firmSize: "",
-      notes: ""
-    });
+Special Requirements:
+${formData.notes || 'None specified'}`;
+
+      const response = await fetch('/api/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          service: 'LawBey Enterprise',
+          message: message,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details || 'Failed to send inquiry');
+      }
+
+      toast({
+        title: "Inquiry Submitted Successfully",
+        description: "We'll contact you within 24 hours with a custom quote for your firm."
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        firmName: "",
+        firmSize: "",
+        notes: ""
+      });
+    } catch (error) {
+      console.error("Error sending inquiry:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "There was a problem sending your inquiry. Please try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -430,6 +471,31 @@ export default function Enterprise() {
         </div>
       </section>
 
+      {/* Try LawBey CTA Section */}
+      <section className="py-24 bg-gradient-to-r from-[#00A0E3] to-[#F7BE00]">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center text-white"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Try LawBey Now</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+              Experience the power of AI legal research firsthand. Try our live demo and see how LawBey can transform your legal practice.
+            </p>
+            <Button
+              size="lg"
+              className="bg-white text-[#00A0E3] hover:bg-gray-100 font-semibold px-8 py-4 text-lg"
+              onClick={() => window.open('https://lawbey.com', '_blank')}
+            >
+              Try LawBey Demo
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -523,9 +589,10 @@ export default function Enterprise() {
 
                 <Button
                   type="submit"
+                  disabled={isLoading}
                   className="w-full bg-[#00A0E3] hover:bg-[#0078A8] text-white font-semibold py-3"
                 >
-                  Submit Inquiry
+                  {isLoading ? "Submitting..." : "Submit Inquiry"}
                 </Button>
               </form>
             </CardContent>
