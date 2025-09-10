@@ -1,5 +1,6 @@
 
 import React, { Component, ReactNode } from 'react';
+import { handleGlobalError } from '../lib/errorHandling';
 
 interface Props {
   children: ReactNode;
@@ -21,7 +22,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+    handleGlobalError(error, errorInfo);
   }
 
   render() {

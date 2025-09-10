@@ -42,7 +42,7 @@ process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
 
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() }););
 });
 
 // Middleware
