@@ -30,14 +30,7 @@ export default defineConfig(({ mode }) => {
         // Explicitly excluded the node_modules folder for better performance
         ignored: ['**/node_modules/**', '**/dist/**']
       },
-      cors: true, // Enable CORS for development
-      proxy: {
-        '/api': {
-          target: 'http://localhost:5000',
-          changeOrigin: true,
-          secure: false,
-        }
-      }
+      cors: true // Enable CORS for development
     },
     resolve: {
       alias: {
