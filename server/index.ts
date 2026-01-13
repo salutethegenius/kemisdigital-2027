@@ -59,10 +59,13 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 // Register API routes
 registerRoutes(app);
 
-// In development, set up Vite for the React client
+// Check if we're running as API-only (client running separately)
+const API_ONLY = process.env.API_ONLY === 'true';
+
+// In development, set up Vite for the React client (unless API_ONLY mode)
 let server: any; // Store server reference for graceful shutdown
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && !API_ONLY) {
   server = createServer(app);
   
   setupVite(app, server)
@@ -84,6 +87,11 @@ if (process.env.NODE_ENV === 'development') {
       console.error('Error setting up Vite:', err);
       process.exit(1);
     });
+} else if (API_ONLY) {
+  // API-only mode: just run the Express server without Vite
+  server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 API server running on port ${PORT} (API-only mode)`);
+  });
 } else {
   // In production, serve static files from the build directory
   serveStatic(app);

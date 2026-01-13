@@ -1,62 +1,41 @@
-import OpenAI from "openai";
-
-// the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true
-});
-
 interface ChatResponse {
   message: string;
   suggestions?: string[];
+  rawContent?: string;
 }
 
-export async function getChatbotResponse(message: string): Promise<string> {
+/**
+ * Get a chatbot response from the server
+ * @param message - The user's message
+ * @param mode - 'chat' for customer support mode (default), 'raw' for direct OpenAI responses
+ */
+export async function getChatbotResponse(message: string, mode: 'chat' | 'raw' = 'chat'): Promise<string> {
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-      messages: [
-        {
-          role: "system",
-          content: `You are a knowledgeable customer support assistant for KemisDigital, a leading AI Marketing firm. Your role is to:
-          1. Help customers understand our AI marketing services including content generation, predictive analytics, campaign automation, and personalization
-          2. Provide information about our technology stack and integration capabilities
-          3. Share relevant case studies and success metrics when appropriate
-          4. Direct pricing inquiries to our sales team for custom quotes
-          5. Maintain a professional, helpful, and engaging tone
-          
-          Keep responses concise (under 150 words) and format your response as a JSON object with:
-          {
-            "message": "your response text",
-            "suggestions": ["optional follow-up suggestion 1", "optional follow-up suggestion 2"]
-          }`,
-        },
-        {
-          role: "user",
-          content: message,
-        },
-      ],
-      temperature: 0.7,
-      max_tokens: 250,
-      response_format: { type: "json_object" },
+    const response = await fetch('/api/chatbot/message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message, mode }),
     });
 
-    const rawContent = response.choices[0]?.message?.content;
-    if (!rawContent) {
-      throw new Error("No content received from API");
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}`);
+    }
+
+    const data: ChatResponse = await response.json();
+    
+    // Raw mode returns the direct content
+    if (mode === 'raw' && data.rawContent) {
+      return data.rawContent;
     }
     
-    try {
-      const content = JSON.parse(rawContent) as ChatResponse;
-      return content.message || "I apologize, but I couldn't generate a proper response.";
-    } catch (parseError) {
-      console.warn("Failed to parse JSON response, returning raw content:", parseError);
-      return rawContent;
-    }
+    return data.message || "I apologize, but I couldn't generate a proper response.";
   } catch (error) {
     console.error("Error getting chatbot response:", error);
-    if (error instanceof Error && error.message.includes("API key")) {
-      return "I apologize, but there seems to be an issue with the authentication. Please contact support for assistance.";
+    if (error instanceof Error && error.message.includes("Failed to fetch")) {
+      return "I apologize, but the chat service is currently unavailable. Please try again later.";
     }
     return "I apologize, but I'm having trouble connecting to our systems. Please try again later.";
   }

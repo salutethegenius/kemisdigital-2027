@@ -59,13 +59,7 @@ export default function ContentRecommendations() {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        // Check if OPENAI_API_KEY is available
-        if (!import.meta.env.VITE_OPENAI_API_KEY) {
-          console.warn("OpenAI API key not available, using fallback recommendations");
-          setRecommendations(fallbackRecommendations);
-          setIsLoading(false);
-          return;
-        }
+        // Server handles the API key, no client-side check needed
 
         const prompt = `Return ONLY a raw JSON array of 3 AI marketing recommendations for a user interested in ${userInterests.join(", ")}.
 No text before or after. Format must be exactly:
@@ -79,7 +73,7 @@ No text before or after. Format must be exactly:
 ]
 Ensure response contains only a valid JSON array.`;
 
-        const response = await getChatbotResponse(prompt);
+        const response = await getChatbotResponse(prompt, 'raw');
 
         if (!response) {
           throw new Error("Empty response received from AI service");
