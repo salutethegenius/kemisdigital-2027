@@ -41,8 +41,8 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  // Fix the path to point to the client build directory 
-  const distPath = path.resolve(__dirname, "..", "client", "dist");
+  // The Vite build outputs to dist/public (relative to project root)
+  const distPath = path.resolve(__dirname, "..", "dist", "public");
   const oneYear = 31536000; // Cache for one year in seconds
 
   // Only check for build directory in production mode
