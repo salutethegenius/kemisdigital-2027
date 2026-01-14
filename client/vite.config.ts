@@ -14,21 +14,26 @@ export default defineConfig(({ mode }) => {
   console.log('Vite config running in:', isReplEnv ? 'Replit environment' : 'Local environment')
   console.log('API URL from env:', env.VITE_API_URL)
 
+  // Check if running via Express middleware (server sets this up)
+  const isMiddlewareMode = process.env.npm_lifecycle_script?.includes('server/index.ts');
+  
   return {
     plugins: [react()],
     server: {
-      port: 3000, // Use port 3000 for the client
+      port: 3000, // Use port 3000 for standalone client dev
       host: '0.0.0.0',
-      strictPort: true,
+      strictPort: false, // Allow fallback to other ports
       // Allow all hosts in Replit environment and specific domain
       allowedHosts: (isReplEnv ? true : ['localhost', '24176b1e-abdf-4317-8c6a-b8034bf640b8-00-2s4f0r9vwb4pk.picard.replit.dev']) as true | string[],
-      hmr: {
+      // HMR config - when running through Express middleware, HMR is handled by the server
+      // When running standalone, use default WebSocket connection
+      hmr: isMiddlewareMode ? undefined : {
         port: 3000,
-        host: '0.0.0.0'
+        host: 'localhost'
       },
       watch: {
         // Explicitly excluded the node_modules folder for better performance
-        ignored: ['**/node_modules/**', '**/dist/**']
+        ignored: ['**/node_modules/**', '**/dist/**', '**/*.timestamp-*']
       },
       cors: true // Enable CORS for development
     },

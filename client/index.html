@@ -24,10 +24,9 @@
     <meta property="twitter:description" content="Clients say we've earned this title because we're in the game with them. Backed by 20 years of experience in the Bahamian marketplace." />
     <meta property="twitter:image" content="/images/fav.png" />
     
-    <!-- Preload critical images for faster loading -->
-    <link rel="preload" href="/images/optimized/beachbahamas-blur.jpg" as="image" type="image/jpeg" fetchpriority="high" />
-    <link rel="preload" href="/images/optimized/beachbahamas-small.jpg" as="image" type="image/jpeg" />
-    <link rel="preload" href="/images/fav.png" as="image" type="image/png" />
+    <!-- Prefetch hero images for faster loading (prefetch instead of preload to avoid warnings) -->
+    <link rel="prefetch" href="/images/optimized/beachbahamas-blur.jpg" as="image" type="image/jpeg" />
+    <link rel="prefetch" href="/images/optimized/beachbahamas-small.jpg" as="image" type="image/jpeg" />
   </head>
   <body>
     <div id="root"></div>

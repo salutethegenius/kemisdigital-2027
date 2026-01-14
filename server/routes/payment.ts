@@ -1,22 +1,33 @@
 import express, { Request, Response } from 'express';
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  console.error("STRIPE_SECRET_KEY is not defined in environment variables");
-  process.exit(1);
+const router = express.Router();
+
+// Initialize Stripe only if the key is available
+let stripe: Stripe | null = null;
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-01-27.acacia',
+  });
+} else {
+  console.warn("⚠️  STRIPE_SECRET_KEY is not defined - payment routes will return errors");
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-01-27.acacia',
-});
-
-const router = express.Router();
+// Middleware to check if Stripe is configured
+const requireStripe = (req: Request, res: Response, next: Function) => {
+  if (!stripe) {
+    return res.status(503).json({ 
+      error: 'Payment service unavailable - Stripe not configured' 
+    });
+  }
+  next();
+};
 
 /**
  * Create a one-time payment intent
  * Used for single purchases or one-time services
  */
-router.post("/create-payment", async (req: Request, res: Response) => {
+router.post("/create-payment", requireStripe, async (req: Request, res: Response) => {
   try {
     const { amount, planType, name, email } = req.body;
 
@@ -24,8 +35,8 @@ router.post("/create-payment", async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
-    // Create a payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
+    // Create a payment intent (stripe is guaranteed by requireStripe middleware)
+    const paymentIntent = await stripe!.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
       metadata: {
@@ -52,7 +63,7 @@ router.post("/create-payment", async (req: Request, res: Response) => {
  * Create a subscription
  * Used for recurring billing plans
  */
-router.post("/create-subscription", async (req: Request, res: Response) => {
+router.post("/create-subscription", requireStripe, async (req: Request, res: Response) => {
   try {
     const { name, email, planId, paymentMethod, setupFee } = req.body;
 
@@ -60,9 +71,9 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
-    // Create or get customer
+    // Create or get customer (stripe is guaranteed by requireStripe middleware)
     let customer;
-    const existingCustomers = await stripe.customers.list({
+    const existingCustomers = await stripe!.customers.list({
       email,
       limit: 1,
     });
@@ -70,19 +81,19 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
     if (existingCustomers.data.length > 0) {
       customer = existingCustomers.data[0];
     } else {
-      customer = await stripe.customers.create({
+      customer = await stripe!.customers.create({
         name,
         email,
       });
     }
 
     // Attach payment method to customer
-    await stripe.paymentMethods.attach(paymentMethod, {
+    await stripe!.paymentMethods.attach(paymentMethod, {
       customer: customer.id,
     });
 
     // Set as default payment method
-    await stripe.customers.update(customer.id, {
+    await stripe!.customers.update(customer.id, {
       invoice_settings: {
         default_payment_method: paymentMethod,
       },
@@ -92,7 +103,7 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
     let subscription;
     if (setupFee && setupFee > 0) {
       // Create a one-time invoice item for the setup fee
-      await stripe.invoiceItems.create({
+      await stripe!.invoiceItems.create({
         customer: customer.id,
         amount: Math.round(setupFee * 100), // Convert to cents
         currency: 'usd',
@@ -101,7 +112,7 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
     }
 
     // Create subscription
-    subscription = await stripe.subscriptions.create({
+    subscription = await stripe!.subscriptions.create({
       customer: customer.id,
       items: [
         {
@@ -134,7 +145,7 @@ router.post("/create-subscription", async (req: Request, res: Response) => {
  * Create a product in Stripe
  * For admin use only, typically not exposed to clients
  */
-router.post("/create-product", async (req: Request, res: Response) => {
+router.post("/create-product", requireStripe, async (req: Request, res: Response) => {
   try {
     const { name, description, type, amount, interval } = req.body;
 
@@ -143,7 +154,7 @@ router.post("/create-product", async (req: Request, res: Response) => {
     }
 
     // Create a product first
-    const product = await stripe.products.create({
+    const product = await stripe!.products.create({
       name,
       description,
     });
@@ -151,7 +162,7 @@ router.post("/create-product", async (req: Request, res: Response) => {
     // Create price based on type
     let price;
     if (type === 'subscription') {
-      price = await stripe.prices.create({
+      price = await stripe!.prices.create({
         product: product.id,
         unit_amount: Math.round(amount * 100), // Convert to cents
         currency: 'usd',
@@ -160,7 +171,7 @@ router.post("/create-product", async (req: Request, res: Response) => {
         },
       });
     } else {
-      price = await stripe.prices.create({
+      price = await stripe!.prices.create({
         product: product.id,
         unit_amount: Math.round(amount * 100), // Convert to cents
         currency: 'usd',

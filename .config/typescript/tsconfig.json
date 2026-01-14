@@ -1,0 +1,13 @@
+{
+  "preferences": {
+    "disableSuggestions": false,
+    "quotePreference": "single",
+    "importModuleSpecifierPreference": "relative"
+  },
+  "tsserver": {
+    "logLevel": "verbose",
+    "maxTsServerMemory": 4096,
+    "useSyntacticClassifications": true,
+    "disableAutomaticTypeAcquisition": false
+  }
+}

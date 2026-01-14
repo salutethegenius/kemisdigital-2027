@@ -25,7 +25,7 @@ export default function SEOHelmet({
   const finalOgUrl = ogUrl ? `${siteUrl}${ogUrl}` : siteUrl;
   
   // Default OG image for Bahamian branding if none provided
-  const defaultOgImage = 'https://lightning.kemisdigital.com/assets/kemis-social-card.jpg';
+  const defaultOgImage = '/images/fav.png';
   const finalOgImage = ogImage || defaultOgImage;
   
   return (
