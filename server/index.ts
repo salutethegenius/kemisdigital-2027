@@ -6,6 +6,7 @@ import cors from 'cors';
 import compression from 'compression';
 import path from 'path';
 import { errorHandler, notFoundHandler } from './middleware/errorHandling';
+import { securityHeaders } from './middleware/security';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
@@ -39,6 +40,11 @@ process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
   // Exit with error code after a short delay to allow logging to complete
   setTimeout(() => process.exit(1), 500);
 });
+
+// Security headers - applied to all responses
+if (process.env.NODE_ENV === 'production') {
+  app.use(securityHeaders);
+}
 
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {

@@ -1,22 +1,68 @@
-
 import { Router } from 'express';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { rateLimit, sanitizeInput, isValidEmail, requireJson, limitPayloadSize } from '../middleware/security';
 
 const router = Router();
 
-// Create AWS SES client
-const sesClient = new SESClient({
-  region: process.env.AWS_REGION || 'us-east-1',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
+// Check if AWS SES is configured
+const isAWSConfigured = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
 
-// Email sending endpoint
-router.post('/send', async (req, res) => {
+// Create AWS SES client only if configured
+let sesClient: SESClient | null = null;
+if (isAWSConfigured) {
+  sesClient = new SESClient({
+    region: process.env.AWS_REGION || 'us-east-1',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    },
+  });
+} else {
+  console.warn('⚠️  AWS SES not configured - email sending will be disabled');
+}
+
+// Email sending endpoint with security protections
+router.post('/send', 
+  requireJson,                                    // Validate Content-Type
+  limitPayloadSize(50),                           // Max 50KB payload
+  rateLimit({ windowMs: 60000, maxRequests: 5 }), // 5 requests per minute per IP
+  async (req, res) => {
   try {
-    const { name, email, service, message } = req.body;
+    // Check if SES is configured
+    if (!sesClient) {
+      return res.status(503).json({ 
+        error: 'Email service not configured',
+        details: 'AWS SES credentials not provided'
+      });
+    }
+
+    // Sanitize and validate inputs
+    const name = sanitizeInput(req.body.name, 100);
+    const email = sanitizeInput(req.body.email, 254);
+    const service = sanitizeInput(req.body.service, 100);
+    const message = sanitizeInput(req.body.message, 1000);
+
+    // Validation
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Name, email, and message are required' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email address' });
+    }
+
+    // Escape HTML to prevent XSS in emails
+    const escapeHtml = (str: string) => str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeService = escapeHtml(service);
+    const safeMessage = escapeHtml(message);
 
     const emailParams = {
       Source: process.env.AWS_SMTP_USERNAME || 'noreply@kemisdigital.com',
@@ -25,18 +71,18 @@ router.post('/send', async (req, res) => {
       },
       Message: {
         Subject: {
-          Data: `New Contact Form Submission - ${service}`,
+          Data: `New Contact Form Submission - ${safeService}`,
           Charset: 'UTF-8',
         },
         Body: {
           Html: {
             Data: `
               <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Service:</strong> ${service}</p>
+              <p><strong>Name:</strong> ${safeName}</p>
+              <p><strong>Email:</strong> ${safeEmail}</p>
+              <p><strong>Service:</strong> ${safeService}</p>
               <p><strong>Message:</strong></p>
-              <p>${message}</p>
+              <p>${safeMessage}</p>
             `,
             Charset: 'UTF-8',
           },

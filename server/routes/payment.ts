@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import Stripe from 'stripe';
+import { rateLimit, sanitizeInput, isValidEmail, requireJson, limitPayloadSize, apiKeyAuth } from '../middleware/security';
 
 const router = express.Router();
 
@@ -27,12 +28,29 @@ const requireStripe = (req: Request, res: Response, next: Function) => {
  * Create a one-time payment intent
  * Used for single purchases or one-time services
  */
-router.post("/create-payment", requireStripe, async (req: Request, res: Response) => {
+router.post("/create-payment", 
+  requireJson,
+  limitPayloadSize(10),                            // Max 10KB payload
+  rateLimit({ windowMs: 60000, maxRequests: 10 }), // 10 requests per minute per IP
+  requireStripe, 
+  async (req: Request, res: Response) => {
   try {
-    const { amount, planType, name, email } = req.body;
+    // Sanitize inputs
+    const amount = Number(req.body.amount);
+    const planType = sanitizeInput(req.body.planType, 50);
+    const name = sanitizeInput(req.body.name, 100);
+    const email = sanitizeInput(req.body.email, 254);
 
-    if (!amount || !planType || !name || !email) {
+    if (!amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: 'Invalid amount' });
+    }
+
+    if (!planType || !name || !email) {
       return res.status(400).json({ error: 'Missing required parameters' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email address' });
     }
 
     // Create a payment intent (stripe is guaranteed by requireStripe middleware)
@@ -63,12 +81,26 @@ router.post("/create-payment", requireStripe, async (req: Request, res: Response
  * Create a subscription
  * Used for recurring billing plans
  */
-router.post("/create-subscription", requireStripe, async (req: Request, res: Response) => {
+router.post("/create-subscription", 
+  requireJson,
+  limitPayloadSize(10),                            // Max 10KB payload
+  rateLimit({ windowMs: 60000, maxRequests: 10 }), // 10 requests per minute per IP
+  requireStripe, 
+  async (req: Request, res: Response) => {
   try {
-    const { name, email, planId, paymentMethod, setupFee } = req.body;
+    // Sanitize inputs
+    const name = sanitizeInput(req.body.name, 100);
+    const email = sanitizeInput(req.body.email, 254);
+    const planId = sanitizeInput(req.body.planId, 100);
+    const paymentMethod = sanitizeInput(req.body.paymentMethod, 100);
+    const setupFee = Number(req.body.setupFee) || 0;
 
     if (!name || !email || !planId || !paymentMethod) {
       return res.status(400).json({ error: 'Missing required parameters' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email address' });
     }
 
     // Create or get customer (stripe is guaranteed by requireStripe middleware)
@@ -143,14 +175,28 @@ router.post("/create-subscription", requireStripe, async (req: Request, res: Res
 
 /**
  * Create a product in Stripe
- * For admin use only, typically not exposed to clients
+ * For admin use only - requires API key authentication
  */
-router.post("/create-product", requireStripe, async (req: Request, res: Response) => {
+router.post("/create-product", 
+  requireJson,
+  limitPayloadSize(10),
+  apiKeyAuth,      // Require admin API key
+  requireStripe, 
+  async (req: Request, res: Response) => {
   try {
-    const { name, description, type, amount, interval } = req.body;
+    // Sanitize inputs
+    const name = sanitizeInput(req.body.name, 100);
+    const description = sanitizeInput(req.body.description, 500);
+    const type = sanitizeInput(req.body.type, 20);
+    const amount = Number(req.body.amount);
+    const interval = sanitizeInput(req.body.interval, 10);
 
-    if (!name || !amount || (type === 'subscription' && !interval)) {
-      return res.status(400).json({ error: 'Missing required parameters' });
+    if (!name || !amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: 'Name and valid amount are required' });
+    }
+
+    if (type === 'subscription' && !interval) {
+      return res.status(400).json({ error: 'Interval required for subscription' });
     }
 
     // Create a product first
